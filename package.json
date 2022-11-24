@@ -22,5 +22,8 @@
     "*.{js,json,css,md,tsx,ts}": [
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "@next-auth/typeorm-legacy-adapter": "^2.0.1"
   }
 }

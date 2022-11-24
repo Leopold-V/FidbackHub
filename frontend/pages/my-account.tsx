@@ -1,22 +1,18 @@
 import React from "react";
-import Head from "next/head";
-import Page from "components/pages/my-account";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import AccessDeniedIndicator from "components/access-denied-indicator";
+import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
+import Head from "next/head";
 import WithGraphQL from "lib/with-graphql";
+import Page from "components/pages/my-account";
 
-const MyAccountPage: InferGetServerSidePropsType<typeof getServerSideProps> = ({
+const MyAccountPage = ({
   session,
 }) => {
-  if (!session) {
-    return <AccessDeniedIndicator />;
-  }
 
   return (
     <WithGraphQL session={session}>
       <Head>
-        <title>My Account Page</title>
+        <title>My Account</title>
       </Head>
       <Page />
     </WithGraphQL>

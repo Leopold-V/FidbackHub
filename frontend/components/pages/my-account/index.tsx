@@ -1,31 +1,36 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  Box,
-  Button,
-  CloseButton,
-  FormControl,
-  FormLabel,
-  Grid,
-  Heading,
-  Input,
-  Stack,
-  useColorMode,
-} from "@chakra-ui/core";
-import Loader from "components/loader";
 import { useSession } from "next-auth/react";
 import React, { FormEvent, useEffect, useState } from "react";
 
 const usersQuery = gql`
-  query fetchUser($userId: ID!) {
-    user(id: $userId) {
+  query MeQuery {
+    me {
       id
       username
+      email
+      confirmed
+      blocked
+      role {
+        id
+        name
+        description
+        type
+      }
     }
   }
 `;
+
+/*
+const usersQuery = gql`
+  query fetchUser($userId: ID!) {
+    user(id: $userId) {
+      data {
+        id
+      }
+    }
+  }
+`;
+*/
 
 const updateUserMutation = gql`
   mutation updateUser($userId: ID!, $username: String) {
@@ -41,12 +46,12 @@ const updateUserMutation = gql`
 `;
 
 const MyAccountPageComponent = () => {
-  const { colorMode } = useColorMode();
-  const bgColor = { light: "white", dark: "gray.800" };
-  const color = { light: "gray.800", dark: "gray.100" };
-  const [username, setUsername] = useState("");
-  const { data:session, status } = useSession();
-
+  const [profile, setProfile] = useState({
+    username: "",
+    id: "",
+    email: ""
+  });
+  const { data: session, status } = useSession();
   const {
     loading: fetchUserFetching,
     error: fetchUserError,
@@ -57,9 +62,14 @@ const MyAccountPageComponent = () => {
 
   useEffect(() => {
     if (fetchUserData) {
-      const { username } = fetchUserData.user;
+      const profile = fetchUserData.me;
+      console.log(profile);
 
-      setUsername(username || "");
+      setProfile(profile || {
+        username: "",
+        id: "",
+        email: ""
+      });
     }
   }, [fetchUserData]);
 
@@ -69,69 +79,69 @@ const MyAccountPageComponent = () => {
   ] = useMutation(updateUserMutation);
 
   if (fetchUserFetching) {
-    return <Loader />;
+    return <div className="flex flex-col justify-center items-center space-y-8">Loading user data...</div>;
   }
 
   if (fetchUserError) {
-    return <p>Error: {fetchUserError.message}</p>;
+    return <p className="flex flex-col justify-center items-center space-y-8">Error: {fetchUserError.message}</p>;
   }
 
   const handleSubmit = () => {
-    updateUser({ variables: { userId: session.id, username } });
+    updateUser({ variables: { userId: profile.id, username: profile.username } });
   };
 
   const errorNode = () => {
+    console.log(updateUserError);
+    
     if (!updateUserError) {
       return false;
     }
 
     return (
-      <Alert status="error">
-        <AlertIcon />
-        <AlertTitle>{updateUserError}</AlertTitle>
-        <CloseButton position="absolute" right="8px" top="8px" />
-      </Alert>
+      <div>
+        error
+      </div>
     );
   };
 
   return (
-    <Stack spacing={4}>
-      <Heading color={color[colorMode]}>My Account</Heading>
+    <div className="flex flex-col justify-center items-center space-y-8">
+      <h1 className="mt-8">My Account</h1>
       {errorNode()}
-      <Grid templateColumns="repeat(1, 1fr)" gap={4}>
-        <Box
-          p={4}
-          bg={bgColor[colorMode]}
-          color={color[colorMode]}
-          shadow="sm"
-          rounded="lg"
-        >
-          <Stack spacing={4}>
-            <FormControl isRequired>
-              <FormLabel htmlFor="username">Username</FormLabel>
-              <Input
-                type="text"
-                id="username"
-                value={username}
-                onChange={(e: FormEvent<HTMLInputElement>) =>
-                  setUsername(e.currentTarget.value)
-                }
-                isDisabled={updateUserFetching}
-              />
-            </FormControl>
-            <FormControl>
-              <Button
-                loadingText="Saving..."
-                onClick={handleSubmit}
-                isLoading={updateUserFetching}
-              >
-                Save
-              </Button>
-            </FormControl>
-          </Stack>
-        </Box>
-      </Grid>
-    </Stack>
+      <form className="space-y-8 divide-y divide-gray-200">
+      <div className="space-y-6 sm:space-y-5">
+      <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+        <label htmlFor="username" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+          Username
+        </label>
+        <div className="mt-1 sm:col-span-2 sm:mt-0">
+          <div className="flex max-w-lg rounded-md shadow-sm">
+            <input
+              type="text"
+              name="username"
+              id="username"
+              autoComplete="username"
+              value={profile.username}
+              className="block w-full min-w-0 flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              onChange={(e: FormEvent<HTMLInputElement>) =>
+                setProfile({...profile, username: e.currentTarget.value})
+              }
+              disabled={updateUserFetching}
+            />
+          </div>
+        </div>
+      </div>
+      </div>
+      </form>
+      <button
+        type="button"
+        className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2"
+        onClick={handleSubmit}
+        disabled={updateUserFetching}
+      >
+        Save
+      </button>
+    </div>
   );
 };
 

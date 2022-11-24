@@ -1,17 +1,14 @@
-import React, { FC } from "react";
-import { ColorModeProvider, LightMode } from "@chakra-ui/core";
-import Container from "components/layout/container";
-import Navbar from "components/navbar";
+import { Navbar } from './Navbar'
 
-const Layout: FC = ({ children }) => {
+const Layout = ({ children }: { children: React.ReactChild}) => {
   return (
-    <ColorModeProvider>
-      <LightMode>
+    <div>
+      <div className="relative flex min-h-full flex-col">
         <Navbar />
-        <Container>{children}</Container>
-      </LightMode>
-    </ColorModeProvider>
-  );
-};
+        {children}
+        </div>
+      </div>
+  )
+}
 
 export default Layout;

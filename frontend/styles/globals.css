@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn {
+      @apply inline-block px-6 py-2 font-semibold text-center text-white rounded-sm transition duration-150 ease-in-out;
+    }
+  
+    .btn-tall {
+      @apply py-3;
+    }
+  
+    .title {
+      @apply mb-4 text-3xl font-extrabold text-center text-white;
+    }
+  
+    .title-small {
+      @apply text-2xl font-bold;
+    }
+  }
+  
+  @layer utilities {
+    .bg-illustration-01 {
+      background-image: url("../public/images/illustration-section-01.svg");
+    }
+  }

@@ -1,6 +1,5 @@
 import React from "react";
 import Head from "next/head";
-import Page from "components/pages/error";
 import { NextPage } from "next";
 
 const Custom404Page: NextPage = () => {
@@ -9,7 +8,7 @@ const Custom404Page: NextPage = () => {
       <Head>
         <title>Error Page</title>
       </Head>
-      <Page statusCode={404} />
+      <div>Error 404, page not found</div>
     </>
   );
 };

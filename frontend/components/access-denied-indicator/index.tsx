@@ -1,41 +1,36 @@
-import React, { FC } from "react";
-import { Icon, Flex, Button, Stack, Box } from "@chakra-ui/core";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 
-interface IProps {
-  message?: string;
-}
-
-const AccessDeniedIndicator: FC<IProps> = ({
+const AccessDeniedIndicator = ({
   message = "You need to Sign In to view this content!",
 }) => {
   const iconNode = () => {
-    return <Icon name="warning-2" color="purple" size="50px" />;
+    return <div>Warning icon*</div>;
   };
 
   const signInButtonNode = () => {
     return (
       <Link href="/api/auth/signin">
-        <Button
+        <button
+          className="font-bold"
           onClick={(e) => {
             e.preventDefault();
             signIn();
           }}
         >
           {message}
-        </Button>
+        </button>
       </Link>
     );
   };
 
   return (
-    <Flex justifyContent="center" alignItems="center" h="200px">
-      <Stack spacing={4} align="center">
-        <Box>{iconNode()}</Box>
-        <Box>{signInButtonNode()}</Box>
-      </Stack>
-    </Flex>
+    <div className="flex justify-center">
+      <div className="text-center">
+        <div>{iconNode()}</div>
+        <div>{signInButtonNode()}</div>
+      </div>
+    </div>
   );
 };
 
