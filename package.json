@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "dev:frontend": "cd frontend && yarn dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend/app && npm run develop",
     "build:frontend": "cd frontend && yarn build",
     "export:frontend": "cd frontend && yarn export",
     "start:frontend": "cd frontend && yarn start",
