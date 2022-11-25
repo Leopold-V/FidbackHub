@@ -1,25 +1,7 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
-import { log } from "console";
-import { useSession } from "next-auth/react";
 import React, { FormEvent, useEffect, useState } from "react";
-
-const usersQuery = gql`
-  query MeQuery {
-    me {
-      id
-      username
-      email
-      confirmed
-      blocked
-      role {
-        id
-        name
-        description
-        type
-      }
-    }
-  }
-`;
+import { useSession } from "next-auth/react";
+import { gql, useMutation, useQuery } from "@apollo/client";
+import { useFetch } from "../../../hooks/useFetch";
 
 const MyAccountPageComponent = () => {
   const [profile, setProfile] = useState({
@@ -29,29 +11,31 @@ const MyAccountPageComponent = () => {
   });
   const { data: session, status } = useSession();
 
-  const {
-    loading: fetchUserFetching,
-    error: fetchUserError,
-    data: fetchUserData,
-  } = useQuery(usersQuery);
+  const { data, error, loading } = useFetch(`http://localhost:1337/api/users/${session.id}`, {
+      headers: {
+        'authorization': 'Bearer ' + session.jwt,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+  });
 
   useEffect(() => {
-    if (fetchUserData) {
-      const profile = fetchUserData.me;
-      setProfile(profile || {
-        username: "",
-        id: "",
-        email: ""
-      });
+    if (data) {
+      setProfile({
+        username: data.username,
+        id: data.id,
+        email: data.email
+      })
     }
-  }, [fetchUserData]);
+  }, [data])
+  
 
-  if (fetchUserFetching) {
+  if (loading) {
     return <div className="flex flex-col justify-center items-center space-y-8">Loading user data...</div>;
   }
 
-  if (fetchUserError) {
-    return <p className="flex flex-col justify-center items-center space-y-8">Error: {fetchUserError.message}</p>;
+  if (error) {
+    return <p className="flex flex-col justify-center items-center space-y-8">Error: {error}</p>;
   }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
