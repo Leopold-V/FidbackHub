@@ -4,7 +4,8 @@
   "info": {
     "singularName": "project",
     "pluralName": "projects",
-    "displayName": "project"
+    "displayName": "project",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -13,6 +14,12 @@
   "attributes": {
     "name": {
       "type": "string"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "projects"
     }
   }
 }

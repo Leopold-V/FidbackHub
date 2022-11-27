@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Profile = () => {
+export const Profile = ({ profile }) => {
   return (
     <div className="flex items-center space-x-3">
     <div className="h-12 w-12 flex-shrink-0">
@@ -11,7 +11,7 @@ export const Profile = () => {
       />
     </div>
     <div className="space-y-1">
-      <div className="text-sm font-medium text-gray-900">Debbie Lewis</div>
+      <div className="text-sm font-medium text-gray-900">{profile.username}</div>
       <a href="#" className="group flex items-center space-x-2.5">
         <svg
           className="h-5 w-5 text-gray-400 group-hover:text-gray-500"

@@ -1,39 +1,40 @@
+import { useSession } from 'next-auth/react';
 import React, { FormEvent, useState } from 'react'
+import { updateUser } from '../../../services/user.service';
+import { ErrorAlert } from 'components/common/ErrorAlert';
+import { SuccessAlert } from 'components/common/SuccessAlert';
 
-export const ProfileForm = ({ profile, setProfile, token }) => {
+export const ProfileForm = ({ profile, setProfile }) => {
+    const { data: session } = useSession();
     const [loading, setloading] = useState(false);
     const [error, seterror] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setloading(true);
         try {
-            const data = await fetch(`http://localhost:1337/api/users/${profile.id}`, {
-              method: 'put',
-              body: JSON.stringify({ username: profile.username }),
-              headers: {
-                'authorization': 'Bearer ' + token,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-              }
-            });
-            const json = await data.json();
-            console.log(json);
-            if (json.error) {
-                seterror(json.error.message);
+            const data = await updateUser(session.id, session.jwt, { username: profile.username });
+            if (data.error) {
+              seterror(data.error.message);
+              setSuccess(false);
+            } else {
+              seterror(false);
+              setSuccess(true);
             }
-            setloading(false);
         } catch (error) {
             seterror(error.message);
+            setSuccess(false);
+        } finally {
             setloading(false);
         }
       };
 
-
   return (
     <form onSubmit={handleSubmit} className="text-center space-y-8">
     <div className="space-y-6 sm:space-y-5 divide-y divide-gray-200">
-      <div className="font-semibold text-red-600">{error}</div>
+      {error && <ErrorAlert message={error} />}
+      {success && <SuccessAlert />}
       <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
         <label htmlFor="username" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
           Username

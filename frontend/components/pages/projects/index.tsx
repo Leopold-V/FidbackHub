@@ -3,15 +3,19 @@ import { Activityfeed } from "./Activityfeed";
 import { ProfileColumn } from "./ProfileColumn";
 import { ProjectsColumn } from "./ProjectsColumn";
 
-const ProjectsPageComponent = () => {
+const ProjectsPageComponent = ({ userData }) => {
+  const profile = {
+    id: userData.id,
+    username: userData.username,
+    email: userData.email
+  };
+
   return (
     <>
-      {/* 3 column wrapper */}
       <div className="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
-        {/* Left sidebar & main wrapper */}
         <div className="min-w-0 flex-1 bg-white xl:flex">
-          <ProfileColumn />
-          <ProjectsColumn />
+          <ProfileColumn profile={profile} />
+          <ProjectsColumn projects={userData.projects} />
         </div>
         <Activityfeed />
       </div>

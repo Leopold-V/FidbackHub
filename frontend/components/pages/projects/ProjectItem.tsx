@@ -36,7 +36,7 @@ export const ProjectItem = ({ project }) => {
           <h2 className="text-sm font-medium">
             <a href={project.href}>
               <span className="absolute inset-0" aria-hidden="true" />
-              {project.attributes.name}{' '}
+              {project.name}{' '}
               <span className="sr-only">{project.active ? 'Running' : 'Not running'}</span>
             </a>
           </h2>
