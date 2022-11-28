@@ -1,20 +1,28 @@
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, useState } from "react";
 import { useSession } from 'next-auth/react';
-import { updateUser } from '../../../services/user.service';
-import { ErrorAlert } from 'components/common/ErrorAlert';
-import { SuccessAlert } from 'components/common/SuccessAlert';
+import { addProject } from "../../../services/project.service";
+import { ErrorAlert } from "components/common/ErrorAlert";
+import { SuccessAlert } from "components/common/SuccessAlert";
 
-export const ProfileForm = ({ profile, setProfile }) => {
+export const ProjectForm = () => {
     const { data: session } = useSession();
+    const [project, setProject] = useState({
+        name: '',
+        github_url: '',
+    });
     const [loading, setloading] = useState(false);
     const [error, seterror] = useState(false);
     const [success, setSuccess] = useState(false);
+
+    const handleChange = (e: FormEvent<HTMLInputElement>) => {
+        setProject({...project, [e.currentTarget.name]: e.currentTarget.value})
+    }
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setloading(true);
         try {
-            const data = await updateUser(session.id, session.jwt, { username: profile.username });
+            const data = await addProject(session.id, session.jwt, project);
             if (data.error) {
               seterror(data.error.message);
               setSuccess(false);
@@ -36,21 +44,38 @@ export const ProfileForm = ({ profile, setProfile }) => {
       {error && <ErrorAlert message={error} />}
       {success && <SuccessAlert />}
       <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-        <label htmlFor="username" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-          Username
+        <label htmlFor="name" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+          Project name
         </label>
         <div className="mt-1 sm:col-span-2 sm:mt-0">
           <div className="flex max-w-lg rounded-md shadow-sm">
             <input
               type="text"
-              name="username"
-              id="username"
-              autoComplete="username"
-              value={profile.username}
+              name="name"
+              id="name"
+              autoComplete="name"
+              value={project.name}
               className="block w-full min-w-0 flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              onChange={(e: FormEvent<HTMLInputElement>) =>
-                setProfile({...profile, username: e.currentTarget.value})
-              }
+              onChange={handleChange}
+              disabled={loading}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+        <label htmlFor="github_url" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+          Github url
+        </label>
+        <div className="mt-1 sm:col-span-2 sm:mt-0">
+          <div className="flex max-w-lg rounded-md shadow-sm">
+            <input
+              type="url"
+              name="github_url"
+              id="github_url"
+              autoComplete="github_url"
+              value={project.github_url}
+              className="block w-full min-w-0 flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              onChange={handleChange}
               disabled={loading}
             />
           </div>

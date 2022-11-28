@@ -1,49 +1,13 @@
 import { useSession } from 'next-auth/react';
 import React from 'react'
-
-/*
-const updateUserMutation = gql`
-  mutation updateUser($userId: ID!, $username: String) {
-    updateUser(
-      input: { where: { id: $userId }, data: { username: $username } }
-    ) {
-      user {
-        id
-        username
-      }
-    }
-  }
-`;
-*/
+import { ProjectForm } from './ProjectForm';
 
 const ProjectCreationComponent = () => {
-    const { data: session, status } = useSession();
-
-/*
-  const {
-    loading: fetchUserFetching,
-    error: fetchUserError,
-    data: fetchUserData,
-  } = useQuery(usersQuery, {
-    variables: { userId: session.id },
-  });
-
-  useEffect(() => {
-    if (fetchUserData) {
-      const { username } = fetchUserData.user;
-
-      setUsername(username || "");
-    }
-  }, [fetchUserData]);
-
-  const [
-    updateUser,
-    { loading: updateUserFetching, error: updateUserError },
-  ] = useMutation(updateUserMutation);
-  */
-
   return (
-    <div>Project creation page</div>
+    <div className="flex flex-col justify-center items-center space-y-8">
+      <h1 className="mt-8 text-lg font-semibold">New project</h1>
+      <ProjectForm />
+    </div>
   )
 }
 

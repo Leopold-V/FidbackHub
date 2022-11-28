@@ -67,7 +67,7 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::project.project",
-      "mappedBy": "users_permissions_user"
+      "mappedBy": "user"
     }
   }
 }
