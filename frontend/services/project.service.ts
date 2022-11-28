@@ -1,8 +1,8 @@
-export const getProjects = async (id: string, jwt: string) => {
+export const getProjects = async (token: string) => {
     const data = await fetch(`http://localhost:1337/api/projects`, {
         method: 'GET',
         headers: {
-            'authorization': 'Bearer ' + jwt,
+            'authorization': 'Bearer ' + token,
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }

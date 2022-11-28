@@ -1,6 +1,7 @@
 import React from "react";
-import Page from "components/pages/dashboard";
 import Head from "next/head";
+import Page from "components/pages/dashboard";
+import { getProjects } from "../../services/project.service";
 
 const DashboardPage = ({ params }) => {
   return (
@@ -14,12 +15,9 @@ const DashboardPage = ({ params }) => {
 };
 
 export async function getStaticPaths() {
-    const paths = [
-        {params: { id: '1' }},
-        {params: { id: '2' }},
-        {params: { id: '3' }}
-    ]
-    return { paths, fallback: false }
+    const projects = await getProjects(process.env.ALLPROJECTS_API_TOKEN);
+    const listProjects = [...projects.data.map((ele) => ({params: {id: ele.id + ''}}))]
+    return { paths: [...listProjects], fallback: false }
 }
 
   // This also gets called at build time

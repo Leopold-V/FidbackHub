@@ -3,6 +3,7 @@ import {
     ChevronRightIcon,
     StarIcon,
   } from '@heroicons/react/20/solid'
+import Link from 'next/link'
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -11,6 +12,11 @@ function classNames(...classes) {
 export const ProjectItem = ({ project }) => {
 
   return (
+    <Link
+    href={{
+      pathname: `/dashboard/${project.id}`,
+    }}
+  >
     <li
     className="relative py-5 pl-4 pr-6 hover:bg-gray-50 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6"
   >
@@ -101,5 +107,6 @@ export const ProjectItem = ({ project }) => {
       </div>
     </div>
   </li>
+  </Link>
   )
 }

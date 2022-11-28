@@ -2,8 +2,8 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 export const useFetch = (url: string, token: string) => {
-    const [loading, setloading] = useState(false);
-    const [error, seterror] = useState(false);
+    const [loading, setloading] = useState(true);
+    const [error, seterror] = useState<boolean | string>(false);
     const [data, setData] = useState(null);
 
     useEffect(() => {
@@ -34,5 +34,5 @@ export const useFetch = (url: string, token: string) => {
     }, [])
     
 
-    return { data, error, loading }
+    return { data, error, seterror, loading }
 }

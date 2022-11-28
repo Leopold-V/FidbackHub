@@ -1,59 +1,42 @@
+import React, { useEffect, useState } from 'react'
+import { useFetch } from '../../../hooks/useFetch';
 import { useSession } from 'next-auth/react';
-import React from 'react'
-
-/*
-const usersQuery = gql`
-  query fetchUser($userId: ID!) {
-    user(id: $userId) {
-      id
-      username
-    }
-  }
-`;
-
-const updateUserMutation = gql`
-  mutation updateUser($userId: ID!, $username: String) {
-    updateUser(
-      input: { where: { id: $userId }, data: { username: $username } }
-    ) {
-      user {
-        id
-        username
-      }
-    }
-  }
-`;
-*/
 
 const DashboardPageComponent = ({ params }) => {
   const { data: session, status } = useSession();
-  
-  // TODO => query corresponding project
-
-/*
-  const {
-    loading: fetchUserFetching,
-    error: fetchUserError,
-    data: fetchUserData,
-  } = useQuery(usersQuery, {
-    variables: { userId: session.id },
+  const [project, setProject] = useState({
+    name: '',
+    github_url: ''
   });
 
+  const { data: userData, error, seterror, loading } = useFetch(`http://localhost:1337/api/users/${session.id}?populate=*`, session.jwt);
+
   useEffect(() => {
-    if (fetchUserData) {
-      const { username } = fetchUserData.user;
-
-      setUsername(username || "");
+    if (userData) {
+      const projectFound = userData.projects.find((ele) => (ele.id === +params.id));
+      if (projectFound) {
+        setProject(projectFound)
+      } else {
+        seterror('Error 404, page not found');
+      }
     }
-  }, [fetchUserData]);
+  }, [userData])
 
-  const [
-    updateUser,
-    { loading: updateUserFetching, error: updateUserError },
-  ] = useMutation(updateUserMutation);
-  */
+  if (loading) return (
+    <div className="flex flex-col justify-center items-center space-y-8">
+      <h1 className="mt-8 text-lg font-semibold">Loading...</h1>
+    </div>
+  )
+  if (error) return ((
+    <div className="flex flex-col justify-center items-center space-y-8">
+      <h1 className="mt-8 text-lg font-semibold">{error}</h1>
+    </div>
+  ))
+
   return (
-    <div>Dashboard page { params.id} </div>
+    <div className="flex flex-col justify-center items-center space-y-8">
+      <h1 className="mt-8 text-lg font-semibold">{project.name} <span className="text-indigo-600"> dashboard</span></h1>
+    </div>
   )
 }
 
