@@ -6,8 +6,9 @@ import Head from "next/head";
 import { getUser } from "../services/user.service";
 
 import Page from "components/pages/projects";
+import { userType } from "types/index";
 
-const ProjectsPage = ({ userData }) => {
+const ProjectsPage = ({ userData }: { userData: userType }) => {
   return (
     <>
       <Head>

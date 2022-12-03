@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import IAccount from "types/account";
-import iToken from "types/token";
-import IUser from "types/user";
-import ISession from "types/session";
+import IAccount from "types/next_auth/account";
+import iToken from "types/next_auth/token";
+import IUser from "types/next_auth/user";
+import ISession from "types/next_auth/session";
 
 const options = {
   providers: [
@@ -20,12 +20,12 @@ const options = {
   },
   debug: true,
   callbacks: {
-    async session({ session, token, user }) {
+    async session({ session, token, user }: {session: ISession, token: iToken, user: IUser }) {
       session.jwt = token.jwt;
       session.id = token.id;
       return session;
     },
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({ token, user, account }: {token: iToken, user: IUser, account: IAccount, }) {
       const isSignIn = user ? true : false;
 
       if (isSignIn) {

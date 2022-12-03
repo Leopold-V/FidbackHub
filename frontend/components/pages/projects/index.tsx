@@ -1,13 +1,15 @@
 import React from "react";
+import { userType } from "types/index";
 import { Activityfeed } from "./Activityfeed";
 import { ProfileColumn } from "./ProfileColumn";
 import { ProjectsColumn } from "./ProjectsColumn";
 
-const ProjectsPageComponent = ({ userData }) => {
+const ProjectsPageComponent = ({ userData }: { userData: userType }) => {
   const profile = {
     id: userData.id,
     username: userData.username,
     email: userData.email
+
   };
 
   return (

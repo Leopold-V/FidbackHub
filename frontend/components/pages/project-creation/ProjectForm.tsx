@@ -3,15 +3,16 @@ import { useSession } from 'next-auth/react';
 import { addProject } from "../../../services/project.service";
 import { ErrorAlert } from "components/common/ErrorAlert";
 import { SuccessAlert } from "components/common/SuccessAlert";
+import { projectType } from "types/index";
 
 export const ProjectForm = () => {
     const { data: session } = useSession();
-    const [project, setProject] = useState({
+    const [project, setProject] = useState<Partial<projectType>>({
         name: '',
         github_url: '',
     });
     const [loading, setloading] = useState(false);
-    const [error, seterror] = useState(false);
+    const [error, seterror] = useState<string | boolean>(false);
     const [success, setSuccess] = useState(false);
 
     const handleChange = (e: FormEvent<HTMLInputElement>) => {
@@ -22,7 +23,7 @@ export const ProjectForm = () => {
         e.preventDefault();
         setloading(true);
         try {
-            const data = await addProject(session.id, session.jwt, project);
+            const data = await addProject('12', session.jwt, project);
             if (data.error) {
               seterror(data.error.message);
               setSuccess(false);

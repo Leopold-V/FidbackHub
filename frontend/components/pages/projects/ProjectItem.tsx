@@ -4,12 +4,13 @@ import {
     StarIcon,
   } from '@heroicons/react/20/solid'
 import Link from 'next/link'
+import { projectType } from 'types/index'
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export const ProjectItem = ({ project }) => {
+export const ProjectItem = ({ project }: { project: projectType }) => {
 
   return (
     <Link
@@ -25,29 +26,23 @@ export const ProjectItem = ({ project }) => {
       <div className="min-w-0 space-y-3">
         <div className="flex items-center space-x-3">
           <span
-            className={classNames(
-              project.active ? 'bg-green-100' : 'bg-gray-100',
-              'h-4 w-4 rounded-full flex items-center justify-center'
-            )}
+            className='bg-gray-100 h-4 w-4 rounded-full flex items-center justify-center'
             aria-hidden="true"
           >
             <span
-              className={classNames(
-                project.active ? 'bg-green-400' : 'bg-gray-400',
-                'h-2 w-2 rounded-full'
-              )}
+              className="bg-gray-400 h-2 w-2 rounded-full"
             />
           </span>
 
           <h2 className="text-sm font-medium">
-            <a href={project.href}>
+            <a href={project.website_url}>
               <span className="absolute inset-0" aria-hidden="true" />
               {project.name}{' '}
-              <span className="sr-only">{project.active ? 'Running' : 'Not running'}</span>
+              <span className="sr-only">Not running</span>
             </a>
           </h2>
         </div>
-        <a href={project.repoHref} className="group relative flex items-center space-x-2.5">
+        <a href={project.website_url} className="group relative flex items-center space-x-2.5">
           <svg
             className="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
             viewBox="0 0 18 18"
@@ -63,7 +58,7 @@ export const ProjectItem = ({ project }) => {
             />
           </svg>
           <span className="truncate text-sm font-medium text-gray-500 group-hover:text-gray-900">
-            {project.repo}
+            {project.github_url}
           </span>
         </a>
       </div>
@@ -74,35 +69,11 @@ export const ProjectItem = ({ project }) => {
       <div className="hidden flex-shrink-0 flex-col items-end space-y-3 sm:flex">
         <p className="flex items-center space-x-4">
           <a
-            href={project.siteHref}
+            href={project.website_url}
             className="relative text-sm font-medium text-gray-500 hover:text-gray-900"
           >
             Visit site
           </a>
-          <button
-            type="button"
-            className="relative rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          >
-            <span className="sr-only">
-              {project.starred ? 'Add to favorites' : 'Remove from favorites'}
-            </span>
-            <StarIcon
-              className={classNames(
-                project.starred
-                  ? 'text-yellow-300 hover:text-yellow-400'
-                  : 'text-gray-300 hover:text-gray-400',
-                'h-5 w-5'
-              )}
-              aria-hidden="true"
-            />
-          </button>
-        </p>
-        <p className="flex space-x-2 text-sm text-gray-500">
-          <span>{project.tech}</span>
-          <span aria-hidden="true">&middot;</span>
-          <span>Last deploy {project.lastDeploy}</span>
-          <span aria-hidden="true">&middot;</span>
-          <span>{project.location}</span>
         </p>
       </div>
     </div>

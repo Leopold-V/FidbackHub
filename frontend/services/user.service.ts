@@ -1,4 +1,6 @@
-export const getUser = async (id: string, jwt: string) => {
+import { userType } from "types/index";
+
+export const getUser = async (id: string, jwt: string): Promise<userType> => {
     const data = await fetch(`http://localhost:1337/api/users/${id}?populate=*`, {
         method: 'GET',
         headers: {
@@ -11,7 +13,7 @@ export const getUser = async (id: string, jwt: string) => {
     return json;
 }
 
-export const updateUser = async (id: string, jwt: string, userData) => {
+export const updateUser = async (id: string, jwt: string, userData: Partial<userType>): Promise<userType> => {
     const data = await fetch(`http://localhost:1337/api/users/${id}`, {
         method: 'put',
         body: JSON.stringify({ ...userData }),

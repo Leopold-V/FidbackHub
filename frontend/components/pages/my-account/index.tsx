@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { userType } from "types/index";
 import { ProfileForm } from "./ProfileForm";
 
-const MyAccountPageComponent = ({ profile }) => {
+const MyAccountPageComponent = ({ profile }: { profile: userType }) => {
   const [_profile, setProfile] = useState({...profile});
 
   return (

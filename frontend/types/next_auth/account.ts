@@ -3,6 +3,6 @@ export default interface IAccount {
   provider: string;
   type: string;
   refreshToken: string;
-  accessToken: string;
+  access_token: string;
   accessTokenExpires: string;
 }

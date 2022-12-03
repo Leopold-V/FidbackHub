@@ -3,8 +3,9 @@ import { useSession } from 'next-auth/react';
 import { updateUser } from '../../../services/user.service';
 import { ErrorAlert } from 'components/common/ErrorAlert';
 import { SuccessAlert } from 'components/common/SuccessAlert';
+import { userType } from 'types/index';
 
-export const ProfileForm = ({ profile, setProfile }) => {
+export const ProfileForm = ({ profile, setProfile }: { profile: userType, setProfile: (user: userType) => void }) => {
     const { data: session } = useSession();
     const [loading, setloading] = useState(false);
     const [error, seterror] = useState(false);

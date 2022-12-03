@@ -1,4 +1,6 @@
-export const getProjects = async (token: string) => {
+import { projectType, strapiFetchErrorType } from "types/index";
+
+export const getProjects = async (token: string): Promise<projectType> => {
     const data = await fetch(`http://localhost:1337/api/projects`, {
         method: 'GET',
         headers: {
@@ -11,7 +13,7 @@ export const getProjects = async (token: string) => {
     return json;
 }
 
-export const addProject = async (id: string, jwt: string, project) => {
+export const addProject = async (id: string, jwt: string, project: Partial<projectType>): Promise<projectType> => {
     const data = await fetch(`http://localhost:1337/api/projects`, {
         method: 'POST',
         body: JSON.stringify({data: {...project, user: id}}),

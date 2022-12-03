@@ -1,6 +1,6 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { ReactNode } from "react";
-import session from "types/session";
+import session from "types/next_auth/session";
 
 const WithGraphQL = ({
   session,
