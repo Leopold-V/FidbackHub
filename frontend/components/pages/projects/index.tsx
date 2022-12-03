@@ -9,14 +9,13 @@ const ProjectsPageComponent = ({ userData }: { userData: userType }) => {
     id: userData.id,
     username: userData.username,
     email: userData.email
-
   };
 
   return (
     <>
       <div className="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
         <div className="min-w-0 flex-1 bg-white xl:flex">
-          <ProfileColumn profile={profile} />
+          <ProfileColumn profile={profile} projectsNumber={userData.projects.length} />
           <ProjectsColumn projects={userData.projects} />
         </div>
         <Activityfeed />

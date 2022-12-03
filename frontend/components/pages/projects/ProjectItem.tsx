@@ -5,44 +5,22 @@ import {
   } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 import { projectType } from 'types/index'
+import { ProjectItemDropdown } from './ProjectItemDropdown'
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export const ProjectItem = ({ project }: { project: projectType }) => {
+export const ProjectItem = ({ project, projects, setprojects }: { project: projectType, projects: projectType[], setprojects: (project: projectType[]) => void }) => {
 
   return (
-    <Link
-    href={{
-      pathname: `/dashboard/${project.id}`,
-    }}
-  >
     <li
     className="relative py-5 pl-4 pr-6 hover:bg-gray-50 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6"
   >
     <div className="flex items-center justify-between space-x-4">
       {/* Repo name and link */}
-      <div className="min-w-0 space-y-3">
-        <div className="flex items-center space-x-3">
-          <span
-            className='bg-gray-100 h-4 w-4 rounded-full flex items-center justify-center'
-            aria-hidden="true"
-          >
-            <span
-              className="bg-gray-400 h-2 w-2 rounded-full"
-            />
-          </span>
-
-          <h2 className="text-sm font-medium">
-            <a href={project.website_url}>
-              <span className="absolute inset-0" aria-hidden="true" />
-              {project.name}{' '}
-              <span className="sr-only">Not running</span>
-            </a>
-          </h2>
-        </div>
-        <a href={project.website_url} className="group relative flex items-center space-x-2.5">
+      <div className="min-w-0 space-x-3 flex flex-row">
+        <a href={project.github_url} className="group relative flex items-center space-x-2.5 cursor-pointer">
           <svg
             className="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
             viewBox="0 0 18 18"
@@ -57,11 +35,21 @@ export const ProjectItem = ({ project }: { project: projectType }) => {
               fill="currentcolor"
             />
           </svg>
-          <span className="truncate text-sm font-medium text-gray-500 group-hover:text-gray-900">
-            {project.github_url}
-          </span>
         </a>
+        <div className="flex items-center">
+          <h2 className="text-sm font-medium">
+            <Link
+              href={`/dashboard/${project.id}`}
+            >
+              <a className=" hover:text-indigo-600">
+              {project.name}
+              </a>
+            </Link>
+          </h2>
+        </div>
       </div>
+      <div className="flex flex-row space-x-3">
+      <ProjectItemDropdown projectId={project.id} projects={projects} setprojects={setprojects} />
       <div className="sm:hidden">
         <ChevronRightIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
       </div>
@@ -70,14 +58,14 @@ export const ProjectItem = ({ project }: { project: projectType }) => {
         <p className="flex items-center space-x-4">
           <a
             href={project.website_url}
-            className="relative text-sm font-medium text-gray-500 hover:text-gray-900"
+            className="relative text-sm font-medium text-gray-500 hover:text-gray-900 cursor-pointer"
           >
             Visit site
           </a>
         </p>
       </div>
+      </div>
     </div>
   </li>
-  </Link>
   )
 }

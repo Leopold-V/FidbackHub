@@ -15,7 +15,9 @@
     "name": {
       "type": "string",
       "minLength": 3,
-      "required": true
+      "required": true,
+      "unique": true,
+      "maxLength": 128
     },
     "user": {
       "type": "relation",
@@ -24,7 +26,16 @@
       "inversedBy": "projects"
     },
     "github_url": {
-      "type": "string"
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 128,
+      "unique": false
+    },
+    "website_url": {
+      "type": "string",
+      "minLength": 10,
+      "unique": false,
+      "maxLength": 128
     }
   }
 }

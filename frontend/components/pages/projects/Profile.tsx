@@ -1,6 +1,7 @@
 import React from 'react'
+import { userType } from 'types/index'
 
-export const Profile = ({ profile }) => {
+export const Profile = ({ profile }: { profile: userType }) => {
   return (
     <div className="flex items-center space-x-3">
     <div className="h-12 w-12 flex-shrink-0">

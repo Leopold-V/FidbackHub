@@ -23,7 +23,7 @@ export type projectType = {
         name: string;
         message: string,
         details: {
-            error: strapiErrorDetailType[]
+            errors: strapiErrorDetailType[]
         }
     }
 }
