@@ -42,10 +42,10 @@ export const deleteProject = async (id: number, jwt: string): Promise<projectTyp
     return json;
 }
 
-export const updateProject = async (project: Partial<projectType>): Promise<projectType> => {
+export const updateProject = async (project: Partial<projectType>, jwt: string): Promise<projectType> => {
     const data = await fetch(`http://localhost:3000/api/projects/${project.id}`, {
         method: 'PUT',
-        body: JSON.stringify({project: {...project}}),
+        body: JSON.stringify({project: {...project}, jwt: jwt}),
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'

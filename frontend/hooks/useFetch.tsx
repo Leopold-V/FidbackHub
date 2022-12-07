@@ -17,8 +17,12 @@ export const useFetch = (url: string, token: string) => {
                       'Content-Type': 'application/json'
                     }, signal: abortController.signal } );
                 const json = await data.json();
-                seterror(false);
-                setData(json);
+                if (json.error) {
+                    seterror(json.error.message)
+                } else {
+                    seterror(false);
+                    setData(json);
+                }
                 setloading(false);
             } catch (error) {
                 if (!abortController.signal.aborted) {
