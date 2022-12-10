@@ -8,14 +8,14 @@ import { userType } from 'types/index';
 export const ProfileForm = ({ profile, setProfile }: { profile: userType, setProfile: (user: userType) => void }) => {
     const { data: session } = useSession();
     const [loading, setloading] = useState(false);
-    const [error, seterror] = useState(false);
+    const [error, seterror] = useState<string | boolean>(false);
     const [success, setSuccess] = useState(false);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setloading(true);
         try {
-            const data = await updateUser(session.id, session.jwt, { username: profile.username });
+            const data = await updateUser(session.jwt, { username: profile.username });
             if (data.error) {
               seterror(data.error.message);
               setSuccess(false);

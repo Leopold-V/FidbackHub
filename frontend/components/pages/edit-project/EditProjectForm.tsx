@@ -20,7 +20,7 @@ export const EditProjectForm = ({ project, setProject }: { project: projectType,
         e.preventDefault();
         setloading(true);
         try {
-            await updateProject(project, session.jwt);
+            await updateProject(session.id, project, session.jwt);
             seterror(false);
             setSuccess(true);
         } catch (error) {

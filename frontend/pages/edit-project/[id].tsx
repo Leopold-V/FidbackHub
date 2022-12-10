@@ -1,7 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import Page from "components/pages/edit-project";
-import { getProjects } from "../../services/project.service";
 
 const EditProjectPage = ({ params }) => {
   return (
@@ -15,9 +14,14 @@ const EditProjectPage = ({ params }) => {
 };
 
 export async function getStaticPaths() {
-    const projects = await getProjects(process.env.PROJECTS_API_TOKEN);
-    const listProjects = [...projects.data.map((ele) => ({params: {id: ele.id + ''}}))]
-    return { paths: [...listProjects], fallback: false }
+  const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects`, {
+    headers: {
+        'Authorization': 'Bearer ' + process.env.PROJECTS_API_TOKEN,
+    }
+  });
+  const projects = await data.json();
+  const listProjects = [...projects.data.map((ele) => ({params: {id: ele.id + ''}}))]
+  return { paths: [...listProjects], fallback: false }
 }
 
   // This also gets called at build time

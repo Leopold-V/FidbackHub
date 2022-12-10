@@ -13,7 +13,6 @@ const DashboardPageComponent = ({ params }) => {
 
   useEffect(() => {
     if (projectData) {
-      console.log(projectData);
       setProject({...projectData.data.attributes})
     }
   }, [projectData])

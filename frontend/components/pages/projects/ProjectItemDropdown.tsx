@@ -14,9 +14,14 @@ export const ProjectItemDropdown = ({ projectId, projects, setprojects}: { proje
     const { data: session } = useSession();
 
     const handleDeleteProject = async () => {
-        const newProjectsList = [...projects].filter((ele) => ele.id !== projectId);
-        setprojects([...newProjectsList]);
-        await deleteProject(projectId, session.jwt);
+      try {
+          await deleteProject(projectId, session.jwt);
+          const newProjectsList = [...projects].filter((ele) => ele.id !== projectId);
+          setprojects([...newProjectsList]);
+        } catch (error) {
+          // TODO: trigger an alert with the error message
+          console.log(error);
+        }
     }
   
     return (

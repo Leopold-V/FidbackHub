@@ -8,6 +8,14 @@ export type userType = {
     createdAt?: string;
     updatedAt?: string;
     projects?: projectType[];
+    error?: {
+        status: number;
+        name: string;
+        message: string,
+        details: {
+            errors: strapiErrorDetailType[]
+        }
+    }
 }
 
 export type projectType = {

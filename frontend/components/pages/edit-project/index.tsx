@@ -15,18 +15,14 @@ const EditProjectPageComponent = ({ params }) => {
     website_url: '',
   });
 
-  const { data: userData, error, seterror, loading } = useFetch(`http://localhost:1337/api/users/${session.id}?populate=*`, session.jwt);
+  const { data: projectData, error, seterror, loading } = useFetch(`http://localhost:3000/api/projects/${params.id}`, session.jwt);
 
   useEffect(() => {
-    if (userData) {
-      const projectFound = userData.projects.find((ele) => (ele.id === +params.id));
-      if (projectFound) {
-        setProject(projectFound)
-      } else {
-        seterror('Error 404, page not found');
+      if (projectData) {
+        console.log(projectData);
+        setProject({...projectData.data.attributes, id: projectData.data.id});
       }
-    }
-  }, [userData])
+  }, [projectData])
 
   if (loading) return (
     <div className="flex flex-col justify-center items-center space-y-8">

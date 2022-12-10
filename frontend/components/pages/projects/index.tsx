@@ -1,10 +1,12 @@
-import React from "react";
-import { userType } from "types/index";
+import React, { useState } from "react";
+import { projectType, userType } from "types/index";
 import { Activityfeed } from "./Activityfeed";
 import { ProfileColumn } from "./ProfileColumn";
 import { ProjectsColumn } from "./ProjectsColumn";
 
-const ProjectsPageComponent = ({ userData }: { userData: userType }) => {
+const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType, userProjects: projectType[] }) => {
+  const [projects, setprojects] = useState(userProjects);
+
   const profile = {
     id: userData.id,
     username: userData.username,
@@ -15,8 +17,8 @@ const ProjectsPageComponent = ({ userData }: { userData: userType }) => {
     <>
       <div className="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
         <div className="min-w-0 flex-1 bg-white xl:flex">
-          <ProfileColumn profile={profile} projectsNumber={userData.projects.length} />
-          <ProjectsColumn projects={userData.projects} />
+          <ProfileColumn profile={profile} projectsNumber={projects.length} />
+          <ProjectsColumn projects={projects} setprojects={setprojects} />
         </div>
         <Activityfeed />
       </div>

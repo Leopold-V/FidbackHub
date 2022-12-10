@@ -24,7 +24,7 @@ export const ProjectForm = () => {
         e.preventDefault();
         setloading(true);
         try {
-            await addProject(session.id, project);
+            await addProject(session.id, project, session.jwt);
             seterror(false);
             setSuccess(true);
         } catch (error) {
