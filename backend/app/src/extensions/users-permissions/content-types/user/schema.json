@@ -68,6 +68,11 @@
       "relation": "oneToMany",
       "target": "api::project.project",
       "mappedBy": "user"
+    },
+    "avatar_url": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 255
     }
   }
 }

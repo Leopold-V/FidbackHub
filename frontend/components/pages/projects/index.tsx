@@ -10,7 +10,8 @@ const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType,
   const profile = {
     id: userData.id,
     username: userData.username,
-    email: userData.email
+    email: userData.email,
+    avatar_url: userData.avatar_url
   };
 
   return (

@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ratings",
+  "info": {
+    "singularName": "rating",
+    "pluralName": "ratings",
+    "displayName": "rating",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "design": {
+      "type": "integer",
+      "max": 10,
+      "min": 0,
+      "default": 0,
+      "required": true
+    },
+    "speed": {
+      "type": "integer",
+      "required": true,
+      "max": 10,
+      "min": 0,
+      "default": 0
+    },
+    "responsive": {
+      "type": "integer",
+      "required": true,
+      "max": 10,
+      "min": 0,
+      "default": 0
+    },
+    "project": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project.project",
+      "inversedBy": "ratings"
+    }
+  }
+}

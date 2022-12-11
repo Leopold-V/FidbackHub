@@ -36,6 +36,12 @@
       "minLength": 10,
       "unique": false,
       "maxLength": 128
+    },
+    "ratings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::rating.rating",
+      "mappedBy": "project"
     }
   }
 }

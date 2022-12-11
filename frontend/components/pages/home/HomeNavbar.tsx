@@ -13,7 +13,7 @@ export const HomeNavbar = () => {
         if (status === 'authenticated') {
             router.push('/projects');
         } else {
-          signIn('google', {
+          signIn('github', {
             callbackUrl: `/projects`,
           });
         }

@@ -2,6 +2,7 @@ export type userType = {
     id: number;
     username: string;
     email: string;
+    avatar_url?: string;
     provider?: string;
     confirmed?: boolean,
     blocked?: boolean,
@@ -26,6 +27,22 @@ export type projectType = {
     publishedAt: string;
     github_url: string;
     website_url: string;
+    ratings?: ratingType[];
+    error?: {
+        status: number;
+        name: string;
+        message: string,
+        details: {
+            errors: strapiErrorDetailType[]
+        }
+    }
+}
+
+export type ratingType = {
+    id: number;
+    design: number;
+    speed: number;
+    responsive: number;
     error?: {
         status: number;
         name: string;

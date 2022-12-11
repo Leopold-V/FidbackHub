@@ -5,6 +5,7 @@ import { Bars3CenterLeftIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 import { signOut } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 
 const navigation = [
     { name: 'Projects', href: '/projects', current: true, key: 1 },
@@ -20,7 +21,7 @@ function classNames(...classes) {
 }
 
 export const Navbar = () => {
-
+  const { data: session } = useSession();
   return (
     <Disclosure as="nav" className="flex-shrink-0 bg-indigo-600">
     {({ open }) => (
@@ -33,7 +34,7 @@ export const Navbar = () => {
                 <img
                   className="h-8 w-auto"
                   src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=300"
-                  alt="Your Company"
+                  alt="Avisitor logo"
                 />
               </div>
             </div>
@@ -92,8 +93,8 @@ export const Navbar = () => {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=256&h=256&q=80"
-                        alt=""
+                        src={session?.user.image}
+                        alt="User avatar"
                       />
                     </Menu.Button>
                   </div>

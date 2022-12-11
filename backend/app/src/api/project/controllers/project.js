@@ -11,8 +11,7 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
     try {
       const response = await strapi.db.query('api::project.project').create({
         data: ctx.request.body.data,
-        populate: { user: true },
-        publish: true
+        populate: { user: true }
       });
       return {data: {id: response.id, attributes: {...response}}, meta: {}};
     } catch (error) {
@@ -23,7 +22,7 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
     try {
       const response = await strapi.db.query('api::project.project').findOne({
         where: {id: ctx.params.id, user: ctx.state.user.id},
-        populate: { user: true },
+        populate: { user: true, ratings: true },
       });
       return {data: {id: response.id, attributes: {...response}}, meta: {}};
     } catch (error) {
@@ -38,10 +37,11 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
       const response = await strapi.db.query('api::project.project').update({
         where: {id: ctx.params.id, user: ctx.state.user.id},
         data: ctx.request.body.data,
-        populate: { user: true },
+        populate: { user: true, ratings: true },
       });
       return {data: {id: response.id, attributes: {...response}}, meta: {}};
     } catch (error) {
+      console.log(error.message);
       throw new ApplicationError();
     }
   },

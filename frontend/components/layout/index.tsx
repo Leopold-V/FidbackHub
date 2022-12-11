@@ -4,7 +4,7 @@ const Layout = ({ children }: { children: React.ReactChild}) => {
   return (
     <div>
       <div className="relative flex min-h-full flex-col">
-        <Navbar />
+        <Navbar  />
         {children}
         </div>
       </div>

@@ -10,7 +10,7 @@ module.exports = (plugin) => {
             throw new Error();
           }
           const response = await strapi.query('plugin::users-permissions.user').update({
-            where: {id: ctx.state.user.id},
+            where: {id: ctx.request.body.data.userid},
             data: ctx.request.body.data
           });
           return {data: {id: response.id, attributes: {...response}}, meta: {}};

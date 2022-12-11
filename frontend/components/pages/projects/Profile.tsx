@@ -7,13 +7,13 @@ export const Profile = ({ profile }: { profile: userType }) => {
     <div className="h-12 w-12 flex-shrink-0">
       <img
         className="h-12 w-12 rounded-full"
-        src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=256&h=256&q=80"
-        alt=""
+        src={profile.avatar_url}
+        alt="user avatar"
       />
     </div>
     <div className="space-y-1">
       <div className="text-sm font-medium text-gray-900">{profile.username}</div>
-      <a href="#" className="group flex items-center space-x-2.5">
+      <a href={`https://github.com/${profile.username}`} className="group flex items-center space-x-2.5">
         <svg
           className="h-5 w-5 text-gray-400 group-hover:text-gray-500"
           aria-hidden="true"
@@ -26,9 +26,6 @@ export const Profile = ({ profile }: { profile: userType }) => {
             clipRule="evenodd"
           />
         </svg>
-        <span className="text-sm font-medium text-gray-500 group-hover:text-gray-900">
-          debbielewis
-        </span>
       </a>
     </div>
   </div>
