@@ -10,11 +10,12 @@ module.exports = (plugin) => {
             throw new Error();
           }
           const response = await strapi.query('plugin::users-permissions.user').update({
-            where: {id: ctx.request.body.data.userid},
+            where: {id: ctx.state.user.id},
             data: ctx.request.body.data
           });
           return {data: {id: response.id, attributes: {...response}}, meta: {}};
         } catch (error) {
+          console.log(error);
           throw new ApplicationError('Something went wrong');
         }
     }
