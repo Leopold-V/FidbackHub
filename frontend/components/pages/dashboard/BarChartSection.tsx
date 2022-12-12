@@ -15,6 +15,7 @@ export const BarChartSection = ({ ratings }) => {
 		//const d = dayjs(ratingsFiltered[0].createdAt).isBetween(dateRange.startDate, dateRange.endDate);
 		//console.log(d);
 		const newRating = JSON.parse(JSON.stringify(ratings)).filter((ele) => {
+			console.log(dayjs(ele.createdAt).isBetween(dayjs(dateRange.startDate), dayjs(dateRange.endDate)));
 			return dayjs(ele.createdAt).isBetween(dayjs(dateRange.startDate), dayjs(dateRange.endDate)) === true
 		});
 		setratingsFiltered([...newRating]);
