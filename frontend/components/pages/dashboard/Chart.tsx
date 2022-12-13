@@ -1,24 +1,16 @@
 import { useEffect, useState } from 'react';
 import { XAxis, YAxis, BarChart, Bar, Tooltip } from 'recharts';
+import { ratingCategories, ratingType } from 'types/index';
 
-export const Chart = ({ratings, title, ratingType }) => {
-	const [data, setdata] = useState(JSON.parse(JSON.stringify(initialData)));
-
-useEffect(() => {
-  setdata(JSON.parse(JSON.stringify(initialData)));
-}, [])
-
-console.log(ratings);
-
+export const Chart = ({ratings, title, ratingType }: { ratings: ratingType[], title: string, ratingType: ratingCategories}) => {
+	const [data, setdata] = useState(initialData);
 
 	useEffect(() => {
-		// ******************************* TODO: ****************************** 
-		// Refactor this with a copy array or so many re-render will occurs because of thesetdata in the loop.
     const newData = JSON.parse(JSON.stringify(initialData));
     ratings.forEach((ele, i) => {
       newData[ele[ratingType]][ratingType] += 1;
-      setdata([...newData]);
     })
+    setdata([...newData]);
 	}, [ratings]);
 	
 	return (

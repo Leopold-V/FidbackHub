@@ -43,6 +43,7 @@ export type ratingType = {
     design: number;
     speed: number;
     responsive: number;
+    createdAt?: Date;
     error?: {
         status: number;
         name: string;
@@ -52,6 +53,8 @@ export type ratingType = {
         }
     }
 }
+
+export type ratingCategories = 'design' | 'speed' | 'responsive'
 
 export type strapiFetchErrorType = {
     data: null | any;

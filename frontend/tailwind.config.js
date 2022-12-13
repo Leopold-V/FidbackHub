@@ -7,6 +7,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
     "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
   ],
+  darkMode: 'class',
   theme: {
     extend: {      fontFamily: {
       sans: ['Inter var', ...defaultTheme.fontFamily.sans],
