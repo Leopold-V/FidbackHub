@@ -2,6 +2,7 @@ import React from 'react'
 import { useFetch } from '../../../hooks/useFetch';
 import { useSession } from 'next-auth/react';
 import { BarChartSection } from './BarChartSection';
+import { LineChartSection } from './LineChartSection';
 
 const DashboardPageComponent = ({ params }) => {
   const { data: session } = useSession();
@@ -20,10 +21,16 @@ const DashboardPageComponent = ({ params }) => {
   ))
 
   return (
-    <div className="flex flex-col justify-center items-center space-y-8">
+    <div className="flex flex-col items-center space-y-8 bg-gray-50">
       <h1 className="mt-8 text-lg font-semibold">{projectData.data.attributes.name} <span className="text-indigo-600"> dashboard</span></h1>
       {projectData.data.attributes.ratings.length > 0 ?
-      <BarChartSection ratings={projectData.data.attributes.ratings} />
+      (<div className="divide-y space-y-8">
+        <BarChartSection ratings={projectData.data.attributes.ratings} />
+        <LineChartSection ratings={projectData.data.attributes.ratings} />
+        <div className="pt-8">Line chart2 here</div>
+        <div className="pt-8">Line chart3 here</div>
+      </div>
+      )
       : <div className="text-center my-6 text-sm lg:text-base">It looks like you don't have any data yet...</div>}
     </div>
   )
