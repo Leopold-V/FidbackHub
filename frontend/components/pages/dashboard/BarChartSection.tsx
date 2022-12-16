@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 import { ratingType } from 'types/index';
-import { Chart } from './Chart'
+import { RatingBarChart } from './RatingBarChart'
 import { DateFilter } from './DateFilter'
+import { Card } from 'components/common/Card';
+import { DividerTitle } from 'components/common/DividerTitle';
 
 export const BarChartSection = ({ ratings }: { ratings: ratingType[]}) => {
 	const [dateRange, setdateRange] = useState({ 
@@ -23,18 +25,20 @@ export const BarChartSection = ({ ratings }: { ratings: ratingType[]}) => {
 	}, [dateRange]);
 
   return (
-    <div className="flex flex-col items-center p-4 bg-white rounded shadow">
-		<div className="flex lg:flex-row lg:justify-start w-full flex-col space-x-6 items-center">
-			<h2 className="text-center text-lg lg:w-1/4">Overall ratings</h2>
-			<div>
-				<DateFilter dateRange={dateRange} setdateRange={setdateRange} />
+	<>
+	    <DividerTitle title="Overall ratings" />
+		<Card >
+			<div className="flex flex-col items-center">
+				<div className="self-start">
+					<DateFilter dateRange={dateRange} setdateRange={setdateRange} />
+				</div>
+				<div className="flex lg:flex-row flex-col justify-center items-center">
+					<RatingBarChart title={"Design"} ratings={ratingsFiltered} ratingType="design" />
+					<RatingBarChart title={"Speed"} ratings={ratingsFiltered} ratingType="speed" />
+					<RatingBarChart title={"Responsive"} ratings={ratingsFiltered} ratingType="responsive" />
+				</div>
 			</div>
-		</div>
-		<div className="flex lg:flex-row flex-col justify-center items-center">
-			<Chart title={"Design"} ratings={ratingsFiltered} ratingType="design" />
-			<Chart title={"Speed"} ratings={ratingsFiltered} ratingType="speed" />
-			<Chart title={"Responsive"} ratings={ratingsFiltered} ratingType="responsive" />
-		</div>
-    </div>
+		</Card>
+	</>
   )
 }

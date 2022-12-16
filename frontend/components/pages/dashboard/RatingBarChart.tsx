@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { XAxis, YAxis, BarChart, Bar, Tooltip } from 'recharts';
 import { ratingCategories, ratingType } from 'types/index';
 
-export const Chart = ({ratings, title, ratingType }: { ratings: ratingType[], title: string, ratingType: ratingCategories}) => {
+export const RatingBarChart = ({ratings, title, ratingType }: { ratings: ratingType[], title: string, ratingType: ratingCategories}) => {
 	const [data, setdata] = useState(initialData);
 
 	useEffect(() => {
@@ -15,12 +15,12 @@ export const Chart = ({ratings, title, ratingType }: { ratings: ratingType[], ti
 	
 	return (
 		<div>
-			<h3 className="text-center text-gray-700 my-4">{title}</h3>
+			<h4 className="text-center text-gray-500 font-medium my-4">{title}</h4>
 			<BarChart width={400} height={250} data={Object.values(data)}>
 				<Tooltip />
         <Bar dataKey={ratingType} fill="#4f46e5" />
-				<XAxis dataKey="name" />
-				<YAxis type="number" />
+				<XAxis dataKey="name" fontSize={10} />
+				<YAxis type="number" fontSize={10} />
       </BarChart>
 		</div>
 	)

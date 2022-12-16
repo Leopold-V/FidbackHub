@@ -46,16 +46,15 @@ const data = [
     name: 'Page G',
     uv: 3490,
     pv: 4300,
-    createdAt: new Date()
+    createdAt: new Date(dayjs(new Date()).add(7, 'day').toString())
   },
 ];
 
-export const LineTest = ({ ratings }: { ratings: ratingType[]}) => {
+export const AverageChart = ({ ratings }: { ratings: ratingType[]}) => {
     function formatXAxis(tickItem) {
         // If using moment.js
         return dayjs(tickItem).format('MMM Do YY')
     }
-
 
     return (
         <LineChart
@@ -70,7 +69,7 @@ export const LineTest = ({ ratings }: { ratings: ratingType[]}) => {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey={ratings.map((ele) => ele.createdAt)} tickFormatter={formatXAxis} />
+          <XAxis values={ratings.map((ele, i) => ({...ele, createdAt: new Date(dayjs(new Date()).add(i, 'day').toString())}))} dataKey="createdAt" tickFormatter={formatXAxis} />
           <YAxis />
           <Tooltip />
           <Legend />
