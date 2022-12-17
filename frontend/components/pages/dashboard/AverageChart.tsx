@@ -58,8 +58,8 @@ export const AverageChart = ({ ratings }: { ratings: ratingType[]}) => {
 
     return (
         <LineChart
-          width={800}
-          height={300}
+          width={700}
+          height={260}
           data={data}
           margin={{
             top: 5,

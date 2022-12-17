@@ -1,22 +1,28 @@
 import { Card } from 'components/common/Card'
 import { DividerTitle } from 'components/common/DividerTitle'
-import React from 'react'
+import dayjs from 'dayjs'
+import React, { useState } from 'react'
 import { ratingType } from 'types/index'
 import { AverageChart } from './AverageChart'
+import { DateFilter } from './DateFilter'
 
 export const AverageChartSection = ({ ratings }: { ratings: ratingType[]}) => {
+	const [dateRange, setdateRange] = useState({ 
+		startDate: dayjs().subtract(7, 'day'), 
+		endDate: dayjs(new Date())
+	});
+
   return (
 	<>
-    	<DividerTitle title="Progression" />
-		<h3 className="text-lg font-medium leading-6 text-gray-900"></h3>
+    <DividerTitle title="Progression" />
 		<Card>
 			<div className="flex flex-col items-center">
-				<div className="flex lg:flex-row lg:justify-start w-full flex-col space-x-6 items-center">
-					<div>
-						Filter
-					</div>
+				<div className="self-start">
+						<DateFilter dateRange={dateRange} setdateRange={setdateRange} />
 				</div>
-				<AverageChart ratings={ratings} />
+				<div className="my-2">
+					<AverageChart ratings={ratings} />
+				</div>
 			</div>
 		</Card>
 	</>
