@@ -1,80 +1,64 @@
-import dayjs from 'dayjs';
-import React from 'react';
+import dayjs, { Dayjs } from 'dayjs';
+import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { ratingType } from 'types/index';
 
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-    createdAt: new Date()
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-    createdAt: new Date()
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    createdAt: new Date()
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    createdAt: new Date()
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    createdAt: new Date()
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    createdAt: new Date()
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    createdAt: new Date(dayjs(new Date()).add(7, 'day').toString())
-  },
-];
+export const AverageChart = ({ ratings, dateRange }: { ratings: ratingType[], dateRange: { startDate: string, endDate: string}}) => {
+  const [data, setData] = useState([]);
+  function formatXAxis(tickItem) {
+    return dayjs(tickItem).format('DD/MM/YY')
+  }
 
-export const AverageChart = ({ ratings }: { ratings: ratingType[]}) => {
-    function formatXAxis(tickItem) {
-        // If using moment.js
-        return dayjs(tickItem).format('MMM Do YY')
+  const createHashMapFromDateRangeFilter = (dateRange) => {
+    const newData = {};
+    const numberOfDayDifference = dayjs(dateRange.endDate).diff(dayjs(dateRange.startDate), 'day');
+    for (let i = 0; i <= numberOfDayDifference; i ++) {
+      newData[dayjs(dateRange.startDate).add(i, 'day').format('YYYY-MM-DD')] = {
+        count: 0,
+        design: 0,
+        speed: 0,
+        responsive: 0,
+        date: dayjs(dateRange.startDate).add(i, 'day').format('YYYY-MM-DD'), 
+      };
     }
+    return newData;
+  }
 
-    return (
-        <LineChart
-          width={700}
-          height={260}
-          data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis values={ratings.map((ele, i) => ({...ele, createdAt: new Date(dayjs(new Date()).add(i, 'day').toString())}))} dataKey="createdAt" tickFormatter={formatXAxis} />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-        </LineChart>
-    );
+  useEffect(() => {
+    const newData = createHashMapFromDateRangeFilter(dateRange);
+    ratings.forEach((ele, i) => {
+      newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].count += 1;
+      newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].design = ((newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].design + ele.design) / newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].count);
+      newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].speed = ((newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].speed + ele.speed) / newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].count);
+      newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].responsive = ((newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].responsive + ele.responsive) / newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].count);
+    });
+    setData(Object.values(newData));
+  }, [ratings]);
+    
+  return (
+    <ResponsiveContainer width="80%" height={260}>
+      <LineChart
+        data={data}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis 
+          dataKey="date"
+          tickFormatter={formatXAxis} 
+        />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line type="monotone" dataKey="count" stroke="#8884d8" dot={null} />
+        <Line type="monotone" dataKey="design" stroke="#84d8c4" dot={null} />
+        <Line type="monotone" dataKey="speed" stroke="#d5d871" dot={null} />
+        <Line type="monotone" dataKey="responsive" stroke="#f15353" dot={null} />
+      </LineChart>
+    </ResponsiveContainer>
+  );
 }

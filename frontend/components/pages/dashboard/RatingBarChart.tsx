@@ -15,12 +15,12 @@ export const RatingBarChart = ({ratings, title, ratingType }: { ratings: ratingT
 	
 	return (
 		<div>
-			<h4 className="text-center text-gray-500 font-medium my-4">{title}</h4>
+			<h4 className="text-center text-gray-700 font-medium my-4">{title}</h4>
 			<BarChart width={400} height={250} data={Object.values(data)}>
 				<Tooltip />
         <Bar dataKey={ratingType} fill="#4f46e5" />
-				<XAxis dataKey="name" fontSize={10} />
-				<YAxis type="number" fontSize={10} />
+				<XAxis dataKey="name" />
+				<YAxis type="number" />
       </BarChart>
 		</div>
 	)

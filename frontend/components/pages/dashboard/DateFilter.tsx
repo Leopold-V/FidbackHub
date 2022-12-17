@@ -14,7 +14,7 @@ export const DateFilter = ({ dateRange, setdateRange}) => {
             onChange={handleValueChange}
             showShortcuts={true}
             placeholder={"Date filter"} 
-            inputClassName="font-semibold text-xs"
+            inputClassName="text-xs font-semibold text-gray-700"
         /> 
     );
 }; 
