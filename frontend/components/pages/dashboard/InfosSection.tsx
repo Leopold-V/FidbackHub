@@ -2,7 +2,6 @@ import { Card } from "components/common/Card";
 import { ratingType } from "types/index";
 
 export const InfoSection = ({ ratings }: { ratings: ratingType[]}) => {
-  console.log(ratings);
   const avgRating = ratings.reduce((a, b) => {
     return a += b.design + b.speed + b.responsive
   }, 0) / (ratings.length * 3);
