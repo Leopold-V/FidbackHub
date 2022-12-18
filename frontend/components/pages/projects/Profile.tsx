@@ -6,7 +6,7 @@ export const Profile = ({ profile }: { profile: userType }) => {
     <div className="flex items-center space-x-3">
     <div className="h-12 w-12 flex-shrink-0">
       <img
-        className="h-12 w-12 rounded-full"
+        className="h-12 w-12 rounded-full border-2"
         src={profile.avatar_url}
         alt="user avatar"
       />

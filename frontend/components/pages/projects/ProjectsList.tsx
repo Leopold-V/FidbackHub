@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { projectType } from "types/index";
 import { ProjectItem } from './ProjectItem'
 

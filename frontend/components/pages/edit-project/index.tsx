@@ -36,8 +36,8 @@ const EditProjectPageComponent = ({ params }) => {
   ))
 
   return (
-    <div className="flex flex-col justify-center items-center space-y-8">
-      <h1 className="mt-8 text-lg font-semibold">Edit your project</h1>
+    <div className="flex flex-col items-center py-8 space-y-8">
+      <h1 className="mt-2 text-lg font-semibold">Edit your project</h1>
       {<EditProjectForm project={project} setProject={setProject} />}
     </div>
   )

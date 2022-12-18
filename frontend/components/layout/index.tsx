@@ -3,7 +3,7 @@ import { Navbar } from './Navbar'
 const Layout = ({ children }: { children: React.ReactChild}) => {
   return (
     <div>
-      <div className="relative flex min-h-full flex-col">
+      <div className="relative flex min-h-screen flex-col bg-gray-50">
         <Navbar  />
         {children}
         </div>
