@@ -43,6 +43,7 @@ export type ratingType = {
     design: number;
     speed: number;
     responsive: number;
+    average: number;
     createdAt?: Date;
     error?: {
         status: number;

@@ -9,7 +9,7 @@ export const TableRatingRow = ({ rating }: { rating: ratingType }) => {
         {dayjs(rating.createdAt).format("YYYY-MM-DD").toString()}
       </td>
       <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6">
-        {Math.round((rating.design + rating.speed + rating.responsive) / 3)}
+        {rating.average}
       </td>
       <td className="whitespace-nowrap p-4 text-sm text-gray-500">
         {rating.design}

@@ -42,6 +42,13 @@
       "relation": "oneToMany",
       "target": "api::rating.rating",
       "mappedBy": "project"
+    },
+    "api_key": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 256,
+      "minLength": 64
     }
   }
 }
