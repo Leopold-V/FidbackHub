@@ -3,8 +3,8 @@ import { ratingType } from "types/index";
 
 export const InfoSection = ({ ratings }: { ratings: ratingType[]}) => {
   const avgRating = ratings.reduce((a, b) => {
-    return a += b.design + b.speed + b.responsive
-  }, 0) / (ratings.length * 3);
+    return a += b.average
+  }, 0) / (ratings.length);
   const avgDesign = ratings.reduce((a, b) => {
     return a += b.design
   }, 0) / (ratings.length);
@@ -31,7 +31,7 @@ export const InfoSection = ({ ratings }: { ratings: ratingType[]}) => {
 
   const stats = [
     { name: "Total ratings", stat: ratings.length },
-    { name: "Avg. rating", stat: avgRating + '/10' },
+    { name: "Avg. rating", stat: avgRating.toFixed(2) + '/10' },
     { name: "Best category", stat: bestCategory()},
   ];
 
