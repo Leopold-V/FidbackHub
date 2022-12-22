@@ -13,8 +13,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 const addProject = async (req: NextApiRequest, res: NextApiResponse) => {
     const project = req.body.project;
+    console.log(project);
     const api_key = generateKey();
-    console.log(api_key);
     const data = await fetch(`http://localhost:1337/api/projects`, {
         method: 'POST',
         body: JSON.stringify({data: {...project, api_key: api_key, user: project.userId}}),

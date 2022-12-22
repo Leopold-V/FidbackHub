@@ -78,7 +78,7 @@ export const ProjectItemDropdown = ({ projectId, projects, setprojects}: { proje
                         'block px-4 py-2 text-sm'
                     )}
                     >
-                    Edit
+                    Settings
                     </a>
                 </Link>
             </div>

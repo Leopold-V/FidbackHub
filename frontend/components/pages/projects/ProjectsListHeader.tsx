@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import { Menu } from '@headlessui/react'
 import {
     BarsArrowUpIcon,
@@ -9,7 +9,28 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export const ProjectsListHeader = () => {
+export const ProjectsListHeader = ({projects, setprojects}) => {
+
+  const handleSort = (e: MouseEvent<HTMLButtonElement>) => {
+    const field = e.currentTarget.dataset.field;
+    console.log(field);
+    const newProjectsArray = [...projects].sort((a, b) => 
+    {
+      const nameA = a[field].toString().toLowerCase(); // ignore upper and lowercase
+      const nameB = b[field].toString().toLowerCase(); // ignore upper and lowercase
+      console.log(nameA, nameB);
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    console.log(newProjectsArray);
+    setprojects(newProjectsArray);
+  }
+
   return (
     <div className="border-b border-t border-gray-200 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6">
     <div className="flex items-center">
@@ -24,41 +45,44 @@ export const ProjectsListHeader = () => {
           <div className="py-1">
             <Menu.Item>
               {({ active }) => (
-                <a
-                  href="#"
+                <button
+                  onClick={handleSort}
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
+                    'w-full px-4 py-2 text-sm'
                   )}
+                  data-field="name"
                 >
                   Name
-                </a>
+                </button>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <a
-                  href="#"
+                <button
+                  onClick={handleSort}
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
+                    'w-full px-4 py-2 text-sm'
                   )}
+                  data-field="updatedAt"
                 >
                   Date modified
-                </a>
+                </button>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <a
-                  href="#"
+                <button
+                  onClick={handleSort}
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
+                    'w-full px-4 py-2 text-sm'
                   )}
+                  data-field="createdAt"
                 >
                   Date created
-                </a>
+                </button>
               )}
             </Menu.Item>
           </div>

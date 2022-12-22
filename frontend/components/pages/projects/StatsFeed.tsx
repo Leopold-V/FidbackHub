@@ -40,9 +40,9 @@ const StatsList = ({
     <div className="space-y-4">
       <Card>
         <dt className="truncate text-sm font-medium text-gray-500">
-          Total ratings in your projects:
+          Total ratings:
         </dt>
-        <dd className="mt-1 text-lg font-semibold tracking-tight text-gray-900">
+        <dd className="mt-1 font-semibold tracking-tight text-gray-900">
           {ratingsNumber}
         </dd>
       </Card>
@@ -50,7 +50,7 @@ const StatsList = ({
         <dt className="truncate text-sm font-medium text-gray-500">
           Most rated project
         </dt>
-        <dd className="mt-1 text-lg font-semibold tracking-tight text-gray-900">
+        <dd className="mt-1 font-semibold tracking-tight text-gray-900">
           {maxRatedProject.name}: {maxRatedProject.number}
         </dd>
       </Card>
@@ -58,7 +58,7 @@ const StatsList = ({
         <dt className="truncate text-sm font-medium text-gray-500">
           Best rated project
         </dt>
-        <dd className="mt-1 text-lg font-semibold tracking-tight text-gray-900">
+        <dd className="mt-1 font-semibold tracking-tight text-gray-900">
           {avgValues.sort((a, b) => b.avg - a.avg)[0].name}: {avgValues.sort((a, b) => b.avg - a.avg)[0].avg.toFixed(2)}
         </dd>
       </Card>
@@ -69,7 +69,7 @@ const StatsList = ({
 const FeedHeader = () => {
   return (
     <div className="pt-6 pb-2">
-      <h2 className="text-sm font-semibold">Stats</h2>
+      <h2 className="font-medium">Stats</h2>
     </div>
   );
 };

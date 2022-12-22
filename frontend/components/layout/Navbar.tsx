@@ -40,7 +40,7 @@ export const Navbar = () => {
             </div>
 
             {/* Search section */}
-            <div className="flex flex-1 justify-center lg:justify-end">
+            {/* <div className="flex flex-1 justify-center lg:justify-end">
               <div className="w-full px-2 lg:px-6">
                 <label htmlFor="search" className="sr-only">
                   Search projects
@@ -58,7 +58,7 @@ export const Navbar = () => {
                   />
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="flex lg:hidden">
               {/* Mobile menu button */}
               <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-indigo-600 p-2 text-indigo-400 hover:bg-indigo-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600">

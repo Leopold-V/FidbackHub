@@ -5,7 +5,6 @@ import { BarChartSection } from './BarChartSection';
 import { AverageChartSection } from './AverageChartSection';
 import { InfoSection } from './InfosSection';
 import { ListRatingsSection } from './ListRatingsSection';
-import { InstallationSection } from './InstallationSection';
 
 const DashboardPageComponent = ({ params }) => {
   const { data: session } = useSession();
@@ -28,7 +27,6 @@ const DashboardPageComponent = ({ params }) => {
       {projectData.data.attributes.ratings.length > 0 ?
       (<div className="space-y-8">
         <InfoSection ratings={projectData.data.attributes.ratings} />
-        <InstallationSection api_key={projectData.data.attributes.api_key} />
         <AverageChartSection ratings={projectData.data.attributes.ratings} />
         <BarChartSection ratings={projectData.data.attributes.ratings} />
         <ListRatingsSection ratings={projectData.data.attributes.ratings} />

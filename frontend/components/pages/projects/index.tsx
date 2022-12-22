@@ -3,6 +3,7 @@ import { userType } from "types/index";
 import { StatsFeed } from "./StatsFeed";
 import { ProfileColumn } from "./ProfileColumn";
 import { ProjectsColumn } from "./ProjectsColumn";
+import { Hello } from '../../../node_modules/fidbackhub';
 
 const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType, userProjects: any[] }) => {
   const profile = {
@@ -50,6 +51,26 @@ const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType,
     setallratings(_allratings);
   }, []);
 
+  const testRating = async () => {
+    const rating = {design: 5, speed: 6, responsive: 7, average: 6}
+    const data = await fetch('http://localhost:3000/api/ratings', {
+      method: 'POST',
+      body: JSON.stringify({
+        rating: {
+          ...rating,
+          project: 33,
+          projectToken: 'ooosj6mXZiXCbZ+hrK+WZ2HI3jieFFJMNX+AszKHdfbA1QKuV8IOSsq0XpSjSbnfxH+FlkAVR35wztNP5xhtrw=='
+        }
+      }),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+    })
+    const json = await data.json();
+    return json;
+  }
+
   return (
     <>
       <div className="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
@@ -59,6 +80,8 @@ const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType,
         </div>
         {avgValues.length > 0 && <StatsFeed ratingsNumber={allratings.length} maxRatedProject={maxRatedProject} avgValues={avgValues} />}
       </div>
+      <Hello />
+      <button onClick={testRating}>send a rating test</button>
     </>
   );
 };

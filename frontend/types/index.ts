@@ -28,6 +28,7 @@ export type projectType = {
     github_url: string;
     website_url: string;
     ratings?: ratingType[];
+    api_key?: string;
     error?: {
         status: number;
         name: string;

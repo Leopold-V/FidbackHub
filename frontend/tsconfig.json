@@ -44,5 +44,5 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ]
+, "components/pages/documentation/index.msx"  ]
 }

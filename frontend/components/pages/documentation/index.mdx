@@ -1,0 +1,33 @@
+import SyntaxHighlighter from 'react-syntax-highlighter';
+
+## Quick start guide
+
+1. Installation
+
+You can install the Avisitor React component library as an NPM package
+
+<SyntaxHighlighter language="sh">
+  {"npm install avisitor"}
+</SyntaxHighlighter>
+
+2. Project Token
+
+You will need your project token for sending data. 
+
+You can get your project token from your [project settings](http://localhost:3000/projects).
+
+3. Usage
+
+Use the component in your project
+
+<SyntaxHighlighter language="react">
+  {`import Avisitor from "Avisitor";
+
+export const Avisitor = () => {
+  return (
+    <Avisitor token={YOUR_SECRET_KEY} />
+  )
+}`}
+</SyntaxHighlighter>
+
+And voilà !

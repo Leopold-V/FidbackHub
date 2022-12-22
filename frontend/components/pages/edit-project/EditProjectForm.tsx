@@ -4,6 +4,7 @@ import { updateProject } from "../../../services/project.service";
 import { ErrorAlert } from "components/common/ErrorAlert";
 import { SuccessAlert } from "components/common/SuccessAlert";
 import { projectType } from "types/index";
+import SecretKey from "../dashboard/SecretKey";
 
 export const EditProjectForm = ({ project, setProject }: { project: projectType, setProject: (user: projectType) => void }) => {
     const { data: session } = useSession();

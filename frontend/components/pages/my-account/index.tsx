@@ -26,7 +26,7 @@ const MyAccountPageComponent = ({ profile }: { profile: userType }) => {
       </div>
       <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
         <div className="block font-medium text-gray-700">
-          email: 
+          Email: 
         </div>
         <div className="sm:col-span-2">
          <span>{profile.email}</span> 
