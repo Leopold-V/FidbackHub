@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import '../styles/globals.css'
 import Layout from "components/layout";
 import { LoaderScreen } from "components/common/LoaderScreen";
+import FeedbackHub from '../node_modules/fidbackhub';
 
 const App = ({ Component, pageProps }: AppProps) => {
   const { session } = pageProps;
@@ -27,6 +28,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           </ProtectedRoute>
             : <Component {...pageProps} />
           }
+          <FeedbackHub color="indigo" />
       </SessionProvider>
     </>
   );

@@ -3,7 +3,6 @@ import { userType } from "types/index";
 import { StatsFeed } from "./StatsFeed";
 import { ProfileColumn } from "./ProfileColumn";
 import { ProjectsColumn } from "./ProjectsColumn";
-import { Hello } from '../../../node_modules/fidbackhub';
 
 const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType, userProjects: any[] }) => {
   const profile = {
@@ -80,7 +79,6 @@ const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType,
         </div>
         {avgValues.length > 0 && <StatsFeed ratingsNumber={allratings.length} maxRatedProject={maxRatedProject} avgValues={avgValues} />}
       </div>
-      <Hello />
       <button onClick={testRating}>send a rating test</button>
     </>
   );

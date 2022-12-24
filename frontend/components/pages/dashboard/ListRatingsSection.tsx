@@ -1,5 +1,5 @@
 import { DividerTitle } from "components/common/DividerTitle"
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, useState } from "react";
 import { ratingType } from "types/index";
 import { ListRatings } from "./ListRatings"
 
@@ -30,13 +30,8 @@ export const ListRatingsSection = ({ ratings }: { ratings: ratingType[]}) => {
     } else {
       newratings = [...ratings].sort((a, b) => b[category] - a[category]);
     }
-    console.log(newratings);
     setratingsSorted(newratings);
   }
-
-  useEffect(() => {
-    console.log(ratingsSorted);
-  }, [ratingsSorted])
 
     return (
       <>
