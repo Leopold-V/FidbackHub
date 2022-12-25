@@ -8,6 +8,7 @@ const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::rating.rating', ({ strapi }) => ({
   async create(ctx) {
+    console.log(ctx.request.body);
     try {
       const project = await strapi.db.query('api::project.project').findOne({
         where: {id: ctx.request.body.data.project, api_key: ctx.request.body.data.projectToken},

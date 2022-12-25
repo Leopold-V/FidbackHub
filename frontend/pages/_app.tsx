@@ -28,7 +28,10 @@ const App = ({ Component, pageProps }: AppProps) => {
           </ProtectedRoute>
             : <Component {...pageProps} />
           }
-          <FeedbackHub color="indigo" />
+          <FeedbackHub 
+            color="indigo" 
+            ApiKey="ooosj6mXZiXCbZ+hrK+WZ2HI3jieFFJMNX+AszKHdfbA1QKuV8IOSsq0XpSjSbnfxH+FlkAVR35wztNP5xhtrw=="
+          />
       </SessionProvider>
     </>
   );
