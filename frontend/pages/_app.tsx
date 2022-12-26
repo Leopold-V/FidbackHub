@@ -11,7 +11,6 @@ import FeedbackHub from '../node_modules/fidbackhub';
 
 const App = ({ Component, pageProps }: AppProps) => {
   const { session } = pageProps;
-
   const router = useRouter();
 
   return (
@@ -28,9 +27,10 @@ const App = ({ Component, pageProps }: AppProps) => {
           </ProtectedRoute>
             : <Component {...pageProps} />
           }
-          <FeedbackHub 
-            color="indigo" 
-            ApiKey="ooosj6mXZiXCbZ+hrK+WZ2HI3jieFFJMNX+AszKHdfbA1QKuV8IOSsq0XpSjSbnfxH+FlkAVR35wztNP5xhtrw=="
+          <FeedbackHub
+            color="indigo"
+            apiKey="ooosj6mXZiXCbZ+hrK+WZ2HI3jieFFJMNX+AszKHdfbA1QKuV8IOYmq0XpSjSbnNxN+FlkAVR35wztNP5xhtrw=="
+            //apiKey={process.env.NEXT_PUBLIC_FIDBACKHUB_TOKEN}
           />
       </SessionProvider>
     </>

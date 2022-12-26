@@ -19,11 +19,11 @@ export const InfoSection = ({ ratings }: { ratings: ratingType[]}) => {
   const bestCategory = () => {
     switch (bestAvg) {
       case avgDesign:
-        return `Design (${avgDesign})`
+        return `Design - ${avgDesign.toFixed(2)}`
       case avgSpeed:
-        return `Speed - ${avgSpeed}/10`
+        return `Speed - ${avgSpeed.toFixed(2)}`
       case avgResponsive:
-        return `Responsive - ${avgResponsive}`
+        return `Responsive - ${avgResponsive.toFixed(2)}`
       default:
         break;
     }
