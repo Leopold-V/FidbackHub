@@ -12,6 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 const createRating = async (req: NextApiRequest, res: NextApiResponse) => {
     const forwarded = req.headers["x-forwarded-for"]
     console.log(forwarded);
+    //@ts-ignore
     const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress
     console.log(ip);
     const rating = req.body.rating;

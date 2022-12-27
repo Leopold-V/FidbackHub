@@ -44,7 +44,9 @@ const EditProjectPageComponent = ({ params }) => {
       <Card>
         <div className="space-y-8">
           <SecretKey label={"Project token"} value={project.api_key} />
-        {<EditProjectForm project={project} setProject={setProject} />}
+        {//@ts-ignore
+          <EditProjectForm project={project} setProject={setProject} />
+        }
         </div>
       </Card>
     </div>
