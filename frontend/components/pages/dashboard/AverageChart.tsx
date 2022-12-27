@@ -26,9 +26,7 @@ export const AverageChart = ({ ratings, dateRange }: { ratings: ratingType[], da
 
   useEffect(() => {
     const newData = createHashMapFromDateRangeFilter(dateRange);
-    console.log(newData);
     ratings.forEach((ele, i) => {
-      console.log(dayjs(ele.createdAt).format('YYYY-MM-DD'));
       if (newData[dayjs(ele.createdAt).format('YYYY-MM-DD')]) {
         newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].count += 1;
         newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].design = ((newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].design + ele.design) / newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].count);

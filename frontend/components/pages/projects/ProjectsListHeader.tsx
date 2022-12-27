@@ -13,7 +13,6 @@ export const ProjectsListHeader = ({projects, setprojects}) => {
 
   const handleSort = (e: MouseEvent<HTMLButtonElement>) => {
     const field = e.currentTarget.dataset.field;
-    console.log(field);
     const newProjectsArray = [...projects].sort((a, b) => 
     {
       const nameA = a[field].toString().toLowerCase(); // ignore upper and lowercase
@@ -27,7 +26,6 @@ export const ProjectsListHeader = ({projects, setprojects}) => {
       }
       return 0;
     });
-    console.log(newProjectsArray);
     setprojects(newProjectsArray);
   }
 

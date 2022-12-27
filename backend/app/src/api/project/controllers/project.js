@@ -46,13 +46,35 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
   },
   async delete(ctx) {
     try {
-      const response = await strapi.db.query('api::project.project').delete({
+      const rep = await strapi.db.query('api::rating.rating').findMany({
+        where: {project: ctx.params.id},
+        populate: { project: true }
+      });
+      rep.forEach(async (ele) => {
+        await strapi.db.query('api::rating.rating').delete({
+          where: {id: ele.id},
+        })
+      })
+      const project = await strapi.db.query('api::project.project').delete({
         where: {id: ctx.params.id, user: ctx.state.user.id},
         populate: { user: true },
       });
-      return {data: {id: response.id, attributes: {...response}}, meta: {}};
+      return {data: {id: project.id, attributes: {...project}}, meta: {}};
     } catch (error) {
+      console.log(error);
       throw new ApplicationError();
     }
-  }
+  },
+  async projectUser(ctx) {
+    try {
+      const response = await strapi.db.query('api::project.project').findMany({
+        where: { user: ctx.state.user.id},
+        populate: { user: true, ratings: true },
+      });
+      return {data: {id: response.id, attributes: {...response}}, meta: {}};
+    } catch (error) {
+      console.log(error.message);
+      throw new ApplicationError();
+    }
+  },
 }));

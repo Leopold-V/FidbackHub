@@ -16,6 +16,22 @@ export const getProjects = async (token: string, id: number) => {
     return json;
 }
 
+export const getProjectsFromUser = async (jwt: number) => {
+    const data = await fetch(`http://localhost:1337/api/project-user`, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + jwt,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    });
+    const json = await data.json();
+    if (json.error) {
+        throw new Error(json.error.message);
+    }
+    return json;
+}
+
 export const addProject = async (id: number, project: Partial<projectType>, jwt: string): Promise<projectType> => {
     const data = await fetch(`http://localhost:3000/api/projects/create-project`, {
         method: 'POST',

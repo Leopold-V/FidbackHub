@@ -2,15 +2,11 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  // content: [
-  //   "./pages/**/*.{js,ts,jsx,tsx}",
-  //   "./components/**/*.{js,ts,jsx,tsx}",
-  //   "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
-  // ],
-  purge: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-  ],
+   content: [
+     "./pages/**/*.{js,ts,jsx,tsx}",
+     "./components/**/*.{js,ts,jsx,tsx}",
+     "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
+   ],
   darkMode: 'class',
   theme: {
     extend: {      fontFamily: {

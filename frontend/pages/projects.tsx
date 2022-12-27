@@ -1,15 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
-import { getSession } from "next-auth/react";
 import Head from "next/head";
 
 import { getUser } from "../services/user.service";
-import { getProjects } from "../services/project.service";
-
+import { getProjects, getProjectsFromUser } from "../services/project.service";
 import Page from "components/pages/projects";
-import { projectType, userType } from "types/index";
+import { useSession } from "next-auth/react";
+import { LoaderScreen } from "components/common/LoaderScreen";
 
-const ProjectsPage = ({ userData, userProjects }: { userData: userType, userProjects: projectType[] }) => {
+const ProjectsPage = () => {
+  const { data: session, status } = useSession()
+  const [userProjects, setuserProjects] = useState([]);
+  const [userData, setuserData] = useState(null);
+  const [loading, setloading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const userData = await getUser(session.id, session.jwt);
+        setuserData(userData);
+        const projects = await getProjectsFromUser(session.jwt);
+        setuserProjects(Object.values(projects.data.attributes));
+        setloading(false);
+      } catch (error) {
+        setError(error.message);
+        setloading(false);
+      }
+    })()
+  }, [])
+
+  if (loading) {
+    return <LoaderScreen />
+  }
+  if (error) {
+    return <div>Error: {error}</div>
+  }
   return (
     <>
       <Head>
@@ -19,18 +45,5 @@ const ProjectsPage = ({ userData, userProjects }: { userData: userType, userProj
     </>
   );
 };
-
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const session = await getSession({ req });
-  const userData = await getUser(session.id, session.jwt);
-  const userProjects = await getProjects(process.env.PROJECTS_API_TOKEN, session.id);
-  return {
-    props: {
-      userData,
-      userProjects: userProjects.data.map((ele) => ({...ele.attributes, id: ele.id }))
-    },
-  };
-};
-
 
 export default ProjectsPage;

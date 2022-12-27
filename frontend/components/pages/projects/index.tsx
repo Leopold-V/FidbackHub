@@ -5,6 +5,8 @@ import { ProfileColumn } from "./ProfileColumn";
 import { ProjectsColumn } from "./ProjectsColumn";
 
 const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType, userProjects: any[] }) => {
+  console.log(userProjects);
+  
   const profile = {
     id: userData.id,
     username: userData.username,
@@ -22,27 +24,27 @@ const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType,
     let maxRatedProject = { name: '', number: 0};
     let listAvgValues = [];
     userProjects.forEach((project) => {
-      if (project.ratings.data.length > maxRatedProject.number) {
-        maxRatedProject.number = project.ratings.data.length;
+      if (project.ratings.length > maxRatedProject.number) {
+        maxRatedProject.number = project.ratings.length;
         maxRatedProject.name = project.name;
       }
-      _allratings = _allratings.concat(project.ratings.data);
+      _allratings = _allratings.concat(project.ratings);
       let projectAvg = 0;
       let projectAvgSpeed = 0;
       let projectAvgDesign = 0;
       let projectAvgResponsive = 0;
-      project.ratings.data.forEach((rating, i) => {
-        projectAvg += rating.attributes.average;
-        projectAvgSpeed += rating.attributes.speed;
-        projectAvgDesign += rating.attributes.design;
-        projectAvgResponsive += rating.attributes.responsive;
+      project.ratings.forEach((rating, i) => {
+        projectAvg += rating.average;
+        projectAvgSpeed += rating.speed;
+        projectAvgDesign += rating.design;
+        projectAvgResponsive += rating.responsive;
       });
       listAvgValues.push({
         name: project.name,
-        avg: projectAvg / project.ratings.data.length,
-        speed: projectAvgSpeed / project.ratings.data.length,
-        design: projectAvgDesign / project.ratings.data.length,
-        responsive: projectAvgResponsive / project.ratings.data.length
+        avg: projectAvg / project.ratings.length,
+        speed: projectAvgSpeed / project.ratings.length,
+        design: projectAvgDesign / project.ratings.length,
+        responsive: projectAvgResponsive / project.ratings.length
       });
     });
     setavgValues(listAvgValues);

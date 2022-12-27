@@ -10,7 +10,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 }
 
 const getAllProjects = async (req: NextApiRequest, res: NextApiResponse) => {
-    const userId = +req.query.userId;
     const data = await fetch(`http://localhost:1337/api/projects?populate=*`, {
         method: 'GET',
         headers: {
@@ -20,6 +19,5 @@ const getAllProjects = async (req: NextApiRequest, res: NextApiResponse) => {
         }
     });
     const json = await data.json();
-    const newJson = {...json, data: json.data.filter((ele) => ele.attributes.user.data.id === userId)};
-    return newJson;
+    return json;
 }

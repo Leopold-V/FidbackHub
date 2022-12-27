@@ -45,14 +45,14 @@ export const ListRatings = ({
               <table className="min-w-full divide-y divide-gray-300">
                 <thead className="bg-gray-100">
                   <tr className="divide-x divide-gray-200">
-                    <th scope="col" className="py-3.5 pl-4 pr-4 sm:pl-6">
+                    <th scope="col" className="p-2">
                       <div className="flex justify-between items-center">
                         <span className="text-sm font-semibold text-gray-900">
                           Date
                         </span>
                         <div className="flex flex-col">
                           <button
-                            className="mx-2"
+                            className="ml-2"
                             onClick={sortRatingsDescending}
                             data-category="createdAt"
                           >
@@ -72,7 +72,7 @@ export const ListRatings = ({
                             </svg>
                           </button>
                           <button
-                            className="mx-2"
+                            className="ml-2"
                             onClick={sortRatingsAscending}
                             data-category="createdAt"
                           >
@@ -94,14 +94,14 @@ export const ListRatings = ({
                         </div>{" "}
                       </div>
                     </th>
-                    <th scope="col" className="px-4 py-3.5">
+                    <th scope="col" className="p-2">
                       <div className="flex justify-between items-center">
                         <span className="text-sm font-semibold text-gray-900">
                           Avg.
                         </span>
                         <div className="flex flex-col">
                           <button
-                            className="mx-2"
+                            className="ml-2"
                             onClick={sortRatingsDescending}
                             data-category="avg"
                           >
@@ -121,7 +121,7 @@ export const ListRatings = ({
                             </svg>
                           </button>
                           <button
-                            className="mx-2"
+                            className="ml-2"
                             onClick={sortRatingsAscending}
                             data-category="avg"
                           >
@@ -143,14 +143,14 @@ export const ListRatings = ({
                         </div>
                       </div>
                     </th>
-                    <th scope="col" className="px-4 py-3.5">
+                    <th scope="col" className="p-2">
                       <div className="flex justify-between items-center">
                         <span className="text-sm font-semibold text-gray-900">
                           Design
                         </span>
                         <div className="flex flex-col">
                           <button
-                            className="mx-2"
+                            className="ml-2"
                             onClick={sortRatingsDescending}
                             data-category="design"
                           >
@@ -170,7 +170,7 @@ export const ListRatings = ({
                             </svg>
                           </button>
                           <button
-                            className="mx-2"
+                            className="ml-2"
                             onClick={sortRatingsAscending}
                             data-category="design"
                           >
@@ -192,14 +192,14 @@ export const ListRatings = ({
                         </div>
                       </div>
                     </th>
-                    <th scope="col" className="px-4 py-3.5">
+                    <th scope="col" className="p-2">
                       <div className="flex justify-between items-center">
                         <span className="text-sm font-semibold text-gray-900">
                           Speed
                         </span>
                         <div className="flex flex-col">
                           <button
-                            className="mx-2"
+                            className="ml-2"
                             onClick={sortRatingsDescending}
                             data-category="speed"
                           >
@@ -219,7 +219,7 @@ export const ListRatings = ({
                             </svg>
                           </button>
                           <button
-                            className="mx-2"
+                            className="ml-2"
                             onClick={sortRatingsAscending}
                             data-category="speed"
                           >
@@ -241,14 +241,14 @@ export const ListRatings = ({
                         </div>
                       </div>
                     </th>
-                    <th scope="col" className="py-3.5 pl-4 pr-4 sm:pr-6">
+                    <th scope="col" className="p-2">
                       <div className="flex justify-between items-center">
                         <span className="text-sm font-semibold text-gray-900">
                           Resp.
                         </span>
                         <div className="flex flex-col">
                           <button
-                            className="mx-2"
+                            className="ml-2"
                             onClick={sortRatingsDescending}
                             data-category="responsive"
                           >
@@ -268,7 +268,7 @@ export const ListRatings = ({
                             </svg>
                           </button>
                           <button
-                            className="mx-2"
+                            className="ml-2"
                             onClick={sortRatingsAscending}
                             data-category="responsive"
                           >
