@@ -25,6 +25,7 @@
     ]
   },
   "dependencies": {
-    "@next-auth/typeorm-legacy-adapter": "^2.0.1"
+    "@next-auth/typeorm-legacy-adapter": "^2.0.1",
+    "dayjs": "^1.11.7"
   }
 }

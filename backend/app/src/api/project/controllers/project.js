@@ -8,6 +8,15 @@ const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::project.project', ({ strapi }) => ({
   async create(ctx) {
+    if (ctx.request.body.data.name === "" || !ctx.request.body.data.name) {
+      throw new ApplicationError("You must provide a name for your project.");
+    }
+    if (ctx.request.body.data.github_url === "" || !ctx.request.body.data.github_url) {
+      throw new ApplicationError("You must provide a github url for your project.");
+    }
+    if (ctx.request.body.data.website_url === "" || !ctx.request.body.data.website_url) {
+      throw new ApplicationError("You must provide a website url for your project.");
+    }
     try {
       const response = await strapi.db.query('api::project.project').create({
         data: ctx.request.body.data,

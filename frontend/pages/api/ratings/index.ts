@@ -11,14 +11,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 const createRating = async (req: NextApiRequest, res: NextApiResponse) => {
     const forwarded = req.headers["x-forwarded-for"]
-    console.log(forwarded);
     //@ts-ignore
     const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress
     console.log(ip);
+    const ipArr = ip.split(':');
+    const ipv4 = ipArr[ipArr.length - 1];
+    console.log(ipArr);
     const rating = req.body.rating;
     const data = await fetch(`http://localhost:1337/api/ratings`, {
         method: 'POST',
-        body: JSON.stringify({ data: {...rating }}),
+        body: JSON.stringify({ data: {...rating, user_ipv4: ipv4 }}),
         headers: {
             'Authorization': 'Bearer ' + process.env.RATINGS_API_TOKEN,
             'Accept': 'application/json',
@@ -26,5 +28,8 @@ const createRating = async (req: NextApiRequest, res: NextApiResponse) => {
         }
     });
     const json = await data.json();
+    if (json.error) {
+      throw new Error(json.error.message);
+  }
     return json;
 }

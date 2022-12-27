@@ -44,6 +44,11 @@
       "min": 0,
       "max": 10,
       "required": true
+    },
+    "user_ipv4": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 32
     }
   }
 }

@@ -45,6 +45,7 @@ export type ratingType = {
     speed: number;
     responsive: number;
     average: number;
+    user_ipv4 ?: string;
     createdAt?: Date;
     error?: {
         status: number;

@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { generateKey } from "../../../utils/generate_api_key";
 
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
       const data = await addProject(req, res);
@@ -13,7 +12,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 const addProject = async (req: NextApiRequest, res: NextApiResponse) => {
     const project = req.body.project;
-    console.log(project);
     const api_key = generateKey();
     const data = await fetch(`http://localhost:1337/api/projects`, {
         method: 'POST',

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { SessionProvider  } from "next-auth/react";
@@ -29,7 +29,6 @@ const App = ({ Component, pageProps }: AppProps) => {
           }
           <FeedbackHub
             color="indigo"
-            //apiKey="XBDdI0zL/IowdCvNPSlxMNHH2y8THZeUsdXoy3TD46hDwQJll/3DZZ+lTQgMl1RkYRWfgR6iAiikQ6exvav9+A=="
             apiKey={process.env.NEXT_PUBLIC_FIDBACKHUB_TOKEN}
           />
       </SessionProvider>
@@ -38,12 +37,8 @@ const App = ({ Component, pageProps }: AppProps) => {
 };
 
 const ProtectedRoute = ({ children }) => {
-  const { data: session, status } = useSession({ required: true })
+  const { status } = useSession({ required: true })
   
-  useEffect(() => {
-    console.log(status);
-  }, [status])
-
   if (status === 'loading') {
     return (<LoaderScreen />)
   }
