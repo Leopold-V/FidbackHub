@@ -28,11 +28,23 @@ module.exports = createCoreController('api::rating.rating', ({ strapi }) => ({
   },
   async find(ctx) {
     try {
-      const response = await strapi.db.query('api::rating.rating').find({
+      const projects = await strapi.db.query('api::project.project').findMany({
+        where:{ user: ctx.state.user.id},
+        populate: { user: true },
+      });
+      const response = await strapi.db.query('api::rating.rating').findMany({
+        where: {
+          project: {
+            id: {
+              $in: projects.map((ele) => ele.id)
+            }
+          },
+        },
         populate: { project: true },
       });
       return {data: {id: response.id, attributes: {...response}}, meta: {}};
     } catch (error) {
+      console.log(error);
       throw new ApplicationError();
     }
   },

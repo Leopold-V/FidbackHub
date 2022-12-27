@@ -69,7 +69,7 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
     try {
       const response = await strapi.db.query('api::project.project').findMany({
         where: { user: ctx.state.user.id},
-        populate: { user: true, ratings: true },
+        populate: { ratings: true },
       });
       return {data: {id: response.id, attributes: {...response}}, meta: {}};
     } catch (error) {

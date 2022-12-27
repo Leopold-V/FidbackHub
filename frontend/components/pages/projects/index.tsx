@@ -4,9 +4,7 @@ import { StatsFeed } from "./StatsFeed";
 import { ProfileColumn } from "./ProfileColumn";
 import { ProjectsColumn } from "./ProjectsColumn";
 
-const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType, userProjects: any[] }) => {
-  console.log(userProjects);
-  
+const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType, userProjects: any[] }) => {  
   const profile = {
     id: userData.id,
     username: userData.username,

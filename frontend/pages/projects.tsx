@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { GetServerSideProps } from "next";
-import Head from "next/head";
-
-import { getUser } from "../services/user.service";
-import { getProjects, getProjectsFromUser } from "../services/project.service";
-import Page from "components/pages/projects";
 import { useSession } from "next-auth/react";
-import { LoaderScreen } from "components/common/LoaderScreen";
+import Head from "next/head";
+import { getUser } from "../services/user.service";
+import { getProjectsFromUser } from "../services/project.service";
+import Page from "components/pages/projects";
 
 const ProjectsPage = () => {
-  const { data: session, status } = useSession()
+  const { data: session } = useSession()
   const [userProjects, setuserProjects] = useState([]);
   const [userData, setuserData] = useState(null);
   const [loading, setloading] = useState(true);
@@ -28,10 +25,11 @@ const ProjectsPage = () => {
         setloading(false);
       }
     })()
-  }, [])
+  }, []);
 
+  // TODO: build a skeleton page for loading ?
   if (loading) {
-    return <LoaderScreen />
+    return <div>Loading</div>
   }
   if (error) {
     return <div>Error: {error}</div>

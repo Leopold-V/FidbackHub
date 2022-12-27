@@ -10,6 +10,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 }
 
 const createRating = async (req: NextApiRequest, res: NextApiResponse) => {
+    const forwarded = req.headers["x-forwarded-for"]
+    console.log(forwarded);
+    const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress
+    console.log(ip);
     const rating = req.body.rating;
     const data = await fetch(`http://localhost:1337/api/ratings`, {
         method: 'POST',
