@@ -13,7 +13,7 @@ const options = {
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
   ],
-  secret:"5xT45s7AKNuQREg7gF9LoQSXwW/dL62hAEKKfk/rk8k=", //PUT YOUR OWN SECRET (command: openssl rand -base64 32)
+  secret:process.env.JWT_SECRET, //PUT YOUR OWN SECRET (command: openssl rand -base64 32)
   database: process.env.NEXT_PUBLIC_DATABASE_URL,
   session: {
     strategy: "jwt",

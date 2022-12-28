@@ -1,4 +1,4 @@
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { ratingType } from 'types/index';
@@ -29,12 +29,20 @@ export const AverageChart = ({ ratings, dateRange }: { ratings: ratingType[], da
     ratings.forEach((ele, i) => {
       if (newData[dayjs(ele.createdAt).format('YYYY-MM-DD')]) {
         newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].count += 1;
-        newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].design = ((newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].design + ele.design) / newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].count);
-        newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].speed = ((newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].speed + ele.speed) / newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].count);
-        newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].responsive = ((newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].responsive + ele.responsive) / newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].count);
+        newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].design += ele.design;
+        newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].speed += ele.speed;
+        newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].responsive += ele.responsive;
       }
     });
-    setData(Object.values(newData));
+    setData(Object.values(newData).map((ele: any) => {
+      return {
+        count: ele.count,
+        date: ele.date,
+        speed: ele.count > 0 ? (ele.speed / ele.count).toFixed(2) : 0,
+        design: ele.count > 0 ? (ele.design / ele.count).toFixed(2) : 0,
+        responsive: ele.count > 0 ? (ele.responsive / ele.count).toFixed(2) : 0
+      }
+    }));
   }, [ratings]);
     
   return (

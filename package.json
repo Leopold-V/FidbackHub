@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@next-auth/typeorm-legacy-adapter": "^2.0.1",
-    "dayjs": "^1.11.7"
+    "dayjs": "^1.11.7",
+    "fidbackhub": "^0.0.2-beta"
   }
 }

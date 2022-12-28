@@ -4,10 +4,10 @@ import Head from "next/head";
 import { SessionProvider  } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import FidbackHub from "fidbackhub";
 import '../styles/globals.css'
 import Layout from "components/layout";
 import { LoaderScreen } from "components/common/LoaderScreen";
-import FeedbackHub from '../node_modules/fidbackhub';
 
 const App = ({ Component, pageProps }: AppProps) => {
   const { session } = pageProps;
@@ -27,7 +27,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           </ProtectedRoute>
             : <Component {...pageProps} />
           }
-          <FeedbackHub
+          <FidbackHub
             color="indigo"
             apiKey={process.env.NEXT_PUBLIC_FIDBACKHUB_TOKEN}
           />
