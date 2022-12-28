@@ -12,3 +12,5 @@ out
 backend/data
 backend/build
 backend/db
+**/yarn-lock
+**/package-lock.json
