@@ -2,96 +2,104 @@ import { useEffect, useState } from 'react';
 import { XAxis, YAxis, BarChart, Bar, Tooltip } from 'recharts';
 import { ratingCategories, ratingType } from 'types/index';
 
-export const RatingBarChart = ({ratings, title, ratingType }: { ratings: ratingType[], title: string, ratingType: ratingCategories}) => {
-	const [data, setdata] = useState(initialData);
+export const RatingBarChart = ({
+  ratings,
+  title,
+  ratingType,
+}: {
+  ratings: ratingType[];
+  title: string;
+  ratingType: ratingCategories;
+}) => {
+  const [data, setdata] = useState(initialData);
 
-	useEffect(() => {
+  useEffect(() => {
     const newData = JSON.parse(JSON.stringify(initialData));
     ratings.forEach((ele, i) => {
       newData[ele[ratingType]][ratingType] += 1;
-    })
+    });
     setdata([...newData]);
-	}, [ratings]);
-	
-	return (
-		<div>
-			<h4 className="text-center text-gray-700 font-medium my-4">{title}</h4>
-			<BarChart width={400} height={250} data={Object.values(data)}>
-				<Tooltip />
+  }, [ratings]);
+
+  return (
+    <div>
+      <h4 className="text-center text-gray-700 font-medium my-4">{title}</h4>
+      <BarChart width={400} height={250} data={Object.values(data)}>
+        <Tooltip />
         <Bar dataKey={ratingType} fill="#4f46e5" />
-				<XAxis dataKey="name" />
-				<YAxis type="number" />
+        <XAxis dataKey="name" />
+        <YAxis type="number" />
       </BarChart>
-		</div>
-	)
+    </div>
+  );
 };
 
 const initialData = [
-	{
+  {
     name: '0',
     design: 0,
-		speed: 0,
-		responsive: 0
+    speed: 0,
+    responsive: 0,
   },
   {
     name: '1',
-		design: 0,
-		speed: 0,
-		responsive: 0
+    design: 0,
+    speed: 0,
+    responsive: 0,
   },
   {
     name: '2',
     design: 0,
-		speed: 0,
-		responsive: 0
+    speed: 0,
+    responsive: 0,
   },
   {
     name: '3',
     design: 0,
-		speed: 0,
-		responsive: 0
+    speed: 0,
+    responsive: 0,
   },
-	{
+  {
     name: '4',
     design: 0,
-		speed: 0,
-		responsive: 0
+    speed: 0,
+    responsive: 0,
   },
   {
     name: '5',
     design: 0,
-		speed: 0,
-		responsive: 0
+    speed: 0,
+    responsive: 0,
   },
   {
     name: '6',
     design: 0,
-		speed: 0,
-		responsive: 0
+    speed: 0,
+    responsive: 0,
   },
   {
     name: '7',
     design: 0,
-		speed: 0,
-		responsive: 0
+    speed: 0,
+    responsive: 0,
   },
-	{
+  {
     name: '8',
     design: 0,
-		speed: 0,
-		responsive: 0
+    speed: 0,
+    responsive: 0,
   },
-	{
+  {
     name: '9',
     design: 0,
-		speed: 0,
-		responsive: 0
+    speed: 0,
+    responsive: 0,
   },
-	{
+  {
     name: '10',
-		design: 0,
-		speed: 0,
-		responsive: 0
+    design: 0,
+    speed: 0,
+    responsive: 0,
   },
 ];
 /*

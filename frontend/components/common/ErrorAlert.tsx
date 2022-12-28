@@ -1,4 +1,4 @@
-import { XCircleIcon } from '@heroicons/react/20/solid'
+import { XCircleIcon } from '@heroicons/react/20/solid';
 
 export const ErrorAlert = ({ message }) => {
   return (
@@ -17,5 +17,5 @@ export const ErrorAlert = ({ message }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

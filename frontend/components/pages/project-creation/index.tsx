@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { ProjectForm } from './ProjectForm';
 
 const ProjectCreationComponent = () => {
@@ -7,7 +7,7 @@ const ProjectCreationComponent = () => {
       <h1 className="mt-2 text-lg font-semibold">New project</h1>
       <ProjectForm />
     </div>
-  )
-}
+  );
+};
 
 export default ProjectCreationComponent;

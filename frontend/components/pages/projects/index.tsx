@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { userType } from "types/index";
-import { StatsFeed } from "./StatsFeed";
-import { ProfileColumn } from "./ProfileColumn";
-import { ProjectsColumn } from "./ProjectsColumn";
+import React, { useEffect, useState } from 'react';
+import { userType } from 'types/index';
+import { StatsFeed } from './StatsFeed';
+import { ProfileColumn } from './ProfileColumn';
+import { ProjectsColumn } from './ProjectsColumn';
 
-const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType, userProjects: any[] }) => {  
+const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType; userProjects: any[] }) => {
   const profile = {
     id: userData.id,
     username: userData.username,
     email: userData.email,
-    avatar_url: userData.avatar_url
+    avatar_url: userData.avatar_url,
   };
-  
+
   const [projects, setprojects] = useState(userProjects);
   const [allratings, setallratings] = useState([]);
-  const [maxRatedProject, setmaxRatedProject] = useState({ name: '', number: 0});
+  const [maxRatedProject, setmaxRatedProject] = useState({ name: '', number: 0 });
   const [avgValues, setavgValues] = useState([]);
 
   useEffect(() => {
     let _allratings = [];
-    let maxRatedProject = { name: '', number: 0};
+    let maxRatedProject = { name: '', number: 0 };
     let listAvgValues = [];
     userProjects.forEach((project) => {
       if (project.ratings.length > maxRatedProject.number) {
@@ -42,7 +42,7 @@ const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType,
         avg: projectAvg / project.ratings.length,
         speed: projectAvgSpeed / project.ratings.length,
         design: projectAvgDesign / project.ratings.length,
-        responsive: projectAvgResponsive / project.ratings.length
+        responsive: projectAvgResponsive / project.ratings.length,
       });
     });
     setavgValues(listAvgValues);
@@ -57,7 +57,9 @@ const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType,
           <ProfileColumn profile={profile} projectsNumber={projects.length} />
           <ProjectsColumn projects={projects} setprojects={setprojects} />
         </div>
-        {avgValues.length > 0 && <StatsFeed ratingsNumber={allratings.length} maxRatedProject={maxRatedProject} avgValues={avgValues} />}
+        {avgValues.length > 0 && (
+          <StatsFeed ratingsNumber={allratings.length} maxRatedProject={maxRatedProject} avgValues={avgValues} />
+        )}
       </div>
     </>
   );

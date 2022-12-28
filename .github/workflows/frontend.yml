@@ -1,0 +1,16 @@
+name: main
+on:
+  push:
+    branches: [master]
+jobs:
+  code-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - name: install dependencies
+        run: npm install
+      - name: Running Prettier Code Formatter
+        run: npm run format:check --if-present

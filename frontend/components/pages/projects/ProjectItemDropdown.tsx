@@ -7,24 +7,32 @@ import { projectType } from 'types/index';
 import { deleteProject } from '../../../services/project.service';
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
-export const ProjectItemDropdown = ({ projectId, projects, setprojects}: { projectId: number, projects: projectType[], setprojects: (project: projectType[]) => void }) => {
-    const { data: session } = useSession();
+export const ProjectItemDropdown = ({
+  projectId,
+  projects,
+  setprojects,
+}: {
+  projectId: number;
+  projects: projectType[];
+  setprojects: (project: projectType[]) => void;
+}) => {
+  const { data: session } = useSession();
 
-    const handleDeleteProject = async () => {
-      try {
-          await deleteProject(projectId, session.jwt);
-          const newProjectsList = [...projects].filter((ele) => ele.id !== projectId);
-          setprojects([...newProjectsList]);
-        } catch (error) {
-          // TODO: trigger an alert with the error message
-          console.log(error);
-        }
+  const handleDeleteProject = async () => {
+    try {
+      await deleteProject(projectId, session.jwt);
+      const newProjectsList = [...projects].filter((ele) => ele.id !== projectId);
+      setprojects([...newProjectsList]);
+    } catch (error) {
+      // TODO: trigger an alert with the error message
+      console.log(error);
     }
-  
-    return (
+  };
+
+  return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button className="flex items-center rounded-full text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
@@ -44,67 +52,36 @@ export const ProjectItemDropdown = ({ projectId, projects, setprojects}: { proje
       >
         <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-          <Menu.Item>
+            <Menu.Item>
               {({ active }) => (
-                <div
-                    className={classNames(
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    )}
-                >
-                    <Link
-                    href={`/dashboard/${projectId}`}>
-                        <a
-                        className={classNames(
-                            'block px-4 py-2 text-sm'
-                        )}
-                        >
-                        Open
-                        </a>
-                    </Link>
+                <div className={classNames(active ? 'bg-gray-100 text-gray-900' : 'text-gray-700')}>
+                  <Link href={`/dashboard/${projectId}`}>
+                    <a className={classNames('block px-4 py-2 text-sm')}>Open</a>
+                  </Link>
                 </div>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <div
-                className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                )}
-            >
-                <Link
-                href={`/edit-project/${projectId}`}>
-                    <a
-                    className={classNames(
-                        'block px-4 py-2 text-sm'
-                    )}
-                    >
-                    Settings
-                    </a>
-                </Link>
-            </div>
+                <div className={classNames(active ? 'bg-gray-100 text-gray-900' : 'text-gray-700')}>
+                  <Link href={`/edit-project/${projectId}`}>
+                    <a className={classNames('block px-4 py-2 text-sm')}>Settings</a>
+                  </Link>
+                </div>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <div
-                className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                )}
-            >
-                <button
-                    className={classNames(
-                        'px-4 py-2 text-sm w-full text-left'
-                    )}
-                    onClick={handleDeleteProject}
-                    >
+                <div className={classNames(active ? 'bg-gray-100 text-gray-900' : 'text-gray-700')}>
+                  <button className={classNames('px-4 py-2 text-sm w-full text-left')} onClick={handleDeleteProject}>
                     Delete
-                </button>
-            </div>
+                  </button>
+                </div>
               )}
             </Menu.Item>
           </div>
         </Menu.Items>
       </Transition>
     </Menu>
-  )
-}
+  );
+};

@@ -1,4 +1,4 @@
-import { CheckCircleIcon } from '@heroicons/react/20/solid'
+import { CheckCircleIcon } from '@heroicons/react/20/solid';
 
 export const SuccessAlert = () => {
   return (
@@ -12,5 +12,5 @@ export const SuccessAlert = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

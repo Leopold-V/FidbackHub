@@ -1,9 +1,7 @@
-import Link from "next/link";
-import { signIn } from "next-auth/react";
+import Link from 'next/link';
+import { signIn } from 'next-auth/react';
 
-const AccessDeniedIndicator = ({
-  message = "You need to Sign In to view this content!",
-}) => {
+const AccessDeniedIndicator = ({ message = 'You need to Sign In to view this content!' }) => {
   const iconNode = () => {
     return <div>Warning icon*</div>;
   };

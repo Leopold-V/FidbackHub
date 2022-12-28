@@ -1,13 +1,12 @@
-import React, { MouseEvent } from 'react'
+import React, { MouseEvent } from 'react';
 import dayjs from 'dayjs';
 
 export const DateButtonGroups = ({ setdateRange }) => {
-
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-    const newDateRange = { 
-      startDate: e.currentTarget.dataset.date, 
-      endDate: dayjs(new Date()).format('YYYY-MM-DD')
-    } 
+    const newDateRange = {
+      startDate: e.currentTarget.dataset.date,
+      endDate: dayjs(new Date()).format('YYYY-MM-DD'),
+    };
     setdateRange(newDateRange);
   };
 
@@ -54,5 +53,5 @@ export const DateButtonGroups = ({ setdateRange }) => {
         12M
       </button>
     </span>
-  )
-}
+  );
+};

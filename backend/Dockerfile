@@ -1,16 +1,15 @@
 FROM strapi/base
 
 COPY ./app/package.json ./
-COPY ./app/yarn.lock ./
 
-RUN yarn install
+RUN npm install
 
 COPY ./app .
 
 ENV NODE_ENV production
 
-RUN yarn build
+RUN npm run build
 
 EXPOSE 1337
 
-CMD ["yarn", "develop"]
+CMD ["npm", "start"]

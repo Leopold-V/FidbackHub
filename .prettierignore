@@ -1,0 +1,9 @@
+# Folders
+dist/
+assets/
+
+# Files
+README.md
+backend
+node_modules
+frontend/.next
