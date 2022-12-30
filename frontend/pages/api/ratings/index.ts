@@ -13,10 +13,8 @@ const createRating = async (req: NextApiRequest, res: NextApiResponse) => {
   const forwarded = req.headers['x-forwarded-for'];
   //@ts-ignore
   const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress;
-  console.log(ip);
   const ipArr = ip.split(':');
   const ipv4 = ipArr[ipArr.length - 1];
-  console.log(ipArr);
   const rating = req.body.rating;
   const data = await fetch(`http://localhost:1337/api/ratings`, {
     method: 'POST',
@@ -29,7 +27,7 @@ const createRating = async (req: NextApiRequest, res: NextApiResponse) => {
   });
   const json = await data.json();
   if (json.error) {
-    throw new Error(json.error.message);
+    return { message: json.error.message };
   }
-  return json;
+  return { message: 'Thank you for the feedback!' };
 };

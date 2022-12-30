@@ -15,7 +15,7 @@ const addProject = async (req: NextApiRequest, res: NextApiResponse) => {
   const api_key = generateKey();
   const data = await fetch(`http://localhost:1337/api/projects`, {
     method: 'POST',
-    body: JSON.stringify({ data: { ...project, api_key: api_key, user: project.userId } }),
+    body: JSON.stringify({ data: { ...project, api_key: api_key, user: req.body.user } }),
     headers: {
       Authorization: req.headers.authorization,
       Accept: 'application/json',

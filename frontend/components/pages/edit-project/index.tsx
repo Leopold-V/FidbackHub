@@ -27,7 +27,6 @@ const EditProjectPageComponent = ({ params }) => {
 
   useEffect(() => {
     if (projectData) {
-      console.log(projectData);
       setProject({ ...projectData.data.attributes, id: projectData.data.id });
     }
   }, [projectData]);

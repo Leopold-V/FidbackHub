@@ -6,9 +6,14 @@ const dayjs = require('dayjs');
 const utils = require("@strapi/utils");
 const { ApplicationError } = utils.errors;
 const { createCoreController } = require("@strapi/strapi").factories;
+const { schemaCreate } = require('../content-types/rating/validation');
 
 module.exports = createCoreController("api::rating.rating", ({ strapi }) => ({
   async create(ctx) {
+    const { error } = schemaCreate.validate(ctx.request.body.data);
+    if (error) {
+      return ctx.badRequest(error.details[0].message, {...error.details[0]})
+    }
     try {
       const project = await strapi.db.query("api::project.project").findOne({
         where: { api_key: ctx.request.body.data.projectToken },

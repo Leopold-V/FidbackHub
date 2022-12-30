@@ -35,7 +35,7 @@ export const getProjectsFromUser = async (jwt: number) => {
 export const addProject = async (id: number, project: Partial<projectType>, jwt: string): Promise<projectType> => {
   const data = await fetch(`http://localhost:3000/api/projects/create-project`, {
     method: 'POST',
-    body: JSON.stringify({ project: { ...project, userId: id } }),
+    body: JSON.stringify({ project: { ...project }, user: id }),
     headers: {
       Authorization: 'Bearer ' + jwt,
       Accept: 'application/json',

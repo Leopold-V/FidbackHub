@@ -28,6 +28,7 @@ export const ProjectForm = () => {
       seterror(false);
       setSuccess(true);
     } catch (error) {
+      console.log(error.options);
       seterror(error.message);
       setSuccess(false);
     } finally {

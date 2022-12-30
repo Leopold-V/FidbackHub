@@ -29,10 +29,18 @@ const ProjectsPage = () => {
 
   // TODO: build a skeleton page for loading ?
   if (loading) {
-    return <div>Loading</div>;
+    return (
+      <div className="flex flex-col justify-center items-center py-8">
+        <h1 className="mt-2 font-semibold">Loading user data...</h1>
+      </div>
+    );
   }
   if (error) {
-    return <div>Error: {error}</div>;
+    return (
+      <div className="flex flex-col justify-center items-center py-8">
+        <h1 className="mt-2 font-semibold">Error: {error}</h1>
+      </div>
+    );
   }
   return (
     <>

@@ -19,7 +19,6 @@
     "@mdx-js/react": "^2.2.1",
     "@next/mdx": "^13.0.7",
     "dayjs": "^1.11.7",
-    "fidbackhub": "^0.0.2-beta",
     "graphql": "^16.6.0",
     "mysql": "^2.18.1",
     "next": "^12.2.5",

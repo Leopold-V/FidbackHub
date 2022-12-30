@@ -5,17 +5,13 @@
 const utils = require('@strapi/utils');
 const { ApplicationError } = utils.errors;
 const { createCoreController } = require('@strapi/strapi').factories;
+const { schemaCreate, schemaUpdate } = require('../content-types/project/validation');
 
 module.exports = createCoreController('api::project.project', ({ strapi }) => ({
   async create(ctx) {
-    if (ctx.request.body.data.name === "" || !ctx.request.body.data.name) {
-      throw new ApplicationError("You must provide a name for your project.");
-    }
-    if (ctx.request.body.data.github_url === "" || !ctx.request.body.data.github_url) {
-      throw new ApplicationError("You must provide a github url for your project.");
-    }
-    if (ctx.request.body.data.website_url === "" || !ctx.request.body.data.website_url) {
-      throw new ApplicationError("You must provide a website url for your project.");
+    const { error } = schemaCreate.validate(ctx.request.body.data);
+    if (error) {
+      return ctx.badRequest(error.details[0].message, {...error.details[0]})
     }
     try {
       const response = await strapi.db.query('api::project.project').create({
@@ -26,6 +22,7 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
     } catch (error) {
       throw new ApplicationError();
     }
+
   },
   async findOne(ctx) {
     try {
@@ -39,10 +36,12 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
     }
   },
   async update(ctx) {
+    console.log(ctx.request.body.data);
+    const { error } = schemaUpdate.validate(ctx.request.body.data);
+    if (error) {
+      return ctx.badRequest(error.details[0].message, {...error.details[0]})
+    }
     try {
-      if (ctx.request.body.data.name === "" || !ctx.request.body.data.name) {
-        throw new Error();
-      }
       const response = await strapi.db.query('api::project.project').update({
         where: {id: ctx.params.id, user: ctx.state.user.id},
         data: ctx.request.body.data,
