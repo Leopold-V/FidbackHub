@@ -1,9 +1,10 @@
 import React, { FormEvent, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { projectType } from 'types/index';
 import { addProject } from '../../../services/project.service';
 import { ErrorAlert } from 'components/common/ErrorAlert';
 import { SuccessAlert } from 'components/common/SuccessAlert';
-import { projectType } from 'types/index';
+import { SpinnerButton } from 'components/common/Spinner';
 
 export const ProjectForm = () => {
   const { data: session } = useSession();
@@ -101,9 +102,10 @@ export const ProjectForm = () => {
       </div>
       <button
         type="submit"
-        className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2"
+        className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-sm font-medium text-white shadow-sm disabled:bg-indigo-400 hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2"
         disabled={loading}
       >
+        {loading && <SpinnerButton />}
         Save
       </button>
     </form>

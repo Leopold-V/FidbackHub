@@ -1,8 +1,8 @@
+import React from 'react';
 import { useSession } from 'next-auth/react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 
 export const HomeNavbar = () => {
   const { status } = useSession();

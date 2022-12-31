@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import { EditProjectForm } from './EditProjectForm';
 import { Card } from 'components/common/Card';
 import SecretKey from '../dashboard/SecretKey';
+import { Spinner } from 'components/common/Spinner';
 
 const EditProjectPageComponent = ({ params }) => {
   const { data: session, status } = useSession();
@@ -31,16 +32,18 @@ const EditProjectPageComponent = ({ params }) => {
     }
   }, [projectData]);
 
+  // TODO: SKELETON LOADING
   if (loading)
     return (
-      <div className="flex flex-col justify-center items-center space-y-8">
-        <h1 className="mt-8 text-lg font-semibold">Loading...</h1>
+      <div className="flex flex-col justify-center items-center space-y-2 mt-8">
+        <Spinner />
+        <h1 className="text-lg font-semibold">Loading your project data...</h1>
       </div>
     );
   if (error)
     return (
-      <div className="flex flex-col justify-center items-center space-y-8">
-        <h1 className="mt-8 text-lg font-semibold">{error}</h1>
+      <div className="flex flex-col justify-center items-center mt-8">
+        <h1 className="text-lg font-semibold">{error}</h1>
       </div>
     );
 

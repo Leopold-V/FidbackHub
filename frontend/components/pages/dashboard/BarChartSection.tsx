@@ -8,7 +8,7 @@ import { useDateFilterForRatings } from '../../../hooks/useDateFilterForRatings'
 import { DateButtonGroups } from './DateButtonsGroup';
 
 export const BarChartSection = ({ ratings }: { ratings: ratingType[] }) => {
-  const [ratingsFiltered, setratingsFiltered, dateRange, setdateRange] = useDateFilterForRatings(ratings);
+  const [ratingsFiltered, dateRange, setdateRange] = useDateFilterForRatings(ratings);
 
   return (
     <>
@@ -19,6 +19,7 @@ export const BarChartSection = ({ ratings }: { ratings: ratingType[] }) => {
             <div>
               <DateFilter dateRange={dateRange} setdateRange={setdateRange} />
             </div>
+            <h2 className="py-2">Number of ratings by values</h2>
             <DateButtonGroups setdateRange={setdateRange} />
           </div>
           <div className="flex lg:flex-row flex-col justify-center items-center">

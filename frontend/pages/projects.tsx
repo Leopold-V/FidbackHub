@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { getUser } from '../services/user.service';
 import { getProjectsFromUser } from '../services/project.service';
 import Page from 'components/pages/projects';
+import { Spinner } from 'components/common/Spinner';
 
 const ProjectsPage = () => {
   const { data: session } = useSession();
@@ -21,7 +22,7 @@ const ProjectsPage = () => {
         setuserProjects(Object.values(projects.data.attributes));
         setloading(false);
       } catch (error) {
-        setError(error.message);
+        setError('Error server, please retry later or contact the administrator if the problem persist.');
         setloading(false);
       }
     })();
@@ -30,8 +31,9 @@ const ProjectsPage = () => {
   // TODO: build a skeleton page for loading ?
   if (loading) {
     return (
-      <div className="flex flex-col justify-center items-center py-8">
-        <h1 className="mt-2 font-semibold">Loading user data...</h1>
+      <div className="flex flex-col justify-center items-center space-y-2 mt-8">
+        <Spinner />
+        <h1 className="text-lg font-semibold">Loading your data...</h1>
       </div>
     );
   }

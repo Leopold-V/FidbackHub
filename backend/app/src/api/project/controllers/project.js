@@ -14,6 +14,20 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
       return ctx.badRequest(error.details[0].message, {...error.details[0]})
     }
     try {
+      const existingProject = await strapi.db.query('api::project.project').findOne({
+        where: {name: ctx.request.body.data.name, user: ctx.request.body.data.user},
+        populate: { user: true }
+      });
+      if (existingProject) {
+        return ctx.badRequest(`A project with the name ${ctx.request.body.data.name} already exist!`);
+      }
+      const existingWebsite = await strapi.db.query('api::project.project').findOne({
+        where: {website_url: ctx.request.body.data.website_url, user: ctx.request.body.data.user},
+        populate: { user: true }
+      });
+      if (existingWebsite) {
+        return ctx.badRequest(`A project with the website ${ctx.request.body.data.website_url} already exist!`);
+      }
       const response = await strapi.db.query('api::project.project').create({
         data: ctx.request.body.data,
         populate: { user: true }
@@ -22,7 +36,6 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
     } catch (error) {
       throw new ApplicationError();
     }
-
   },
   async findOne(ctx) {
     try {
@@ -30,6 +43,10 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
         where: {id: ctx.params.id, user: ctx.state.user.id},
         populate: { user: true, ratings: true },
       });
+      if (!response) {
+        // If project is from another user, we answer with the same message as an unexisting url path to not guess another user project id.
+        return ctx.badRequest(`Error 404, page not found`);
+      }
       return {data: {id: response.id, attributes: {...response}}, meta: {}};
     } catch (error) {
       throw new ApplicationError();

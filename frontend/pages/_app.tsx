@@ -28,7 +28,14 @@ const App = ({ Component, pageProps }: AppProps) => {
         ) : (
           <Component {...pageProps} />
         )}
-        <FidbackHub color="indigo" apiKey={process.env.NEXT_PUBLIC_FIDBACKHUB_TOKEN} />
+        <FidbackHub
+          color="indigo"
+          apiKey={process.env.NEXT_PUBLIC_FIDBACKHUB_TOKEN}
+          width={300}
+          height={300}
+          isAnimate={true}
+          disabled={false}
+        />
       </SessionProvider>
     </>
   );

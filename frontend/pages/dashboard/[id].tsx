@@ -24,7 +24,6 @@ export async function getStaticPaths() {
   return { paths: [...listProjects], fallback: false };
 }
 
-// This also gets called at build time
 export async function getStaticProps({ params }) {
   return { props: { params } };
 }

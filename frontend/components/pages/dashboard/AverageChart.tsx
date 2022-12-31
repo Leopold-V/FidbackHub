@@ -54,7 +54,7 @@ export const AverageChart = ({
   }, [ratings]);
 
   return (
-    <ResponsiveContainer width="80%" height={260}>
+    <ResponsiveContainer width="95%" height={260}>
       <LineChart
         data={data}
         margin={{
@@ -65,10 +65,27 @@ export const AverageChart = ({
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" tickFormatter={formatXAxis} />
-        <YAxis />
+        <XAxis
+          dataKey="date"
+          tickFormatter={formatXAxis}
+          style={{
+            fontSize: '.8rem',
+          }}
+        />
+        <YAxis
+          style={{
+            fontSize: '.8rem',
+          }}
+        />
         <Tooltip />
-        <Legend />
+        <Legend
+          iconSize={12}
+          iconType="plainline"
+          style={{
+            fontSize: '.8rem',
+          }}
+          formatter={(value, entry, index) => <span className="text-gray-500 text-sm">{value}</span>}
+        />
         <Line type="monotone" dataKey="count" stroke="#8884d8" dot={null} />
         <Line type="monotone" dataKey="design" stroke="#84d8c4" dot={null} />
         <Line type="monotone" dataKey="speed" stroke="#d5d871" dot={null} />

@@ -25,3 +25,7 @@
       background-image: url("../public/images/illustration-section-01.svg");
     }
   }
+
+.recharts-tooltip-wrapper {
+  font-size: .8rem;
+}

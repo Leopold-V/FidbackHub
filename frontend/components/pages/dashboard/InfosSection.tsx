@@ -35,7 +35,7 @@ export const InfoSection = ({ ratings }: { ratings: ratingType[] }) => {
 
   const stats = [
     { name: 'Total ratings', stat: ratings.length },
-    { name: 'Avg. rating', stat: avgRating.toFixed(2) + '/10' },
+    { name: 'Avg. rating', stat: ratings.length > 0 ? avgRating.toFixed(2) + '/10' : 0 },
     { name: 'Best category', stat: bestCategory() },
   ];
 

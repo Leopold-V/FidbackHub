@@ -23,5 +23,5 @@ export const useDateFilterForRatings = (ratings: ratingType[]) => {
     setratingsFiltered([...newRating]);
   }, [dateRange]);
 
-  return [ratingsFiltered, setratingsFiltered, dateRange, setdateRange];
+  return [ratingsFiltered, dateRange, setdateRange];
 };

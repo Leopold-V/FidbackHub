@@ -4,6 +4,7 @@ import { updateProject } from '../../../services/project.service';
 import { ErrorAlert } from 'components/common/ErrorAlert';
 import { SuccessAlert } from 'components/common/SuccessAlert';
 import { projectType } from 'types/index';
+import { SpinnerButton } from 'components/common/Spinner';
 
 export const EditProjectForm = ({
   project,
@@ -26,7 +27,7 @@ export const EditProjectForm = ({
     e.preventDefault();
     setloading(true);
     try {
-      await updateProject(session.id, project, session.jwt);
+      await updateProject(project, session.jwt);
       seterror(false);
       setSuccess(true);
     } catch (error) {
@@ -102,9 +103,10 @@ export const EditProjectForm = ({
       </div>
       <button
         type="submit"
-        className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2"
+        className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-sm font-medium text-white shadow-sm disabled:bg-indigo-400 hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2"
         disabled={loading}
       >
+        {loading && <SpinnerButton />}
         Save
       </button>
     </form>

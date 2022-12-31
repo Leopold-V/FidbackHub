@@ -9,10 +9,13 @@ module.exports = (plugin) => {
           if (ctx.request.body.data.username === "" || !ctx.request.body.data.username) {
             throw new Error();
           }
+          // OPERATION DISABLED BECAUSE NOT NECESSARY FOR NOW
+          /*
           const response = await strapi.query('plugin::users-permissions.user').update({
             where: {id: ctx.state.user.id},
             data: ctx.request.body.data
           });
+          */
           return {data: {id: response.id, attributes: {...response}}, meta: {}};
         } catch (error) {
           console.log(error);

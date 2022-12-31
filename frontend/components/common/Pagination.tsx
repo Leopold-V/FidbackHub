@@ -27,20 +27,24 @@ export const Pagination = ({
         </p>
       </div>
       <div className="flex flex-1 justify-between sm:justify-end">
-        <button
-          className="relative inline-flex items-center disabled:cursor-not-allowed disabled:bg-gray-50 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-          disabled={pageIndex === 0}
-          onClick={handlePrevious}
-        >
-          Previous
-        </button>
-        <button
-          className="relative ml-3 inline-flex items-center disabled:cursor-not-allowed disabled:bg-gray-50 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-          disabled={pageIndex === pageNumber - 1}
-          onClick={handleNext}
-        >
-          Next
-        </button>
+        {nbCurrentRatingsDisplay > 0 && (
+          <>
+            <button
+              className="relative inline-flex items-center disabled:cursor-not-allowed disabled:bg-gray-50 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              disabled={pageIndex === 0}
+              onClick={handlePrevious}
+            >
+              Previous
+            </button>
+            <button
+              className="relative ml-3 inline-flex items-center disabled:cursor-not-allowed disabled:bg-gray-50 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              disabled={pageIndex === pageNumber - 1}
+              onClick={handleNext}
+            >
+              Next
+            </button>
+          </>
+        )}
       </div>
     </nav>
   );

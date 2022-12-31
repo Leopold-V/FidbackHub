@@ -8,7 +8,7 @@ import { useDateFilterForRatings } from '../../../hooks/useDateFilterForRatings'
 import { DateButtonGroups } from './DateButtonsGroup';
 
 export const AverageChartSection = ({ ratings }: { ratings: ratingType[] }) => {
-  const [ratingsFiltered, setratingsFiltered, dateRange, setdateRange] = useDateFilterForRatings(ratings);
+  const [ratingsFiltered, dateRange, setdateRange] = useDateFilterForRatings(ratings);
 
   return (
     <>
@@ -19,6 +19,7 @@ export const AverageChartSection = ({ ratings }: { ratings: ratingType[] }) => {
             <div>
               <DateFilter dateRange={dateRange} setdateRange={setdateRange} />
             </div>
+            <h2 className="py-2">Average ratings by day</h2>
             <DateButtonGroups setdateRange={setdateRange} />
           </div>
           <div className="my-2 w-full flex justify-center">

@@ -1,6 +1,6 @@
 import React from 'react';
-import Page from 'components/pages/documentation/index.mdx';
 import Head from 'next/head';
+import Page from 'components/pages/documentation/index.mdx';
 
 const DocumentationPage = () => {
   return (

@@ -27,8 +27,18 @@ export const RatingBarChart = ({
       <BarChart width={400} height={250} data={Object.values(data)}>
         <Tooltip />
         <Bar dataKey={ratingType} fill="#4f46e5" />
-        <XAxis dataKey="name" />
-        <YAxis type="number" />
+        <XAxis
+          dataKey="name"
+          style={{
+            fontSize: '.8rem',
+          }}
+        />
+        <YAxis
+          type="number"
+          style={{
+            fontSize: '.8rem',
+          }}
+        />
       </BarChart>
     </div>
   );
