@@ -32,7 +32,7 @@ const DashboardPageComponent = ({ params }) => {
 
   return (
     <div className="flex flex-col items-center space-y-8 py-8">
-      <h1 className="mt-2 text-2xl font-medium">
+      <h1 className="mt-2 text-3xl font-bold">
         {projectData.data.attributes.name} <span className="text-indigo-600 font-extrabold"> dashboard</span>
       </h1>
       {projectData.data && (

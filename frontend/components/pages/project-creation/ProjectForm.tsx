@@ -43,7 +43,7 @@ export const ProjectForm = () => {
         {error && <ErrorAlert message={error} />}
         {success && <SuccessAlert />}
         <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+          <label htmlFor="name" className="block text-sm font-medium  sm:mt-px sm:pt-2">
             Project name
           </label>
           <div className="mt-1 sm:col-span-2 sm:mt-0">
@@ -62,7 +62,7 @@ export const ProjectForm = () => {
           </div>
         </div>
         <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-          <label htmlFor="website_url" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+          <label htmlFor="website_url" className="block text-sm font-medium  sm:mt-px sm:pt-2">
             Website url
           </label>
           <div className="mt-1 sm:col-span-2 sm:mt-0">
@@ -81,7 +81,7 @@ export const ProjectForm = () => {
           </div>
         </div>
         <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-          <label htmlFor="github_url" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+          <label htmlFor="github_url" className="block text-sm font-medium  sm:mt-px sm:pt-2">
             Github url
           </label>
           <div className="mt-1 sm:col-span-2 sm:mt-0">

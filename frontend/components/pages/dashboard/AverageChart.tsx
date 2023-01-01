@@ -1,3 +1,4 @@
+import { Card } from 'components/common/Card';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
@@ -71,26 +72,55 @@ export const AverageChart = ({
           style={{
             fontSize: '.8rem',
           }}
+          tick={{ fill: '#d3d3de' }}
         />
         <YAxis
           style={{
-            fontSize: '.8rem',
+            fontSize: '.9rem',
           }}
+          tick={{ fill: '#d3d3de' }}
         />
-        <Tooltip />
+        <Tooltip
+          contentStyle={{
+            backgroundColor: '#303136',
+            borderRadius: '5px',
+            borderColor: '#303136',
+          }}
+          labelStyle={{
+            color: '#d3d3de',
+          }}
+          content={<CustomTooltip />}
+        />
         <Legend
           iconSize={12}
           iconType="plainline"
           style={{
-            fontSize: '.8rem',
+            fontSize: '.9rem',
           }}
-          formatter={(value, entry, index) => <span className="text-gray-500 text-sm">{value}</span>}
+          formatter={(value) => <span className="text-secondaryText text-sm">{value}</span>}
         />
-        <Line type="monotone" dataKey="count" stroke="#8884d8" dot={null} />
-        <Line type="monotone" dataKey="design" stroke="#84d8c4" dot={null} />
-        <Line type="monotone" dataKey="speed" stroke="#d5d871" dot={null} />
-        <Line type="monotone" dataKey="responsive" stroke="#f15353" dot={null} />
+        <Line type="monotone" dataKey="count" stroke="#6366f1" dot={null} />
+        <Line type="monotone" dataKey="design" stroke="#df5c3b" dot={null} />
+        <Line type="monotone" dataKey="speed" stroke="#5dbb7c" dot={null} />
+        <Line type="monotone" dataKey="responsive" stroke="#201eaa" dot={null} />
       </LineChart>
     </ResponsiveContainer>
   );
+};
+
+const CustomTooltip = ({ active, payload, label }: any) => {
+  console.log('payload', payload);
+  if (active) {
+    return (
+      <div className="bg-secondaryBackground text-secondaryText font-medium p-3 rounded space-y-1">
+        <p>{label}</p>
+        <p>Count: {payload[0].payload.count}</p>
+        <p>Design: {payload[0].payload.design}</p>
+        <p>Speed: {payload[0].payload.speed}</p>
+        <p>Responsive: {payload[0].payload.responsive}</p>
+      </div>
+    );
+  }
+
+  return null;
 };

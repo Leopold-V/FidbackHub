@@ -23,25 +23,39 @@ export const RatingBarChart = ({
 
   return (
     <div>
-      <h4 className="text-center text-gray-700 font-medium my-4">{title}</h4>
+      <h4 className="text-center text-secondaryText font-medium my-4">{title}</h4>
       <BarChart width={400} height={250} data={Object.values(data)}>
-        <Tooltip />
+        <Tooltip content={<CustomTooltip />} />
         <Bar dataKey={ratingType} fill="#4f46e5" />
         <XAxis
           dataKey="name"
           style={{
-            fontSize: '.8rem',
+            fontSize: '.9rem',
           }}
+          tick={{ fill: '#d3d3de' }}
         />
         <YAxis
           type="number"
           style={{
-            fontSize: '.8rem',
+            fontSize: '.9rem',
           }}
+          tick={{ fill: '#d3d3de' }}
         />
       </BarChart>
     </div>
   );
+};
+
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (active) {
+    return (
+      <div className="bg-secondaryBackground text-secondaryText font-medium p-3 rounded space-y-1">
+        <p>Count: {payload[0].payload[payload[0].name]}</p>
+        <p>Rating: {label}</p>
+      </div>
+    );
+  }
+  return null;
 };
 
 const initialData = [

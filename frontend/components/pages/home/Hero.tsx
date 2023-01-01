@@ -5,7 +5,7 @@ export const Hero = () => {
   return (
     <>
       <h1 className="px-8 mt-16 mb-6 text-5xl font-extrabold leading-tight text-center text-white xl:text-6xl">
-        Discover <span className="text-indigo-700">Avisitor</span>
+        Discover <span className="text-indigo-700">FidbackHub</span>
       </h1>
       <p className="max-w-xl mx-auto mb-10 text-xl text-center xl:max-w-2xl">
         A simple way to recolt feedbacks on your website design and performance. Ask to the users!

@@ -16,11 +16,11 @@ export const Pagination = ({
 
   return (
     <nav
-      className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
+      className="flex items-center justify-between border-t border-3Background bg-mainBackground px-4 py-3 sm:px-6"
       aria-label="Pagination"
     >
       <div className="hidden sm:block">
-        <p className="text-sm text-gray-700">
+        <p className="text-sm text-secondaryText">
           Showing <span className="font-medium">{nbCurrentRatingsDisplay}</span> to{' '}
           <span className="font-medium">{pageLength}</span> of <span className="font-medium">{totalratings}</span>{' '}
           results
@@ -30,14 +30,14 @@ export const Pagination = ({
         {nbCurrentRatingsDisplay > 0 && (
           <>
             <button
-              className="relative inline-flex items-center disabled:cursor-not-allowed disabled:bg-gray-50 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              className="relative inline-flex items-center disabled:cursor-not-allowed disabled:bg-zinc-700 rounded-md border border-4Background bg-secondaryBackground px-4 py-2 text-sm font-medium text-secondaryText hover:text-indigo-500 duration-150"
               disabled={pageIndex === 0}
               onClick={handlePrevious}
             >
               Previous
             </button>
             <button
-              className="relative ml-3 inline-flex items-center disabled:cursor-not-allowed disabled:bg-gray-50 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              className="relative ml-3 inline-flex items-center disabled:cursor-not-allowed disabled:bg-zinc-700 rounded-md border  border-4Background bg-secondaryBackground px-4 py-2 text-sm font-medium text-secondaryText hover:text-indigo-500 duration-150"
               disabled={pageIndex === pageNumber - 1}
               onClick={handleNext}
             >

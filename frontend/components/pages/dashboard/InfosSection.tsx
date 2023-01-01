@@ -41,12 +41,12 @@ export const InfoSection = ({ ratings }: { ratings: ratingType[] }) => {
 
   return (
     <div>
-      <h3 className="text-lg font-medium leading-6 text-gray-900">Total</h3>
+      <h3 className="text-lg font-medium leading-6">Total</h3>
       <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
         {stats.map((item) => (
           <Card key={item.name}>
-            <dt className="truncate text-sm font-medium text-gray-500">{item.name}</dt>
-            <dd className="mt-1 text-2xl font-semibold tracking-tight text-gray-900">{item.stat}</dd>
+            <dt className="truncate text-sm font-medium text-secondaryText">{item.name}</dt>
+            <dd className="mt-1 text-2xl font-semibold tracking-tight">{item.stat}</dd>
           </Card>
         ))}
       </dl>

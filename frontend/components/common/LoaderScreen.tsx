@@ -2,11 +2,11 @@ import React from 'react';
 
 export const LoaderScreen = () => {
   return (
-    <div className="h-screen flex flex-col justify-center items-center space-y-12 bg-gray-200">
+    <div className="h-screen flex flex-col justify-center items-center bg-mainBackground">
       <div role="status">
         <svg
           aria-hidden="true"
-          className="mr-2 w-24 h-24 text-gray-200 animate-spin fill-blue-600"
+          className="mr-2 w-24 h-24 text-mainBackground animate-spin fill-main"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +22,6 @@ export const LoaderScreen = () => {
         </svg>
         <span className="sr-only text-3xl font-bold">Loading...</span>
       </div>
-      <div className="text-3xl font-bold text-zinc-700">Loading...</div>
     </div>
   );
 };

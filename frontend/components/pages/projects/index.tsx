@@ -51,17 +51,15 @@ const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType;
   }, []);
 
   return (
-    <>
-      <div className="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
-        <div className="min-w-0 flex-1 xl:flex">
-          <ProfileColumn profile={profile} projectsNumber={projects.length} />
-          <ProjectsColumn projects={projects} setprojects={setprojects} />
-        </div>
-        {avgValues.length > 0 && (
-          <StatsFeed ratingsNumber={allratings.length} maxRatedProject={maxRatedProject} avgValues={avgValues} />
-        )}
+    <div className="mx-auto w-full max-w-7xl lg:flex xl:px-8">
+      <div className="min-w-0 flex-1 xl:flex">
+        <ProfileColumn profile={profile} projectsNumber={projects.length} />
+        <ProjectsColumn projects={projects} setprojects={setprojects} />
       </div>
-    </>
+      {allratings.length > 0 && (
+        <StatsFeed ratingsNumber={allratings.length} maxRatedProject={maxRatedProject} avgValues={avgValues} />
+      )}
+    </div>
   );
 };
 

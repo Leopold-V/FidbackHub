@@ -10,7 +10,7 @@ export const ProjectsList = ({
   setprojects: (projects: projectType[]) => void;
 }) => {
   return (
-    <ul role="list" className="divide-y divide-gray-200 border-b border-gray-200">
+    <ul role="list" className="divide-y divide-3Background border border-3Background rounded">
       {projects.map((project) => (
         <ProjectItem project={project} key={project.id} projects={projects} setprojects={setprojects} />
       ))}

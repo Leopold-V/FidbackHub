@@ -14,13 +14,13 @@ export const ProjectItem = ({
   setprojects: (project: projectType[]) => void;
 }) => {
   return (
-    <li className="relative py-5 pl-4 pr-6 hover:bg-gray-50 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
+    <li className="relative py-5 pl-4 pr-6 hover:bg-secondaryBackground duration-150 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6 rounded">
       <div className="flex items-center justify-between space-x-4">
         {/* Repo name and link */}
         <div className="min-w-0 space-x-3 flex flex-row">
           <a href={project.github_url} className="group relative flex items-center space-x-2.5 cursor-pointer">
             <svg
-              className="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+              className="h-5 w-5 flex-shrink-0 text-secondaryText group-hover:text-gray-400 duration-150"
               viewBox="0 0 18 18"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -45,14 +45,19 @@ export const ProjectItem = ({
         <div className="flex flex-row space-x-3">
           <ProjectItemDropdown projectId={project.id} projects={projects} setprojects={setprojects} />
           <div className="sm:hidden">
-            <ChevronRightIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+            <a href={project.website_url}>
+              <ChevronRightIcon
+                className="h-5 w-5 text-secondaryText hover:text-indigo-500 duration-150"
+                aria-hidden="true"
+              />
+            </a>
           </div>
           {/* Repo meta info */}
           <div className="hidden flex-shrink-0 flex-col items-end space-y-3 sm:flex">
             <p className="flex items-center space-x-4">
               <a
                 href={project.website_url}
-                className="relative text-sm font-medium text-gray-500 hover:text-gray-900 cursor-pointer"
+                className="relative text-sm font-medium text-secondaryText hover:text-indigo-500 duration-150 cursor-pointer"
               >
                 Visit site
               </a>

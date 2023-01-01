@@ -11,11 +11,18 @@ export const ProjectsColumn = ({
   projects: projectType[];
   setprojects: (projects: projectType[]) => void;
 }) => {
+  const [projectsFiltered, setprojectsFiltered] = useState(projects);
+
   return (
-    <div className="lg:min-w-0 lg:flex-1 bg-white">
-      <ProjectsListHeader projects={projects} setprojects={setprojects} />
+    <div className="lg:min-w-0 lg:flex-1">
+      <ProjectsListHeader
+        projects={projects}
+        setprojects={setprojects}
+        projectsFiltered={projectsFiltered}
+        setprojectsFiltered={setprojectsFiltered}
+      />
       {projects.length > 0 ? (
-        <ProjectsList projects={projects} setprojects={setprojects} />
+        <ProjectsList projects={projectsFiltered} setprojects={setprojects} />
       ) : (
         <div className="text-center my-6 text-sm lg:text-base">
           You don't have any project yet!{' '}

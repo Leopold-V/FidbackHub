@@ -12,7 +12,7 @@ export const StatsFeed = ({
   avgValues: any[];
 }) => {
   return (
-    <div className="bg-gray-50 pr-4 sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:pr-8 xl:pr-0">
+    <div className="pr-4 sm:pr-6 lg:flex-shrink-0 lg:pr-8 xl:pr-0">
       <div className="pl-6 lg:w-80">
         <FeedHeader />
         <div className="py-4">
@@ -33,20 +33,20 @@ const StatsList = ({
   avgValues: any[];
 }) => {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 secondaryText">
       <Card>
-        <dt className="truncate text-sm font-medium text-gray-500">Total ratings:</dt>
-        <dd className="mt-1 font-semibold tracking-tight text-gray-900">{ratingsNumber}</dd>
+        <dt className="truncate text-sm font-medium text-secondaryText">Total ratings:</dt>
+        <dd className="mt-1 font-semibold tracking-tight ">{ratingsNumber}</dd>
       </Card>
       <Card>
-        <dt className="truncate text-sm font-medium text-gray-500">Most rated project</dt>
-        <dd className="mt-1 font-semibold tracking-tight text-gray-900">
+        <dt className="truncate text-sm font-medium text-secondaryText">Most rated project</dt>
+        <dd className="mt-1 font-semibold tracking-tight">
           {maxRatedProject.name}: {maxRatedProject.number}
         </dd>
       </Card>
       <Card>
-        <dt className="truncate text-sm font-medium text-gray-500">Best rated project</dt>
-        <dd className="mt-1 font-semibold tracking-tight text-gray-900">
+        <dt className="truncate text-sm font-medium text-secondaryText">Best rated project</dt>
+        <dd className="mt-1 font-semibold tracking-tight">
           {avgValues.sort((a, b) => b.avg - a.avg)[0].name}: {avgValues.sort((a, b) => b.avg - a.avg)[0].avg.toFixed(2)}
         </dd>
       </Card>
