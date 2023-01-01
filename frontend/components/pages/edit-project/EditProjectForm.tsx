@@ -60,25 +60,25 @@ export const EditProjectForm = ({
       <div className="text-sm flex justify-center items-center p-4">
         <span className="sm:w-1/4 w-3/4 mx-auto">Project ID</span>
         <div className="sm:w-1/2 w-3/4 flex">
-          <p className="text-secondaryText">{project.id}</p>
+          <p className="text-secondaryText font-light">{project.id}</p>
         </div>
       </div>
       <div className="text-sm flex justify-center items-center p-4">
         <span className="sm:w-1/4 w-3/4 mx-auto">Number of ratings</span>
         <div className="sm:w-1/2 w-3/4 flex">
-          <p className="text-secondaryText">{project.ratings.length}</p>
+          <p className="text-secondaryText font-light">{project.ratings.length}</p>
         </div>
       </div>
       <div className="text-sm flex justify-center items-center p-4">
         <span className="sm:w-1/4 w-3/4 mx-auto">Date created</span>
         <div className="sm:w-1/2 w-3/4 flex">
-          <p className="text-secondaryText">{dayjs(project.createdAt).format('YYYY-MM-DD')}</p>
+          <p className="text-secondaryText font-light">{dayjs(project.createdAt).format('YYYY-MM-DD')}</p>
         </div>
       </div>
       <div className="text-sm flex justify-center items-center p-4">
         <span className="sm:w-1/4 w-3/4 mx-auto">Last modified</span>
         <div className="sm:w-1/2 w-3/4 flex">
-          <p className="text-secondaryText">{dayjs(project.updatedAt).format('YYYY-MM-DD')}</p>
+          <p className="text-secondaryText font-light">{dayjs(project.updatedAt).format('YYYY-MM-DD')}</p>
         </div>
       </div>
       <InputDecorators label="Website link">

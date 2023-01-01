@@ -6,6 +6,7 @@ import { Card } from 'components/common/Card';
 import SecretKey from '../dashboard/SecretKey';
 import { Spinner } from 'components/common/Spinner';
 import { PageHeader } from 'components/common/PageHeader';
+import { DangerZone } from './DangerZone';
 
 const EditProjectPageComponent = ({ params }) => {
   const { data: session, status } = useSession();
@@ -66,6 +67,12 @@ const EditProjectPageComponent = ({ params }) => {
         <h2 className="font-medium">Access</h2>
         <div className="border border-3Background hover:border-4Background bg-stone-900 duration-200 sm:rounded py-4">
           <SecretKey label={'Project token'} value={project.api_key} />
+        </div>
+      </div>
+      <div className="flex flex-col xl:w-3/4 w-full mx-auto space-y-2 px-4">
+        <h2 className="font-medium text-red-500">Danger zone</h2>
+        <div className="border border-red-500 bg-stone-900 duration-200 sm:rounded p-1">
+          <DangerZone projectId={project.id} />
         </div>
       </div>
     </div>

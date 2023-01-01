@@ -2,6 +2,7 @@ import React, { MouseEvent } from 'react';
 import { Menu } from '@headlessui/react';
 import { BarsArrowUpIcon, ChevronDownIcon } from '@heroicons/react/20/solid';
 import { SearchProject } from './SearchProject';
+import dayjs from 'dayjs';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -10,18 +11,25 @@ function classNames(...classes) {
 export const ProjectsListHeader = ({ projects, setprojects, setprojectsFiltered, grid, setgrid }) => {
   const handleSort = (e: MouseEvent<HTMLButtonElement>) => {
     const field = e.currentTarget.dataset.field;
-    const newProjectsArray = [...projects].sort((a, b) => {
-      const nameA = a[field].toString().toLowerCase(); // ignore upper and lowercase
-      const nameB = b[field].toString().toLowerCase(); // ignore upper and lowercase
-      console.log(nameA, nameB);
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      return 0;
-    });
+    let newProjectsArray = [];
+    if (field !== 'name') {
+      newProjectsArray = [...projects].sort((a, b) => {
+        const dateA = new Date(a[field]);
+        const dateB = new Date(b[field]);
+        if (dateA < dateB) {
+          return 1;
+        }
+        if (dateA > dateB) {
+          return -1;
+        }
+        return 0;
+      });
+    } else {
+      newProjectsArray = [...projects].sort((a, b) => {
+        return a[field].localeCompare(b[field]);
+      });
+    }
+    console.log(projects);
     setprojects(newProjectsArray);
   };
 

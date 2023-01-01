@@ -1,12 +1,15 @@
+import Link from 'next/link';
 import React from 'react';
 import { userType } from 'types/index';
 
 export const Profile = ({ profile }: { profile: userType }) => {
   return (
     <div className="flex items-center space-x-6">
-      <div className="h-12 w-12">
-        <img className="h-12 w-12 rounded-full border-2" src={profile.avatar_url} alt="user avatar" />
-      </div>
+      <Link href="http://localhost:3000/my-account">
+        <div className="h-12 w-12 cursor-pointer">
+          <img className="h-12 w-12 rounded-full border-2" src={profile.avatar_url} alt="user avatar" />
+        </div>
+      </Link>
       <a href={`https://github.com/${profile.username}`} className="space-y-1">
         <div className="text-sm font-medium hover:text-main duration-200">{profile.username}</div>
         <svg

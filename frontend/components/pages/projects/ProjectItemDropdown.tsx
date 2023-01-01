@@ -1,37 +1,14 @@
-import { useSession } from 'next-auth/react';
 import { Fragment } from 'react';
+import Link from 'next/link';
 import { Menu, Transition } from '@headlessui/react';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
-import Link from 'next/link';
 import { projectType } from 'types/index';
-import { deleteProject } from '../../../services/project.service';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export const ProjectItemDropdown = ({
-  projectId,
-  projects,
-  setprojects,
-}: {
-  projectId: number;
-  projects: projectType[];
-  setprojects: (project: projectType[]) => void;
-}) => {
-  const { data: session } = useSession();
-
-  const handleDeleteProject = async () => {
-    try {
-      await deleteProject(projectId, session.jwt);
-      const newProjectsList = [...projects].filter((ele) => ele.id !== projectId);
-      setprojects([...newProjectsList]);
-    } catch (error) {
-      // TODO: trigger an alert with the error message
-      console.log(error);
-    }
-  };
-
+export const ProjectItemDropdown = ({ projectId }: { projectId: number }) => {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -64,13 +41,6 @@ export const ProjectItemDropdown = ({
                 <Link href={`/edit-project/${projectId}`}>
                   <a className={classNames('block px-4 py-2 text-sm')}>Settings</a>
                 </Link>
-              </div>
-            </Menu.Item>
-            <Menu.Item>
-              <div className="hover:bg-4Background duration-300">
-                <button className={classNames('px-4 py-2 text-sm w-full text-left')} onClick={handleDeleteProject}>
-                  Delete
-                </button>
               </div>
             </Menu.Item>
           </div>

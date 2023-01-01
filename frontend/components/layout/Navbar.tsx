@@ -2,7 +2,6 @@ import React from 'react';
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3CenterLeftIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
@@ -38,27 +37,6 @@ export const Navbar = () => {
                   />
                 </div>
               </div>
-
-              {/* Search section */}
-              {/* <div className="flex flex-1 justify-center lg:justify-end">
-              <div className="w-full px-2 lg:px-6">
-                <label htmlFor="search" className="sr-only">
-                  Search projects
-                </label>
-                <div className="relative text-indigo-200 focus-within:text-gray-400">
-                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                    <MagnifyingGlassIcon className="h-5 w-5" aria-hidden="true" />
-                  </div>
-                  <input
-                    id="search"
-                    name="search"
-                    className="block w-full rounded-md border border-transparent bg-indigo-300 bg-opacity-25 py-2 pl-10 pr-3 leading-5 text-indigo-100 placeholder-indigo-200 focus:bg-white focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:text-sm"
-                    placeholder="Search projects"
-                    type="search"
-                  />
-                </div>
-              </div>
-            </div> */}
               <div className="flex lg:hidden">
                 {/* Mobile menu button */}
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-indigo-600 p-2 text-indigo-400 hover:bg-indigo-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600">
@@ -71,19 +49,32 @@ export const Navbar = () => {
                 </Disclosure.Button>
               </div>
               {/* Links section */}
-              <div className="hidden lg:block lg:w-80">
+              <div className="hidden lg:block">
                 <div className="flex items-center justify-end">
-                  <div className="flex">
+                  <div className="flex items-center">
                     {navigation.map((item) => (
                       <Link href={item.href} key={item.name}>
                         <a
-                          className="rounded-md px-3 py-2 text-sm font-medium text-indigo-200 hover:text-white"
+                          className="rounded-md px-3 py-2 text-sm font-medium text-indigo-200 hover:text-white duration-200"
                           aria-current={item.current ? 'page' : undefined}
                         >
                           {item.name}
                         </a>
                       </Link>
                     ))}
+                    <Link href={'/project-creation'} key={'999'}>
+                      <div className="text-indigo-200 text-sm cursor-pointer hover:text-white px-3 py-2 flex items-center space-x-1 duration-200">
+                        <span>New</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          className="w-5 h-5"
+                        >
+                          <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                        </svg>
+                      </div>
+                    </Link>
                   </div>
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-4 flex-shrink-0">
@@ -152,6 +143,11 @@ export const Navbar = () => {
                   </Disclosure.Button>
                 </div>
               ))}
+              <Disclosure.Button as="a" href={'/project-creation'} key={'999'}>
+                <div className="text-indigo-200 cursor-pointer text-base font-medium hover:text-white px-3 py-2 flex items-center space-x-1 duration-200">
+                  <span>New project</span>
+                </div>
+              </Disclosure.Button>
             </div>
             <div className="border-t border-indigo-800 pt-4 pb-3">
               <div className="space-y-1 px-2">

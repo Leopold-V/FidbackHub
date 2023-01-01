@@ -1,5 +1,5 @@
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import React, { useState } from 'react';
 import { projectType } from 'types/index';
 import { ProjectsList } from './ProjectsList';
 import { ProjectsListHeader } from './ProjectsListHeader';
@@ -13,6 +13,10 @@ export const ProjectsColumn = ({
 }) => {
   const [projectsFiltered, setprojectsFiltered] = useState(projects);
   const [grid, setgrid] = useState(false);
+
+  useEffect(() => {
+    setprojectsFiltered(projects);
+  }, [projects]);
 
   return (
     <div className="lg:min-w-0 lg:flex-1">

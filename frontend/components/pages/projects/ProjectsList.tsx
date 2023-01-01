@@ -1,4 +1,3 @@
-import { Card } from 'components/common/Card';
 import React from 'react';
 import { projectType } from 'types/index';
 import { ProjectItem } from './ProjectItem';
@@ -14,7 +13,7 @@ export const ProjectsList = ({
 }) => {
   if (grid) {
     return (
-      <ul role="list" className="flex sm:flex-row flex-col justify-center items-center">
+      <ul role="list" className="flex sm:flex-row mx-2 flex-wrap flex-col justify-center items-center">
         {projects.map((project) => (
           <div className="m-2 border border-3Background rounded">
             <ProjectItem project={project} projects={projects} setprojects={setprojects} />
