@@ -3,6 +3,7 @@ import { userType } from 'types/index';
 import { StatsFeed } from './StatsFeed';
 import { ProfileColumn } from './ProfileColumn';
 import { ProjectsColumn } from './ProjectsColumn';
+import { PageHeader } from 'components/common/PageHeader';
 
 const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType; userProjects: any[] }) => {
   const profile = {
@@ -37,13 +38,15 @@ const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType;
         projectAvgDesign += rating.design;
         projectAvgResponsive += rating.responsive;
       });
-      listAvgValues.push({
-        name: project.name,
-        avg: projectAvg / project.ratings.length,
-        speed: projectAvgSpeed / project.ratings.length,
-        design: projectAvgDesign / project.ratings.length,
-        responsive: projectAvgResponsive / project.ratings.length,
-      });
+      if (project.ratings.length > 0) {
+        listAvgValues.push({
+          name: project.name,
+          avg: projectAvg / project.ratings.length,
+          speed: projectAvgSpeed / project.ratings.length,
+          design: projectAvgDesign / project.ratings.length,
+          responsive: projectAvgResponsive / project.ratings.length,
+        });
+      }
     });
     setavgValues(listAvgValues);
     setmaxRatedProject(maxRatedProject);
@@ -51,14 +54,17 @@ const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType;
   }, []);
 
   return (
-    <div className="mx-auto w-full max-w-7xl lg:flex xl:px-8">
-      <div className="min-w-0 flex-1 xl:flex">
-        <ProfileColumn profile={profile} projectsNumber={projects.length} />
-        <ProjectsColumn projects={projects} setprojects={setprojects} />
+    <div className="flex flex-col items-center space-y-4 pb-8">
+      <PageHeader label={'Overview'} />
+      <div className="mx-auto w-full max-w-7xl lg:flex xl:px-8">
+        <div className="min-w-0 flex-1 xl:flex">
+          <ProfileColumn profile={profile} projectsNumber={projects.length} />
+          <ProjectsColumn projects={projects} setprojects={setprojects} />
+        </div>
+        {allratings.length > 0 && (
+          <StatsFeed ratingsNumber={allratings.length} maxRatedProject={maxRatedProject} avgValues={avgValues} />
+        )}
       </div>
-      {allratings.length > 0 && (
-        <StatsFeed ratingsNumber={allratings.length} maxRatedProject={maxRatedProject} avgValues={avgValues} />
-      )}
     </div>
   );
 };

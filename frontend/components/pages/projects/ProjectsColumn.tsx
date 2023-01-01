@@ -12,22 +12,24 @@ export const ProjectsColumn = ({
   setprojects: (projects: projectType[]) => void;
 }) => {
   const [projectsFiltered, setprojectsFiltered] = useState(projects);
+  const [grid, setgrid] = useState(false);
 
   return (
     <div className="lg:min-w-0 lg:flex-1">
       <ProjectsListHeader
         projects={projects}
         setprojects={setprojects}
-        projectsFiltered={projectsFiltered}
         setprojectsFiltered={setprojectsFiltered}
+        grid={grid}
+        setgrid={setgrid}
       />
       {projects.length > 0 ? (
-        <ProjectsList projects={projectsFiltered} setprojects={setprojects} />
+        <ProjectsList projects={projectsFiltered} setprojects={setprojects} grid={grid} />
       ) : (
         <div className="text-center my-6 text-sm lg:text-base">
           You don't have any project yet!{' '}
           <Link href="/project-creation">
-            <a className="text-indigo-600 font-bold hover:text-indigo-400">Start by creating one</a>
+            <a className="text-main font-bold hover:text-indigo-400 duration-200">Start by creating one</a>
           </Link>
           .
         </div>

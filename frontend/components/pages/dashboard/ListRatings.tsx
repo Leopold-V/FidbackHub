@@ -196,8 +196,8 @@ export const ListRatings = ({
   return (
     <div className="sm:px-6">
       <div className="mt-8 flex flex-col">
-        <div className="-my-2 sm:-mx-6">
-          <div className="inline-block min-w-full py-2 align-middle">
+        <div className="sm:-mx-6">
+          <div className="inline-block min-w-full align-middle">
             <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg border border-3Background">
               <table className="min-w-full divide-y divide-3Background">
                 <ListRatingTableHeader

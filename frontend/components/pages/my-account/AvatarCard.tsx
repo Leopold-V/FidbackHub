@@ -1,16 +1,13 @@
-import React from 'react';
 import { userType } from 'types/index';
 
-export const Profile = ({ profile }: { profile: userType }) => {
+export const AvatarCard = ({ profile }: { profile: userType }) => {
   return (
-    <div className="flex items-center space-x-6">
-      <div className="h-12 w-12">
-        <img className="h-12 w-12 rounded-full border-2" src={profile.avatar_url} alt="user avatar" />
-      </div>
-      <a href={`https://github.com/${profile.username}`} className="space-y-1">
+    <div className="py-8 self-center space-y-4">
+      <img className="inline-block h-32 w-32 rounded-full" src={profile.avatar_url} alt="user avatar" />
+      <a href={`https://github.com/${profile.username}`} className="space-x-3 flex justify-center items-center">
         <div className="text-sm font-medium hover:text-main duration-200">{profile.username}</div>
         <svg
-          className="h-5 w-5 group-hover:text-gray-300 duration-150"
+          className="h-6 w-6 group-hover:text-gray-300 duration-150"
           aria-hidden="true"
           fill="currentColor"
           viewBox="0 0 20 20"

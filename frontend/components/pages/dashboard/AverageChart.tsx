@@ -109,7 +109,6 @@ export const AverageChart = ({
 };
 
 const CustomTooltip = ({ active, payload, label }: any) => {
-  console.log('payload', payload);
   if (active) {
     return (
       <div className="bg-secondaryBackground text-secondaryText font-medium p-3 rounded space-y-1">

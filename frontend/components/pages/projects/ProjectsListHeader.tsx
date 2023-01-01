@@ -1,13 +1,13 @@
 import React, { MouseEvent } from 'react';
 import { Menu } from '@headlessui/react';
-import { BarsArrowUpIcon, ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid';
+import { BarsArrowUpIcon, ChevronDownIcon } from '@heroicons/react/20/solid';
 import { SearchProject } from './SearchProject';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export const ProjectsListHeader = ({ projects, setprojects, projectsFiltered, setprojectsFiltered }) => {
+export const ProjectsListHeader = ({ projects, setprojects, setprojectsFiltered, grid, setgrid }) => {
   const handleSort = (e: MouseEvent<HTMLButtonElement>) => {
     const field = e.currentTarget.dataset.field;
     const newProjectsArray = [...projects].sort((a, b) => {
@@ -30,8 +30,13 @@ export const ProjectsListHeader = ({ projects, setprojects, projectsFiltered, se
       <div className="flex items-center space-x-3">
         <h1 className="text-lg font-medium pl-6">Projects</h1>
         <SearchProject projects={projects} setprojectsFiltered={setprojectsFiltered} />
-        <div className="text-secondarytext flex items-center divide-x">
-          <button className="py-1 px-2 bg-secondaryBackground hover:text-indigo-500 duration-150 rounded-l border border-3Background cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        <div className="flex items-center divide-x divide-3Background">
+          <button
+            className={`py-1 px-2 ${
+              grid ? 'text-mainText' : 'text-gray-400'
+            } bg-secondaryBackground hover:text-mainText duration-200 rounded-l cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500`}
+            onClick={() => setgrid(true)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -47,7 +52,12 @@ export const ProjectsListHeader = ({ projects, setprojects, projectsFiltered, se
               />
             </svg>
           </button>
-          <button className="py-1 px-2 bg-secondaryBackground hover:text-indigo-500 duration-150 rounded-r border border-3Background cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <button
+            className={`py-1 px-2 ${
+              !grid ? 'text-mainText' : 'text-gray-400'
+            } bg-secondaryBackground hover:text-mainText duration-200 rounded-r cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500`}
+            onClick={() => setgrid(false)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

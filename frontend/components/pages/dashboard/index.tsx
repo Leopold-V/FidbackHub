@@ -6,6 +6,7 @@ import { AverageChartSection } from './AverageChartSection';
 import { InfoSection } from './InfosSection';
 import { ListRatingsSection } from './ListRatingsSection';
 import { Spinner } from 'components/common/Spinner';
+import { PageHeader } from 'components/common/PageHeader';
 
 const DashboardPageComponent = ({ params }) => {
   const { data: session } = useSession();
@@ -18,23 +19,24 @@ const DashboardPageComponent = ({ params }) => {
   // TODO: SKELETON LOADING
   if (loading)
     return (
-      <div className="flex flex-col justify-center items-center space-y-2 mt-8">
+      <div className="flex flex-col items-center space-y-8">
+        <PageHeader label="Dashboard" />
         <Spinner />
         <h1 className="text-lg font-semibold">Loading your project data...</h1>
       </div>
     );
   if (error)
     return (
-      <div className="flex flex-col justify-center items-center mt-8">
+      <div className="flex flex-col items-center space-y-8">
+        <PageHeader label="Dashboard" />
         <h1 className="text-lg font-semibold">{error}</h1>
       </div>
     );
 
   return (
-    <div className="flex flex-col items-center space-y-8 py-8">
-      <h1 className="mt-2 text-3xl font-bold">
-        {projectData.data.attributes.name} <span className="text-indigo-600 font-extrabold"> dashboard</span>
-      </h1>
+    <div className="flex flex-col items-center space-y-8 pb-8">
+      <PageHeader label="Dashboard" />
+      <h1 className="mt-2 text-2xl font-semibold">{projectData.data.attributes.name}</h1>
       {projectData.data && (
         <div className="space-y-8">
           <InfoSection ratings={projectData.data.attributes.ratings} />

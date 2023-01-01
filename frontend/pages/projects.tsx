@@ -5,6 +5,7 @@ import { getUser } from '../services/user.service';
 import { getProjectsFromUser } from '../services/project.service';
 import Page from 'components/pages/projects';
 import { Spinner } from 'components/common/Spinner';
+import { PageHeader } from 'components/common/PageHeader';
 
 const ProjectsPage = () => {
   const { data: session } = useSession();
@@ -31,7 +32,8 @@ const ProjectsPage = () => {
   // TODO: build a skeleton page for loading ?
   if (loading) {
     return (
-      <div className="flex flex-col justify-center items-center space-y-2 mt-8">
+      <div className="flex flex-col items-center space-y-8">
+        <PageHeader label={'Overview'} />
         <Spinner />
         <h1 className="text-lg font-semibold">Loading your data...</h1>
       </div>
@@ -39,7 +41,8 @@ const ProjectsPage = () => {
   }
   if (error) {
     return (
-      <div className="flex flex-col justify-center items-center py-8">
+      <div className="flex flex-col items-center space-y-8">
+        <PageHeader label={'Overview'} />
         <h1 className="mt-2 font-semibold">Error: {error}</h1>
       </div>
     );

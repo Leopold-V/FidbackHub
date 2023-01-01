@@ -14,7 +14,7 @@ export const ProjectItem = ({
   setprojects: (project: projectType[]) => void;
 }) => {
   return (
-    <li className="relative py-5 pl-4 pr-6 hover:bg-secondaryBackground duration-150 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6 rounded">
+    <li className="relative py-5 pl-4 pr-6 hover:bg-secondaryBackground duration-150 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
       <div className="flex items-center justify-between space-x-4">
         {/* Repo name and link */}
         <div className="min-w-0 space-x-3 flex flex-row">
@@ -37,7 +37,7 @@ export const ProjectItem = ({
           <div className="flex items-center">
             <h2 className="text-sm font-medium">
               <Link href={`/dashboard/${project.id}`}>
-                <a className=" hover:text-indigo-600">{project.name}</a>
+                <a className="hover:text-main duration-200">{project.name}</a>
               </Link>
             </h2>
           </div>
@@ -47,7 +47,7 @@ export const ProjectItem = ({
           <div className="sm:hidden">
             <a href={project.website_url}>
               <ChevronRightIcon
-                className="h-5 w-5 text-secondaryText hover:text-indigo-500 duration-150"
+                className="h-5 w-5 text-secondaryText hover:text-main duration-200"
                 aria-hidden="true"
               />
             </a>
@@ -57,7 +57,7 @@ export const ProjectItem = ({
             <p className="flex items-center space-x-4">
               <a
                 href={project.website_url}
-                className="relative text-sm font-medium text-secondaryText hover:text-indigo-500 duration-150 cursor-pointer"
+                className="relative text-sm font-medium text-secondaryText hover:text-main duration-200 cursor-pointer"
               >
                 Visit site
               </a>

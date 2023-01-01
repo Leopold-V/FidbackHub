@@ -5,6 +5,8 @@ import { ErrorAlert } from 'components/common/ErrorAlert';
 import { SuccessAlert } from 'components/common/SuccessAlert';
 import { projectType } from 'types/index';
 import { SpinnerButton } from 'components/common/Spinner';
+import dayjs from 'dayjs';
+import { InputDecorators } from 'components/common/InputDecorators';
 
 export const EditProjectForm = ({
   project,
@@ -39,76 +41,82 @@ export const EditProjectForm = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="text-center space-y-8">
-      <div className="space-y-6 sm:space-y-5 divide-y divide-gray-200">
-        {error && <ErrorAlert message={error} />}
-        {success && <SuccessAlert />}
-        <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-            Project name
-          </label>
-          <div className="mt-1 sm:col-span-2 sm:mt-0">
-            <div className="flex max-w-lg rounded-md shadow-sm">
-              <input
-                type="text"
-                name="name"
-                id="name"
-                autoComplete="name"
-                value={project.name || ''}
-                className="block w-full min-w-0 flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                onChange={handleChange}
-                disabled={loading}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-          <label htmlFor="website_url" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-            Website url
-          </label>
-          <div className="mt-1 sm:col-span-2 sm:mt-0">
-            <div className="flex max-w-lg rounded-md shadow-sm">
-              <input
-                type="url"
-                name="website_url"
-                id="website_url"
-                autoComplete="website_url"
-                value={project.website_url || ''}
-                className="block w-full min-w-0 flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                onChange={handleChange}
-                disabled={loading}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-          <label htmlFor="github_url" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-            Github repository url
-          </label>
-          <div className="mt-1 sm:col-span-2 sm:mt-0">
-            <div className="flex max-w-lg rounded-md shadow-sm">
-              <input
-                type="url"
-                name="github_url"
-                id="github_url"
-                autoComplete="github_url"
-                value={project.github_url || ''}
-                className="block w-full min-w-0 flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                onChange={handleChange}
-                disabled={loading}
-              />
-            </div>
-          </div>
+    <form onSubmit={handleSubmit} className="divide-y divide-3Background">
+      {error && <ErrorAlert message={error} />}
+      {success && <SuccessAlert />}
+      <InputDecorators label="Project name">
+        <input
+          type="text"
+          name="name"
+          id="name"
+          autoComplete="name"
+          value={project.name || ''}
+          className="flex-grow text-secondaryText focus:text-mainText rounded-md border duration-200 border-3Background bg-secondaryBackground bg-opacity-25 py-2 leading-5 text-secondaryPrimary placeholder-gray-500 focus:placeholder-gray-600 outline-none focus:ring-1 text-sm"
+          onChange={handleChange}
+          disabled={loading}
+          placeholder="Project name"
+        />
+      </InputDecorators>
+      <div className="text-sm flex justify-center items-center p-4">
+        <span className="sm:w-1/4 w-3/4 mx-auto">Project ID</span>
+        <div className="sm:w-1/2 w-3/4 flex">
+          <p className="text-secondaryText">{project.id}</p>
         </div>
       </div>
-      <button
-        type="submit"
-        className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-sm font-medium text-white shadow-sm disabled:bg-indigo-400 hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2"
-        disabled={loading}
-      >
-        {loading && <SpinnerButton />}
-        Save
-      </button>
+      <div className="text-sm flex justify-center items-center p-4">
+        <span className="sm:w-1/4 w-3/4 mx-auto">Number of ratings</span>
+        <div className="sm:w-1/2 w-3/4 flex">
+          <p className="text-secondaryText">{project.ratings.length}</p>
+        </div>
+      </div>
+      <div className="text-sm flex justify-center items-center p-4">
+        <span className="sm:w-1/4 w-3/4 mx-auto">Date created</span>
+        <div className="sm:w-1/2 w-3/4 flex">
+          <p className="text-secondaryText">{dayjs(project.createdAt).format('YYYY-MM-DD')}</p>
+        </div>
+      </div>
+      <div className="text-sm flex justify-center items-center p-4">
+        <span className="sm:w-1/4 w-3/4 mx-auto">Last modified</span>
+        <div className="sm:w-1/2 w-3/4 flex">
+          <p className="text-secondaryText">{dayjs(project.updatedAt).format('YYYY-MM-DD')}</p>
+        </div>
+      </div>
+      <InputDecorators label="Website link">
+        <input
+          type="url"
+          name="website_url"
+          id="website_url"
+          autoComplete="website_url"
+          value={project.website_url || ''}
+          className="flex-grow text-secondaryText focus:text-mainText rounded-md duration-200 border border-3Background bg-secondaryBackground bg-opacity-25 py-2 leading-5 text-secondaryPrimary placeholder-gray-500 focus:placeholder-gray-600 outline-none focus:ring-1 text-sm"
+          onChange={handleChange}
+          disabled={loading}
+          placeholder="Website url"
+        />
+      </InputDecorators>
+      <InputDecorators label="Github link">
+        <input
+          type="url"
+          name="github_url"
+          id="github_url"
+          autoComplete="github_url"
+          value={project.github_url || ''}
+          className="flex-grow text-secondaryText focus:text-mainText rounded-md border duration-200 border-3Background bg-secondaryBackground bg-opacity-25 py-2 leading-5 text-secondaryPrimary placeholder-gray-500 focus:placeholder-gray-600 outline-none focus:ring-1 text-sm"
+          onChange={handleChange}
+          disabled={loading}
+          placeholder="Github url"
+        />
+      </InputDecorators>
+      <div className="border-t border-3Background flex justify-center py-4">
+        <button
+          type="submit"
+          className="duration-200 mx-auto inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm disabled:bg-indigo-400 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          disabled={loading}
+        >
+          {loading && <SpinnerButton />}
+          Save
+        </button>
+      </div>
     </form>
   );
 };

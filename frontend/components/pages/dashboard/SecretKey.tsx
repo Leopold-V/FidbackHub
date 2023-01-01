@@ -10,13 +10,13 @@ const SecretKey = ({ label, value }) => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center space-y-4">
-      <span className="font-semibold">{label}:</span>
-      <div className="flex items-center">
-        <div className="font-medium rounded text-gray-700 focus:outline-none focus:bg-white w-60 overflow-hidden overflow-ellipsis">
-          {value}
+    <div className="text-sm flex justify-center items-center space-x-4">
+      <span className="sm:w-1/4 w-3/4 mx-auto p-4">{label}</span>
+      <div className="flex items-center sm:w-1/2 w-3/4">
+        <div className="rounded text-secondaryText focus:outline-none">
+          <pre className="sm:w-32 lg:w-60 w-20 overflow-hidden overflow-ellipsis">{value}</pre>
         </div>
-        <button onClick={copyToClipboard} className="px-2 py-1 text-gray-600 hover:text-gray-800">
+        <button onClick={copyToClipboard} className="px-2 py-1 text-secondaryText hover:text-main duration-200">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -32,7 +32,7 @@ const SecretKey = ({ label, value }) => {
             />
           </svg>
         </button>
-        {copied && <span className="ml-2 text-gray-600">Copied!</span>}
+        {copied && <span className="ml-2 text-secondaryText">Copied!</span>}
       </div>
     </div>
   );

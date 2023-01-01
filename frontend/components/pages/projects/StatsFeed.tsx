@@ -1,5 +1,4 @@
 import React from 'react';
-import { ratingType } from 'types/index';
 import { Card } from 'components/common/Card';
 
 export const StatsFeed = ({
