@@ -1,42 +1,13 @@
 import { Card } from 'components/common/Card';
-import { ratingType } from 'types/index';
+import { feedbackType } from 'types/index';
 
-export const InfoSection = ({ ratings }: { ratings: ratingType[] }) => {
-  const avgRating =
-    ratings.reduce((a, b) => {
-      return (a += b.average);
-    }, 0) / ratings.length;
-  const avgDesign =
-    ratings.reduce((a, b) => {
-      return (a += b.design);
-    }, 0) / ratings.length;
-  const avgSpeed =
-    ratings.reduce((a, b) => {
-      return (a += b.speed);
-    }, 0) / ratings.length;
-  const avgResponsive =
-    ratings.reduce((a, b) => {
-      return (a += b.responsive);
-    }, 0) / ratings.length;
-  const bestAvg = Math.max(avgDesign, avgSpeed, avgResponsive);
+export const InfoSection = ({ feedbacks }: { feedbacks: feedbackType[] }) => {
 
-  const bestCategory = () => {
-    switch (bestAvg) {
-      case avgDesign:
-        return `Design - ${avgDesign.toFixed(2)}`;
-      case avgSpeed:
-        return `Speed - ${avgSpeed.toFixed(2)}`;
-      case avgResponsive:
-        return `Responsive - ${avgResponsive.toFixed(2)}`;
-      default:
-        break;
-    }
-  };
-
+  //TODO: update stats with real values
   const stats = [
-    { name: 'Total ratings', stat: ratings.length },
-    { name: 'Avg. rating', stat: ratings.length > 0 ? avgRating.toFixed(2) + '/10' : 0 },
-    { name: 'Best category', stat: bestCategory() },
+    { name: 'Total feedbacks', stat: feedbacks.length },
+    { name: 'Open', stat: feedbacks.length > 0 ? 2 : 0 },
+    { name: 'Total progress', stat: '78%'},
   ];
 
   return (

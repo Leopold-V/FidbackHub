@@ -1,11 +1,11 @@
 import React, { FormEvent, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import dayjs from 'dayjs';
 import { updateProject } from '../../../services/project.service';
+import { projectType } from 'types/index';
 import { ErrorAlert } from 'components/common/ErrorAlert';
 import { SuccessAlert } from 'components/common/SuccessAlert';
-import { projectType } from 'types/index';
 import { SpinnerButton } from 'components/common/Spinner';
-import dayjs from 'dayjs';
 import { InputDecorators } from 'components/common/InputDecorators';
 
 export const EditProjectForm = ({
@@ -64,9 +64,9 @@ export const EditProjectForm = ({
         </div>
       </div>
       <div className="text-sm flex justify-center items-center p-4">
-        <span className="sm:w-1/4 w-3/4 mx-auto">Number of ratings</span>
+        <span className="sm:w-1/4 w-3/4 mx-auto">Number of feedbacks</span>
         <div className="sm:w-1/2 w-3/4 flex">
-          <p className="text-secondaryText font-light">{project.ratings.length}</p>
+          <p className="text-secondaryText font-light">{project.feedbacks.length}</p>
         </div>
       </div>
       <div className="text-sm flex justify-center items-center p-4">

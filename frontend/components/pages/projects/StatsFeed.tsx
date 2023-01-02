@@ -2,20 +2,18 @@ import React from 'react';
 import { Card } from 'components/common/Card';
 
 export const StatsFeed = ({
-  ratingsNumber,
-  maxRatedProject,
-  avgValues,
+  feedbackNumber,
+  maxFeedbackProject,
 }: {
-  ratingsNumber: number;
-  maxRatedProject: { name: string; number: number };
-  avgValues: any[];
+  feedbackNumber: number;
+  maxFeedbackProject: { name: string; number: number };
 }) => {
   return (
     <div className="pr-4 sm:pr-6 lg:flex-shrink-0 lg:pr-8 xl:pr-0">
       <div className="pl-6 lg:w-80">
         <FeedHeader />
         <div className="py-4">
-          <StatsList ratingsNumber={ratingsNumber} maxRatedProject={maxRatedProject} avgValues={avgValues} />
+          <StatsList feedbackNumber={feedbackNumber} maxFeedbackProject={maxFeedbackProject} />
         </div>
       </div>
     </div>
@@ -23,32 +21,24 @@ export const StatsFeed = ({
 };
 
 const StatsList = ({
-  ratingsNumber,
-  maxRatedProject,
-  avgValues,
+  feedbackNumber,
+  maxFeedbackProject,
 }: {
-  ratingsNumber: number;
-  maxRatedProject: { name: string; number: number };
-  avgValues: any[];
+  feedbackNumber: number;
+  maxFeedbackProject: { name: string; number: number };
 }) => {
   return (
     <div className="space-y-4 secondaryText">
       <Card>
         <dt className="truncate text-sm font-medium text-secondaryText">Total ratings:</dt>
-        <dd className="mt-1 font-semibold tracking-tight ">{ratingsNumber}</dd>
+        <dd className="mt-1 font-semibold tracking-tight ">{feedbackNumber}</dd>
       </Card>
-      <Card>
-        <dt className="truncate text-sm font-medium text-secondaryText">Most rated project</dt>
+      {feedbackNumber > 0 && (<Card>
+        <dt className="truncate text-sm font-medium text-secondaryText">Most popular project</dt>
         <dd className="mt-1 font-semibold tracking-tight">
-          {maxRatedProject.name}: {maxRatedProject.number}
+          {maxFeedbackProject.name}: {maxFeedbackProject.number}
         </dd>
-      </Card>
-      <Card>
-        <dt className="truncate text-sm font-medium text-secondaryText">Best rated project</dt>
-        <dd className="mt-1 font-semibold tracking-tight">
-          {avgValues.sort((a, b) => b.avg - a.avg)[0].name}: {avgValues.sort((a, b) => b.avg - a.avg)[0].avg.toFixed(2)}
-        </dd>
-      </Card>
+      </Card>)}
     </div>
   );
 };

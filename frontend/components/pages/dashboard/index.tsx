@@ -1,10 +1,9 @@
 import React from 'react';
 import { useFetch } from '../../../hooks/useFetch';
 import { useSession } from 'next-auth/react';
-import { BarChartSection } from './BarChartSection';
-import { AverageChartSection } from './AverageChartSection';
+import { ProgressLineChartSection } from './ProgressLineChartSection';
 import { InfoSection } from './InfosSection';
-import { ListRatingsSection } from './ListRatingsSection';
+import { ListFeedbacksSection } from './ListFeedbacksSection';
 import { Spinner } from 'components/common/Spinner';
 import { PageHeader } from 'components/common/PageHeader';
 
@@ -38,11 +37,10 @@ const DashboardPageComponent = ({ params }) => {
       <PageHeader label="Dashboard" />
       <h1 className="mt-2 text-2xl font-semibold">{projectData.data.attributes.name}</h1>
       {projectData.data && (
-        <div className="space-y-8">
-          <InfoSection ratings={projectData.data.attributes.ratings} />
-          <AverageChartSection ratings={projectData.data.attributes.ratings} />
-          <BarChartSection ratings={projectData.data.attributes.ratings} />
-          <ListRatingsSection ratings={projectData.data.attributes.ratings} />
+        <div className="space-y-8 md:w-2/3">
+          <InfoSection feedbacks={projectData.data.attributes.feedbacks} />
+          <ProgressLineChartSection feedbacks={projectData.data.attributes.feedbacks} />
+          <ListFeedbacksSection feedbacks={projectData.data.attributes.feedbacks} />
         </div>
       )}
     </div>

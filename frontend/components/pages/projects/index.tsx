@@ -14,43 +14,21 @@ const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType;
   };
 
   const [projects, setprojects] = useState(userProjects);
-  const [allratings, setallratings] = useState([]);
-  const [maxRatedProject, setmaxRatedProject] = useState({ name: '', number: 0 });
-  const [avgValues, setavgValues] = useState([]);
+  const [allfeedbacks, setallfeedbacks] = useState([]);
+  const [maxFeedbackProject, setmaxFeedbackProject] = useState({ name: '', number: 0 });
 
   useEffect(() => {
-    let _allratings = [];
-    let maxRatedProject = { name: '', number: 0 };
-    let listAvgValues = [];
+    let _allfeedbacks = [];
+    let _maxFeedbackProject = { name: '', number: 0 };
     userProjects.forEach((project) => {
-      if (project.ratings.length > maxRatedProject.number) {
-        maxRatedProject.number = project.ratings.length;
-        maxRatedProject.name = project.name;
+      if (project.feedbacks.length > maxFeedbackProject.number) {
+        _maxFeedbackProject.number = project.feedbacks.length;
+        _maxFeedbackProject.name = project.name;
       }
-      _allratings = _allratings.concat(project.ratings);
-      let projectAvg = 0;
-      let projectAvgSpeed = 0;
-      let projectAvgDesign = 0;
-      let projectAvgResponsive = 0;
-      project.ratings.forEach((rating, i) => {
-        projectAvg += rating.average;
-        projectAvgSpeed += rating.speed;
-        projectAvgDesign += rating.design;
-        projectAvgResponsive += rating.responsive;
-      });
-      if (project.ratings.length > 0) {
-        listAvgValues.push({
-          name: project.name,
-          avg: projectAvg / project.ratings.length,
-          speed: projectAvgSpeed / project.ratings.length,
-          design: projectAvgDesign / project.ratings.length,
-          responsive: projectAvgResponsive / project.ratings.length,
-        });
-      }
+      _allfeedbacks = _allfeedbacks.concat(project.feedbacks);
     });
-    setavgValues(listAvgValues);
-    setmaxRatedProject(maxRatedProject);
-    setallratings(_allratings);
+    setmaxFeedbackProject(_maxFeedbackProject);
+    setallfeedbacks(_allfeedbacks);
   }, []);
 
   return (
@@ -61,9 +39,7 @@ const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType;
           <ProfileColumn profile={profile} projectsNumber={projects.length} />
           <ProjectsColumn projects={projects} setprojects={setprojects} />
         </div>
-        {allratings.length > 0 && (
-          <StatsFeed ratingsNumber={allratings.length} maxRatedProject={maxRatedProject} avgValues={avgValues} />
-        )}
+        <StatsFeed feedbackNumber={allfeedbacks.length} maxFeedbackProject={maxFeedbackProject} />
       </div>
     </div>
   );

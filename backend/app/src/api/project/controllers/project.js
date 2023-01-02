@@ -41,7 +41,7 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
     try {
       const response = await strapi.db.query('api::project.project').findOne({
         where: {id: ctx.params.id, user: ctx.state.user.id},
-        populate: { user: true, ratings: true },
+        populate: { user: true, feedbacks: true },
       });
       if (!response) {
         // If project is from another user, we answer with the same message as an unexisting url path to not guess another user project id.
@@ -71,12 +71,12 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
   },
   async delete(ctx) {
     try {
-      const rep = await strapi.db.query('api::rating.rating').findMany({
+      const rep = await strapi.db.query('api::feedback.feedback').findMany({
         where: {project: ctx.params.id},
         populate: { project: true }
       });
       rep.forEach(async (ele) => {
-        await strapi.db.query('api::rating.rating').delete({
+        await strapi.db.query('api::feedback.feedback').delete({
           where: {id: ele.id},
         })
       })
@@ -94,7 +94,7 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
     try {
       const response = await strapi.db.query('api::project.project').findMany({
         where: { user: ctx.state.user.id},
-        populate: { ratings: true },
+        populate: { feedbacks: true },
       });
       return {data: {id: response.id, attributes: {...response}}, meta: {}};
     } catch (error) {

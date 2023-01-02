@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * rating router
+ * feedback router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
-const defaultRouter = createCoreRouter("api::rating.rating");
+const defaultRouter = createCoreRouter("api::feedback.feedback");
 
 const customRouter = (innerRouter, extraRoutes = []) => {
   let routes;
@@ -22,8 +22,8 @@ const customRouter = (innerRouter, extraRoutes = []) => {
 const myExtraRoutes = [
   {
     method: "GET",
-    path: "/verify-ratings",
-    handler: "api::rating.rating.verifyRating",
+    path: "/verify-feedbacks",
+    handler: "api::feedback.feedback.verifyFeedback",
   }
 ];
 

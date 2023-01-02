@@ -37,18 +37,18 @@
       "unique": false,
       "maxLength": 128
     },
-    "ratings": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::rating.rating",
-      "mappedBy": "project"
-    },
     "api_key": {
       "type": "string",
       "required": true,
       "unique": true,
       "maxLength": 256,
       "minLength": 64
+    },
+    "feedbacks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::feedback.feedback",
+      "mappedBy": "project"
     }
   }
 }

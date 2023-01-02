@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * rating service
+ * feedback service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::rating.rating');
+module.exports = createCoreService('api::feedback.feedback');

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useFetch } from '../../../hooks/useFetch';
 import { useSession } from 'next-auth/react';
-import { EditProjectForm } from './EditProjectForm';
-import { Card } from 'components/common/Card';
-import SecretKey from '../dashboard/SecretKey';
+import { useFetch } from '../../../hooks/useFetch';
 import { Spinner } from 'components/common/Spinner';
 import { PageHeader } from 'components/common/PageHeader';
+import { EditProjectForm } from './EditProjectForm';
+import SecretKey from './SecretKey';
 import { DangerZone } from './DangerZone';
 
 const EditProjectPageComponent = ({ params }) => {
@@ -19,7 +18,7 @@ const EditProjectPageComponent = ({ params }) => {
     github_url: '',
     website_url: '',
     api_key: '',
-    ratings: [],
+    feedbacks: [],
   });
 
   const {

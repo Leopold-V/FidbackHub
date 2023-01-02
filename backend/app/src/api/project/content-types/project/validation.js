@@ -25,7 +25,7 @@ const schemaUpdate = Joi.object({
   createdAt: Joi.string(),
   updatedAt: Joi.string(),
   user: Joi.any(),
-  ratings: Joi.any()
+  feedbacks: Joi.any()
 });
 
 module.exports = { schemaCreate, schemaUpdate };

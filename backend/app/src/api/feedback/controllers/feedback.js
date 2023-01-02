@@ -1,14 +1,14 @@
 "use strict";
 /**
- * rating controller
+ * feedback controller
  */
 const dayjs = require('dayjs');
 const utils = require("@strapi/utils");
 const { ApplicationError } = utils.errors;
 const { createCoreController } = require("@strapi/strapi").factories;
-const { schemaCreate } = require('../content-types/rating/validation');
+const { schemaCreate } = require('../content-types/feedback/validation');
 
-module.exports = createCoreController("api::rating.rating", ({ strapi }) => ({
+module.exports = createCoreController("api::feedback.feedback", ({ strapi }) => ({
   async create(ctx) {
     const { error } = schemaCreate.validate(ctx.request.body.data);
     if (error) {
@@ -17,12 +17,12 @@ module.exports = createCoreController("api::rating.rating", ({ strapi }) => ({
     try {
       const project = await strapi.db.query("api::project.project").findOne({
         where: { api_key: ctx.request.body.data.projectToken },
-        populate: { ratings: true },
+        populate: { feedbacks: true },
       });
       if (!project) {
         throw new Error("No project found with this api key.");
       }
-      const response = await strapi.db.query("api::rating.rating").create({
+      const response = await strapi.db.query("api::feedback.feedback").create({
         data: { ...ctx.request.body.data, project: project.id },
         populate: { project: true },
       });
@@ -41,7 +41,7 @@ module.exports = createCoreController("api::rating.rating", ({ strapi }) => ({
         where: { user: ctx.state.user.id },
         populate: { user: true },
       });
-      const response = await strapi.db.query("api::rating.rating").findMany({
+      const response = await strapi.db.query("api::feedback.feedback").findMany({
         where: {
           project: {
             id: {
@@ -60,9 +60,9 @@ module.exports = createCoreController("api::rating.rating", ({ strapi }) => ({
       throw new ApplicationError();
     }
   },
-  async verifyRating(ctx) {
+  async verifyFeedback(ctx) {
     try {
-      const response = await strapi.db.query("api::rating.rating").findMany({
+      const response = await strapi.db.query("api::feedback.feedback").findMany({
         where: {
           user_ipv4: ctx.request.ip,
           project: {

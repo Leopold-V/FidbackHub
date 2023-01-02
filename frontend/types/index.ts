@@ -27,7 +27,7 @@ export type projectType = {
   publishedAt: string;
   github_url: string;
   website_url: string;
-  ratings?: ratingType[];
+  feedbacks?: feedbackType[];
   api_key?: string;
   error?: {
     status: number;
@@ -39,12 +39,13 @@ export type projectType = {
   };
 };
 
-export type ratingType = {
+export type feedbackType = {
   id: number;
-  design: number;
-  speed: number;
-  responsive: number;
-  average: number;
+  title: string;
+  description: string;
+  author_email: string;
+  status: feedbackStatusType;
+  screenshot?: string;
   user_ipv4?: string;
   createdAt?: Date;
   error?: {
@@ -56,8 +57,6 @@ export type ratingType = {
     };
   };
 };
-
-export type ratingCategories = 'design' | 'speed' | 'responsive';
 
 export type strapiFetchErrorType = {
   data: null | any;
@@ -75,3 +74,8 @@ type strapiErrorDetailType = {
   path: string[];
   message: string;
 };
+
+/** 
+ * The current **state** of a feedback 
+ */
+export type feedbackStatusType = "New" | "In progress" | "Confirmed" | "Rejected"

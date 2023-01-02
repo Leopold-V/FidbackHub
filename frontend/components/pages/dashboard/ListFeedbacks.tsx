@@ -1,9 +1,9 @@
 import React, { MouseEvent, useEffect, useState } from 'react';
 import { Pagination } from 'components/common/Pagination';
-import { ratingType } from 'types/index';
-import { TableRatingRow } from './TableRatingRow';
+import { feedbackType } from 'types/index';
+import { TableFeedbackRow } from './TableFeedbackRow';
 
-function ListRatingTableHeader(props) {
+function ListFeedbacksTableHeader(props) {
   return (
     <thead className="bg-secondaryBackground">
       <tr className="divide-x divide-3Background">
@@ -11,7 +11,7 @@ function ListRatingTableHeader(props) {
           <div className="flex justify-between items-center">
             <span className="text-sm text-secondaryText">Date</span>
             <div className="flex flex-col">
-              <button className="ml-2" onClick={props.sortRatingsDescending} data-category="createdAt">
+              <button className="ml-2" onClick={props.sortFeedbacksDescending} data-category="createdAt">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -23,7 +23,7 @@ function ListRatingTableHeader(props) {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
                 </svg>
               </button>
-              <button className="ml-2" onClick={props.sortRatingsAscending} data-category="createdAt">
+              <button className="ml-2" onClick={props.sortFeedbacksAscending} data-category="createdAt">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -40,9 +40,9 @@ function ListRatingTableHeader(props) {
         </th>
         <th scope="col" className="p-2">
           <div className="flex justify-between items-center">
-            <span className="text-sm text-secondaryText">Avg.</span>
+            <span className="text-sm text-secondaryText">Title</span>
             <div className="flex flex-col">
-              <button className="ml-2" onClick={props.sortRatingsDescending} data-category="avg">
+              <button className="ml-2" onClick={props.sortFeedbacksDescending} data-category="title">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -54,7 +54,7 @@ function ListRatingTableHeader(props) {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
                 </svg>
               </button>
-              <button className="ml-2" onClick={props.sortRatingsAscending} data-category="avg">
+              <button className="ml-2" onClick={props.sortFeedbacksAscending} data-category="title">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -71,9 +71,9 @@ function ListRatingTableHeader(props) {
         </th>
         <th scope="col" className="p-2">
           <div className="flex justify-between items-center">
-            <span className="text-sm text-secondaryText">Design</span>
+            <span className="text-sm text-secondaryText">Status</span>
             <div className="flex flex-col">
-              <button className="ml-2" onClick={props.sortRatingsDescending} data-category="design">
+              <button className="ml-2" onClick={props.sortFeedbacksDescending} data-category="status">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -85,7 +85,7 @@ function ListRatingTableHeader(props) {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
                 </svg>
               </button>
-              <button className="ml-2" onClick={props.sortRatingsAscending} data-category="design">
+              <button className="ml-2" onClick={props.sortFeedbacksAscending} data-category="status">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -102,9 +102,9 @@ function ListRatingTableHeader(props) {
         </th>
         <th scope="col" className="p-2">
           <div className="flex justify-between items-center">
-            <span className="text-sm text-secondaryText">Speed</span>
+            <span className="text-sm text-secondaryText">Author email</span>
             <div className="flex flex-col">
-              <button className="ml-2" onClick={props.sortRatingsDescending} data-category="speed">
+              <button className="ml-2" onClick={props.sortFeedbacksDescending} data-category="author_email">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -116,38 +116,7 @@ function ListRatingTableHeader(props) {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
                 </svg>
               </button>
-              <button className="ml-2" onClick={props.sortRatingsAscending} data-category="speed">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </th>
-        <th scope="col" className="p-2">
-          <div className="flex justify-between items-center">
-            <span className="text-sm text-secondaryText">Resp.</span>
-            <div className="flex flex-col">
-              <button className="ml-2" onClick={props.sortRatingsDescending} data-category="responsive">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-                </svg>
-              </button>
-              <button className="ml-2" onClick={props.sortRatingsAscending} data-category="responsive">
+              <button className="ml-2" onClick={props.sortFeedbacksAscending} data-category="author_email">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -167,31 +136,31 @@ function ListRatingTableHeader(props) {
   );
 }
 
-export const ListRatings = ({
-  ratings,
-  sortRatingsAscending,
-  sortRatingsDescending,
+export const ListFeedbacks = ({
+  feedbacks,
+  sortFeedbacksAscending,
+  sortFeedbacksDescending,
 }: {
-  ratings: ratingType[];
-  sortRatingsAscending: (e: MouseEvent<HTMLButtonElement>) => void;
-  sortRatingsDescending: (e: MouseEvent<HTMLButtonElement>) => void;
+  feedbacks: feedbackType[];
+  sortFeedbacksAscending: (e: MouseEvent<HTMLButtonElement>) => void;
+  sortFeedbacksDescending: (e: MouseEvent<HTMLButtonElement>) => void;
 }) => {
   const pageLength = 10;
-  const pageNumber = Math.ceil(ratings.length / pageLength);
+  const pageNumber = Math.ceil(feedbacks.length / pageLength);
 
-  const [ratingsToDisplay, setRatingsToDisplay] = useState(ratings.slice(0, pageLength));
+  const [feedbacksToDisplay, setFeedbacksToDisplay] = useState(feedbacks.slice(0, pageLength));
   const [pageIndex, setpageIndex] = useState(0);
-  const [currentPageFirstRatingsIndex, setcurrentPageFirstRatingsIndex] = useState(pageLength * pageIndex);
+  const [currentPageFirstFeedbacksIndex, setcurrentPageFirstFeedbacksIndex] = useState(pageLength * pageIndex);
 
   useEffect(() => {
-    setcurrentPageFirstRatingsIndex(pageLength * pageIndex);
+    setcurrentPageFirstFeedbacksIndex(pageLength * pageIndex);
   }, [pageIndex]);
 
   useEffect(() => {
-    setRatingsToDisplay(
-      ratings.slice(currentPageFirstRatingsIndex * pageIndex, currentPageFirstRatingsIndex * pageIndex + pageLength),
+    setFeedbacksToDisplay(
+      feedbacks.slice(currentPageFirstFeedbacksIndex * pageIndex, currentPageFirstFeedbacksIndex * pageIndex + pageLength),
     );
-  }, [currentPageFirstRatingsIndex, ratings]);
+  }, [currentPageFirstFeedbacksIndex, feedbacks]);
 
   return (
     <div className="sm:px-6">
@@ -200,13 +169,13 @@ export const ListRatings = ({
           <div className="inline-block min-w-full align-middle">
             <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg border border-3Background">
               <table className="min-w-full divide-y divide-3Background">
-                <ListRatingTableHeader
-                  sortRatingsAscending={sortRatingsAscending}
-                  sortRatingsDescending={sortRatingsDescending}
+                <ListFeedbacksTableHeader
+                  sortFeedbacksAscending={sortFeedbacksAscending}
+                  sortFeedbacksDescending={sortFeedbacksDescending}
                 />
                 <tbody className="divide-y divide-3Background bg-mainBackground">
-                  {ratingsToDisplay.map((rating) => (
-                    <TableRatingRow key={rating.id} rating={rating} />
+                  {feedbacksToDisplay.map((feedback) => (
+                    <TableFeedbackRow key={feedback.id} feedback={feedback} />
                   ))}
                 </tbody>
               </table>
@@ -214,8 +183,8 @@ export const ListRatings = ({
                 pageIndex={pageIndex}
                 setpageIndex={setpageIndex}
                 pageNumber={pageNumber}
-                totalratings={ratings.length}
-                nbCurrentRatingsDisplay={ratingsToDisplay.length}
+                totalratings={feedbacks.length}
+                nbCurrentFeedbackDisplay={feedbacksToDisplay.length}
                 pageLength={pageLength}
               />
             </div>
