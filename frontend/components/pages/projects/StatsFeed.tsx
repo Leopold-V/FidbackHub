@@ -30,15 +30,17 @@ const StatsList = ({
   return (
     <div className="space-y-4 secondaryText">
       <Card>
-        <dt className="truncate text-sm font-medium text-secondaryText">Total ratings:</dt>
+        <dt className="truncate text-sm font-medium text-secondaryText">Number of feedbacks:</dt>
         <dd className="mt-1 font-semibold tracking-tight ">{feedbackNumber}</dd>
       </Card>
-      {feedbackNumber > 0 && (<Card>
-        <dt className="truncate text-sm font-medium text-secondaryText">Most popular project</dt>
-        <dd className="mt-1 font-semibold tracking-tight">
-          {maxFeedbackProject.name}: {maxFeedbackProject.number}
-        </dd>
-      </Card>)}
+      {feedbackNumber > 0 && (
+        <Card>
+          <dt className="truncate text-sm font-medium text-secondaryText">Most popular project</dt>
+          <dd className="mt-1 font-semibold tracking-tight">
+            {maxFeedbackProject.name}: {maxFeedbackProject.number}
+          </dd>
+        </Card>
+      )}
     </div>
   );
 };

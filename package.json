@@ -7,27 +7,14 @@
     "start:frontend": "cd frontend && yarn start",
     "release": "release-it",
     "format:check": "prettier -c \"frontend/**/*.{js,ts,jsx,tsx}\"",
-    "format:fix": "prettier -w \"frontend/**/*.{js,ts,jsx,tsx}\""
+    "format:fix": "prettier -w \"frontend/**/*.{js,ts,jsx,tsx}\"",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^5.1.0",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
-    "prettier": "^2.7.1",
-    "release-it": "^15.4.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,json,css,md,tsx,ts}": [
-      "prettier --write"
-    ]
+    "prettier": "^2.7.1"
   },
   "dependencies": {
-    "@next-auth/typeorm-legacy-adapter": "^2.0.1",
-    "dayjs": "^1.11.7"
+    "@next-auth/typeorm-legacy-adapter": "^2.0.1"
   }
 }

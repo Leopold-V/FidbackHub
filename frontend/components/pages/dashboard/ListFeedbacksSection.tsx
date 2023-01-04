@@ -9,7 +9,7 @@ export const ListFeedbacksSection = ({ feedbacks }: { feedbacks: feedbackType[] 
   const sortFeedbacksAscending = (e: MouseEvent<HTMLButtonElement>) => {
     const category = e.currentTarget.dataset.category;
     let newfeedbacks = [];
-    if (category === "createdAt") {
+    if (category === 'createdAt') {
       newfeedbacks = [...feedbacks].sort((a, b) => new Date(b[category]).getTime() - new Date(a[category]).getTime());
     } else {
       newfeedbacks = [...feedbacks].sort((a, b) => b[category].localeCompare(a[category]));
@@ -20,7 +20,7 @@ export const ListFeedbacksSection = ({ feedbacks }: { feedbacks: feedbackType[] 
   const sortFeedbacksDescending = (e: MouseEvent<HTMLButtonElement>) => {
     const category = e.currentTarget.dataset.category;
     let newfeedbacks = [];
-    if (category === "createdAt") {
+    if (category === 'createdAt') {
       newfeedbacks = [...feedbacks].sort((a, b) => new Date(a[category]).getTime() - new Date(b[category]).getTime());
     } else {
       newfeedbacks = [...feedbacks].sort((a, b) => a[category].localeCompare(b[category]));

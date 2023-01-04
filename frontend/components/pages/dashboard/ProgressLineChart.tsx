@@ -90,9 +90,6 @@ export const ProgressLineChart = ({
           formatter={(value) => <span className="text-secondaryText text-sm">{value}</span>}
         />
         <Line type="monotone" dataKey="number" stroke="#6366f1" dot={null} />
-        <Line type="monotone" dataKey="design" stroke="#df5c3b" dot={null} />
-        <Line type="monotone" dataKey="speed" stroke="#5dbb7c" dot={null} />
-        <Line type="monotone" dataKey="responsive" stroke="#201eaa" dot={null} />
       </LineChart>
     </ResponsiveContainer>
   );

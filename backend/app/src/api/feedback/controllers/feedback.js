@@ -6,7 +6,7 @@ const dayjs = require('dayjs');
 const utils = require("@strapi/utils");
 const { ApplicationError } = utils.errors;
 const { createCoreController } = require("@strapi/strapi").factories;
-const { schemaCreate } = require('../content-types/feedback/validation');
+const { schemaCreate, schemaUpdate } = require('../content-types/feedback/validation');
 
 module.exports = createCoreController("api::feedback.feedback", ({ strapi }) => ({
   async create(ctx) {
@@ -30,6 +30,33 @@ module.exports = createCoreController("api::feedback.feedback", ({ strapi }) => 
         data: { id: response.id, attributes: { ...response } },
         meta: {},
       };
+    } catch (error) {
+      console.log(error.message);
+      throw new ApplicationError(error.message);
+    }
+  },
+  async findOne(ctx) {
+    try {
+      const project = await strapi.db.query("api::project.project").findOne({
+        where: {
+          feedbacks: {
+            id: {
+              $contains: ctx.params.id
+            }
+          },
+          user: ctx.state.user.id
+        },
+        populate: { feedbacks: true, user: true },
+      });
+      if (!project) {
+        // If project is from another user, we answer with the same message as an unexisting url path to not guess other users feedback id.
+        return ctx.badRequest(`Error 404, ressource not found`);
+      }
+      const response = await strapi.db.query('api::feedback.feedback').findOne({
+        where: {id: ctx.params.id },
+        populate: { project: true },
+      });
+      return {data: {id: response.id, attributes: {...response}}, meta: {}};
     } catch (error) {
       console.log(error.message);
       throw new ApplicationError(error.message);
@@ -60,22 +87,35 @@ module.exports = createCoreController("api::feedback.feedback", ({ strapi }) => 
       throw new ApplicationError();
     }
   },
-  async verifyFeedback(ctx) {
-    try {
-      const response = await strapi.db.query("api::feedback.feedback").findMany({
-        where: {
-          user_ipv4: ctx.request.ip,
-          project: {
-            api_key: ctx.query.key,
-          }
-        },
-        populate: { project: true },
-      });
-      const reponseFilteredDate = response.filter((ele) => dayjs(ele.createdAt).format("YYYY-MM-DD").toString() === dayjs(new Date()).format("YYYY-MM-DD").toString());
-      return reponseFilteredDate.length > 0;
-    } catch (error) {
-      console.log(error);
-      throw new ApplicationError();
+  async update(ctx) {
+    const { error } = schemaUpdate.validate(ctx.request.body.data);
+    if (error) {
+      return ctx.badRequest(error.details[0].message, {...error.details[0]})
     }
-  },
+    try {
+      const project = await strapi.db.query("api::project.project").findOne({
+        where: {
+          feedbacks: {
+            id: {
+              $contains: ctx.params.id
+            },
+            status: "Open"
+          },
+          user: ctx.state.user.id
+        },
+        populate: { feedbacks: true, user: true },
+      });
+      if (!project) {
+        // If project is from another user, we answer with the same message as an unexisting url path to not guess other users feedback id.
+        throw new ApplicationError(`Error 404, ressource not found`);
+      }
+      const response = await strapi.db.query('api::feedback.feedback').update({
+        where: {id: ctx.params.id },
+        data: ctx.request.body.data,
+      });
+      return {data: {id: response.id, attributes: {...response}}, meta: {}};
+    } catch (error) {
+      throw new ApplicationError(error.message);
+    }
+  }
 }));

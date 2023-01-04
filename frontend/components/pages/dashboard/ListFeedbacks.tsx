@@ -71,9 +71,9 @@ function ListFeedbacksTableHeader(props) {
         </th>
         <th scope="col" className="p-2">
           <div className="flex justify-between items-center">
-            <span className="text-sm text-secondaryText">Status</span>
+            <span className="text-sm text-secondaryText">State</span>
             <div className="flex flex-col">
-              <button className="ml-2" onClick={props.sortFeedbacksDescending} data-category="status">
+              <button className="ml-2" onClick={props.sortFeedbacksDescending} data-category="state">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -85,7 +85,7 @@ function ListFeedbacksTableHeader(props) {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
                 </svg>
               </button>
-              <button className="ml-2" onClick={props.sortFeedbacksAscending} data-category="status">
+              <button className="ml-2" onClick={props.sortFeedbacksAscending} data-category="state">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -158,7 +158,10 @@ export const ListFeedbacks = ({
 
   useEffect(() => {
     setFeedbacksToDisplay(
-      feedbacks.slice(currentPageFirstFeedbacksIndex * pageIndex, currentPageFirstFeedbacksIndex * pageIndex + pageLength),
+      feedbacks.slice(
+        currentPageFirstFeedbacksIndex * pageIndex,
+        currentPageFirstFeedbacksIndex * pageIndex + pageLength,
+      ),
     );
   }, [currentPageFirstFeedbacksIndex, feedbacks]);
 

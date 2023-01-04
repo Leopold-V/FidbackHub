@@ -2,12 +2,18 @@ import { Card } from 'components/common/Card';
 import { feedbackType } from 'types/index';
 
 export const InfoSection = ({ feedbacks }: { feedbacks: feedbackType[] }) => {
+  const numberOfOpenFeedback = feedbacks.filter(
+    (ele: feedbackType) => ele.state !== 'Rejected' && ele.state !== 'Confirmed',
+  ).length;
+  const confirmedFeedback = feedbacks.filter((ele: feedbackType) => ele.state === 'Confirmed').length;
+  const rejectedFeedback = feedbacks.filter((ele: feedbackType) => ele.state === 'Rejected').length;
+  const totalProgress = confirmedFeedback > 0 ? (confirmedFeedback / (feedbacks.length - rejectedFeedback)) * 100 : 0;
 
   //TODO: update stats with real values
   const stats = [
     { name: 'Total feedbacks', stat: feedbacks.length },
-    { name: 'Open', stat: feedbacks.length > 0 ? 2 : 0 },
-    { name: 'Total progress', stat: '78%'},
+    { name: 'Open', stat: numberOfOpenFeedback },
+    { name: 'Total progress', stat: `${totalProgress.toFixed(2)}%` },
   ];
 
   return (

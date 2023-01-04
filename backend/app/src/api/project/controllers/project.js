@@ -44,8 +44,8 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
         populate: { user: true, feedbacks: true },
       });
       if (!response) {
-        // If project is from another user, we answer with the same message as an unexisting url path to not guess another user project id.
-        return ctx.badRequest(`Error 404, page not found`);
+        // If project is from another user, we answer with the same message as an unexisting url path to not guess another users project id.
+        return ctx.badRequest(`Error 404, ressource not found`);
       }
       return {data: {id: response.id, attributes: {...response}}, meta: {}};
     } catch (error) {
@@ -53,7 +53,6 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
     }
   },
   async update(ctx) {
-    console.log(ctx.request.body.data);
     const { error } = schemaUpdate.validate(ctx.request.body.data);
     if (error) {
       return ctx.badRequest(error.details[0].message, {...error.details[0]})

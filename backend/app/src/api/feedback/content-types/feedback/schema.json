@@ -37,7 +37,7 @@
         "images"
       ]
     },
-    "status": {
+    "state": {
       "type": "enumeration",
       "enum": [
         "New",
@@ -57,6 +57,13 @@
     "author_email": {
       "type": "email",
       "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "Open",
+        "Close"
+      ]
     }
   }
 }

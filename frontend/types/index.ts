@@ -45,11 +45,12 @@ export type feedbackType = {
   description: string;
   author_email: string;
   status: feedbackStatusType;
+  state: feedbackStateType;
   screenshot?: string;
   user_ipv4?: string;
   createdAt?: Date;
   error?: {
-    status: number;
+    state: number;
     name: string;
     message: string;
     details: {
@@ -75,7 +76,9 @@ type strapiErrorDetailType = {
   message: string;
 };
 
-/** 
- * The current **state** of a feedback 
+/**
+ * The current **state** of a feedback
  */
-export type feedbackStatusType = "New" | "In progress" | "Confirmed" | "Rejected"
+export type feedbackStatusType = 'Open' | 'Close';
+
+export type feedbackStateType = 'New' | 'In progress' | 'Confirmed' | 'Rejected';

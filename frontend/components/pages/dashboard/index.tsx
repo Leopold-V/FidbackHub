@@ -39,8 +39,8 @@ const DashboardPageComponent = ({ params }) => {
       {projectData.data && (
         <div className="space-y-8 md:w-2/3">
           <InfoSection feedbacks={projectData.data.attributes.feedbacks} />
-          <ProgressLineChartSection feedbacks={projectData.data.attributes.feedbacks} />
           <ListFeedbacksSection feedbacks={projectData.data.attributes.feedbacks} />
+          <ProgressLineChartSection feedbacks={projectData.data.attributes.feedbacks} />
         </div>
       )}
     </div>
