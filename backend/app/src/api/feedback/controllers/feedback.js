@@ -10,6 +10,7 @@ const { schemaCreate, schemaUpdate } = require('../content-types/feedback/valida
 
 module.exports = createCoreController("api::feedback.feedback", ({ strapi }) => ({
   async create(ctx) {
+    console.log(ctx.request.body);
     const { error } = schemaCreate.validate(ctx.request.body.data);
     if (error) {
       return ctx.badRequest(error.details[0].message, {...error.details[0]})

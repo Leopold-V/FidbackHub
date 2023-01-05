@@ -3,6 +3,7 @@ import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import Link from 'next/link';
 import { projectType } from 'types/index';
 import { ProjectItemDropdown } from './ProjectItemDropdown';
+import { PencilIcon } from '@heroicons/react/24/outline';
 
 export const ProjectItem = ({
   project,
@@ -42,8 +43,13 @@ export const ProjectItem = ({
             </h2>
           </div>
         </div>
-        <div className="flex flex-row space-x-3">
-          <ProjectItemDropdown projectId={project.id} />
+        <div className="flex flex-row items-center space-x-3">
+          <Link href={`/edit-project/${project.id}`}>
+            <a className="flex h-8 w-8 items-center justify-center rounded-full text-secondaryText hover:text-indigo-500 duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+              <PencilIcon className="h-5 w-5" aria-hidden="true" />
+              <span className="sr-only">Open</span>
+            </a>
+          </Link>
           <div className="sm:hidden">
             <a href={project.website_url}>
               <ChevronRightIcon

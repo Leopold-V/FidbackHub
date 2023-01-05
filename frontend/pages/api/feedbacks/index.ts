@@ -16,9 +16,10 @@ const createFeedback = async (req: NextApiRequest, res: NextApiResponse) => {
   const ipArr = ip.split(':');
   const ipv4 = ipArr[ipArr.length - 1];
   const feedback = req.body.feedback;
-  const data = await fetch(`http://localhost:1337/api/feedback`, {
+  console.log(feedback);
+  const data = await fetch(`http://localhost:1337/api/feedbacks`, {
     method: 'POST',
-    body: JSON.stringify({ data: { ...feedback, user_ipv4: ipv4 } }),
+    body: JSON.stringify({ data: { ...feedback, status: 'Open', state: 'New', user_ipv4: ipv4 } }),
     headers: {
       Authorization: 'Bearer ' + process.env.FEEDBACKS_API_TOKEN,
       Accept: 'application/json',
@@ -29,5 +30,5 @@ const createFeedback = async (req: NextApiRequest, res: NextApiResponse) => {
   if (json.error) {
     return { message: json.error.message };
   }
-  return { message: 'Thank you for the feedback!' };
+  return { message: 'Feedback succesfull!' };
 };

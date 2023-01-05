@@ -9,6 +9,7 @@ import { Spinner } from 'components/common/Spinner';
 import { SelectState } from './SelectState';
 import { ErrorAlert } from 'components/common/ErrorAlert';
 import { SuccessAlert } from 'components/common/SuccessAlert';
+import { Button, ButtonDelete } from 'components/common/Button';
 
 const FeedbackPage = ({ id }) => {
   const { data: session } = useSession();
@@ -125,24 +126,14 @@ const FeedbackPage = ({ id }) => {
             <p>{feedback.author_email}</p>
           </InputDecorators>
           <div className="border-t border-3Background flex flex-col sm:flex-row justify-center items-center py-4 items sm:space-x-4 spacex-x-0 sm:space-y-0  space-y-4">
-            {feedback.status === 'Open' ? (
+            {currentstatus === 'Open' ? (
               <>
-                <button
-                  type="button"
-                  className="duration-200 flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm disabled:bg-indigo-400 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  disabled={loadingUpdate}
-                  onClick={handleUpdateStateFeedback}
-                >
+                <Button disabled={loadingUpdate} onClick={handleUpdateStateFeedback}>
                   Save
-                </button>
-                <button
-                  type="submit"
-                  className="duration-200 flex items-center justify-center rounded border border-red-600 px-4 py-2 text-sm font-medium text-red-500 hover:text-white shadow-sm disabled:bg-red-400 hover:bg-red-500 outline-none focus:ring-2 focus:ring-red-500"
-                  onClick={handleCloseFeedback}
-                  disabled={loadingUpdate}
-                >
+                </Button>
+                <ButtonDelete type="submit" onClick={handleCloseFeedback} disabled={loadingUpdate}>
                   Close feedback
-                </button>
+                </ButtonDelete>
               </>
             ) : (
               <p>This fidback is close.</p>
