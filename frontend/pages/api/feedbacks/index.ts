@@ -27,8 +27,5 @@ const createFeedback = async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
   const json = await data.json();
-  if (json.error) {
-    return { message: json.error.message };
-  }
-  return { message: 'Feedback succesfull!' };
+  return json;
 };

@@ -6,6 +6,7 @@ import { PageHeader } from 'components/common/PageHeader';
 import { EditProjectForm } from './EditProjectForm';
 import SecretKey from './SecretKey';
 import { DangerZone } from './DangerZone';
+import { ProjectHeader } from 'components/common/ProjectHeader';
 
 const EditProjectPageComponent = ({ params }) => {
   const { data: session, status } = useSession();
@@ -37,7 +38,7 @@ const EditProjectPageComponent = ({ params }) => {
   if (loading)
     return (
       <div className="flex flex-col items-center space-y-8">
-        <PageHeader label={'Project Settings'} />
+        <ProjectHeader id={params.id} />
         <Spinner />
         <h1 className="text-lg font-semibold">Loading your project data...</h1>
       </div>
@@ -45,14 +46,15 @@ const EditProjectPageComponent = ({ params }) => {
   if (error)
     return (
       <div className="flex flex-col items-center space-y-8">
-        <PageHeader label={'Project Settings'} />
+        <ProjectHeader id={params.id} />
         <h1 className="text-lg font-semibold">{error}</h1>
       </div>
     );
 
   return (
     <div className="flex flex-col items-center space-y-8 pb-8">
-      <PageHeader label={'Project Settings'} />
+        <ProjectHeader id={params.id} />
+        <h1 className="mt-2 text-3xl font-bold text-center">{project.name}</h1>
       <div className="flex flex-col xl:w-3/4 w-full mx-auto space-y-2 px-4">
         <h2 className="font-medium">Details</h2>
         <div className="border border-3Background hover:border-4Background bg-stone-900 duration-200 sm:rounded p-1">

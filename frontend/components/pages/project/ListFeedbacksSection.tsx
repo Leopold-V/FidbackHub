@@ -28,6 +28,13 @@ export const ListFeedbacksSection = ({ feedbacks }: { feedbacks: feedbackType[] 
     setfeedbacksSorted(newfeedbacks);
   };
 
+  const filterStatus = (status: string) => {
+    console.log(status);
+    let newfeedbacks = [];
+    newfeedbacks = [...feedbacks].filter((ele) => ele.status === status);
+    setfeedbacksSorted(newfeedbacks);
+  }
+
   return (
     <>
       <DividerTitle title="List of feedbacks" />
@@ -35,6 +42,7 @@ export const ListFeedbacksSection = ({ feedbacks }: { feedbacks: feedbackType[] 
         feedbacks={feedbacksSorted}
         sortFeedbacksAscending={sortFeedbacksAscending}
         sortFeedbacksDescending={sortFeedbacksDescending}
+        filterStatus={filterStatus}
       />
     </>
   );

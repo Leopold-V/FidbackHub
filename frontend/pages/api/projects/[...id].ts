@@ -25,6 +25,7 @@ const getProject = async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
   const json = await data.json();
+  console.log(json);
   return json;
 };
 

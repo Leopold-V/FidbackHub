@@ -1,12 +1,12 @@
 import React from 'react';
 import Head from 'next/head';
-import Page from 'components/pages/dashboard';
+import Page from 'components/pages/project';
 
-const DashboardPage = ({ params }) => {
+const ProjectPage = ({ params }) => {
   return (
     <>
       <Head>
-        <title>Dashboard</title>
+        <title>Project</title>
       </Head>
       <Page params={params} />
     </>
@@ -28,4 +28,4 @@ export async function getStaticProps({ params }) {
   return { props: { params } };
 }
 
-export default DashboardPage;
+export default ProjectPage;

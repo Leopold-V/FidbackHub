@@ -31,7 +31,7 @@ export const ProjectItemDropdown = ({ projectId }: { projectId: number }) => {
           <div className="bg-3Background">
             <Menu.Item>
               <div className=" hover:bg-4Background duration-300 hover:text-gray-100">
-                <Link href={`/dashboard/${projectId}`}>
+                <Link href={`/project/${projectId}`}>
                   <a className={classNames('block px-4 py-2 text-sm')}>Open</a>
                 </Link>
               </div>

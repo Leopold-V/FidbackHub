@@ -37,7 +37,7 @@ export const ProjectItem = ({
           </a>
           <div className="flex items-center">
             <h2 className="text-sm font-medium">
-              <Link href={`/dashboard/${project.id}`}>
+              <Link href={`/project/${project.id}`}>
                 <a className="hover:text-main duration-200">{project.name}</a>
               </Link>
             </h2>

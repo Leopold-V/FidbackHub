@@ -28,7 +28,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         ) : (
           <Component {...pageProps} />
         )}
-        <FidbackHub apiKey={process.env.NEXT_PUBLIC_FIDBACKHUB_TOKEN} height={400} />
+        <FidbackHub apiKey={process.env.NEXT_PUBLIC_FIDBACKHUB_TOKEN} height={500} />
       </SessionProvider>
     </>
   );

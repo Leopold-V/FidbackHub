@@ -1,7 +1,8 @@
 import React from 'react';
 import { useFetch } from '../../../hooks/useFetch';
 import { useSession } from 'next-auth/react';
-import { ProgressLineChartSection } from './ProgressLineChartSection';
+import { InfoSection } from './InfosSection';
+import { ListFeedbacksSection } from './ListFeedbacksSection';
 import { Spinner } from 'components/common/Spinner';
 import { ProjectHeader } from '../../common/ProjectHeader';
 
@@ -35,7 +36,8 @@ const ProjectPageComponent = ({ params }) => {
       <ProjectHeader id={params.id} />
       {projectData.data && (
         <div className="space-y-8 md:w-2/3">
-          <ProgressLineChartSection feedbacks={projectData.data.attributes.feedbacks} />
+          <InfoSection feedbacks={projectData.data.attributes.feedbacks} />
+          <ListFeedbacksSection feedbacks={projectData.data.attributes.feedbacks} />
         </div>
       )}
     </div>
