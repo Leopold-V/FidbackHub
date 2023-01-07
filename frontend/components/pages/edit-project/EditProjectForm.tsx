@@ -16,20 +16,26 @@ export const EditProjectForm = ({
   setProject: (user: projectType) => void;
 }) => {
   const { data: session } = useSession();
-
+  const [input, setInput] = useState({
+    name: project.name,
+    website_url: project.website_url,
+    github_url: project.github_url
+  });
   const [loading, setloading] = useState(false);
   const [error, seterror] = useState<string | boolean>(false);
   const [success, setSuccess] = useState(false);
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
-    setProject({ ...project, [e.currentTarget.name]: e.currentTarget.value });
+    console.log({ ...input, [e.currentTarget.name]: e.currentTarget.value });
+    setInput({ ...input, [e.currentTarget.name]: e.currentTarget.value });
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setloading(true);
     try {
-      await updateProject(project, session.jwt);
+      await updateProject({...project, ...input}, session.jwt);
+      setProject({...project, ...input});
       seterror(false);
       setSuccess(true);
     } catch (error) {
@@ -50,7 +56,7 @@ export const EditProjectForm = ({
           name="name"
           id="name"
           autoComplete="name"
-          value={project.name || ''}
+          value={input.name}
           className="flex-grow text-secondaryText focus:text-mainText rounded-md border duration-200 border-3Background bg-secondaryBackground bg-opacity-25 py-2 leading-5 text-secondaryPrimary placeholder-gray-500 focus:placeholder-gray-600 outline-none focus:ring-1 text-sm"
           onChange={handleChange}
           disabled={loading}
@@ -87,7 +93,7 @@ export const EditProjectForm = ({
           name="website_url"
           id="website_url"
           autoComplete="website_url"
-          value={project.website_url || ''}
+          value={input.website_url}
           className="flex-grow text-secondaryText focus:text-mainText rounded-md duration-200 border border-3Background bg-secondaryBackground bg-opacity-25 py-2 leading-5 text-secondaryPrimary placeholder-gray-500 focus:placeholder-gray-600 outline-none focus:ring-1 text-sm"
           onChange={handleChange}
           disabled={loading}
@@ -100,7 +106,7 @@ export const EditProjectForm = ({
           name="github_url"
           id="github_url"
           autoComplete="github_url"
-          value={project.github_url || ''}
+          value={input.github_url}
           className="flex-grow text-secondaryText focus:text-mainText rounded-md border duration-200 border-3Background bg-secondaryBackground bg-opacity-25 py-2 leading-5 text-secondaryPrimary placeholder-gray-500 focus:placeholder-gray-600 outline-none focus:ring-1 text-sm"
           onChange={handleChange}
           disabled={loading}

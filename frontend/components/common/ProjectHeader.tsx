@@ -17,23 +17,7 @@ const tabs = (id: number, routeName) => ([
     return (
         <div className="w-full bg-stone-900 border-b pt-4 border-3Background">
         <div className="text-center sm:text-left sm:w-3/4 mx-auto">
-        <div className="sm:hidden">
-          <label htmlFor="tabs" className="sr-only">
-            Select a tab
-          </label>
-          {/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
-          <select
-            id="tabs"
-            name="tabs"
-            className="block w-full rounded-md border-3Background py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-            defaultValue={tabs(id, router.asPath).find((tab) => tab.current).name}
-          >
-            {tabs(id, router.asPath).map((tab) => (
-              <option key={tab.name}>{tab.name}</option>
-            ))}
-          </select>
-        </div>
-        <div className="hidden sm:block">
+        <div className="block">
           <div className="">
             <nav className="-mb-px flex space-x-8" aria-label="Tabs">
               {tabs(id, router.asPath).map((tab) => (

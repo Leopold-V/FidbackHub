@@ -3,7 +3,12 @@ import { Pagination } from 'components/common/Pagination';
 import { feedbackType } from 'types/index';
 import { FeedbackItem } from './FeedbackItem';
 import { LockClosedIcon, LockOpenIcon } from '@heroicons/react/20/solid';
+import { BarsArrowUpIcon, ChevronDownIcon } from '@heroicons/react/20/solid';
+import { Menu } from '@headlessui/react';
 
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ');
+}
 
 function ListFeedbacksHeader({ sortFeedbacksAscending, sortFeedbacksDescending, filterStatus }) {
   const [selectedStatus, setselectedStatus] = useState("Open");
@@ -14,7 +19,7 @@ function ListFeedbacksHeader({ sortFeedbacksAscending, sortFeedbacksDescending, 
   }
 
   return (
-    <div className="bg-secondaryBackground divide-x divide-3Background flex justify-between p-4">
+    <div className="bg-zinc-900 flex justify-between border-b border-3Background p-4">
       <div className="flex items-center space-x-4">
         <button className="flex items-center space-x-2" data-status="Open" onClick={handleClickStatus}>
           <LockOpenIcon className={`h-5 w-5 duration-200 hover:text-green-400 text-green-400 ${selectedStatus === "Open" ? 'text-green-600' : 'text-green-800'}`} aria-hidden="true" />
@@ -25,26 +30,84 @@ function ListFeedbacksHeader({ sortFeedbacksAscending, sortFeedbacksDescending, 
           <span className={`duration-200 hover:text-red-400 text-sm font-medium ${selectedStatus === "Close" ? 'text-red-400' : 'text-red-800'}`}>Close</span>
         </button>
       </div>
-      <div className="space-x-6 flex items-center">
-          <div className="flex items-center space-x-1 text-secondaryText hover:text-mainText duration-200">
-            <span className="text-sm ">Date</span>
-            <ButtonGroupFilter sortFeedbacksAscending={sortFeedbacksAscending} sortFeedbacksDescending={sortFeedbacksDescending} filterName="createdAt" />
-          </div>
-          <div className="flex items-center space-x-1 text-secondaryText hover:text-mainText duration-200">
-            <span className="text-sm ">Title</span>
-            <ButtonGroupFilter sortFeedbacksAscending={sortFeedbacksAscending} sortFeedbacksDescending={sortFeedbacksDescending} filterName="createdAt" />
-          </div>
-          <div className="flex items-center space-x-1 text-secondaryText hover:text-mainText duration-200">
-            <span className="text-sm ">State</span>
-            <ButtonGroupFilter sortFeedbacksAscending={sortFeedbacksAscending} sortFeedbacksDescending={sortFeedbacksDescending} filterName="createdAt" />
-          </div>
-          <div className="flex items-center space-x-1 text-secondaryText hover:text-mainText duration-200">
-            <span className="text-sm ">Author email</span>
-            <ButtonGroupFilter sortFeedbacksAscending={sortFeedbacksAscending} sortFeedbacksDescending={sortFeedbacksDescending} filterName="createdAt" />
-          </div>
-      </div>
+      <ButtonSort />
     </div>
   );
+}
+
+const ButtonSort = () => {
+  // TODO function sort
+  const handleSort = () => {
+    console.log('hello');
+  }
+
+  return (
+    <Menu as="div" className="relative">
+          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-secondaryBackground px-4 py-2 text-sm font-medium text-secondaryText hover:opacity-80 duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <BarsArrowUpIcon className="mr-3 h-5 w-5 text-secondaryText" aria-hidden="true" />
+            Sort
+            <ChevronDownIcon className="ml-2.5 -mr-1.5 h-5 w-5 text-secondaryText" aria-hidden="true" />
+          </Menu.Button>
+          <Menu.Items className="absolute overflow-hidden right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-secondaryBackground shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Menu.Item>
+              {({ active }) => (
+                <button
+                  onClick={handleSort}
+                  className={classNames(
+                    active ? 'bg-3Background text-secondaryText' : 'text-secondaryText',
+                    'w-full px-4 py-2 text-sm',
+                  )}
+                  data-field="name"
+                >
+                  Title
+                </button>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <button
+                  onClick={handleSort}
+                  className={classNames(
+                    active ? 'bg-3Background text-secondaryText' : 'text-secondaryText',
+                    'w-full px-4 py-2 text-sm',
+                  )}
+                  data-field="updatedAt"
+                >
+                  State
+                </button>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <button
+                  onClick={handleSort}
+                  className={classNames(
+                    active ? 'bg-3Background text-secondaryText' : 'text-secondaryText',
+                    'w-full px-4 py-2 text-sm',
+                  )}
+                  data-field="createdAt"
+                >
+                  Author
+                </button>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <button
+                  onClick={handleSort}
+                  className={classNames(
+                    active ? 'bg-3Background text-secondaryText' : 'text-secondaryText',
+                    'w-full px-4 py-2 text-sm',
+                  )}
+                  data-field="createdAt"
+                >
+                  Date
+                </button>
+              )}
+            </Menu.Item>
+          </Menu.Items>
+        </Menu>
+  )
 }
 
 const ButtonGroupFilter = ({ filterName, sortFeedbacksDescending, sortFeedbacksAscending }) => {

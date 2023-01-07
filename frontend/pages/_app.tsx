@@ -8,6 +8,9 @@ import FidbackHub from 'fidbackhub';
 import '../styles/globals.css';
 import Layout from 'components/layout';
 import { LoaderScreen } from 'components/common/LoaderScreen';
+import dayjs from 'dayjs';
+var localizedFormat = require('dayjs/plugin/localizedFormat');
+dayjs.extend(localizedFormat);
 
 const App = ({ Component, pageProps }: AppProps) => {
   const { session } = pageProps;

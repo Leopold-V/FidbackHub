@@ -39,6 +39,7 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
   },
   async findOne(ctx) {
     try {
+      console.log(ctx.state.user);
       const response = await strapi.db.query('api::project.project').findOne({
         where: {id: ctx.params.id, user: ctx.state.user.id},
         populate: { user: true, feedbacks: true },

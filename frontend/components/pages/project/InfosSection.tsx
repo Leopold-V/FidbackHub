@@ -18,15 +18,15 @@ export const InfoSection = ({ feedbacks }: { feedbacks: feedbackType[] }) => {
 
   return (
     <div>
-      <h3 className="text-lg font-medium leading-6">Total</h3>
-      <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+      <h3 className="font-medium mb-3">Stats</h3>
+      <ul className="flex flex-col space-y-3">
         {stats.map((item) => (
           <Card key={item.name}>
             <dt className="truncate text-sm font-medium text-secondaryText">{item.name}</dt>
             <dd className="mt-1 text-2xl font-semibold tracking-tight">{item.stat}</dd>
           </Card>
         ))}
-      </dl>
+      </ul>
     </div>
   );
 };

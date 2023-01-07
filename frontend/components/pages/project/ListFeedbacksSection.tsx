@@ -1,8 +1,8 @@
-import { DividerTitle } from 'components/common/DividerTitle';
 import { MouseEvent, useState } from 'react';
 import { feedbackType } from 'types/index';
 import { ListFeedbacks } from './ListFeedbacks';
 
+// TODO refactor component, change function filter and sort location
 export const ListFeedbacksSection = ({ feedbacks }: { feedbacks: feedbackType[] }) => {
   const [feedbacksSorted, setfeedbacksSorted] = useState(feedbacks);
 
@@ -37,7 +37,7 @@ export const ListFeedbacksSection = ({ feedbacks }: { feedbacks: feedbackType[] 
 
   return (
     <>
-      <DividerTitle title="List of feedbacks" />
+      <h2 className="font-medium mb-3">List feedbacks</h2>
       <ListFeedbacks
         feedbacks={feedbacksSorted}
         sortFeedbacksAscending={sortFeedbacksAscending}
