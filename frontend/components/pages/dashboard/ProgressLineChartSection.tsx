@@ -14,7 +14,7 @@ export const ProgressLineChartSection = ({ feedbacks }: { feedbacks: feedbackTyp
       <Card>
         <div className="flex flex-col mb-2 items-center space-y-4">
           <div className="flex lg:flex-row flex-col items-center justify-between w-full">
-            <h2 className="pb-2 lg:pb-0">Number of feedbacks</h2>
+            <h2 className="pb-2 lg:pb-0">Reported feedbacks</h2>
             <DateButtonGroups setdateRange={setdateRange} />
           </div>
           <div className="w-full flex justify-center">

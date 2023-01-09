@@ -27,7 +27,7 @@ export function SearchProject({ projects, setprojectsFiltered }) {
           <input
             id="search"
             name="search"
-            className="block w-full rounded-md border border-transparent duration-150 bg-4Background bg-opacity-25 py-2 pl-10 pr-3 leading-5 text-secondaryPrimary placeholder-gray-300 focus:placeholder-gray-400 outline-none focus:ring-1 sm:text-sm"
+            className="block w-full rounded-md border border-transparent duration-200 bg-4Background bg-opacity-25 py-2 pl-10 pr-3 leading-5 text-secondaryPrimary placeholder-muted focus:placeholder-gray-500 outline-none focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm"
             placeholder="Search projects"
             type="search"
             value={query}

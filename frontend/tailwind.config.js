@@ -20,6 +20,7 @@ module.exports = {
         '4Background': '#6B7280',
         mainText: 'white',
         secondaryText: '#d3d3de',
+        muted: '#9ca3af',
       },
       typography: (theme) => ({
         DEFAULT: {

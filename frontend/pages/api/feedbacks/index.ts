@@ -4,6 +4,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'POST') {
     const data = await createFeedback(req, res);
     return res.status(200).json({ ...data });
+  } else if (req.method === 'DELETE') {
+    const data = await deleteManyFeedback(req, res);
+    return res.status(200).json({ ...data });
   } else {
     res.status(404).json({ message: 'Ressource not found' });
   }
@@ -16,12 +19,27 @@ const createFeedback = async (req: NextApiRequest, res: NextApiResponse) => {
   const ipArr = ip.split(':');
   const ipv4 = ipArr[ipArr.length - 1];
   const feedback = req.body.feedback;
-  console.log(feedback);
   const data = await fetch(`http://localhost:1337/api/feedbacks`, {
     method: 'POST',
     body: JSON.stringify({ data: { ...feedback, status: 'Open', state: 'New', user_ipv4: ipv4 } }),
     headers: {
       Authorization: 'Bearer ' + process.env.FEEDBACKS_API_TOKEN,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+  const json = await data.json();
+  return json;
+};
+
+const deleteManyFeedback = async (req: NextApiRequest, res: NextApiResponse) => {
+  const feedbacks = req.body.feedbacks;
+  console.log(feedbacks);
+  const data = await fetch(`http://localhost:1337/api/feedbacksDelete`, {
+    method: 'DELETE',
+    body: JSON.stringify({ data: { ...feedbacks } }),
+    headers: {
+      Authorization: req.headers.authorization,
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },

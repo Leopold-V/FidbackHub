@@ -6,10 +6,7 @@ import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 
-const navigation = [
-  { name: 'Projects', href: '/projects', current: true, key: 1 },
-  { name: 'Documentation', href: '/documentation', current: false, key: 2 },
-];
+const navigation = [{ name: 'Projects', href: '/projects', current: true, key: 1 }];
 const userNavigation = [
   { name: 'Your Profile', href: '/my-account' },
   { name: 'Sign out', href: '/api/auth/signout' },

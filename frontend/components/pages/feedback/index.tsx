@@ -10,6 +10,7 @@ import { SelectState } from './SelectState';
 import { ErrorAlert } from 'components/common/ErrorAlert';
 import { SuccessAlert } from 'components/common/SuccessAlert';
 import { Button, ButtonDelete } from 'components/common/Button';
+import { FeedbackHeader } from './FeedbackHeader';
 
 const FeedbackPage = ({ id }) => {
   const { data: session } = useSession();
@@ -27,6 +28,7 @@ const FeedbackPage = ({ id }) => {
     state: null,
     author_email: null,
     api_key: null,
+    project: null,
   });
   const [currentstatus, setcurrentstatus] = useState('');
 
@@ -80,7 +82,13 @@ const FeedbackPage = ({ id }) => {
   if (loading)
     return (
       <div className="flex flex-col items-center space-y-8">
-        <PageHeader label={`Feedback ${id}`} />
+        <div className="w-full bg-stone-900 border-b py-8 border-3Background">
+          <div className="text-center sm:text-left sm:w-3/4 mx-auto">
+            <div className="relative flex justify-center items-center">
+              <h1 className="text-2xl font-bold py-3 text-center">Feedback</h1>
+            </div>
+          </div>
+        </div>
         <Spinner />
         <h1 className="text-lg font-semibold">Loading your project data...</h1>
       </div>
@@ -88,14 +96,20 @@ const FeedbackPage = ({ id }) => {
   if (error)
     return (
       <div className="flex flex-col items-center space-y-8">
-        <PageHeader label={`Feedback ${id}`} />
+        <div className="w-full bg-stone-900 border-b py-8 border-3Background">
+          <div className="text-center sm:text-left sm:w-3/4 mx-auto">
+            <div className="relative flex justify-center items-center">
+              <h1 className="text-2xl font-bold py-3 text-center">Feedback</h1>
+            </div>
+          </div>
+        </div>
         <h1 className="text-lg font-semibold">{error}</h1>
       </div>
     );
 
   return (
     <div className="flex flex-col items-center space-y-8 pb-8">
-      <PageHeader label={`Feedback ${id}`} />
+      <FeedbackHeader label="Feedback" projectId={feedbackData.data.attributes.project.id} />
       <div className="flex flex-col xl:w-3/4 w-full mx-auto space-y-2 px-4">
         <h2 className="font-medium">
           Current status: <span>{currentstatus}</span>
@@ -109,7 +123,7 @@ const FeedbackPage = ({ id }) => {
           <InputDecorators label="Description">
             <p>{feedback.description}</p>
           </InputDecorators>
-          <InputDecorators label="State">
+          {/* <InputDecorators label="State">
             {feedback.status === 'Open' ? (
               <SelectState selected={selectedState} setselected={setSelectedState} />
             ) : (
@@ -121,7 +135,7 @@ const FeedbackPage = ({ id }) => {
                 {feedback.state}
               </span>
             )}
-          </InputDecorators>
+          </InputDecorators> */}
           <InputDecorators label="Author">
             <p>{feedback.author_email}</p>
           </InputDecorators>

@@ -1,5 +1,22 @@
 import { feedbackType } from 'types/index';
 
+export const deleteManyFeedback = async (feedbacks: string[], jwt: string): Promise<feedbackType> => {
+  const data = await fetch(`http://localhost:3000/api/feedbacks`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Bearer ' + jwt,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ feedbacks: feedbacks }),
+  });
+  const json = await data.json();
+  if (json.error) {
+    throw new Error(json.error.message);
+  }
+  return json;
+};
+
 export const deleteFeedback = async (id: number, jwt: string): Promise<feedbackType> => {
   const data = await fetch(`http://localhost:3000/api/feedbacks/${id}`, {
     method: 'DELETE',

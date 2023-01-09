@@ -44,7 +44,7 @@ export const ProjectItem = ({
           </div>
         </div>
         <div className="flex flex-row items-center space-x-3">
-          <Link href={`/edit-project/${project.id}`}>
+          <Link href={`/project/${project.id}/settings`}>
             <a className="flex h-8 w-8 items-center justify-center rounded-full text-secondaryText hover:text-indigo-500 duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
               <PencilIcon className="h-5 w-5" aria-hidden="true" />
               <span className="sr-only">Open</span>

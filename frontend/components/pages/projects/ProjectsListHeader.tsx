@@ -29,7 +29,6 @@ export const ProjectsListHeader = ({ projects, setprojects, setprojectsFiltered,
         return a[field].localeCompare(b[field]);
       });
     }
-    console.log(projects);
     setprojects(newProjectsArray);
   };
 
@@ -42,7 +41,7 @@ export const ProjectsListHeader = ({ projects, setprojects, setprojectsFiltered,
           <button
             className={`py-1 px-2 ${
               grid ? 'text-mainText' : 'text-gray-400'
-            } bg-secondaryBackground hover:text-mainText duration-200 rounded-l cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500`}
+            } bg-secondaryBackground hover:text-mainText duration-200 focus:z-10 rounded-l cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500`}
             onClick={() => setgrid(true)}
           >
             <svg

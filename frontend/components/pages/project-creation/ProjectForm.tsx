@@ -6,6 +6,7 @@ import { ErrorAlert } from 'components/common/ErrorAlert';
 import { SuccessAlert } from 'components/common/SuccessAlert';
 import { SpinnerButton } from 'components/common/Spinner';
 import { InputDecorators } from 'components/common/InputDecorators';
+import { Input } from 'components/common/Input';
 
 export const ProjectForm = () => {
   const { data: session } = useSession();
@@ -43,39 +44,36 @@ export const ProjectForm = () => {
       {error && <ErrorAlert message={error} />}
       {success && <SuccessAlert />}
       <InputDecorators label="Project name">
-        <input
+        <Input
           type="text"
           name="name"
           id="name"
           autoComplete="name"
           value={project.name}
-          className="flex-grow text-secondaryText focus:text-mainText rounded-md border duration-200 border-3Background bg-secondaryBackground bg-opacity-25 py-2 leading-5 text-secondaryPrimary placeholder-gray-500 focus:placeholder-gray-600 outline-none focus:ring-1 text-sm"
           onChange={handleChange}
           disabled={loading}
           placeholder="e.g. my-ecommerce-website"
         />
       </InputDecorators>
       <InputDecorators label="Website link">
-        <input
+        <Input
           type="url"
           name="website_url"
           id="website_url"
           autoComplete="website_url"
           value={project.website_url}
-          className="flex-grow text-secondaryText focus:text-mainText rounded-md border duration-200 border-3Background bg-secondaryBackground bg-opacity-25 py-2 leading-5 text-secondaryPrimary placeholder-gray-500 focus:placeholder-gray-600 outline-none focus:ring-1 text-sm"
           onChange={handleChange}
           disabled={loading}
           placeholder="e.g. https://my-ecommerce-website.com"
         />
       </InputDecorators>
       <InputDecorators label="Github link">
-        <input
+        <Input
           type="url"
           name="github_url"
           id="github_url"
           autoComplete="github_url"
           value={project.github_url}
-          className="flex-grow text-secondaryText focus:text-mainText rounded-md border duration-200 border-3Background bg-secondaryBackground bg-opacity-25 py-2 leading-5 text-secondaryPrimary placeholder-gray-500 focus:placeholder-gray-600 outline-none focus:ring-1 text-sm"
           onChange={handleChange}
           disabled={loading}
           placeholder="e.g. https://github.com/your-username/my-ecommerce-website"
