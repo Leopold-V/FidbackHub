@@ -28,6 +28,7 @@
     "react-dom": "18.1.0",
     "react-syntax-highlighter": "^15.5.0",
     "react-tailwindcss-datepicker": "^1.2.2",
+    "react-toastify": "^9.1.1",
     "recharts": "^2.2.0"
   },
   "devDependencies": {

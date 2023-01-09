@@ -1,10 +1,9 @@
 import React, { FormEvent, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import dayjs from 'dayjs';
+import { toast } from 'react-toastify';
 import { updateProject } from '../../../services/project.service';
 import { projectType } from 'types/index';
-import { ErrorAlert } from 'components/common/ErrorAlert';
-import { SuccessAlert } from 'components/common/SuccessAlert';
 import { SpinnerButton } from 'components/common/Spinner';
 import { InputDecorators } from 'components/common/InputDecorators';
 import { Input } from 'components/common/Input';
@@ -23,8 +22,6 @@ export const EditProjectForm = ({
     github_url: project.github_url,
   });
   const [loading, setloading] = useState(false);
-  const [error, seterror] = useState<string | boolean>(false);
-  const [success, setSuccess] = useState(false);
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
     console.log({ ...input, [e.currentTarget.name]: e.currentTarget.value });
@@ -37,11 +34,9 @@ export const EditProjectForm = ({
     try {
       await updateProject({ ...project, ...input }, session.jwt);
       setProject({ ...project, ...input });
-      seterror(false);
-      setSuccess(true);
+      toast.success(`Project ${project.name} updated!`);
     } catch (error) {
-      seterror(error.message);
-      setSuccess(false);
+      toast.error(error.message);
     } finally {
       setloading(false);
     }
@@ -49,8 +44,6 @@ export const EditProjectForm = ({
 
   return (
     <form onSubmit={handleSubmit} className="divide-y divide-3Background">
-      {error && <ErrorAlert message={error} />}
-      {success && <SuccessAlert />}
       <InputDecorators label="Project name">
         <Input
           type="text"

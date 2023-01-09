@@ -120,27 +120,25 @@ module.exports = createCoreController("api::feedback.feedback", ({ strapi }) => 
     }
   },
   async deleteMany(ctx) {
-    console.log(ctx.request.body);
     try {
       const feedbacks = await strapi.db.query("api::feedback.feedback").findMany({
         where: {
-          id: ctx.request.body.data,
+          id: [...ctx.request.body.data, 4],
+          project: {
+            user: ctx.state.user
+          }
         },
-        populate: { project: true },
+        populate: { project: true, user: true },
       });
-      console.log(feedbacks);
       if (!feedbacks) {
-        // If project is from another user, we answer with the same message as an unexisting url path to not guess other users feedback id.
         throw new ApplicationError(`Error 404, ressource not found`);
       }
-      /*
-      ctx.request.body.data.forEach(async (ele) => {
+      feedbacks.forEach(async (feedback) => {
         await strapi.db.query('api::feedback.feedback').delete({
-          where: {id: ele},
+          where: {id: feedback.id},
         })
       })
-      */
-      return {data: {id: '', attributes: {...feedbacks}}, meta: {}};
+      return {data: {id: [...ctx.request.body.data], attributes: {...feedbacks}}, meta: {}};
     } catch (error) {
       console.log(error);
       throw new ApplicationError();

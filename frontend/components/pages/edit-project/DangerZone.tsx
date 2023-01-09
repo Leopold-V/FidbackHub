@@ -4,29 +4,34 @@ import { deleteProject } from '../../../services/project.service';
 import { SpinnerButtonDanger } from 'components/common/Spinner';
 import { ErrorAlert } from 'components/common/ErrorAlert';
 import { SuccessAlert } from 'components/common/SuccessAlert';
+import { Modal } from 'components/common/Modal';
+
+const message = `Are you sure you want to delete? The project will be permanently
+removed. This action cannot be undone.`;
 
 export const DangerZone = ({ projectId }: { projectId: number }) => {
   const [loading, setloading] = useState(false);
   const [error, seterror] = useState<string | boolean>(false);
   const [success, setSuccess] = useState(false);
+  const [open, setopen] = useState(false);
 
   const { data: session } = useSession();
 
+  const openModalToDelete = () => {
+    setopen(true);
+  };
+
   const handleDeleteProject = async () => {
-    //TODO: Build a modal component to put instead of js native alert
-    const reponse = confirm('Are you sure to delete your project ?');
-    if (reponse) {
-      setloading(true);
-      try {
-        await deleteProject(projectId, session.jwt);
-        seterror(false);
-        setSuccess(true);
-      } catch (error) {
-        seterror(error.message);
-        setSuccess(false);
-      } finally {
-        setloading(false);
-      }
+    setloading(true);
+    try {
+      await deleteProject(projectId, session.jwt);
+      seterror(false);
+      setSuccess(true);
+    } catch (error) {
+      seterror(error.message);
+      setSuccess(false);
+    } finally {
+      setloading(false);
     }
   };
 
@@ -45,7 +50,7 @@ export const DangerZone = ({ projectId }: { projectId: number }) => {
           <button
             type="submit"
             className="duration-200 mx-auto inline-flex items-center justify-center rounded border border-red-600 px-4 py-2 text-sm font-medium text-red-500 hover:text-white shadow-sm disabled:bg-red-400 hover:bg-red-500 outline-none focus:ring-2 focus:ring-red-500"
-            onClick={handleDeleteProject}
+            onClick={openModalToDelete}
             disabled={loading}
           >
             {loading && <SpinnerButtonDanger />}
@@ -53,6 +58,13 @@ export const DangerZone = ({ projectId }: { projectId: number }) => {
           </button>
         </div>
       </div>
+      <Modal
+        open={open}
+        setopen={setopen}
+        handleConfirm={handleDeleteProject}
+        title="Delete a project"
+        message={message}
+      />
     </div>
   );
 };

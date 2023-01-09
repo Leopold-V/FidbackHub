@@ -4,7 +4,13 @@ import { feedbackType } from 'types/index';
 import { FeedbackItem } from './FeedbackItem';
 import { ListFeedbacksHeader } from './ListFeedbacksHeader';
 
-export const ListFeedbacks = ({ feedbacks }: { feedbacks: feedbackType[] }) => {
+export const ListFeedbacks = ({
+  feedbacks,
+  setfeedbacks,
+}: {
+  feedbacks: feedbackType[];
+  setfeedbacks: (feedbacks: feedbackType[]) => void;
+}) => {
   const feedbacksOpen = [...feedbacks].filter((ele) => ele.status === 'Open');
   const [feedbacksSorted, setfeedbacksSorted] = useState(feedbacksOpen);
   const [filterStatus, setfilterStatus] = useState('Open');
@@ -23,11 +29,11 @@ export const ListFeedbacks = ({ feedbacks }: { feedbacks: feedbackType[] }) => {
 
   const initCheckedFeedbacks = () => {
     setcheckedFeedbacks({ ...feedbacks.reduce((a, ele) => ({ ...a, [ele.id]: false }), {}) });
+    setcountchecked(0);
   };
 
   useEffect(() => {
     initCheckedFeedbacks();
-    setcountchecked(0);
   }, [filterStatus]);
 
   useEffect(() => {
@@ -39,7 +45,7 @@ export const ListFeedbacks = ({ feedbacks }: { feedbacks: feedbackType[] }) => {
       (ele: feedbackType) => ele.title.toLowerCase().match(filterSearch.toLowerCase()) && ele.status === filterStatus,
     );
     setfeedbacksSorted(newfeedbacksSorted);
-  }, [filterStatus, filterSearch]);
+  }, [filterStatus, filterSearch, feedbacks]);
 
   useEffect(() => {
     setFeedbacksToDisplay(
@@ -54,7 +60,6 @@ export const ListFeedbacks = ({ feedbacks }: { feedbacks: feedbackType[] }) => {
     <div className="border border-3Background bg-zinc-900 duration-200 sm:rounded">
       <ListFeedbacksHeader
         initCheckedFeedbacks={initCheckedFeedbacks}
-        setcountchecked={setcountchecked}
         setfilterStatus={setfilterStatus}
         setfilterSearch={setfilterSearch}
         filterStatus={filterStatus}
@@ -63,10 +68,10 @@ export const ListFeedbacks = ({ feedbacks }: { feedbacks: feedbackType[] }) => {
         setfeedbacksSorted={setfeedbacksSorted}
       />
       <ul className="divide-y divide-3Background">
-        {feedbacksToDisplay.map((feedback) => (
+        {feedbacksToDisplay.map((feedbacks) => (
           <FeedbackItem
-            key={feedback.id.toString()}
-            feedback={feedback}
+            key={feedbacks.id.toString()}
+            feedback={feedbacks}
             setcountchecked={setcountchecked}
             checkedFeedbacks={checkedFeedbacks}
             setcheckedFeedbacks={setcheckedFeedbacks}
@@ -75,6 +80,8 @@ export const ListFeedbacks = ({ feedbacks }: { feedbacks: feedbackType[] }) => {
       </ul>
       {
         <Pagination
+          setfeedbacks={setfeedbacks}
+          initCheckedFeedbacks={initCheckedFeedbacks}
           checkedFeedbacks={checkedFeedbacks}
           countchecked={countchecked}
           pageIndex={pageIndex}

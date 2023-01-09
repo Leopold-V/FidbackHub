@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { updateFeedback } from '../../../services/feedback.service';
 import { useFetch } from '../../../hooks/useFetch';
+import { toast } from 'react-toastify';
 import { feedbackColor } from '../../../utils/feedback';
 import { PageHeader } from 'components/common/PageHeader';
 import { InputDecorators } from 'components/common/InputDecorators';
@@ -11,13 +12,16 @@ import { ErrorAlert } from 'components/common/ErrorAlert';
 import { SuccessAlert } from 'components/common/SuccessAlert';
 import { Button, ButtonDelete } from 'components/common/Button';
 import { FeedbackHeader } from './FeedbackHeader';
+import { Modal } from 'components/common/Modal';
+
+const message = `Are you sure you want to close this feedback? The feedback will be permanently
+closed. This action cannot be undone.`;
 
 const FeedbackPage = ({ id }) => {
   const { data: session } = useSession();
   const [loadingUpdate, setloadingUpdate] = useState(false);
-  const [errorUpdate, seterrorUpdate] = useState<string | boolean>(false);
   const [selectedState, setSelectedState] = useState(null);
-  const [successUpdate, setSuccessUpdate] = useState(false);
+  const [open, setopen] = useState(false);
   const [feedback, setfeedback] = useState({
     id: null,
     title: null,
@@ -33,6 +37,10 @@ const FeedbackPage = ({ id }) => {
   const [currentstatus, setcurrentstatus] = useState('');
 
   const { data: feedbackData, error, loading } = useFetch(`http://localhost:3000/api/feedbacks/${+id}`, session.jwt);
+
+  const handleClickToClose = () => {
+    setopen(true);
+  };
 
   useEffect(() => {
     if (feedbackData) {
@@ -50,31 +58,23 @@ const FeedbackPage = ({ id }) => {
     setloadingUpdate(true);
     try {
       await updateFeedback({ ...feedback, state: selectedState }, session.jwt);
-      seterrorUpdate(false);
-      setSuccessUpdate(true);
+      toast.success(`Feedback updated!`);
     } catch (error) {
-      seterrorUpdate(error.message);
-      setSuccessUpdate(false);
+      toast.error(error.message);
     } finally {
       setloadingUpdate(false);
     }
   };
   const handleCloseFeedback = async () => {
-    const result = confirm('Do you really want to close this fidback ?');
-    if (result) {
-      setloadingUpdate(true);
-      try {
-        await updateFeedback({ ...feedback, status: 'Close' }, session.jwt);
-        seterrorUpdate(false);
-        setSuccessUpdate(true);
-        setcurrentstatus('Close');
-      } catch (error) {
-        console.log(error.message);
-        seterrorUpdate(error.message);
-        setSuccessUpdate(false);
-      } finally {
-        setloadingUpdate(false);
-      }
+    setloadingUpdate(true);
+    try {
+      await updateFeedback({ ...feedback, status: 'Close' }, session.jwt);
+      toast.success(`Feedback closed!`);
+      setcurrentstatus('Close');
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setloadingUpdate(false);
     }
   };
 
@@ -115,8 +115,6 @@ const FeedbackPage = ({ id }) => {
           Current status: <span>{currentstatus}</span>
         </h2>
         <div className="border border-3Background hover:border-4Background bg-stone-900 duration-200 sm:rounded p-1 divide-y divide-3Background">
-          {errorUpdate && <ErrorAlert message={errorUpdate} />}
-          {successUpdate && <SuccessAlert />}
           <InputDecorators label="Title">
             <p>{feedback.title}</p>
           </InputDecorators>
@@ -145,7 +143,7 @@ const FeedbackPage = ({ id }) => {
                 <Button disabled={loadingUpdate} onClick={handleUpdateStateFeedback}>
                   Save
                 </Button>
-                <ButtonDelete type="submit" onClick={handleCloseFeedback} disabled={loadingUpdate}>
+                <ButtonDelete type="submit" onClick={handleClickToClose} disabled={loadingUpdate}>
                   Close feedback
                 </ButtonDelete>
               </>
@@ -155,6 +153,13 @@ const FeedbackPage = ({ id }) => {
           </div>
         </div>
       </div>
+      <Modal
+        open={open}
+        setopen={setopen}
+        handleConfirm={handleCloseFeedback}
+        title="Close a feedback"
+        message={message}
+      />
     </div>
   );
 };

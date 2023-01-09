@@ -9,7 +9,6 @@ function classNames(...classes) {
 
 export function ListFeedbacksHeader({
   initCheckedFeedbacks,
-  setcountchecked,
   setfilterSearch,
   setfilterStatus,
   filterStatus,
@@ -53,7 +52,6 @@ export function ListFeedbacksHeader({
       </div>
       <SearchFeedback
         initCheckedFeedbacks={initCheckedFeedbacks}
-        setcountchecked={setcountchecked}
         filterSearch={filterSearch}
         setfilterSearch={setfilterSearch}
       />
@@ -88,7 +86,7 @@ export const ButtonSort = ({ feedbacksSorted, setfeedbacksSorted }) => {
 
   return (
     <Menu as="div" className="relative">
-      <Menu.Button className="inline-flex w-full justify-center rounded-md bg-secondaryBackground px-4 py-2 text-sm font-medium text-secondaryText hover:text-mainText duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+      <Menu.Button className="inline-flex w-full justify-center rounded-md bg-secondaryBackground border border-3Background px-4 py-2 text-sm font-medium text-secondaryText hover:text-mainText duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
         <BarsArrowUpIcon className="mr-3 h-5 w-5 text-secondaryText" aria-hidden="true" />
         Sort
         <ChevronDownIcon className="ml-2.5 -mr-1.5 h-5 w-5 text-secondaryText" aria-hidden="true" />

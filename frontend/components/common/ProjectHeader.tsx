@@ -23,7 +23,7 @@ export const ProjectHeader = ({ id, name }) => {
           <div className="absolute top-3 left-0">
             <ButtonBack link="/projects" />
           </div>
-          <h1 className="text-2xl font-bold py-3 text-center">{name}</h1>
+          <h1 className="sm:text-2xl text-lg font-bold py-3 text-center">{name}</h1>
         </div>
         <div className="block">
           <div className="">
@@ -35,7 +35,7 @@ export const ProjectHeader = ({ id, name }) => {
                       tab.current
                         ? 'border-indigo-500 text-indigo-500'
                         : 'border-transparent hover:border-mainText text-secondaryText hover:text-mainText',
-                      'duration-200 whitespace-nowrap py-4 px-1 border-b-2 font-medium',
+                      'duration-200 whitespace-nowrap py-4 px-1 border-b-2 font-medium sm:text-base text-sm',
                     )}
                     aria-current={tab.current ? 'page' : undefined}
                   >

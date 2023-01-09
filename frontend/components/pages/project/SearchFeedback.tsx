@@ -1,10 +1,9 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import { ChangeEvent } from 'react';
 
-export function SearchFeedback({ initCheckedFeedbacks, setcountchecked, filterSearch, setfilterSearch }) {
+export function SearchFeedback({ initCheckedFeedbacks, filterSearch, setfilterSearch }) {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setfilterSearch(e.currentTarget.value);
-    setcountchecked(0);
     initCheckedFeedbacks();
   };
 

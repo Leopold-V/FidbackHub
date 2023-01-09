@@ -41,7 +41,7 @@ export const ProjectsListHeader = ({ projects, setprojects, setprojectsFiltered,
           <button
             className={`py-1 px-2 ${
               grid ? 'text-mainText' : 'text-gray-400'
-            } bg-secondaryBackground hover:text-mainText duration-200 focus:z-10 rounded-l cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500`}
+            } bg-secondaryBackground hover:text-mainText duration-200 focus:z-10 rounded-l cursor-pointer border border-3Background focus:outline-none focus:ring-2 focus:ring-indigo-500`}
             onClick={() => setgrid(true)}
           >
             <svg
@@ -62,7 +62,7 @@ export const ProjectsListHeader = ({ projects, setprojects, setprojectsFiltered,
           <button
             className={`py-1 px-2 ${
               !grid ? 'text-mainText' : 'text-gray-400'
-            } bg-secondaryBackground hover:text-mainText duration-200 rounded-r cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500`}
+            } bg-secondaryBackground hover:text-mainText duration-200 rounded-r cursor-pointer border border-3Background focus:outline-none focus:ring-2 focus:ring-indigo-500`}
             onClick={() => setgrid(false)}
           >
             <svg
@@ -83,7 +83,7 @@ export const ProjectsListHeader = ({ projects, setprojects, setprojectsFiltered,
         </div>
 
         <Menu as="div" className="relative">
-          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-secondaryBackground px-4 py-2 text-sm font-medium text-secondaryText hover:opacity-80 duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-secondaryBackground border border-3Background px-4 py-2 text-sm font-medium text-secondaryText hover:opacity-80 duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500">
             <BarsArrowUpIcon className="mr-3 h-5 w-5 text-secondaryText" aria-hidden="true" />
             Sort
             <ChevronDownIcon className="ml-2.5 -mr-1.5 h-5 w-5 text-secondaryText" aria-hidden="true" />

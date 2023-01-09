@@ -1,5 +1,6 @@
 import React, { FormEvent, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { toast } from 'react-toastify';
 import { projectType } from 'types/index';
 import { addProject } from '../../../services/project.service';
 import { ErrorAlert } from 'components/common/ErrorAlert';
@@ -7,7 +8,6 @@ import { SuccessAlert } from 'components/common/SuccessAlert';
 import { SpinnerButton } from 'components/common/Spinner';
 import { InputDecorators } from 'components/common/InputDecorators';
 import { Input } from 'components/common/Input';
-
 export const ProjectForm = () => {
   const { data: session } = useSession();
   const [project, setProject] = useState<Partial<projectType>>({
@@ -16,8 +16,6 @@ export const ProjectForm = () => {
     github_url: '',
   });
   const [loading, setloading] = useState(false);
-  const [error, seterror] = useState<string | boolean>(false);
-  const [success, setSuccess] = useState(false);
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
     setProject({ ...project, [e.currentTarget.name]: e.currentTarget.value });
@@ -28,12 +26,9 @@ export const ProjectForm = () => {
     setloading(true);
     try {
       await addProject(session.id, project, session.jwt);
-      seterror(false);
-      setSuccess(true);
+      toast.success(`Project ${project.name} created!`);
     } catch (error) {
-      console.log(error.options);
-      seterror(error.message);
-      setSuccess(false);
+      toast.error(error.message);
     } finally {
       setloading(false);
     }
@@ -41,8 +36,6 @@ export const ProjectForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="divide-y divide-3Background">
-      {error && <ErrorAlert message={error} />}
-      {success && <SuccessAlert />}
       <InputDecorators label="Project name">
         <Input
           type="text"

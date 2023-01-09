@@ -22,8 +22,8 @@ const customRouter = (innerRouter, extraRoutes = []) => {
 
 const myExtraRoutes = [
   {
-    method: "DELETE",
-    path: "/feedbacksDelete",
+    method: "POST",
+    path: "/feedbacks/delete-many",
     handler: "api::feedback.feedback.deleteMany",
   }
 ];

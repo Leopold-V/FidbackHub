@@ -7,8 +7,7 @@
     "start:frontend": "cd frontend && yarn start",
     "release": "release-it",
     "format:check": "prettier -c \"frontend/**/*.{js,ts,jsx,tsx}\"",
-    "format:fix": "prettier -w \"frontend/**/*.{js,ts,jsx,tsx}\"",
-    "prepare": "husky install"
+    "format:fix": "prettier -w \"frontend/**/*.{js,ts,jsx,tsx}\""
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^5.1.0",
