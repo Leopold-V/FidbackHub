@@ -48,7 +48,7 @@ export const Navbar = () => {
               {/* Links section */}
               <div className="hidden lg:block">
                 <div className="flex items-center justify-end">
-                  <div className="flex items-center">
+                  <div className="flex items-center space-x-4">
                     {navigation.map((item) => (
                       <Link href={item.href} key={item.name}>
                         <a
@@ -60,18 +60,28 @@ export const Navbar = () => {
                       </Link>
                     ))}
                     <Link href={'/project-creation'} key={'999'}>
-                      <div className="text-indigo-200 text-sm cursor-pointer hover:text-white px-3 py-2 flex items-center space-x-1 duration-200">
-                        <span>New</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          className="w-5 h-5"
-                        >
-                          <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
-                        </svg>
+                      <div className="text-indigo-200 text-sm cursor-pointer hover:text-white px-3 py-2 border-secondaryText border rounded flex items-center space-x-1 duration-200">
+                        <span>New project</span>
+                        <span className="sr-only">Create new project</span>
                       </div>
                     </Link>
+                    <button className="flex rounded-full p-1 text-indigo-200 hover:bg-indigo-600 hover:text-indigo-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-700">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+                        />
+                      </svg>
+                      <span className="sr-only">Open user notification</span>
+                    </button>
                   </div>
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-4 flex-shrink-0">
@@ -148,6 +158,22 @@ export const Navbar = () => {
             </div>
             <div className="border-t border-indigo-800 pt-4 pb-3">
               <div className="space-y-1 px-2">
+                <div className="block rounded-md px-3 py-2 text-indigo-200 hover:bg-indigo-600 hover:text-indigo-100">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+                    />
+                  </svg>
+                </div>
                 {userNavigation.map((item) => (
                   <div key={item.href}>
                     <Disclosure.Button

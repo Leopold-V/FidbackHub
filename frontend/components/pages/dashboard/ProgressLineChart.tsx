@@ -20,7 +20,8 @@ export const ProgressLineChart = ({
     const numberOfDayDifference = dayjs(dateRange.endDate).diff(dayjs(dateRange.startDate), 'day');
     for (let i = 0; i <= numberOfDayDifference; i++) {
       newData[dayjs(dateRange.startDate).add(i, 'day').format('YYYY-MM-DD')] = {
-        number: 0,
+        open: 0,
+        resolved: 0,
         date: dayjs(dateRange.startDate).add(i, 'day').format('YYYY-MM-DD'),
       };
     }
@@ -31,13 +32,17 @@ export const ProgressLineChart = ({
     const newData = createHashMapFromDateRangeFilter(dateRange);
     feedbacks.forEach((ele) => {
       if (newData[dayjs(ele.createdAt).format('YYYY-MM-DD')]) {
-        newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].number += 1;
+        newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].open += 1;
+        if (ele.status === 'Close') {
+          newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].resolved += 1;
+        }
       }
     });
     setData(
       Object.values(newData).map((ele: any) => {
         return {
-          number: ele.number,
+          open: ele.open,
+          resolved: ele.resolved,
           date: ele.date,
         };
       }),
@@ -89,7 +94,8 @@ export const ProgressLineChart = ({
           }}
           formatter={(value) => <span className="text-secondaryText text-sm">{value}</span>}
         />
-        <Line type="monotone" dataKey="number" stroke="#6366f1" dot={null} />
+        <Line type="monotone" dataKey="resolved" stroke="#19cd37" dot={null} />
+        <Line type="monotone" dataKey="open" stroke="#6366f1" dot={null} />
       </LineChart>
     </ResponsiveContainer>
   );
@@ -100,7 +106,8 @@ const CustomTooltip = ({ active, payload, label }: any) => {
     return (
       <div className="bg-secondaryBackground text-secondaryText font-medium p-3 rounded space-y-1">
         <p>{label}</p>
-        <p>Number: {payload[0].payload.number}</p>
+        <p>Open: {payload[0].payload.open}</p>
+        <p>Resolved: {payload[0].payload.resolved}</p>
       </div>
     );
   }
