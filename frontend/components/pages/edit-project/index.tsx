@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { EditProjectForm } from './EditProjectForm';
-import SecretKey from './SecretKey';
-import { DangerZone } from './DangerZone';
 import { ProjectHeader } from 'components/common/ProjectHeader';
+import { EditProjectForm } from './EditProjectForm';
+import { DangerZone } from './DangerZone';
+import { AccessZone } from './AccessZone';
 
 const EditProjectPageComponent = ({ params, project }) => {
   const [_project, setProject] = useState(project);
@@ -11,14 +11,12 @@ const EditProjectPageComponent = ({ params, project }) => {
       <ProjectHeader id={params.id} name={_project.name} />
       <div className="flex flex-col xl:w-3/4 w-full mx-auto space-y-2 px-4">
         <h2 className="font-medium">Details</h2>
-        <div className="border border-3Background hover:border-4Background bg-stone-900 duration-200 sm:rounded p-1">
-          <EditProjectForm project={project} setProject={setProject} />
-        </div>
+        <EditProjectForm project={project} setProject={setProject} />
       </div>
       <div className="flex flex-col xl:w-3/4 w-full mx-auto space-y-2 px-4">
         <h2 className="font-medium">Access</h2>
-        <div className="border border-3Background hover:border-4Background bg-stone-900 duration-200 sm:rounded py-4">
-          <SecretKey label={'Project token'} value={_project.api_key} />
+        <div className="divide-y divide-3Background border border-3Background hover:border-4Background bg-stone-900 duration-200 sm:rounded py-4">
+          <AccessZone api_key={_project.api_key} />
         </div>
       </div>
       <div className="flex flex-col xl:w-3/4 w-full mx-auto space-y-2 px-4">

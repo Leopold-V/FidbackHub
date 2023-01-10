@@ -3,7 +3,7 @@ on:
   push:
     branches: [master]
 jobs:
-  code-check:
+  frontend-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
