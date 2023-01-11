@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSession } from 'next-auth/react';
 import { projectType } from 'types/index';
 import { ProjectItem } from './ProjectItem';
 
@@ -11,12 +12,13 @@ export const ProjectsList = ({
   setprojects: (projects: projectType[]) => void;
   grid: boolean;
 }) => {
+  const { data: session } = useSession();
   if (grid) {
     return (
       <ul role="list" className="flex sm:flex-row mx-2 flex-wrap flex-col justify-center items-center">
         {projects.map((project) => (
           <div className="m-2 border border-3Background rounded">
-            <ProjectItem project={project} projects={projects} setprojects={setprojects} />
+            <ProjectItem key={project.id} project={project} userId={session.id} />
           </div>
         ))}
       </ul>
@@ -25,7 +27,7 @@ export const ProjectsList = ({
   return (
     <ul role="list" className="divide-y divide-3Background border border-3Background rounded">
       {projects.map((project) => (
-        <ProjectItem project={project} key={project.id} projects={projects} setprojects={setprojects} />
+        <ProjectItem key={project.id} project={project} userId={session.id} />
       ))}
     </ul>
   );

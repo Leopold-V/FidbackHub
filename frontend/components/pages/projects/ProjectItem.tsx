@@ -1,19 +1,16 @@
 import React from 'react';
-import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import Link from 'next/link';
-import { projectType } from 'types/index';
-import { ProjectItemDropdown } from './ProjectItemDropdown';
+import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import { PencilIcon } from '@heroicons/react/24/outline';
+import { projectType } from 'types/index';
 
-export const ProjectItem = ({
-  project,
-  projects,
-  setprojects,
-}: {
-  project: projectType;
-  projects: projectType[];
-  setprojects: (project: projectType[]) => void;
-}) => {
+export const ProjectItem = ({ project, userId }: { project: projectType; userId: number }) => {
+  const isGuest =
+    project.members.find((ele) => {
+      console.log(ele.id, userId);
+      return ele.id === userId;
+    }) && true;
+
   return (
     <li className="relative py-5 pl-4 pr-6 hover:bg-mainBackground bg-zinc-900 duration-150 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
       <div className="flex items-center justify-between space-x-4">
@@ -42,14 +39,21 @@ export const ProjectItem = ({
               </Link>
             </h2>
           </div>
+          {!isGuest && (
+            <span className="inline-flex items-center rounded-full bg-secondaryBackground px-3 py-0.5 text-sm font-medium text-muted">
+              Admin
+            </span>
+          )}
         </div>
         <div className="flex flex-row items-center space-x-3">
-          <Link href={`/project/${project.id}/settings`}>
-            <a className="flex h-8 w-8 items-center justify-center rounded-full text-secondaryText hover:text-indigo-500 duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
-              <PencilIcon className="h-5 w-5" aria-hidden="true" />
-              <span className="sr-only">Open</span>
-            </a>
-          </Link>
+          {!isGuest && (
+            <Link href={`/project/${project.id}/settings`}>
+              <a className="flex h-8 w-8 items-center justify-center rounded-full text-secondaryText hover:text-indigo-500 duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+                <PencilIcon className="h-5 w-5" aria-hidden="true" />
+                <span className="sr-only">Open</span>
+              </a>
+            </Link>
+          )}
           <div className="sm:hidden">
             <a href={project.website_url}>
               <ChevronRightIcon

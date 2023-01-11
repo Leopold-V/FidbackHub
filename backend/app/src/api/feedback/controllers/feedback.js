@@ -123,7 +123,7 @@ module.exports = createCoreController("api::feedback.feedback", ({ strapi }) => 
     try {
       const feedbacks = await strapi.db.query("api::feedback.feedback").findMany({
         where: {
-          id: [...ctx.request.body.data, 4],
+          id: [...ctx.request.body.data],
           project: {
             user: ctx.state.user
           }

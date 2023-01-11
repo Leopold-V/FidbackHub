@@ -49,6 +49,12 @@
       "relation": "oneToMany",
       "target": "api::feedback.feedback",
       "mappedBy": "project"
+    },
+    "members": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "member_of"
     }
   }
 }

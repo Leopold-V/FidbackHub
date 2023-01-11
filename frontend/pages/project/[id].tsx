@@ -22,7 +22,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
       Authorization: 'Bearer ' + jwt,
     },
   });
+
   const project = await data.json();
+  console.log(project);
   return { props: { params, project: project.data.attributes } };
 };
 

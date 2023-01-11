@@ -39,10 +39,19 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
   },
   async findOne(ctx) {
     try {
-      console.log(ctx.state.user);
       const response = await strapi.db.query('api::project.project').findOne({
-        where: {id: ctx.params.id, user: ctx.state.user.id},
-        populate: { user: true, feedbacks: true },
+        where: {
+          id: ctx.params.id,
+          $or: [
+            {
+              user: ctx.state.user.id
+            },
+            {
+              members: ctx.state.user.id
+            }
+          ]
+        },
+        populate: { user: true, feedbacks: true, members: true },
       });
       if (!response) {
         // If project is from another user, we answer with the same message as an unexisting url path to not guess another users project id.
@@ -81,7 +90,10 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
         })
       })
       const project = await strapi.db.query('api::project.project').delete({
-        where: {id: ctx.params.id, user: ctx.state.user.id},
+        where: {
+          id: ctx.params.id,
+          user: ctx.state.user.id
+        },
         populate: { user: true },
       });
       return {data: {id: project.id, attributes: {...project}}, meta: {}};
@@ -93,8 +105,17 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
   async projectUser(ctx) {
     try {
       const response = await strapi.db.query('api::project.project').findMany({
-        where: { user: ctx.state.user.id},
-        populate: { feedbacks: true },
+        where: {
+          $or: [
+            {
+              user: ctx.state.user.id
+            },
+            {
+              members: ctx.state.user.id
+            }
+          ]
+        },
+        populate: { feedbacks: true, members: true },
       });
       return {data: {id: response.id, attributes: {...response}}, meta: {}};
     } catch (error) {

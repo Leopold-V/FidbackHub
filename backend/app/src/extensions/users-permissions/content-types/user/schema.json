@@ -73,6 +73,12 @@
       "type": "string",
       "minLength": 10,
       "maxLength": 255
+    },
+    "member_of": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::project.project",
+      "inversedBy": "members"
     }
   }
 }

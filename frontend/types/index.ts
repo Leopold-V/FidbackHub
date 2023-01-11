@@ -29,6 +29,7 @@ export type projectType = {
   website_url: string;
   feedbacks?: feedbackType[];
   api_key?: string;
+  members?: userType[];
   error?: {
     status: number;
     name: string;
