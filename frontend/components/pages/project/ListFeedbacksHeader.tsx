@@ -21,7 +21,7 @@ export function ListFeedbacksHeader({
   };
 
   return (
-    <div className=" flex justify-between border-b border-3Background p-4">
+    <div className="flex justify-between bg-zinc-900 border-b border-3Background p-4 duration-200 shadow">
       <div className="inline-flex rounded-md divide-x divide-3Background">
         <button
           className="relative inline-flex items-center rounded-l-md bg-secondaryBackground px-2 py-2 border border-3Background focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:z-10 duration-200"

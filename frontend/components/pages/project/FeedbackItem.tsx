@@ -9,11 +9,13 @@ export const FeedbackItem = ({
   setcountchecked,
   checkedFeedbacks,
   setcheckedFeedbacks,
+  projectId,
 }: {
   feedback: feedbackType;
   setcountchecked: (countchecked: number) => void;
   checkedFeedbacks: any;
   setcheckedFeedbacks: (checkedFeedbacks: any) => void;
+  projectId: number;
 }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
@@ -36,7 +38,7 @@ export const FeedbackItem = ({
         data-feedback={feedback.id}
         type="checkbox"
       />
-      <Link href={`http://localhost:3000/feedback/${feedback.id}`}>
+      <Link href={`http://localhost:3000/project/${projectId}?feedback=${feedback.id}`}>
         <div className="cursor-pointer flex items-center justify-between w-full">
           <div className="flex items-center space-x-3 col-span-3">
             <div className="flex flex-col">
