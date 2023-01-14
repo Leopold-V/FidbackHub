@@ -10,11 +10,11 @@ function classNames(...classes) {
 export const SelectState = ({
   selected,
   setselected,
-  listItems
+  listItems,
 }: {
   selected: feedbackStateType;
   setselected: (selected: feedbackStateType) => void;
-  listItems: string[]
+  listItems: string[];
 }) => {
   return (
     <Listbox value={selected} onChange={setselected}>

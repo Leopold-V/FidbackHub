@@ -57,9 +57,7 @@ export const FeedbackItem = ({
         </div>
       </div> */}
           <div className="flex items-center">
-            <span className="text-xs w-full text-right text-muted">
-              {formatDateToDisplay(feedback.createdAt)}
-            </span>
+            <span className="text-xs w-full text-right text-muted">{formatDateToDisplay(feedback.createdAt)}</span>
           </div>
         </div>
       </Link>

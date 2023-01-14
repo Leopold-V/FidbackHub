@@ -118,60 +118,65 @@ export const FeedbackDetails = ({ feedbackId }) => {
 
   return (
     <div className="py-4 px-6 text-sm flex flex-col divide-y divide-3Background">
-
       <div className="grid grid-cols-2 pb-4 gap-3">
         <div className="col-span-1 flex flex-col space-y-4">
           <h3 className="text-left text-xl font-semibold">{feedback.title}</h3>
-          <div className="text-secondaryText">#{feedback.id} Open by <span className="text-mainText">{feedback.author_email}</span></div>
+          <div className="text-secondaryText">
+            #{feedback.id} Open by <span className="text-mainText">{feedback.author_email}</span>
+          </div>
           <div className="space-y-5">
-          <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2">
               <LockOpenIcon className="h-5 w-5 text-green-400" aria-hidden="true" />
               <span className="text-sm font-medium text-green-400">Open - {feedback.type}</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <CalendarIcon className="h-5 w-5 text-muted" aria-hidden="true" />
+              <span className="text-sm font-medium text-muted">
+                Created on <time dateTime="2020-12-02">{formatDateToDisplay(feedback.createdAt)}</time>
+              </span>
+            </div>
           </div>
-          <div className="flex items-center space-x-2">
-            <CalendarIcon className="h-5 w-5 text-muted" aria-hidden="true" />
-            <span className="text-sm font-medium text-muted">
-              Created on <time dateTime="2020-12-02">{formatDateToDisplay(feedback.createdAt)}</time>
-            </span>
-          </div>
-          </div>  
         </div>
         <div className="col-span-1 w-7/12 mx-auto">
-          <Image
-            src={img}
-            alt="Screenshot for the feedback"
-            layout="intrinsic"
-          />
+          <Image src={img} alt="Screenshot for the feedback" layout="intrinsic" />
         </div>
       </div>
-        
+
       <div className="grid grid-cols-2 pb-4 gap-3">
         <div className="col-span-1 flex flex-col space-y-4 py-4">
-            <div className="flex items-center space-x-3 w-full">
-              <span className=" text-secondaryText text-right w-12">Type: </span>
-              <div className="">
-                <SelectState selected={selectedType} setselected={setSelectedType} listItems={listType} />
-              </div>
-            </div>
-            <div className="flex items-center space-x-3 w-full">
-              <span className=" text-secondaryText text-right w-12">State: </span>
-              <div className="">
-                <SelectState selected={selectedState} setselected={setSelectedState} listItems={listState} />
-              </div>
-            </div>
-            <div className="flex items-center space-x-3 w-full">
-              <span className=" text-secondaryText text-right w-12">Status: </span>
-              <div className="">
-                <SelectState selected={selectedStatus} setselected={setSelectedStatus} listItems={listStatus} />
-              </div>
+          <div className="flex items-center space-x-3 w-full">
+            <span className=" text-secondaryText text-right w-12">Type: </span>
+            <div className="">
+              <SelectState selected={selectedType} setselected={setSelectedType} listItems={listType} />
             </div>
           </div>
-          <div className="text-secondaryText col-span-1 flex flex-col justify-between mx-auto py-4">
-            <p>OS: <span className="text-mainText">Windows 10</span></p>
-            <p>Browser:  <span className="text-mainText">Firefox Firefox 108.0</span></p>
-            <p>Resolution:  <span className="text-mainText">1536 x 864</span></p>
-            <p>Viewport:  <span className="text-mainText">1536 x 711</span></p>
+          <div className="flex items-center space-x-3 w-full">
+            <span className=" text-secondaryText text-right w-12">State: </span>
+            <div className="">
+              <SelectState selected={selectedState} setselected={setSelectedState} listItems={listState} />
+            </div>
           </div>
+          <div className="flex items-center space-x-3 w-full">
+            <span className=" text-secondaryText text-right w-12">Status: </span>
+            <div className="">
+              <SelectState selected={selectedStatus} setselected={setSelectedStatus} listItems={listStatus} />
+            </div>
+          </div>
+        </div>
+        <div className="text-secondaryText col-span-1 flex flex-col justify-between mx-auto py-4">
+          <p>
+            OS: <span className="text-mainText">Windows 10</span>
+          </p>
+          <p>
+            Browser: <span className="text-mainText">Firefox Firefox 108.0</span>
+          </p>
+          <p>
+            Resolution: <span className="text-mainText">1536 x 864</span>
+          </p>
+          <p>
+            Viewport: <span className="text-mainText">1536 x 711</span>
+          </p>
+        </div>
       </div>
 
       <div className="pt-4 flex space-x-4 justify-center w-full">
@@ -192,7 +197,6 @@ export const FeedbackDetails = ({ feedbackId }) => {
     </div>
   );
 };
-
 
 /*
 Session Environment
