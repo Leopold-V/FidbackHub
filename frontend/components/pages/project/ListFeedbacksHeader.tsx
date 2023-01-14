@@ -38,15 +38,15 @@ export function ListFeedbacksHeader({
         </button>
         <button
           className="relative inline-flex items-center rounded-r-md bg-secondaryBackground px-2 py-2 border border-3Background focus:outline-none focus:ring-2 focus:ring-indigo-500 duration-200"
-          data-status="Close"
+          data-status="Closed"
           onClick={handleClickStatus}
         >
           <span
             className={`duration-200 hover:text-mainText text-sm font-medium ${
-              filterStatus === 'Close' ? 'text-mainText' : 'text-gray-400'
+              filterStatus === 'Closed' ? 'text-mainText' : 'text-gray-400'
             }`}
           >
-            Close
+            Closed
           </span>
         </button>
       </div>

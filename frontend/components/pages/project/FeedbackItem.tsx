@@ -1,6 +1,6 @@
-import dayjs from 'dayjs';
 import React, { ChangeEvent } from 'react';
 import Link from 'next/link';
+import { formatDateToDisplay } from '../../../utils/formatDate';
 import { feedbackType } from 'types/index';
 import { EnvelopeIcon } from '@heroicons/react/20/solid';
 
@@ -43,7 +43,7 @@ export const FeedbackItem = ({
           <div className="flex items-center space-x-3 col-span-3">
             <div className="flex flex-col">
               <div className="text-sm mb-0 sm:mb-2">{feedback.title}</div>
-              <div className="sm:flex items-center hidden text-gray-400">
+              <div className="sm:flex items-center hidden text-muted">
                 <EnvelopeIcon className="h-4 w-4" aria-hidden="true" />
                 <span className="text-sm ml-2">{feedback.author_email}</span>
               </div>
@@ -57,8 +57,8 @@ export const FeedbackItem = ({
         </div>
       </div> */}
           <div className="flex items-center">
-            <span className="sm:text-sm text-xs w-full text-right text-gray-400">
-              {dayjs(feedback.createdAt).format('llll').toString()}
+            <span className="text-xs w-full text-right text-muted">
+              {formatDateToDisplay(feedback.createdAt)}
             </span>
           </div>
         </div>

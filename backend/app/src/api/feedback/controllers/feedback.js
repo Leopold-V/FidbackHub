@@ -2,7 +2,6 @@
 /**
  * feedback controller
  */
-const dayjs = require('dayjs');
 const utils = require("@strapi/utils");
 const { ApplicationError } = utils.errors;
 const { createCoreController } = require("@strapi/strapi").factories;

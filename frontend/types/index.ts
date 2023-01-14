@@ -47,6 +47,7 @@ export type feedbackType = {
   author_email: string;
   status: feedbackStatusType;
   state: feedbackStateType;
+  type: feedbackTypeType;
   screenshot?: string;
   user_ipv4?: string;
   createdAt?: Date;
@@ -80,6 +81,14 @@ type strapiErrorDetailType = {
 /**
  * The current **state** of a feedback
  */
-export type feedbackStatusType = 'Open' | 'Close';
+export type feedbackStatusType = 'Open' | 'Closed';
 
-export type feedbackStateType = 'New' | 'In progress' | 'Confirmed' | 'Rejected';
+/**
+ * The current **status** of a feedback
+ */
+export type feedbackStateType = 'New' | 'In progress' | 'Resolved' | 'Rejected';
+
+/**
+ * The possible **type** of a feedback
+ */
+export type feedbackTypeType = 'General feedback' | 'Bug report' | 'Feature request';

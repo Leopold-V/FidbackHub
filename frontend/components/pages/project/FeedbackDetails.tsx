@@ -1,22 +1,31 @@
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import { updateFeedback } from '../../../services/feedback.service';
 import { toast } from 'react-toastify';
-import { InputDecorators } from 'components/common/InputDecorators';
+import { CalendarIcon, LockOpenIcon } from '@heroicons/react/20/solid';
+import { deleteFeedback, updateFeedback } from '../../../services/feedback.service';
+import { formatDateToDisplay } from '../../../utils/formatDate';
+import { feedbackStateType, feedbackStatusType, feedbackTypeType } from 'types/index';
 import { Spinner } from 'components/common/Spinner';
 import { Button, ButtonDelete } from 'components/common/Button';
 import { Modal } from 'components/common/Modal';
-import { SelectState } from './SelectState';
-import { feedbackColor } from '../../../utils/feedback';
-import dayjs from 'dayjs';
+import { SelectState } from '../../common/SelectState';
 
-const message = `Are you sure you want to close this feedback? The feedback will be permanently
-closed. This action cannot be undone.`;
+import img from 'public/images/screenshot_example.png';
+
+const listState: feedbackStateType[] = ['New', 'In progress', 'Resolved', 'Rejected'];
+const listStatus: feedbackStatusType[] = ['Open', 'Closed'];
+const listType: feedbackTypeType[] = ['Bug report', 'Feature request', 'General feedback'];
+
+const message = `Are you sure you want to dleete this feedback? The feedback will be permanently
+removed. This action cannot be undone.`;
 
 export const FeedbackDetails = ({ feedbackId }) => {
   const { data: session } = useSession();
   const [loadingUpdate, setloadingUpdate] = useState(false);
   const [selectedState, setSelectedState] = useState(null);
+  const [selectedType, setSelectedType] = useState(null);
+  const [selectedStatus, setSelectedStatus] = useState(null);
   const [loading, setloading] = useState(true);
   const [error, seterror] = useState<boolean | string>(false);
   const [open, setopen] = useState(false);
@@ -28,11 +37,11 @@ export const FeedbackDetails = ({ feedbackId }) => {
     description: null,
     status: null,
     state: null,
+    type: null,
     author_email: null,
     api_key: null,
     project: null,
   });
-  const [currentstatus, setcurrentstatus] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -53,7 +62,8 @@ export const FeedbackDetails = ({ feedbackId }) => {
             id: feedbackData.data.id,
           });
           setSelectedState(feedbackData.data.attributes.state);
-          setcurrentstatus(feedbackData.data.attributes.status);
+          setSelectedStatus(feedbackData.data.attributes.status);
+          setSelectedType(feedbackData.data.attributes.type);
         }
       } catch (error) {
         seterror(error.message);
@@ -62,10 +72,6 @@ export const FeedbackDetails = ({ feedbackId }) => {
       }
     })();
   }, [feedbackId]);
-
-  const handleClickToClose = () => {
-    setopen(true);
-  };
 
   const handleUpdateStateFeedback = async () => {
     setloadingUpdate(true);
@@ -78,17 +84,21 @@ export const FeedbackDetails = ({ feedbackId }) => {
       setloadingUpdate(false);
     }
   };
-  const handleCloseFeedback = async () => {
+
+  const handleDeleteFeedback = async () => {
     setloadingUpdate(true);
     try {
-      await updateFeedback({ ...feedback, status: 'Close' }, session.jwt);
-      toast.success(`Feedback closed!`);
-      setcurrentstatus('Close');
+      await deleteFeedback(feedbackId, session.jwt);
+      toast.success(`Feedback deleted!`);
     } catch (error) {
       toast.error(error.message);
     } finally {
       setloadingUpdate(false);
     }
+  };
+
+  const handleClickToClose = () => {
+    setopen(true);
   };
 
   // TODO: SKELETON LOADING
@@ -107,43 +117,100 @@ export const FeedbackDetails = ({ feedbackId }) => {
     );
 
   return (
-    <div className="py-4 px-3 text-sm space-y-3 flex flex-col items-center w-full">
-      <h2 className="text-center text-base">{feedback.title}</h2>
-      <p className="text-muted text-xs">{dayjs(feedback.createdAt).format('llll').toString()}</p>
-      <p>{feedback.description}</p>
-      {feedback.status === 'Open' ? (
-        <SelectState selected={selectedState} setselected={setSelectedState} />
-      ) : (
-        <span
-          className={`text-${feedbackColor(feedback.state)}-800 px-2.5 py-0.5 bg-${feedbackColor(
-            feedback.state,
-          )}-200 rounded-full text-sm`}
-        >
-          {feedback.state}
-        </span>
-      )}
-      <p>{feedback.author_email}</p>
-      <div className="flex flex-col sm:flex-row justify-center items-center py-4 items sm:space-x-4 spacex-x-0 sm:space-y-0  space-y-4">
-        {currentstatus === 'Open' ? (
-          <>
-            <Button disabled={loadingUpdate} onClick={handleUpdateStateFeedback}>
-              Save
-            </Button>
-            <ButtonDelete type="submit" onClick={handleClickToClose} disabled={loadingUpdate}>
-              Close feedback
-            </ButtonDelete>
-          </>
-        ) : (
-          <p>This fidback is close.</p>
-        )}
+    <div className="py-4 px-6 text-sm flex flex-col divide-y divide-3Background">
+
+      <div className="grid grid-cols-2 pb-4 gap-3">
+        <div className="col-span-1 flex flex-col space-y-4">
+          <h3 className="text-left text-xl font-semibold">{feedback.title}</h3>
+          <div className="text-secondaryText">#{feedback.id} Open by <span className="text-mainText">{feedback.author_email}</span></div>
+          <div className="space-y-5">
+          <div className="flex items-center space-x-2">
+              <LockOpenIcon className="h-5 w-5 text-green-400" aria-hidden="true" />
+              <span className="text-sm font-medium text-green-400">Open - {feedback.type}</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <CalendarIcon className="h-5 w-5 text-muted" aria-hidden="true" />
+            <span className="text-sm font-medium text-muted">
+              Created on <time dateTime="2020-12-02">{formatDateToDisplay(feedback.createdAt)}</time>
+            </span>
+          </div>
+          </div>  
+        </div>
+        <div className="col-span-1 w-7/12 mx-auto">
+          <Image
+            src={img}
+            alt="Screenshot for the feedback"
+            layout="intrinsic"
+          />
+        </div>
+      </div>
+        
+      <div className="grid grid-cols-2 pb-4 gap-3">
+        <div className="col-span-1 flex flex-col space-y-4 py-4">
+            <div className="flex items-center space-x-3 w-full">
+              <span className=" text-secondaryText text-right w-12">Type: </span>
+              <div className="">
+                <SelectState selected={selectedType} setselected={setSelectedType} listItems={listType} />
+              </div>
+            </div>
+            <div className="flex items-center space-x-3 w-full">
+              <span className=" text-secondaryText text-right w-12">State: </span>
+              <div className="">
+                <SelectState selected={selectedState} setselected={setSelectedState} listItems={listState} />
+              </div>
+            </div>
+            <div className="flex items-center space-x-3 w-full">
+              <span className=" text-secondaryText text-right w-12">Status: </span>
+              <div className="">
+                <SelectState selected={selectedStatus} setselected={setSelectedStatus} listItems={listStatus} />
+              </div>
+            </div>
+          </div>
+          <div className="text-secondaryText col-span-1 flex flex-col justify-between mx-auto py-4">
+            <p>OS: <span className="text-mainText">Windows 10</span></p>
+            <p>Browser:  <span className="text-mainText">Firefox Firefox 108.0</span></p>
+            <p>Resolution:  <span className="text-mainText">1536 x 864</span></p>
+            <p>Viewport:  <span className="text-mainText">1536 x 711</span></p>
+          </div>
+      </div>
+
+      <div className="pt-4 flex space-x-4 justify-center w-full">
+        <Button disabled={loadingUpdate} onClick={handleUpdateStateFeedback}>
+          Save
+        </Button>
+        <ButtonDelete type="submit" onClick={handleClickToClose} disabled={loadingUpdate}>
+          Delete
+        </ButtonDelete>
       </div>
       <Modal
         open={open}
         setopen={setopen}
-        handleConfirm={handleCloseFeedback}
-        title="Close a feedback"
+        handleConfirm={handleDeleteFeedback}
+        title="Delete a feedback"
         message={message}
       />
     </div>
   );
 };
+
+
+/*
+Session Environment
+
+Website
+http://localhost:3000/projects
+OS
+	Windows Windows 10
+Browser
+	Firefox Firefox 108.0
+Resolution
+	
+1536 x 864
+Viewport
+	1536 x 711
+Pixel Ratio
+	@1.25x
+Zoom
+	100%
+
+*/

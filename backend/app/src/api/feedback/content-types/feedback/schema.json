@@ -42,7 +42,7 @@
       "enum": [
         "New",
         "In progress",
-        "Confirmed",
+        "Resolved",
         "Rejected"
       ],
       "default": "New",
@@ -62,8 +62,17 @@
       "type": "enumeration",
       "enum": [
         "Open",
-        "Close"
+        "Closed"
       ]
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "General feedback",
+        "Bug report",
+        "Feature request"
+      ],
+      "required": true
     }
   }
 }

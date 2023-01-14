@@ -99,7 +99,7 @@ export const FeedbacksSection = ({
             pageLength={pageLength}
           />
         </div>
-        <div className="col-span-5">
+        <div className="col-span-3 border-r border-3Background">
           <FeedbackDetails feedbackId={query.feedback || feedbacks[0].id} />
         </div>
       </div>
