@@ -3,7 +3,6 @@ import { userType } from 'types/index';
 import { StatsFeed } from './StatsFeed';
 import { ProfileColumn } from './ProfileColumn';
 import { ProjectsColumn } from './ProjectsColumn';
-import { PageHeader } from 'components/common/PageHeader';
 
 const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType; userProjects: any[] }) => {
   const profile = {
@@ -33,7 +32,6 @@ const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType;
 
   return (
     <div className="flex flex-col items-center space-y-4 pb-8">
-      <PageHeader label={'Overview'} />
       <div className="mx-auto w-full max-w-7xl lg:flex xl:px-8">
         <div className="min-w-0 flex-1 xl:flex">
           <ProfileColumn profile={profile} projectsNumber={projects.length} />

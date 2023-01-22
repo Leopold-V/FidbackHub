@@ -25,9 +25,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       <SessionProvider session={session}>
         {router.pathname !== '/' ? (
           <ProtectedRoute>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
+            <Component {...pageProps} />
           </ProtectedRoute>
         ) : (
           <Component {...pageProps} />

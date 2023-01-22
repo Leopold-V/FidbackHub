@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import { CalendarIcon, LockOpenIcon } from '@heroicons/react/20/solid';
@@ -17,11 +18,12 @@ const listState: feedbackStateType[] = ['New', 'In progress', 'Resolved', 'Rejec
 const listStatus: feedbackStatusType[] = ['Open', 'Closed'];
 const listType: feedbackTypeType[] = ['Bug report', 'Feature request', 'General feedback'];
 
-const message = `Are you sure you want to dleete this feedback? The feedback will be permanently
+const message = `Are you sure you want to delete this feedback? The feedback will be permanently
 removed. This action cannot be undone.`;
 
-export const FeedbackDetails = ({ feedbackId }) => {
+export const FeedbackDetails = ({ feedbackId, feedbacks, setfeedbacks, projectId }) => {
   const { data: session } = useSession();
+  const router = useRouter();
   const [loadingUpdate, setloadingUpdate] = useState(false);
   const [selectedState, setSelectedState] = useState(null);
   const [selectedType, setSelectedType] = useState(null);
@@ -44,39 +46,45 @@ export const FeedbackDetails = ({ feedbackId }) => {
   });
 
   useEffect(() => {
-    (async () => {
-      setloading(true);
-      try {
-        const reponse = await fetch(`http://localhost:3000/api/feedbacks/${feedbackId}`, {
-          headers: {
-            authorization: 'Bearer ' + session.jwt,
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-        });
-        const feedbackData = await reponse.json();
-        if (feedbackData.data.attributes) {
-          setfeedback({
-            ...feedbackData.data.attributes,
-            api_key: feedbackData.data.attributes.project.api_key,
-            id: feedbackData.data.id,
+    if (feedbackId) {
+      (async () => {
+        setloading(true);
+        try {
+          const reponse = await fetch(`http://localhost:3000/api/feedbacks/${feedbackId}`, {
+            headers: {
+              authorization: 'Bearer ' + session.jwt,
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
           });
-          setSelectedState(feedbackData.data.attributes.state);
-          setSelectedStatus(feedbackData.data.attributes.status);
-          setSelectedType(feedbackData.data.attributes.type);
+          const feedbackData = await reponse.json();
+          if (feedbackData.data.attributes) {
+            setfeedback({
+              ...feedbackData.data.attributes,
+              api_key: feedbackData.data.attributes.project.api_key,
+              id: feedbackData.data.id,
+            });
+            setSelectedState(feedbackData.data.attributes.state);
+            setSelectedStatus(feedbackData.data.attributes.status);
+            setSelectedType(feedbackData.data.attributes.type);
+          }
+        } catch (error) {
+          seterror(error.message);
+        } finally {
+          setloading(false);
         }
-      } catch (error) {
-        seterror(error.message);
-      } finally {
-        setloading(false);
-      }
-    })();
+      })();
+    }
   }, [feedbackId]);
 
   const handleUpdateStateFeedback = async () => {
     setloadingUpdate(true);
     try {
-      await updateFeedback({ ...feedback, state: selectedState }, session.jwt);
+      await updateFeedback({ ...feedback, state: selectedState, status: selectedStatus, type: selectedType }, session.jwt);
+      const indexOfeedback = feedbacks.findIndex((ele) => ele.id === +feedbackId);
+      const newFeedbacks = [...feedbacks];
+      newFeedbacks[indexOfeedback] = { ...feedback, state: selectedState, status: selectedStatus, type: selectedType };
+      setfeedbacks(newFeedbacks);
       toast.success(`Feedback updated!`);
     } catch (error) {
       toast.error(error.message);
@@ -89,6 +97,8 @@ export const FeedbackDetails = ({ feedbackId }) => {
     setloadingUpdate(true);
     try {
       await deleteFeedback(feedbackId, session.jwt);
+      setfeedbacks((feedbacks) => ([...feedbacks].filter((ele) => ele.id !== +feedbackId)));
+      router.push(`http://localhost:3000/project/${projectId}`);
       toast.success(`Feedback deleted!`);
     } catch (error) {
       toast.error(error.message);
@@ -100,6 +110,14 @@ export const FeedbackDetails = ({ feedbackId }) => {
   const handleClickToClose = () => {
     setopen(true);
   };
+
+  if (!feedbackId) {
+    return (
+      <div className="flex flex-col h-full justify-center items-center space-y-8">
+        <h1 className="text-lg font-semibold ">No feedback found!</h1>
+      </div>
+    );
+  }
 
   // TODO: SKELETON LOADING
   if (loading)
@@ -130,8 +148,8 @@ export const FeedbackDetails = ({ feedbackId }) => {
               <span className="text-sm font-medium text-green-400">Open - {feedback.type}</span>
             </div>
             <div className="flex items-center space-x-2">
-              <CalendarIcon className="h-5 w-5 text-muted" aria-hidden="true" />
-              <span className="text-sm font-medium text-muted">
+              <CalendarIcon className="h-5 w-5 text-secondary" aria-hidden="true" />
+              <span className=" text-secondaryText">
                 Created on <time dateTime="2020-12-02">{formatDateToDisplay(feedback.createdAt)}</time>
               </span>
             </div>

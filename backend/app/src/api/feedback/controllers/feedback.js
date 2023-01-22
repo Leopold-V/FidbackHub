@@ -98,8 +98,7 @@ module.exports = createCoreController("api::feedback.feedback", ({ strapi }) => 
           feedbacks: {
             id: {
               $contains: ctx.params.id
-            },
-            status: "Open"
+            }
           },
           user: ctx.state.user.id
         },

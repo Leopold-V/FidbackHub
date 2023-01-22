@@ -1,60 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
+import React from 'react';
 import Head from 'next/head';
 import { getUser } from '../services/user.service';
 import { getProjectsFromUser } from '../services/project.service';
 import Page from 'components/pages/projects';
-import { Spinner } from 'components/common/Spinner';
-import { PageHeader } from 'components/common/PageHeader';
+import Layout from 'components/layout';
+import { getSession } from 'next-auth/react';
+import { GetServerSideProps } from 'next/types';
 
-const ProjectsPage = () => {
-  const { data: session } = useSession();
-  const [userProjects, setuserProjects] = useState([]);
-  const [userData, setuserData] = useState(null);
-  const [loading, setloading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const userData = await getUser(session.id, session.jwt);
-        setuserData(userData);
-        const projects = await getProjectsFromUser(session.jwt);
-        setuserProjects(Object.values(projects.data.attributes));
-        setloading(false);
-      } catch (error) {
-        setError('Error server, please retry later or contact the administrator if the problem persist.');
-        setloading(false);
-      }
-    })();
-  }, []);
-
-  // TODO: build a skeleton page for loading ?
-  if (loading) {
-    return (
-      <div className="flex flex-col items-center space-y-8">
-        <PageHeader label={'Overview'} />
-        <Spinner />
-        <h1 className="text-lg font-semibold">Loading your data...</h1>
-      </div>
-    );
-  }
-  if (error) {
-    return (
-      <div className="flex flex-col items-center space-y-8">
-        <PageHeader label={'Overview'} />
-        <h1 className="mt-2 font-semibold">Error: {error}</h1>
-      </div>
-    );
-  }
+const ProjectsPage = ({ listProjects, userData}) => {
+  console.log(listProjects);
+  
   return (
     <>
       <Head>
         <title>Projects</title>
       </Head>
-      <Page userData={userData} userProjects={userProjects} />
+      <Layout listProjects={listProjects} >
+        <Page userData={userData} userProjects={listProjects} />
+      </Layout>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+  const userData = await getUser(session.id, session.jwt);
+  const listProjects = await getProjectsFromUser(session.jwt);
+  return { props: { userData: userData, listProjects: Object.values(listProjects.data.attributes) } };
 };
 
 export default ProjectsPage;

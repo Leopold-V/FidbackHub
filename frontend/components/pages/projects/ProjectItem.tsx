@@ -7,7 +7,6 @@ import { projectType } from 'types/index';
 export const ProjectItem = ({ project, userId }: { project: projectType; userId: number }) => {
   const isGuest =
     project.members.find((ele) => {
-      console.log(ele.id, userId);
       return ele.id === userId;
     }) && true;
 

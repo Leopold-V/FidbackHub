@@ -3,14 +3,18 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { getSession } from 'next-auth/react';
 import Page from 'components/pages/features';
+import Layout from 'components/layout';
+import { getProjectsFromUser } from '../../../services/project.service';
 
-const FeaturesPage = ({ params, project }) => {
+const FeaturesPage = ({ params, project, listProjects }) => {
   return (
     <>
       <Head>
         <title>Features request</title>
       </Head>
-      <Page params={params} project={project} />
+      <Layout listProjects={listProjects} id={params.id} name={project.name} >
+        <Page project={project} />
+      </Layout>
     </>
   );
 };
@@ -22,8 +26,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
       Authorization: 'Bearer ' + jwt,
     },
   });
-  const project = await data.json();
-  return { props: { params, project: project.data.attributes } };
+  const currentProject = await data.json();
+  const listProjects = await getProjectsFromUser(jwt);
+  return { props: { params, project: currentProject.data.attributes, listProjects: listProjects.data.attributes } };
 };
 
 export default FeaturesPage;

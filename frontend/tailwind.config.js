@@ -13,7 +13,7 @@ module.exports = {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        main: '#6366f1',
+        main: '#4f46e5',
         mainBackground: '#1f2023',
         secondaryBackground: '#303136',
         '3Background': '#3d3d43',

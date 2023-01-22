@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Page from 'components/pages/project-creation';
+import Layout from 'components/layout';
 
 const ProjectCreationPage = () => {
   return (
@@ -8,7 +9,9 @@ const ProjectCreationPage = () => {
       <Head>
         <title>Project Creation</title>
       </Head>
-      <Page />
+      <Layout>
+        <Page />
+      </Layout>
     </>
   );
 };

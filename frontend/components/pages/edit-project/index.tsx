@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import { ProjectHeader } from 'components/common/ProjectHeader';
 import { EditProjectForm } from './EditProjectForm';
 import { DangerZone } from './DangerZone';
 import { AccessZone } from './AccessZone';
 
-const EditProjectPageComponent = ({ params, project }) => {
+const EditProjectPageComponent = ({ project }) => {
   const [_project, setProject] = useState(project);
   return (
     <div className="flex flex-col items-center space-y-8 pb-8">
-      <ProjectHeader id={params.id} name={_project.name} />
       <div className="flex flex-col xl:w-3/4 w-full mx-auto space-y-2 px-4">
         <h2 className="font-medium">Details</h2>
         <EditProjectForm project={project} setProject={setProject} />

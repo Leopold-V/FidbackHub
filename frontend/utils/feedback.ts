@@ -6,7 +6,7 @@ export const feedbackColor = (state: feedbackStateType) => {
       return 'blue';
     case 'In progress':
       return 'yellow';
-    case 'Confirmed':
+    case 'Resolved':
       return 'green';
     case 'Rejected':
       return 'red';

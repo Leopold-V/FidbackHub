@@ -7,8 +7,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   } else if (req.method === 'GET') {
     const data = await getFeedback(req, res);
     return res.status(200).json({ ...data });
+  } else if (req.method === 'DELETE') {
+    const data = await deleteFeedback(req, res);
+    return res.status(200).json({ ...data });
   } else {
-    res.status(404).json({ message: 'Ressource not found' });
+    res.status(404).json({ error: {message: 'Ressource not found'} });
   }
 }
 
@@ -40,17 +43,16 @@ const updateFeedback = async (req: NextApiRequest, res: NextApiResponse) => {
   return json;
 };
 
-/*
-  const deleteFeedback = async (req: NextApiRequest, res: NextApiResponse) => {
-    const data = await fetch(`http://localhost:1337/api/feedbacks/${req.query.id}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: req.headers.authorization,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    });
-    const json = await data.json();
-    return json;
-  };
-*/
+const deleteFeedback = async (req: NextApiRequest, res: NextApiResponse) => {
+  const data = await fetch(`http://localhost:1337/api/feedbacks/${req.query.id}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: req.headers.authorization,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+  const json = await data.json();
+  return json;
+};
+

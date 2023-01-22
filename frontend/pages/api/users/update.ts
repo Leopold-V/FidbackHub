@@ -5,7 +5,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const data = await updateUser(req, res);
     return res.status(200).json({ ...data });
   } else {
-    res.status(404).json({ message: 'Ressource not found' });
+    res.status(404).json({ error: 'Ressource not found' });
   }
 }
 

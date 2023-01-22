@@ -3,21 +3,22 @@ import Head from 'next/head';
 import { getSession } from 'next-auth/react';
 import { GetServerSideProps } from 'next/types';
 import Page from 'components/pages/documentation/index.mdx';
-import { PageHeader } from 'components/common/PageHeader';
-import { ProjectHeader } from 'components/common/ProjectHeader';
+import Layout from 'components/layout';
+import { getProjectsFromUser } from '../../../services/project.service';
 
-const DocumentationPage = ({ params, project }) => {
+const DocumentationPage = ({ params, project, listProjects }) => {
   return (
     <>
       <Head>
         <title>Documentation</title>
       </Head>
+      <Layout listProjects={listProjects} id={params.id} name={project.name} >
       <div className="flex flex-col items-center space-y-8 pb-8">
-        <ProjectHeader id={params.id} name={project.name} />
         <article className="prose prose-mainText prose-a:text-blue-600 hover:prose-a:text-blue-500">
-          <Page params={params} project={project} />
+          <Page project={project} />
         </article>
       </div>
+      </Layout>
     </>
   );
 };
@@ -29,8 +30,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
       Authorization: 'Bearer ' + jwt,
     },
   });
-  const project = await data.json();
-  return { props: { params, project: project.data.attributes } };
+  const currentProject = await data.json();
+  const listProjects = await getProjectsFromUser(jwt);
+  return { props: { params, project: currentProject.data.attributes, listProjects: listProjects.data.attributes } };
 };
 
 export default DocumentationPage;

@@ -53,6 +53,7 @@ export const FeedbacksSection = ({
   }, [filterStatus, filterSearch, feedbacks]);
 
   useEffect(() => {
+    console.log(feedbacksSorted);
     setFeedbacksToDisplay(
       feedbacksSorted.slice(
         currentPageFirstFeedbacksIndex * pageIndex,
@@ -100,7 +101,7 @@ export const FeedbacksSection = ({
           />
         </div>
         <div className="col-span-3 border-r border-3Background">
-          <FeedbackDetails feedbackId={query.feedback || feedbacks[0].id} />
+          <FeedbackDetails feedbackId={query.feedback || feedbacksSorted[0]?.id} feedbacks={feedbacks} setfeedbacks={setfeedbacks} projectId={projectId} />
         </div>
       </div>
     </div>
