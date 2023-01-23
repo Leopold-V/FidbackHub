@@ -13,13 +13,13 @@ const EditProjectPageComponent = ({ project }) => {
       </div>
       <div className="flex flex-col xl:w-3/4 w-full mx-auto space-y-2 px-4">
         <h2 className="font-medium">Access</h2>
-        <div className="divide-y divide-3Background border border-3Background hover:border-4Background bg-stone-900 duration-200 sm:rounded p-1">
+        <div className="divide-y divide-3Background border border-3Background hover:border-4Background bg-mainBackground duration-200 sm:rounded p-1">
           <AccessZone project={project} />
         </div>
       </div>
       <div className="flex flex-col xl:w-3/4 w-full mx-auto space-y-2 px-4">
         <h2 className="font-medium text-red-500">Danger zone</h2>
-        <div className="border border-red-500 bg-stone-900 duration-200 sm:rounded p-1">
+        <div className="border border-red-500 bg-mainBackground duration-200 sm:rounded p-1">
           <DangerZone projectId={_project.id} />
         </div>
       </div>

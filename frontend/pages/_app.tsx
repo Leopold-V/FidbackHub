@@ -23,7 +23,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <link rel="shortcut icon" href="/images/favicon.ico" />
       </Head>
       <SessionProvider session={session}>
-        {router.pathname !== '/' ? (
+        {router.pathname !== ('/' && '/project-creation') ? (
           <ProtectedRoute>
             <Component {...pageProps} />
           </ProtectedRoute>

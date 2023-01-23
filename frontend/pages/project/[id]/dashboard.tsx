@@ -12,7 +12,7 @@ const DashboardPage = ({ params, project, listProjects }) => {
       <Head>
         <title>Project settings</title>
       </Head>
-      <Layout listProjects={listProjects} id={params.id} name={project.name} >
+      <Layout listProjects={listProjects} id={params.id} name={project.name}>
         <Page project={project} />
       </Layout>
     </>

@@ -45,7 +45,7 @@ export const EditProjectForm = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="border border-3Background hover:border-4Background bg-stone-900 duration-200 sm:rounded p-1 divide-y divide-3Background"
+      className="border border-3Background hover:border-4Background bg-mainBackground duration-200 sm:rounded p-1 divide-y divide-3Background"
     >
       <InputDecorators label="Project name">
         <Input

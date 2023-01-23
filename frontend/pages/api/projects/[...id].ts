@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const data = await deleteProject(req, res);
     return res.status(200).json({ ...data });
   } else {
-    res.status(404).json({ error: {message: 'Ressource not found'} });
+    res.status(404).json({ error: { message: 'Ressource not found' } });
   }
 }
 

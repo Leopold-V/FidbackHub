@@ -20,7 +20,7 @@ export function SearchFeedback({ initCheckedFeedbacks, filterSearch, setfilterSe
           <input
             id="search"
             name="search"
-            className="block w-full rounded-md border border-transparent duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-4Background bg-opacity-25 py-2 pl-10 pr-3 leading-5 text-secondaryPrimary placeholder-muted focus:placeholder-gray-500 outline-none sm:text-sm"
+            className="block w-full rounded-md border border-3Background duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-secondaryBackground py-2 pl-10 pr-3 leading-5 text-secondaryPrimary placeholder-muted focus:placeholder-gray-500 outline-none sm:text-sm"
             placeholder="Search feedback"
             type="search"
             value={filterSearch}

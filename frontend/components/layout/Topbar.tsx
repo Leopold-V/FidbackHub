@@ -29,7 +29,7 @@ export const Topbar = () => {
                 <div className="flex-shrink-0">
                   <img
                     className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=300"
+                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                     alt="Avisitor logo"
                   />
                 </div>
@@ -59,13 +59,13 @@ export const Topbar = () => {
                         </a>
                       </Link>
                     ))}
-                    <Link href={'/project-creation'} key={'999'}> 
-                      <div className="text-mainText bg-main text-sm cursor-pointer hover:text-mainText px-3 py-2 border-indigo-500 border rounded flex items-center space-x-1 duration-200">
+                    <Link href={'/project-creation'} key={'999'}>
+                      <div className="text-mainText bg-main text-sm cursor-pointer hover:text-mainText px-3 py-2 border-indigo-600 hover:bg-indigo-500 border rounded flex items-center space-x-1 duration-200">
                         <span>New project</span>
                         <span className="sr-only">Create new project</span>
                       </div>
                     </Link>
-                    <button className="flex rounded-full p-1 text-secondaryText hover:text-mainText focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-700">
+                    <button className="flex rounded-full p-1 text-secondaryText hover:text-mainText focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:ring-offset-1 focus:ring-offset-indigo-500">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -86,7 +86,7 @@ export const Topbar = () => {
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-4 flex-shrink-0">
                     <div>
-                      <Menu.Button className="flex rounded-full bg-indigo-700 text-sm text-maintext focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-700">
+                      <Menu.Button className="flex rounded-full bg-indigo-700 text-sm text-maintext focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:ring-offset-1 focus:ring-offset-indigo-500">
                         <span className="sr-only">Open user menu</span>
                         <img className="h-8 w-8 rounded-full" src={session?.user.image} alt="User avatar" />
                       </Menu.Button>

@@ -11,7 +11,7 @@ export const ProjectItem = ({ project, userId }: { project: projectType; userId:
     }) && true;
 
   return (
-    <li className="relative py-5 pl-4 pr-6 hover:bg-mainBackground bg-zinc-900 duration-150 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
+    <li className="relative py-5 pl-4 pr-6 hover:bg-mainBackground bg-mainBackground duration-150 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
       <div className="flex items-center justify-between space-x-4">
         {/* Repo name and link */}
         <div className="min-w-0 space-x-3 flex flex-row">

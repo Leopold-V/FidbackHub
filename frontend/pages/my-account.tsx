@@ -8,14 +8,14 @@ import Page from 'components/pages/my-account';
 import Layout from 'components/layout';
 import { getProjectsFromUser } from '../services/project.service';
 
-const MyAccountPage = ({ profile, listProjects }: { profile: userType, listProjects: projectType[]}) => {
+const MyAccountPage = ({ profile, listProjects }: { profile: userType; listProjects: projectType[] }) => {
   return (
     <>
       <Head>
         <title>My Account</title>
       </Head>
       <Layout listProjects={listProjects}>
-      <Page profile={profile} />
+        <Page profile={profile} />
       </Layout>
     </>
   );
@@ -28,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   return {
     props: {
       profile,
-      listProjects: listProjects.data.attributes
+      listProjects: listProjects.data.attributes,
     },
   };
 };

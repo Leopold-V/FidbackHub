@@ -5,7 +5,7 @@ export const DividerTitle = ({ title }: { title: string }) => {
         <div className="w-full border-t border-3Background" />
       </div>
       <div className="relative flex justify-center">
-        <span className="px-3 text-lg font-medium bg-mainBackground">{title}</span>
+        <span className="px-3 text-lg font-medium bg-zinc-900">{title}</span>
       </div>
     </div>
   );

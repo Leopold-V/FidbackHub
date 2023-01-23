@@ -12,12 +12,12 @@ const DocumentationPage = ({ params, project, listProjects }) => {
       <Head>
         <title>Documentation</title>
       </Head>
-      <Layout listProjects={listProjects} id={params.id} name={project.name} >
-      <div className="flex flex-col items-center space-y-8 pb-8">
-        <article className="prose prose-mainText prose-a:text-blue-600 hover:prose-a:text-blue-500">
-          <Page project={project} />
-        </article>
-      </div>
+      <Layout listProjects={listProjects} id={params.id} name={project.name}>
+        <div className="flex flex-col items-center space-y-8 pb-8">
+          <article className="prose prose-mainText prose-a:text-blue-600 hover:prose-a:text-blue-500">
+            <Page project={project} />
+          </article>
+        </div>
       </Layout>
     </>
   );

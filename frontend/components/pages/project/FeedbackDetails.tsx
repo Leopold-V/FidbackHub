@@ -80,7 +80,10 @@ export const FeedbackDetails = ({ feedbackId, feedbacks, setfeedbacks, projectId
   const handleUpdateStateFeedback = async () => {
     setloadingUpdate(true);
     try {
-      await updateFeedback({ ...feedback, state: selectedState, status: selectedStatus, type: selectedType }, session.jwt);
+      await updateFeedback(
+        { ...feedback, state: selectedState, status: selectedStatus, type: selectedType },
+        session.jwt,
+      );
       const indexOfeedback = feedbacks.findIndex((ele) => ele.id === +feedbackId);
       const newFeedbacks = [...feedbacks];
       newFeedbacks[indexOfeedback] = { ...feedback, state: selectedState, status: selectedStatus, type: selectedType };
@@ -97,7 +100,7 @@ export const FeedbackDetails = ({ feedbackId, feedbacks, setfeedbacks, projectId
     setloadingUpdate(true);
     try {
       await deleteFeedback(feedbackId, session.jwt);
-      setfeedbacks((feedbacks) => ([...feedbacks].filter((ele) => ele.id !== +feedbackId)));
+      setfeedbacks((feedbacks) => [...feedbacks].filter((ele) => ele.id !== +feedbackId));
       router.push(`http://localhost:3000/project/${projectId}`);
       toast.success(`Feedback deleted!`);
     } catch (error) {

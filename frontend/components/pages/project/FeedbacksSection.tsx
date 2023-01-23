@@ -101,7 +101,12 @@ export const FeedbacksSection = ({
           />
         </div>
         <div className="col-span-3 border-r border-3Background">
-          <FeedbackDetails feedbackId={query.feedback || feedbacksSorted[0]?.id} feedbacks={feedbacks} setfeedbacks={setfeedbacks} projectId={projectId} />
+          <FeedbackDetails
+            feedbackId={query.feedback || feedbacksSorted[0]?.id}
+            feedbacks={feedbacks}
+            setfeedbacks={setfeedbacks}
+            projectId={projectId}
+          />
         </div>
       </div>
     </div>

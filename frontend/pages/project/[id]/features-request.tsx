@@ -12,7 +12,7 @@ const FeaturesPage = ({ params, project, listProjects }) => {
       <Head>
         <title>Features request</title>
       </Head>
-      <Layout listProjects={listProjects} id={params.id} name={project.name} >
+      <Layout listProjects={listProjects} id={params.id} name={project.name}>
         <Page project={project} />
       </Layout>
     </>
