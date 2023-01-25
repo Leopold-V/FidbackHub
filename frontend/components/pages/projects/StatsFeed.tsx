@@ -9,14 +9,12 @@ export const StatsFeed = ({
   maxFeedbackProject: { name: string; number: number };
 }) => {
   return (
-    <div className="pr-4 sm:pr-6 lg:flex-shrink-0 lg:pr-8 xl:pr-0">
-      <div className="pl-6 lg:w-80">
+      <div className="">
         <FeedHeader />
         <div className="py-4">
           <StatsList feedbackNumber={feedbackNumber} maxFeedbackProject={maxFeedbackProject} />
         </div>
       </div>
-    </div>
   );
 };
 
