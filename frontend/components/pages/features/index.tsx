@@ -7,11 +7,12 @@ const FeaturesPageComponent = ({ project }: { project: projectType }) => {
     <div className="flex flex-col items-center space-y-8 pb-8">
       <HeaderWrapper>
         <h2 className="text-secondary">Features request</h2>
-    </HeaderWrapper>
-      <p className="text-muted">Todo: page listing all feedback of type features request and users should be able to upvote</p>
+      </HeaderWrapper>
+      <p className="text-muted">
+        Todo: page listing all feedback of type features request and users should be able to upvote
+      </p>
     </div>
   );
-
 };
 
 export default FeaturesPageComponent;

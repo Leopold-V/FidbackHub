@@ -18,6 +18,8 @@
     "@mdx-js/loader": "^2.2.1",
     "@mdx-js/react": "^2.2.1",
     "@next/mdx": "^13.0.7",
+    "@tanstack/match-sorter-utils": "^8.7.6",
+    "@tanstack/react-table": "^8.7.8",
     "dayjs": "^1.11.7",
     "graphql": "^16.6.0",
     "mysql": "^2.18.1",

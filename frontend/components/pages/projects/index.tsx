@@ -34,7 +34,12 @@ const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType;
     <div className="flex flex-col items-center space-y-4 pb-8">
       <div className="mx-auto w-full max-w-7xl lg:flex xl:px-8">
         <div className="min-w-0 flex-1 xl:flex">
-          <ProfileColumn feedbackNumber={allfeedbacks.length} maxFeedbackProject={maxFeedbackProject} profile={profile} projectsNumber={projects.length} />
+          <ProfileColumn
+            feedbackNumber={allfeedbacks.length}
+            maxFeedbackProject={maxFeedbackProject}
+            profile={profile}
+            projectsNumber={projects.length}
+          />
           <ProjectsColumn projects={projects} setprojects={setprojects} />
         </div>
         <Feed />

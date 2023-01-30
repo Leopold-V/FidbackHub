@@ -4,10 +4,17 @@ import { MetaInfo } from './MetaInfo';
 import { userType } from 'types/index';
 import { StatsFeed } from './StatsFeed';
 
-export const ProfileColumn = ({ profile, projectsNumber, feedbackNumber,
-  maxFeedbackProject, }: { profile: userType; projectsNumber: number,
-    feedbackNumber: number;
-  maxFeedbackProject: { name: string; number: number }; }) => {
+export const ProfileColumn = ({
+  profile,
+  projectsNumber,
+  feedbackNumber,
+  maxFeedbackProject,
+}: {
+  profile: userType;
+  projectsNumber: number;
+  feedbackNumber: number;
+  maxFeedbackProject: { name: string; number: number };
+}) => {
   return (
     <div className="xl:w-64 xl:flex-shrink-0">
       <div className="py-6 pl-4 pr-6 sm:pl-6 lg:pl-8 xl:pl-0">
