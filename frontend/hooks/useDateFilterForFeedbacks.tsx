@@ -6,7 +6,7 @@ import { feedbackType } from 'types/index';
 
 export const useDateFilterForFeedbacks = (feedbacks: feedbackType[]) => {
   const [dateRange, setdateRange] = useState({
-    startDate: dayjs().subtract(7, 'day').format('YYYY-MM-DD'),
+    startDate: dayjs().subtract(1000000, 'day').format('YYYY-MM-DD'),
     endDate: dayjs(new Date()).format('YYYY-MM-DD'),
   });
   const [feedbacksFiltered, setfeedbacksFiltered] = useState(JSON.parse(JSON.stringify(feedbacks)));

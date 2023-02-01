@@ -33,7 +33,7 @@ export const ProgressLineChart = ({
     feedbacks.forEach((ele) => {
       if (newData[dayjs(ele.createdAt).format('YYYY-MM-DD')]) {
         newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].open += 1;
-        if (ele.status === 'Close') {
+        if (ele.status === 'Closed') {
           newData[dayjs(ele.createdAt).format('YYYY-MM-DD')].resolved += 1;
         }
       }

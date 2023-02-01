@@ -4,7 +4,7 @@ import { feedbackType } from 'types/index';
 
 export const InfoSection = ({ feedbacks }: { feedbacks: feedbackType[] }) => {
   const openFeedback = feedbacks.filter((ele) => ele.status === 'Open').length;
-  const closeFeedback = feedbacks.filter((ele) => ele.status === 'Close').length;
+  const closeFeedback = feedbacks.filter((ele) => ele.status === 'Closed').length;
 
   const stats = [
     { name: 'Total feedbacks', stat: feedbacks.length },

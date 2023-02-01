@@ -1,17 +1,13 @@
-import React, { useState } from 'react';
-import { FeedbacksSection } from './FeedbacksSection';
-import { HeaderWrapper } from 'components/common/HeaderWrapper';
+import React from 'react';
 import { FeedbacksTable } from './FeedbacksTable';
+import { useDateFilterForFeedbacks } from '../../../hooks/useDateFilterForFeedbacks';
 
 const ProjectPageComponent = ({ project }) => {
-  const [feedbacks, setfeedbacks] = useState(project.feedbacks);
+  const [feedbacksFiltered, dateRange, setdateRange] = useDateFilterForFeedbacks(project.feedbacks);
 
   return (
     <div className="flex flex-col items-center space-y-8 pb-8">
-      <HeaderWrapper>
-        <h2 className="text-secondary">Feedbacks</h2>
-      </HeaderWrapper>
-      <FeedbacksTable feedbacks={feedbacks} />
+      <FeedbacksTable projectId={project.id} feedbacks={feedbacksFiltered} setdateRange={setdateRange} />
       {/* <FeedbacksSection feedbacks={feedbacks} setfeedbacks={setfeedbacks} projectId={project.id} /> */}
     </div>
   );
