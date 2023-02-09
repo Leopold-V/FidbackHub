@@ -7,7 +7,7 @@ const navigation = (id: number, routeName: string) => [
   {
     name: 'Feedback list',
     href: `/project/${id}`,
-    current: routeName === `/project/${id}` || routeName.match(/\?feedback=/),
+    current: routeName === `/project/${id}` || routeName.match(`/project/${id}/feedback/`),
     icon: HomeIcon,
   },
   {

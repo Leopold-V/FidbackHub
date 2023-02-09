@@ -34,7 +34,7 @@ export const TableSection = ({ table, projectId }: { table: Table<any>; projectI
       <tbody className="divide-3Background divide-y">
         {table.getRowModel().rows.map((row) => {
           return (
-            <tr key={row.id} className="hover:bg-main duration-200 hover:text-mainText cursor-pointer">
+            <tr key={row.id} className="hover:bg-main duration-200 hover:text-mainText">
               {row.getVisibleCells().map((cell) => {
                 return (
                   <td key={cell.id} className="py-4 px-3 text-sm">

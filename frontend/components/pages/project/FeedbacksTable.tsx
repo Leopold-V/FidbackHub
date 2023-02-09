@@ -1,4 +1,4 @@
-import React, { HTMLProps, useEffect } from 'react';
+import React, { HTMLProps, useEffect, useState } from 'react';
 import {
   Column,
   useReactTable,
@@ -21,6 +21,7 @@ import { DateButtonGroups } from '../dashboard/DateButtonsGroup';
 import { formatDateToDisplay } from '../../../utils/formatDate';
 import { TableSection } from './TableSection';
 import { PaginationSection } from './PaginationSection';
+import Link from 'next/link';
 
 declare module '@tanstack/table-core' {
   interface FilterFns {
@@ -81,58 +82,60 @@ export const FeedbacksTable = ({
       },
       {
         accessorKey: 'title',
-        cell: (info) => info.getValue(),
+        cell: (info) => <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}><a className="cursor-pointer">{info.getValue()}</a></Link>,
         header: () => 'Title',
         footer: (props) => props.column.id,
       },
       {
-        accessorFn: (row) => row.description,
-        id: 'description',
-        cell: (info) => info.getValue(),
-        header: () => 'Description',
+        accessorFn: (row) => row.type,
+        id: 'type',
+        cell: (info) => <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}><a className="cursor-pointer">{info.getValue()}</a></Link>,
+        header: () => 'Type',
         footer: (props) => props.column.id,
       },
       {
         accessorFn: (row) => row.status,
         id: 'status',
         cell: (info) => (
-          <span
-            className={`${
-              info.getValue() === 'Open' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-            } px-2.5 py-0.5 text-xs font-medium rounded-full`}
-          >
-            {info.getValue()}
-          </span>
+          <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}>
+            <a
+              className={`${
+                info.getValue() === 'Open' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+              } px-2.5 py-0.5 text-xs font-medium rounded-full cursor-pointer`}
+            >
+              {info.getValue()}
+            </a>
+          </Link>
         ),
         header: () => 'Status',
         footer: (props) => props.column.id,
       },
       {
-        accessorFn: (row) => row.type,
-        id: 'type',
-        cell: (info) => info.getValue(),
-        header: () => 'Type',
+        accessorFn: (row) => row.state,
+        id: 'state',
+        cell: (info) => <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}><a className="cursor-pointer">{info.getValue()}</a></Link>,
+        header: () => 'State',
         footer: (props) => props.column.id,
       },
       {
         accessorFn: (row) => row.author_email,
         id: 'author_email',
         header: 'Author',
-        cell: (info) => info.getValue(),
+        cell: (info) => <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}><a className="cursor-pointer">{info.getValue()}</a></Link>,
         footer: (props) => props.column.id,
       },
       {
         accessorFn: (row) => row.createdAt,
         id: 'createdAt',
         header: 'Created at',
-        cell: (info) => formatDateToDisplay(info.getValue()),
+        cell: (info) => <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}><a className="cursor-pointer">{formatDateToDisplay(info.getValue())}</a></Link>,
         footer: (props) => props.column.id,
       },
     ],
     [],
   );
 
-  const [data, setData] = React.useState<feedbackType[]>(() => feedbacks);
+  const [data, setData] = useState<feedbackType[]>(() => feedbacks);
 
   useEffect(() => {
     setData(feedbacks);
@@ -174,8 +177,6 @@ export const FeedbacksTable = ({
     }
   }, [table.getState().columnFilters[0]?.id]);
 
-  console.log(table.getHeaderGroups()[0].headers[2].headerGroup.headers[2].column);
-
   return (
     <div className="w-full">
       <HeaderWrapper>
@@ -183,7 +184,8 @@ export const FeedbacksTable = ({
         <div className="mt-4 flex items-center justify-between space-x-4">
           <div className="flex space-x-4">
             <FilterStatus column={table.getHeaderGroups()[0].headers[3].headerGroup.headers[3].column} />
-            <FilterType column={table.getHeaderGroups()[0].headers[4].headerGroup.headers[4].column} />
+            <FilterType column={table.getHeaderGroups()[0].headers[2].headerGroup.headers[2].column} />
+            <FilterState column={table.getHeaderGroups()[0].headers[4].headerGroup.headers[4].column} />
           </div>
           <div className="relative">
             <div className="pointer-events-none text-secondaryText absolute inset-y-0 left-0 flex items-center pl-3">
@@ -202,7 +204,7 @@ export const FeedbacksTable = ({
       <div className="w-full">
         <div className="text-secondaryText px-10">
           <TableSection projectId={projectId} table={table} />
-          <PaginationSection table={table} />
+          <PaginationSection table={table} setData={setData} />
         </div>
       </div>
     </div>
@@ -272,6 +274,42 @@ function FilterType({ column }: { column: Column<any, unknown> }) {
   );
 }
 
+function FilterState({ column }: { column: Column<any, unknown> }) {
+  const onChange = (e) => {
+    column.setFilterValue(e.target.value);
+  };
+
+  return (
+    <div className="space-x-2 flex items-center">
+      <label className="text-sm text-secondaryText" htmlFor={`${column.id}-select`}>
+        State
+      </label>
+      <select
+        name={column.id}
+        id={`${column.id}-select`}
+        onChange={onChange}
+        className={`duration-200 text-secondaryText w-32 text-xs bg-secondaryBackground relative cursor-default rounded-md border border-3Background py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
+      >
+        <option value="" key="" className="text-secondaryBackground">
+          All
+        </option>
+        <option className="text-secondaryBackground" value="New" key="New">
+          New
+        </option>
+        <option className="text-secondaryBackground" value="In progress" key="In progress">
+          In progress
+        </option>
+        <option className="text-secondaryBackground" value="Resolved" key="Resolved">
+          Resolved
+        </option>
+        <option className="text-secondaryBackground" value="Rejected" key="Rejected">
+          Rejected
+        </option>
+      </select>
+    </div>
+  );
+}
+
 // A debounced input react component
 function DebouncedInput({
   value: initialValue,
@@ -285,11 +323,11 @@ function DebouncedInput({
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>) {
   const [value, setValue] = React.useState(initialValue);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setValue(initialValue);
   }, [initialValue]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timeout = setTimeout(() => {
       onChange(value);
     }, debounce);
@@ -307,7 +345,7 @@ function IndeterminateCheckbox({
 }: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
   const ref = React.useRef<HTMLInputElement>(null!);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (typeof indeterminate === 'boolean') {
       ref.current.indeterminate = !rest.checked && indeterminate;
     }

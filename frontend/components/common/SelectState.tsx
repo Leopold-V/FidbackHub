@@ -12,8 +12,8 @@ export const SelectState = ({
   setselected,
   listItems,
 }: {
-  selected: feedbackStateType;
-  setselected: (selected: feedbackStateType) => void;
+  selected,
+  setselected,
   listItems: string[];
 }) => {
   return (
