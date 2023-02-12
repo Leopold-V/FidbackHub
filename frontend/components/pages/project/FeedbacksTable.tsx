@@ -82,14 +82,22 @@ export const FeedbacksTable = ({
       },
       {
         accessorKey: 'title',
-        cell: (info) => <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}><a className="cursor-pointer">{info.getValue()}</a></Link>,
+        cell: (info) => (
+          <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}>
+            <a className="cursor-pointer">{info.getValue()}</a>
+          </Link>
+        ),
         header: () => 'Title',
         footer: (props) => props.column.id,
       },
       {
         accessorFn: (row) => row.type,
         id: 'type',
-        cell: (info) => <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}><a className="cursor-pointer">{info.getValue()}</a></Link>,
+        cell: (info) => (
+          <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}>
+            <a className="cursor-pointer">{info.getValue()}</a>
+          </Link>
+        ),
         header: () => 'Type',
         footer: (props) => props.column.id,
       },
@@ -113,7 +121,11 @@ export const FeedbacksTable = ({
       {
         accessorFn: (row) => row.state,
         id: 'state',
-        cell: (info) => <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}><a className="cursor-pointer">{info.getValue()}</a></Link>,
+        cell: (info) => (
+          <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}>
+            <a className="cursor-pointer">{info.getValue()}</a>
+          </Link>
+        ),
         header: () => 'State',
         footer: (props) => props.column.id,
       },
@@ -121,14 +133,22 @@ export const FeedbacksTable = ({
         accessorFn: (row) => row.author_email,
         id: 'author_email',
         header: 'Author',
-        cell: (info) => <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}><a className="cursor-pointer">{info.getValue()}</a></Link>,
+        cell: (info) => (
+          <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}>
+            <a className="cursor-pointer">{info.getValue()}</a>
+          </Link>
+        ),
         footer: (props) => props.column.id,
       },
       {
         accessorFn: (row) => row.createdAt,
         id: 'createdAt',
         header: 'Created at',
-        cell: (info) => <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}><a className="cursor-pointer">{formatDateToDisplay(info.getValue())}</a></Link>,
+        cell: (info) => (
+          <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}>
+            <a className="cursor-pointer">{formatDateToDisplay(info.getValue())}</a>
+          </Link>
+        ),
         footer: (props) => props.column.id,
       },
     ],
@@ -225,7 +245,7 @@ function FilterStatus({ column }: { column: Column<any, unknown> }) {
         name={column.id}
         id={`${column.id}-select`}
         onChange={onChange}
-        className={`duration-200 text-secondaryText w-32 text-xs bg-secondaryBackground relative cursor-default rounded-md border border-3Background py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
+        className={`duration-200 text-secondaryText w-32 text-xs bg-secondaryBackground relative cursor-default rounded-md border border-3Background py-1 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
       >
         <option value="" key="" className="text-secondaryBackground">
           All
@@ -255,7 +275,7 @@ function FilterType({ column }: { column: Column<any, unknown> }) {
         name={column.id}
         id={`${column.id}-select`}
         onChange={onChange}
-        className={`duration-200 text-secondaryText w-32 text-xs bg-secondaryBackground relative cursor-default rounded-md border border-3Background py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
+        className={`duration-200 text-secondaryText w-32 text-xs bg-secondaryBackground relative cursor-default rounded-md border border-3Background py-1 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
       >
         <option value="" key="" className="text-secondaryBackground">
           All
@@ -288,7 +308,7 @@ function FilterState({ column }: { column: Column<any, unknown> }) {
         name={column.id}
         id={`${column.id}-select`}
         onChange={onChange}
-        className={`duration-200 text-secondaryText w-32 text-xs bg-secondaryBackground relative cursor-default rounded-md border border-3Background py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
+        className={`duration-200 text-secondaryText w-32 text-xs bg-secondaryBackground relative cursor-default rounded-md border border-3Background py-1 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
       >
         <option value="" key="" className="text-secondaryBackground">
           All

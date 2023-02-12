@@ -53,7 +53,7 @@ export const Sidebar = ({ id, name }) => {
                   item.current
                     ? 'bg-main text-mainText'
                     : 'text-muted hover:bg-secondaryBackground hover:text-mainText',
-                  'flex items-center px-3 py-2 rounded-r-full font-medium text-sm relative overflow-hidden duration-200',
+                  'flex items-center px-3 py-1.5 rounded-r-full font-medium text-sm relative overflow-hidden duration-200',
                 )}
               >
                 <item.icon

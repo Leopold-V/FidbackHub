@@ -9,7 +9,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 var localizedFormat = require('dayjs/plugin/localizedFormat');
 import '../styles/globals.css';
-import Layout from 'components/layout';
 import { LoaderScreen } from 'components/common/LoaderScreen';
 dayjs.extend(localizedFormat);
 

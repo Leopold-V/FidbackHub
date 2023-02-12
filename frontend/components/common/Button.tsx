@@ -35,6 +35,28 @@ export const Button = ({
   );
 };
 
+export const ButtonOutline = ({
+  onClick = null,
+  disabled = false,
+  children,
+  className = '',
+  type = 'button',
+}: ButtonProps) => {
+  return (
+    <button
+      type={type}
+      className={classNames(
+        'duration-200 flex items-center justify-center rounded border border-indigo-600 px-4 py-2 text-sm font-medium text-indigo-500 hover:text-white shadow-sm disabled:bg-indigo-400 hover:bg-indigo-500 outline-none focus:ring-2 focus:ring-indigo-500',
+        className,
+      )}
+      disabled={disabled}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+};
+
 export const ButtonDelete = ({
   onClick = null,
   disabled = false,

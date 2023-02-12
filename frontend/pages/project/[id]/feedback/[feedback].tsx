@@ -34,11 +34,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
     },
   });
   const feedback = await dataFeedback.json();
-  return { props: { 
-      params, project: currentProject.data.attributes, 
+  return {
+    props: {
+      params,
+      project: currentProject.data.attributes,
       listProjects: listProjects.data.attributes,
-      feedback: {...feedback.data.attributes, api_key: feedback.data.attributes.project.api_key} 
-    } 
+      feedback: { ...feedback.data.attributes, api_key: feedback.data.attributes.project.api_key },
+    },
   };
 };
 

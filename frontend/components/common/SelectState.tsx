@@ -7,15 +7,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export const SelectState = ({
-  selected,
-  setselected,
-  listItems,
-}: {
-  selected,
-  setselected,
-  listItems: string[];
-}) => {
+export const SelectState = ({ selected, setselected, listItems }: { selected; setselected; listItems: string[] }) => {
   return (
     <Listbox value={selected} onChange={setselected}>
       {({ open }) => (
