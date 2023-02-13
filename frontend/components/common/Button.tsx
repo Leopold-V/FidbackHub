@@ -98,7 +98,7 @@ export const ButtonBack = ({ link, label }: { link: string; label?: string }) =>
         >
           <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
         </svg>
-        <span className="ml-2">{label ? label : 'Back'}</span>
+        <span className="ml-1">{label ? label : 'Back'}</span>
       </a>
     </Link>
   );

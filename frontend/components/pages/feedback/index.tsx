@@ -13,12 +13,13 @@ import { feedbackStateType, feedbackStatusType, feedbackType, feedbackTypeType }
 import img from 'public/images/screenshot_example.png';
 import { formatDateToDisplay } from '../../../utils/formatDate';
 import { SelectState } from 'components/common/SelectState';
-import { Button, ButtonDelete, ButtonOutline } from 'components/common/Button';
+import { Button, ButtonBack, ButtonDelete, ButtonOutline } from 'components/common/Button';
 import { updateFeedback, deleteFeedback } from '../../../services/feedback.service';
 import { Modal } from 'components/common/Modal';
 import { HeaderWrapper } from 'components/common/HeaderWrapper';
 import { Card } from 'components/common/Card';
 import { CommentZone } from './CommentZone';
+import { useRouter } from 'next/router';
 
 const listState: feedbackStateType[] = ['New', 'In progress', 'Resolved', 'Rejected'];
 const listStatus: feedbackStatusType[] = ['Open', 'Closed'];
@@ -27,8 +28,9 @@ const listType: feedbackTypeType[] = ['Bug report', 'Feature request', 'General 
 const message = `Are you sure you want to delete this feedback? The feedback will be permanently
 removed. This action cannot be undone.`;
 
-export const FeedbackPageComponent = ({ feedback }: { feedback: feedbackType }) => {
+export const FeedbackPageComponent = ({ feedback, projectId }: { feedback: feedbackType, projectId: number }) => {
   const { data: session } = useSession();
+	const router = useRouter();
   const [loadingUpdate, setloadingUpdate] = useState(false);
   const [loadingDelete, setloadingDelete] = useState(false);
   const [open, setopen] = useState(false);
@@ -55,6 +57,7 @@ export const FeedbackPageComponent = ({ feedback }: { feedback: feedbackType }) 
     setloadingDelete(true);
     try {
       await deleteFeedback(feedback.id, session.jwt);
+			router.push(`/project/${projectId}`)
       toast.success(`Feedback deleted!`);
     } catch (error) {
       toast.error(error.message);
@@ -70,8 +73,9 @@ export const FeedbackPageComponent = ({ feedback }: { feedback: feedbackType }) 
   return (
     <div>
       <HeaderWrapper>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center lg:flex-row flex-col">
           <div className="flex space-x-2 items-center">
+					<ButtonBack link={`/project/${projectId}`} label='' />
             <h2 className="text-secondary">
               {feedback.type} #{feedback.id} - {feedback.title}
             </h2>
@@ -113,7 +117,7 @@ export const FeedbackPageComponent = ({ feedback }: { feedback: feedbackType }) 
               </div>
               <div className="py-4 text-sm border-b border-3Background space-y-2">
                 <h3 className="text-mainText">Description</h3>
-                <p className="text-muted">{feedback.description}</p>
+                <p className="text-secondaryText">{feedback.description}</p>
               </div>
 
               <div className="flex">

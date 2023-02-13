@@ -11,7 +11,7 @@ const SecretKey = ({ label, value }) => {
 
   return (
     <div className="text-sm flex justify-center items-center space-x-4">
-      <span className="sm:w-1/4 w-3/4 mx-auto p-4">{label}</span>
+      <span className="sm:w-1/4 w-3/4 mx-auto py-4 pl-2">{label}</span>
       <div className="flex items-center sm:w-1/2 w-3/4">
         <div className="rounded text-secondaryText focus:outline-none">
           <pre className="sm:w-32 lg:w-60 w-20 overflow-hidden overflow-ellipsis">{value}</pre>

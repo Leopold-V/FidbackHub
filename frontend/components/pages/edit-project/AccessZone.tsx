@@ -1,19 +1,10 @@
 import React, { useState, MouseEvent } from 'react';
 import { Input } from 'components/common/Input';
 import SecretKey from './SecretKey';
-import { Button } from 'components/common/Button';
+import { ButtonOutline } from 'components/common/Button';
 import { SpinnerButton } from 'components/common/Spinner';
 import { UsersIcon } from '@heroicons/react/20/solid';
 import { projectType } from 'types/index';
-
-const membersList = [
-  {
-    email: 'jojodu49@gmail.com',
-  },
-  {
-    email: 'ernestlegrand@outlook.com',
-  },
-];
 
 const MembersList = ({ membersList, setmembers }) => {
   const handleRemoveMember = (e: MouseEvent<HTMLButtonElement>) => {
@@ -25,7 +16,7 @@ const MembersList = ({ membersList, setmembers }) => {
     <ul className="px-3 py-3 text-muted divide-3Background divide-y h-40 overflow-auto scroll-auto">
       {membersList.map((member) => (
         <li key={member.email} className="py-2 flex items-center justify-between">
-          <span className="hover:text-indigo-500 duration-200">{member.email}</span>
+          <span className="hover:text-indigo-500 duration-200 w-52 overflow-hidden overflow-ellipsis">{member.email}</span>
           <button
             onClick={handleRemoveMember}
             data-email={member.email}
@@ -73,18 +64,18 @@ export const AccessZone = ({ project }: { project: projectType }) => {
   return (
     <>
       <SecretKey label={'Project token'} value={project.api_key} />
-      <div className="text-sm flex justify-center p-4">
-        <label htmlFor="member_email" className="sm:w-1/4 w-3/4 mx-auto">
+      <div className="text-sm flex flex-col sm:flex-row justify-center p-4">
+        <label htmlFor="member_email" className="sm:w-1/4 mx-auto sm:pb-0 pb-4">
           Members
         </label>
-        <div className="sm:w-1/2 w-3/4 flex">
+        <div className="flex justify-center">
           <div>
             <div className="relative flex">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-secondaryText">
                 <UsersIcon className="h-5 w-5" aria-hidden="true" />
               </div>
               <Input
-                type="email"
+                type="mail"
                 name="member_email"
                 id="member_email"
                 value={member}
@@ -96,7 +87,7 @@ export const AccessZone = ({ project }: { project: projectType }) => {
                 onClick={handleAdd}
                 className="relative inline-flex items-center rounded-r bg-secondaryBackground px-3 py-2 border border-l-0 border-3Background focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:z-10 duration-200"
               >
-                + Add
+                Add
               </button>
             </div>
             {members.length > 0 && <MembersList membersList={members} setmembers={setmembers} />}
@@ -104,14 +95,13 @@ export const AccessZone = ({ project }: { project: projectType }) => {
         </div>
       </div>
       <div className="border-t border-3Background flex justify-center py-4">
-        <Button
+        <ButtonOutline
           type="submit"
           onClick={handleSave}
-          className="duration-200 mx-auto inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm disabled:bg-indigo-400 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
           {loading && <SpinnerButton />}
           Save
-        </Button>
+        </ButtonOutline>
       </div>
     </>
   );

@@ -13,7 +13,7 @@ const FeedbackPage = ({ params, project, listProjects, feedback }) => {
         <title>Project</title>
       </Head>
       <Layout listProjects={listProjects} id={params.id} name={project.name}>
-        <Page feedback={feedback} />
+        <Page feedback={feedback} projectId={project.id} />
       </Layout>
     </>
   );

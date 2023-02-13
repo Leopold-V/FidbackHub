@@ -7,6 +7,7 @@ import { projectType } from 'types/index';
 import { SpinnerButton } from 'components/common/Spinner';
 import { InputDecorators } from 'components/common/InputDecorators';
 import { Input } from 'components/common/Input';
+import { ButtonOutline } from 'components/common/Button';
 
 export const EditProjectForm = ({
   project,
@@ -108,14 +109,13 @@ export const EditProjectForm = ({
         />
       </InputDecorators>
       <div className="border-t border-3Background flex justify-center py-4">
-        <button
+        <ButtonOutline
           type="submit"
-          className="duration-200 mx-auto inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm disabled:bg-indigo-400 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           disabled={loading}
         >
           {loading && <SpinnerButton />}
           Save
-        </button>
+        </ButtonOutline>
       </div>
     </form>
   );
