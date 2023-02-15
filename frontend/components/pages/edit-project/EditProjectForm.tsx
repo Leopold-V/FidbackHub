@@ -12,9 +12,11 @@ import { ButtonOutline } from 'components/common/Button';
 export const EditProjectForm = ({
   project,
   setProject,
+  isAdmin,
 }: {
   project: projectType;
   setProject: (user: projectType) => void;
+  isAdmin: boolean;
 }) => {
   const { data: session } = useSession();
   const [input, setInput] = useState({
@@ -25,7 +27,6 @@ export const EditProjectForm = ({
   const [loading, setloading] = useState(false);
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
-    console.log({ ...input, [e.currentTarget.name]: e.currentTarget.value });
     setInput({ ...input, [e.currentTarget.name]: e.currentTarget.value });
   };
 
@@ -48,18 +49,27 @@ export const EditProjectForm = ({
       onSubmit={handleSubmit}
       className="border border-3Background hover:border-4Background bg-mainBackground duration-200 sm:rounded p-1 divide-y divide-3Background"
     >
-      <InputDecorators label="Project name">
-        <Input
-          type="text"
-          name="name"
-          id="name"
-          autoComplete="name"
-          value={input.name}
-          onChange={handleChange}
-          disabled={loading}
-          placeholder="Project name"
-        />
-      </InputDecorators>
+      {isAdmin ? (
+        <InputDecorators label="Project name">
+          <Input
+            type="text"
+            name="name"
+            id="name"
+            autoComplete="name"
+            value={input.name}
+            onChange={handleChange}
+            disabled={loading}
+            placeholder="Project name"
+          />
+        </InputDecorators>
+      ) : (
+        <div className="text-sm flex justify-center items-center p-4">
+          <span className="sm:w-1/4 w-3/4 mx-auto">Project name</span>
+          <div className="sm:w-1/2 w-3/4 flex">
+            <p className="text-secondaryText font-light">{project.name}</p>
+          </div>
+        </div>
+      )}
       <div className="text-sm flex justify-center items-center p-4">
         <span className="sm:w-1/4 w-3/4 mx-auto">Project ID</span>
         <div className="sm:w-1/2 w-3/4 flex">
@@ -84,39 +94,56 @@ export const EditProjectForm = ({
           <p className="text-secondaryText font-light">{dayjs(project.updatedAt).format('YYYY-MM-DD')}</p>
         </div>
       </div>
-      <InputDecorators label="Website link">
-        <Input
-          type="url"
-          name="website_url"
-          id="website_url"
-          autoComplete="website_url"
-          value={input.website_url}
-          onChange={handleChange}
-          disabled={loading}
-          placeholder="Website url"
-        />
-      </InputDecorators>
-      <InputDecorators label="Github link">
-        <Input
-          type="url"
-          name="github_url"
-          id="github_url"
-          autoComplete="github_url"
-          value={input.github_url}
-          onChange={handleChange}
-          disabled={loading}
-          placeholder="Github url"
-        />
-      </InputDecorators>
-      <div className="border-t border-3Background flex justify-center py-4">
-        <ButtonOutline
-          type="submit"
-          disabled={loading}
-        >
-          {loading && <SpinnerButton />}
-          Save
-        </ButtonOutline>
-      </div>
+      {isAdmin ? (
+        <InputDecorators label="Website link">
+          <Input
+            type="url"
+            name="website_url"
+            id="website_url"
+            autoComplete="website_url"
+            value={input.website_url}
+            onChange={handleChange}
+            disabled={loading}
+            placeholder="Website url"
+          />
+        </InputDecorators>
+      ) : (
+        <div className="text-sm flex justify-center items-center p-4">
+          <span className="sm:w-1/4 w-3/4 mx-auto">Website link</span>
+          <div className="sm:w-1/2 w-3/4 flex">
+            <p className="text-secondaryText font-light">{project.website_url}</p>
+          </div>
+        </div>
+      )}
+      {isAdmin ? (
+        <InputDecorators label="Github link">
+          <Input
+            type="url"
+            name="github_url"
+            id="github_url"
+            autoComplete="github_url"
+            value={input.github_url}
+            onChange={handleChange}
+            disabled={loading}
+            placeholder="Github url"
+          />
+        </InputDecorators>
+      ) : (
+        <div className="text-sm flex justify-center items-center p-4">
+          <span className="sm:w-1/4 w-3/4 mx-auto">Github link</span>
+          <div className="sm:w-1/2 w-3/4 flex">
+            <p className="text-secondaryText font-light">{project.github_url}</p>
+          </div>
+        </div>
+      )}
+      {isAdmin && (
+        <div className="border-t border-3Background flex justify-center py-4">
+          <ButtonOutline type="submit" disabled={loading}>
+            {loading && <SpinnerButton />}
+            Save
+          </ButtonOutline>
+        </div>
+      )}
     </form>
   );
 };

@@ -23,7 +23,7 @@ const MyAccountPage = ({ profile, listProjects }: { profile: userType; listProje
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const session = await getSession({ req });
-  const profile = await getUser(session.id, session.jwt);
+  const profile = await getUser(session.jwt);
   const listProjects = await getProjectsFromUser(session.jwt);
   return {
     props: {

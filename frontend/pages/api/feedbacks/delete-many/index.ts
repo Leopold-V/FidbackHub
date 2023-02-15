@@ -13,7 +13,7 @@ const deleteManyFeedbacks = async (req: NextApiRequest, res: NextApiResponse) =>
   const feedbacks = req.body.feedbacks;
   const data = await fetch(`http://localhost:1337/api/feedbacks/delete-many`, {
     method: 'POST',
-    body: JSON.stringify({ data: [...feedbacks, 4] }),
+    body: JSON.stringify({ data: [...feedbacks] }),
     headers: {
       Authorization: req.headers.authorization,
       Accept: 'application/json',

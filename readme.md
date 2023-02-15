@@ -3,6 +3,8 @@
 Coming soon...
 
 ### Projects page:
-![main](https://i.gyazo.com/3abeb37c0def4e50d5f598ec9bb16bac.png)
+![main](https://i.gyazo.com/385f6afaeeee385ab46aa95075fc9523.png)
 ### Feedbacks page:
-![main](https://i.gyazo.com/2a88dc3b2854763fc15bad43885039e7.png)
+![main](https://i.gyazo.com/767fd2d6c4a30cc65891cc1fedb0fa9f.png)
+### Feedback page:
+![main](https://i.gyazo.com/f67791794018896bb1cb38a35bb88b5f.png)

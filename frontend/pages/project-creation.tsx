@@ -22,7 +22,7 @@ const ProjectCreationPage = ({ listProjects, userData }) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const session = await getSession({ req });
-  const userData = await getUser(session.id, session.jwt);
+  const userData = await getUser(session.jwt);
   const listProjects = await getProjectsFromUser(session.jwt);
   return { props: { userData: userData, listProjects: Object.values(listProjects.data.attributes) } };
 };

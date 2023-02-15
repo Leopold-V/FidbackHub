@@ -1,6 +1,6 @@
 import { userType } from 'types/index';
 
-export const getUser = async (id: string, jwt: string): Promise<userType> => {
+export const getUser = async (jwt: string): Promise<userType> => {
   const data = await fetch(`http://localhost:1337/api/users/me`, {
     method: 'GET',
     headers: {
@@ -10,6 +10,22 @@ export const getUser = async (id: string, jwt: string): Promise<userType> => {
     },
   });
   const json = await data.json();
+  return json;
+};
+
+export const findUserWithEmail = async (email: string, jwt: string): Promise<any> => {
+  const data = await fetch(`http://localhost:1337/api/users/findUserWithEmail/${email}`, {
+    method: 'GET',
+    headers: {
+      authorization: 'Bearer ' + jwt,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+  const json = await data.json();
+  if (json.error) {
+    throw new Error(json.error.message);
+  }
   return json;
 };
 

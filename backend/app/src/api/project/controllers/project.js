@@ -73,6 +73,10 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
         data: ctx.request.body.data,
         populate: { user: true },
       });
+      if (!response) {
+        // If project is from another user, we answer with the same message as an unexisting url path to not guess another users project id.
+        return ctx.badRequest(`Error 404, ressource not found`);
+      }
       return {data: {id: response.id, attributes: {...response}}, meta: {}};
     } catch (error) {
       throw new ApplicationError();

@@ -2,19 +2,13 @@ import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import Image from 'next/image';
-import {
-  ArrowPathIcon,
-  ChatBubbleBottomCenterTextIcon,
-  LockClosedIcon,
-  LockOpenIcon,
-  PaperClipIcon,
-} from '@heroicons/react/20/solid';
+import { ArrowPathIcon, ChatBubbleBottomCenterTextIcon, LockClosedIcon, LockOpenIcon } from '@heroicons/react/20/solid';
 import { feedbackStateType, feedbackStatusType, feedbackType, feedbackTypeType } from 'types/index';
 import img from 'public/images/screenshot_example.png';
+import { updateFeedback, deleteFeedback } from '../../../services/feedback.service';
 import { formatDateToDisplay } from '../../../utils/formatDate';
 import { SelectState } from 'components/common/SelectState';
-import { Button, ButtonBack, ButtonDelete, ButtonOutline } from 'components/common/Button';
-import { updateFeedback, deleteFeedback } from '../../../services/feedback.service';
+import { ButtonBack, ButtonDelete, ButtonOutline } from 'components/common/Button';
 import { Modal } from 'components/common/Modal';
 import { HeaderWrapper } from 'components/common/HeaderWrapper';
 import { Card } from 'components/common/Card';
@@ -28,9 +22,10 @@ const listType: feedbackTypeType[] = ['Bug report', 'Feature request', 'General 
 const message = `Are you sure you want to delete this feedback? The feedback will be permanently
 removed. This action cannot be undone.`;
 
-export const FeedbackPageComponent = ({ feedback, projectId }: { feedback: feedbackType, projectId: number }) => {
+export const FeedbackPageComponent = ({ _feedback, projectId }: { _feedback: feedbackType; projectId: number }) => {
+  const [feedback, setfeedback] = useState(_feedback);
   const { data: session } = useSession();
-	const router = useRouter();
+  const router = useRouter();
   const [loadingUpdate, setloadingUpdate] = useState(false);
   const [loadingDelete, setloadingDelete] = useState(false);
   const [open, setopen] = useState(false);
@@ -45,6 +40,7 @@ export const FeedbackPageComponent = ({ feedback, projectId }: { feedback: feedb
         { ...feedback, state: selectedState, status: selectedStatus, type: selectedType },
         session.jwt,
       );
+      setfeedback((feedback) => ({ ...feedback, state: selectedState, status: selectedStatus, type: selectedType }));
       toast.success(`Feedback updated!`);
     } catch (error) {
       toast.error(error.message);
@@ -57,7 +53,7 @@ export const FeedbackPageComponent = ({ feedback, projectId }: { feedback: feedb
     setloadingDelete(true);
     try {
       await deleteFeedback(feedback.id, session.jwt);
-			router.push(`/project/${projectId}`)
+      router.push(`/project/${projectId}`);
       toast.success(`Feedback deleted!`);
     } catch (error) {
       toast.error(error.message);
@@ -75,7 +71,7 @@ export const FeedbackPageComponent = ({ feedback, projectId }: { feedback: feedb
       <HeaderWrapper>
         <div className="flex justify-between items-center lg:flex-row flex-col">
           <div className="flex space-x-2 items-center">
-					<ButtonBack link={`/project/${projectId}`} label='' />
+            <ButtonBack link={`/project/${projectId}`} label="" />
             <h2 className="text-secondary">
               {feedback.type} #{feedback.id} - {feedback.title}
             </h2>

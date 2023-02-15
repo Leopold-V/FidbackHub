@@ -9,7 +9,6 @@ const { schemaCreate, schemaUpdate } = require('../content-types/feedback/valida
 
 module.exports = createCoreController("api::feedback.feedback", ({ strapi }) => ({
   async create(ctx) {
-    console.log(ctx.request.body);
     const { error } = schemaCreate.validate(ctx.request.body.data);
     if (error) {
       return ctx.badRequest(error.details[0].message, {...error.details[0]})
@@ -44,7 +43,14 @@ module.exports = createCoreController("api::feedback.feedback", ({ strapi }) => 
               $contains: ctx.params.id
             }
           },
-          user: ctx.state.user.id
+          $or: [
+            {
+              user: ctx.state.user.id
+            },
+            {
+              members: ctx.state.user.id
+            }
+          ]
         },
         populate: { feedbacks: true, user: true },
       });
@@ -100,7 +106,14 @@ module.exports = createCoreController("api::feedback.feedback", ({ strapi }) => 
               $contains: ctx.params.id
             }
           },
-          user: ctx.state.user.id
+          $or: [
+            {
+              user: ctx.state.user.id
+            },
+            {
+              members: ctx.state.user.id
+            }
+          ]
         },
         populate: { feedbacks: true, user: true },
       });
@@ -123,13 +136,20 @@ module.exports = createCoreController("api::feedback.feedback", ({ strapi }) => 
         where: {
           id: [...ctx.request.body.data],
           project: {
-            user: ctx.state.user
+            $or: [
+              {
+                user: ctx.state.user.id
+              },
+              {
+                members: ctx.state.user.id
+              }
+            ]
           }
         },
         populate: { project: true, user: true },
       });
-      if (!feedbacks) {
-        throw new ApplicationError(`Error 404, ressource not found`);
+      if (!feedbacks || feedbacks.length === 0) {
+        return ctx.badRequest(`Error 404, ressource not found`);
       }
       feedbacks.forEach(async (feedback) => {
         await strapi.db.query('api::feedback.feedback').delete({
