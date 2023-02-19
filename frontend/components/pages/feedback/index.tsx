@@ -14,6 +14,7 @@ import { HeaderWrapper } from 'components/common/HeaderWrapper';
 import { Card } from 'components/common/Card';
 import { CommentZone } from './CommentZone';
 import { useRouter } from 'next/router';
+import { ModalImage } from './ModalImage';
 
 const listState: feedbackStateType[] = ['New', 'In progress', 'Resolved', 'Rejected'];
 const listStatus: feedbackStatusType[] = ['Open', 'Closed'];
@@ -29,6 +30,7 @@ export const FeedbackPageComponent = ({ _feedback, projectId }: { _feedback: fee
   const [loadingUpdate, setloadingUpdate] = useState(false);
   const [loadingDelete, setloadingDelete] = useState(false);
   const [open, setopen] = useState(false);
+  const [openimage, setopenimage] = useState(false);
   const [selectedState, setSelectedState] = useState(feedback.state);
   const [selectedType, setSelectedType] = useState(feedback.type);
   const [selectedStatus, setSelectedStatus] = useState(feedback.status);
@@ -65,6 +67,10 @@ export const FeedbackPageComponent = ({ _feedback, projectId }: { _feedback: fee
   const handleClickToClose = () => {
     setopen(true);
   };
+
+  const handleOpenImage = () => {
+    setopenimage(true);
+  }
 
   return (
     <div>
@@ -106,11 +112,16 @@ export const FeedbackPageComponent = ({ _feedback, projectId }: { _feedback: fee
         <div className="lg:w-1/2 flex flex-col">
           <div className="py-5">
             <Card>
-              <div className="space-y-2">
-                <div className="mx-auto w-full h-32 overflow-hidden cursor-pointer">
-                  <Image src={img} alt="Screenshot for the feedback" layout="responsive" />
+                <div className="mx-auto w-full h-32 overflow-hidden relative group">
+                  <Image src={img} alt="Screenshot for the feedback" layout="responsive" className="group-hover:blur-sm duration-500" />
+                  <ButtonOutline 
+                    className="focus:ring-3Background text-3Background border-3Background hover:bg-3Background hover:text-mainText opacity-0 group-hover:opacity-100 absolute z-10 -translate-y-1/2 duration-500 right-0 group-hover:right-1/3 top-1/2"
+                    onClick={handleOpenImage}
+                  >
+                  
+                    Open
+                  </ButtonOutline>
                 </div>
-              </div>
               <div className="py-4 text-sm border-b border-3Background space-y-2">
                 <h3 className="text-mainText">Description</h3>
                 <p className="text-secondaryText">{feedback.description}</p>
@@ -175,11 +186,16 @@ export const FeedbackPageComponent = ({ _feedback, projectId }: { _feedback: fee
                 <ChatBubbleBottomCenterTextIcon className="h-5 w-5" aria-hidden="true" />
                 <h3 className="text-base ">Comments</h3>
               </div>
-              <CommentZone />
+              <CommentZone comments={feedback.comments} projectId={projectId} />
             </Card>
           </div>
         </div>
       </div>
+      <ModalImage
+        image={img}
+        open={openimage}
+        setopen={setopenimage}
+      />
       <Modal
         open={open}
         setopen={setopen}

@@ -41,11 +41,27 @@ export type projectType = {
   };
 };
 
+export type commentType = {
+  id: number;
+  content: string;
+  author: string;
+  createdAt?: Date;
+  error?: {
+    state: number;
+    name: string;
+    message: string;
+    details: {
+      errors: strapiErrorDetailType[];
+    };
+  };
+}
+
 export type feedbackType = {
   id: number;
   title: string;
   description: string;
   author_email: string;
+  comments?: commentType;
   status: feedbackStatusType;
   state: feedbackStateType;
   type: feedbackTypeType;

@@ -5,10 +5,7 @@ import { PencilIcon } from '@heroicons/react/24/outline';
 import { projectType } from 'types/index';
 
 export const ProjectItem = ({ project, userId }: { project: projectType; userId: number }) => {
-  const isGuest =
-    project.members.find((ele) => {
-      return ele.id === userId;
-    }) && true;
+  const isGuest = project.user.id !== userId;
 
   return (
     <li className="relative py-5 pl-4 pr-6 hover:bg-mainBackground bg-mainBackground duration-150 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">

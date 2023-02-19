@@ -60,7 +60,7 @@ module.exports = createCoreController("api::feedback.feedback", ({ strapi }) => 
       }
       const response = await strapi.db.query('api::feedback.feedback').findOne({
         where: {id: ctx.params.id },
-        populate: { project: true },
+        populate: { project: true, comments: true },
       });
       return {data: {id: response.id, attributes: {...response}}, meta: {}};
     } catch (error) {

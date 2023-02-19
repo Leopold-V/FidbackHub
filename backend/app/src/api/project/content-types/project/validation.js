@@ -9,7 +9,8 @@ const schemaCreate = Joi.object({
   website_url: Joi.string().uri().required(),
   github_url: Joi.string().uri().required(),
   api_key: Joi.string().min(64).max(256).required(),
-  user: Joi.number().required()
+  user: Joi.number().required(),
+  members: Joi.array().required()
 });
 
 const schemaUpdate = Joi.object({
@@ -29,4 +30,9 @@ const schemaUpdate = Joi.object({
   members: Joi.array()
 });
 
-module.exports = { schemaCreate, schemaUpdate };
+const schemaUpdateMember = Joi.object({
+  id: Joi.number().required(),
+  members: Joi.array().required()
+});
+
+module.exports = { schemaCreate, schemaUpdate, schemaUpdateMember };

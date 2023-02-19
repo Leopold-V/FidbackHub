@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { EditProjectForm } from './EditProjectForm';
-import { DangerZone } from './DangerZone';
+import { DangerZone, DangerZoneLeave } from './DangerZone';
 import { AccessZone } from './AccessZone';
 import { HeaderWrapper } from 'components/common/HeaderWrapper';
 import { projectType } from 'types/index';
@@ -26,14 +26,12 @@ const EditProjectPageComponent = ({ project }: { project: projectType }) => {
           <div className="divide-y divide-3Background border border-3Background hover:border-4Background bg-mainBackground duration-200 sm:rounded p-1">
             <AccessZone project={project} isAdmin={isAdmin} />
           </div>
-          {isAdmin && (
             <div className="flex flex-col w-full mx-auto space-y-2 pt-3">
               <h2 className="font-medium text-red-500">Danger zone</h2>
               <div className="border border-red-500 bg-mainBackground duration-200 sm:rounded p-1">
-                <DangerZone projectId={_project.id} />
+                {isAdmin ? <DangerZone projectId={_project.id} /> : <DangerZoneLeave project={project} />}
               </div>
             </div>
-          )}
         </div>
       </div>
     </div>

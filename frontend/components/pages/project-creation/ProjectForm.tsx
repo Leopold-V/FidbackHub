@@ -3,8 +3,6 @@ import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import { projectType } from 'types/index';
 import { addProject } from '../../../services/project.service';
-import { ErrorAlert } from 'components/common/ErrorAlert';
-import { SuccessAlert } from 'components/common/SuccessAlert';
 import { SpinnerButton } from 'components/common/Spinner';
 import { InputDecorators } from 'components/common/InputDecorators';
 import { Input } from 'components/common/Input';

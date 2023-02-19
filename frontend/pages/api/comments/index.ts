@@ -1,21 +1,19 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { generateKey } from '../../../utils/generate_api_key';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
-    const data = await addProject(req, res);
+    const data = await createComment(req, res);
     return res.status(200).json({ ...data });
   } else {
     res.status(404).json({ error: { message: 'Ressource not found' } });
   }
 }
 
-const addProject = async (req: NextApiRequest, res: NextApiResponse) => {
-  const project = req.body.project;
-  const api_key = generateKey();
-  const data = await fetch(`http://localhost:1337/api/projects`, {
+const createComment = async (req: NextApiRequest, res: NextApiResponse) => {
+  const comment = req.body.comment;
+  const data = await fetch(`http://localhost:1337/api/comments`, {
     method: 'POST',
-    body: JSON.stringify({ data: { ...project, api_key: api_key, user: req.body.user, members: [req.body.user] } }),
+    body: JSON.stringify({ data: { ...comment, projectId: req.body.projectId } }),
     headers: {
       Authorization: req.headers.authorization,
       Accept: 'application/json',

@@ -5,7 +5,7 @@
 const utils = require('@strapi/utils');
 const { ApplicationError } = utils.errors;
 const { createCoreController } = require('@strapi/strapi').factories;
-const { schemaCreate, schemaUpdate } = require('../content-types/project/validation');
+const { schemaCreate, schemaUpdate, schemaUpdateMember } = require('../content-types/project/validation');
 
 module.exports = createCoreController('api::project.project', ({ strapi }) => ({
   async create(ctx) {
@@ -119,11 +119,40 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
             }
           ]
         },
-        populate: { feedbacks: true, members: true },
+        populate: { feedbacks: true, members: true, user: true },
       });
       return {data: {id: response.id, attributes: {...response}}, meta: {}};
     } catch (error) {
       console.log(error.message);
+      throw new ApplicationError();
+    }
+  },
+  async updateMember(ctx) {
+    console.log(ctx.request.body.data);
+    const { error } = schemaUpdateMember.validate(ctx.request.body.data);
+    if (error) {
+      return ctx.badRequest(error.details[0].message, {...error.details[0]})
+    }
+    try {
+      const response = await strapi.db.query('api::project.project').update({
+        where: {
+          $or: [
+            {
+              user: ctx.state.user.id
+            },
+            {
+              members: ctx.state.user.id
+            }
+          ]
+        },
+        data: ctx.request.body.data,
+        populate: { user: true },
+      });
+      if (!response) {
+        return ctx.badRequest(`Error 404, ressource not found`);
+      }
+      return {data: {id: response.id, attributes: {...response}}, meta: {}};
+    } catch (error) {
       throw new ApplicationError();
     }
   },

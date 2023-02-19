@@ -1,4 +1,4 @@
-import { projectType } from 'types/index';
+import { projectType, userType } from 'types/index';
 
 export const getProjects = async (token: string, id: number) => {
   const data = await fetch(`http://localhost:3000/api/projects?userId=${id}`, {
@@ -76,6 +76,24 @@ export const updateProject = async (project: Partial<projectType>, jwt: string):
     },
   });
   const json = await data.json();
+  if (json.error) {
+    throw new Error(json.error.message);
+  }
+  return json;
+};
+
+export const leaveProject = async (projectId:number, members: userType[], jwt: string): Promise<any> => {
+  const data = await fetch(`http://localhost:1337/api/projects/${projectId}/leave`, {
+    method: 'PUT',
+    body: JSON.stringify({data: { id: projectId, members: members }}),
+    headers: {
+      Authorization: 'Bearer ' + jwt,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+  const json = await data.json();
+  console.log(json);
   if (json.error) {
     throw new Error(json.error.message);
   }

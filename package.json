@@ -3,8 +3,7 @@
     "dev:frontend": "cd frontend && npm run dev",
     "dev:backend": "cd backend/app && npm run develop",
     "build:frontend": "cd frontend && yarn build",
-    "export:frontend": "cd frontend && yarn export",
-    "start:frontend": "cd frontend && yarn start",
+    "start": "npm run dev:backend & npm run dev:frontend",
     "release": "release-it",
     "format:check": "prettier -c \"frontend/**/*.{js,ts,jsx,tsx}\"",
     "format:fix": "prettier -w \"frontend/**/*.{js,ts,jsx,tsx}\""

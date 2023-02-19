@@ -25,6 +25,11 @@ const myExtraRoutes = [
     method: "GET",
     path: "/project-user",
     handler: "api::project.project.projectUser",
+  },
+  {
+    method: "PUT",
+    path: "/projects/:id/leave",
+    handler: "api::project.project.updateMember",
   }
 ];
 
