@@ -61,7 +61,7 @@ export type feedbackType = {
   title: string;
   description: string;
   author_email: string;
-  comments?: commentType;
+  comments?: commentType[];
   status: feedbackStatusType;
   state: feedbackStateType;
   type: feedbackTypeType;

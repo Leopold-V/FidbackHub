@@ -6,13 +6,14 @@ import { formatDateToDisplay } from '../../../utils/formatDate';
 import { toast } from 'react-toastify';
 import { useSession } from 'next-auth/react';
 
-export const CommentZone = ({ comments, projectId }: { comments: commentType[], projectId: number }) => {
+export const CommentZone = ({ comments, feedbackId, projectId }: { comments: commentType[], feedbackId: number, projectId: number }) => {
   const { data: session } = useSession();
 
   const handleClick = async () => {
     const fakeComment = {
       content: 'hello new comment test',
-      author: 'leopold12d12@gmail.com'
+      author: 'leopold12d12@gmail.com',
+      feedback: feedbackId
     }
     try {
       await createComment(fakeComment, projectId, session.jwt);

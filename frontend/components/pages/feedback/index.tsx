@@ -186,7 +186,7 @@ export const FeedbackPageComponent = ({ _feedback, projectId }: { _feedback: fee
                 <ChatBubbleBottomCenterTextIcon className="h-5 w-5" aria-hidden="true" />
                 <h3 className="text-base ">Comments</h3>
               </div>
-              <CommentZone comments={feedback.comments} projectId={projectId} />
+              <CommentZone comments={feedback.comments} feedbackId={feedback.id} projectId={projectId} />
             </Card>
           </div>
         </div>
