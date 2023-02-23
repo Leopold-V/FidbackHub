@@ -16,15 +16,21 @@
       "type": "richtext",
       "required": true
     },
-    "author": {
-      "type": "email",
-      "required": true
-    },
     "feedback": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::feedback.feedback",
       "inversedBy": "comments"
+    },
+    "author": {
+      "type": "string",
+      "required": true,
+      "maxLength": 128,
+      "minLength": 3
+    },
+    "user_avatar": {
+      "type": "string",
+      "required": true
     }
   }
 }

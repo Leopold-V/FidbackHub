@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { WrenchScrewdriverIcon, ChartBarIcon, HomeIcon, KeyIcon, LightBulbIcon } from '@heroicons/react/24/outline';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
+import { Disclosure } from '@headlessui/react';
 
 const navigation = (id: number, routeName: string) => [
   {
@@ -40,12 +41,54 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export const Sidebar = ({ id, name }) => {
+export const Sidebar = ({ id, name, listProjects }) => {
   const router = useRouter();
   return (
     <div className="flex flex-grow flex-col overflow-y-auto bg-mainBackground pt-5 pb-4 border-r border-secondaryBackground">
       <div className="mt-5 flex flex-grow flex-col">
         <nav className="flex-grow space-y-4 pr-6" aria-label="Sidebar">
+        <Disclosure as="div" className="space-y-1">
+                {({ open }) => (
+                  <>
+                    <Disclosure.Button
+                      className='text-muted hover:bg-secondaryBackground hover:text-mainText
+                      flex items-center px-3 py-1.5 rounded-r-full font-medium text-sm relative overflow-hidden duration-200'
+                    >
+                      Reactirator
+                      <svg
+                        className={classNames(
+                          open ? 'text-gray-400 rotate-90' : 'text-gray-300',
+                          'ml-3 h-5 w-5 transform transition-colors duration-150 ease-in-out group-hover:text-gray-400'
+                        )}
+                        viewBox="0 0 20 20"
+                        aria-hidden="true"
+                      >
+                        <path d="M6 6L14 10L6 14V6Z" fill="currentColor" />
+                      </svg>
+                    </Disclosure.Button>
+                    <Disclosure.Panel className="space-y-1">
+                        <Disclosure.Button
+                          as="a"
+                          className="group flex w-full items-center rounded-md py-2 pl-11 pr-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                        >
+                          Reactirator
+                        </Disclosure.Button>
+                        <Disclosure.Button
+                          as="a"
+                          className="group flex w-full items-center rounded-md py-2 pl-11 pr-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                        >
+                          myecommerce
+                        </Disclosure.Button>
+                        <Disclosure.Button
+                          as="a"
+                          className="group flex w-full items-center rounded-md py-2 pl-11 pr-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                        >
+                          another projects
+                        </Disclosure.Button>
+                    </Disclosure.Panel>
+                  </>
+                )}
+              </Disclosure>
           {navigation(id, router.asPath).map((item) => (
             <Link key={item.name} href={item.href}>
               <a

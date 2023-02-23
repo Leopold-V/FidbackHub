@@ -45,6 +45,7 @@ export type commentType = {
   id: number;
   content: string;
   author: string;
+  user_avatar: string;
   createdAt?: Date;
   error?: {
     state: number;

@@ -151,7 +151,7 @@ export const FeedbackPageComponent = ({ _feedback, projectId }: { _feedback: fee
                 </div>
 
                 <div className="text-muted text-sm py-4 space-y-4 mx-auto">
-                  <h3 className=" text-mainText">Device/System details</h3>
+                  <h3 className="text-mainText pb-2">Device/System details</h3>
                   <p>
                     OS: <span className="text-secondaryText pl-2">Windows 10</span>
                   </p>
@@ -182,11 +182,11 @@ export const FeedbackPageComponent = ({ _feedback, projectId }: { _feedback: fee
         <div className="lg:w-1/2 flex flex-col">
           <div className="py-5">
             <Card>
-              <div className="flex items-center space-x-1 text-secondaryText">
+              <div className="flex items-center space-x-2">
                 <ChatBubbleBottomCenterTextIcon className="h-5 w-5" aria-hidden="true" />
-                <h3 className="text-base ">Comments</h3>
+                <h3 className="text-base text-mainText">Comments</h3>
               </div>
-              <CommentZone comments={feedback.comments} feedbackId={feedback.id} projectId={projectId} />
+              <CommentZone _comments={feedback.comments} feedbackId={feedback.id} projectId={projectId} />
             </Card>
           </div>
         </div>

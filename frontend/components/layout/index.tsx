@@ -21,7 +21,7 @@ const Layout = ({
       <Topbar />
       {router.asPath !== '/projects' && router.asPath !== '/project-creation' && router.asPath !== '/my-account' ? (
         <div className="flex sm:flex-row flex-col flex-grow">
-          <Sidebar id={id} name={name} />
+          <Sidebar id={id} name={name} listProjects={listProjects} />
           <div className="sm:w-5/6 bg-zinc-900">{children}</div>
         </div>
       ) : (
