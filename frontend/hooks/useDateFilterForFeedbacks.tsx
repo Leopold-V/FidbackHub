@@ -4,7 +4,8 @@ import isBetween from 'dayjs/plugin/isBetween';
 dayjs.extend(isBetween);
 import { feedbackType } from 'types/index';
 
-export const useDateFilterForFeedbacks = (feedbacks: feedbackType[]) => {
+// passing the projectId to force rerender with useeffect when changing page id params
+export const useDateFilterForFeedbacks = (feedbacks: feedbackType[], projectId: number) => {
   const [dateRange, setdateRange] = useState({
     startDate: dayjs().subtract(1000000, 'day').format('YYYY-MM-DD'),
     endDate: dayjs(new Date()).format('YYYY-MM-DD'),
@@ -22,7 +23,7 @@ export const useDateFilterForFeedbacks = (feedbacks: feedbackType[]) => {
   useEffect(() => {
     const newFeedbacks = filterFeedbacks(feedbacks);
     setfeedbacksFiltered([...newFeedbacks]);
-  }, [dateRange]);
+  }, [dateRange, projectId]);
 
   return [feedbacksFiltered, dateRange, setdateRange];
 };

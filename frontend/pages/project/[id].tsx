@@ -13,7 +13,7 @@ const ProjectPage = ({ params, project, listProjects }) => {
         <title>Project</title>
       </Head>
       <Layout listProjects={listProjects} id={params.id} name={project.name}>
-        <Page project={project} />
+        <Page project={project} projectId={params.id} />
       </Layout>
     </>
   );

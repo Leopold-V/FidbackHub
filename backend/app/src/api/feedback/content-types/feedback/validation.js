@@ -10,8 +10,8 @@ const schemaCreate = Joi.object({
       .min(8)
       .max(1028)
       .required(),
-  status: Joi.string().min(3).max(10).required(),
-  state: Joi.string().min(3).max(10).required(),
+  status: Joi.string().required(),
+  state: Joi.string().required(),
   author_email: Joi.string().required(),
   'type': Joi.string().required(),
   screenshot: Joi.any(),
@@ -31,8 +31,8 @@ const schemaUpdate = Joi.object({
       .min(8)
       .max(1028)
       .required(),
-  status: Joi.string().min(3).max(10).required(),
-  state: Joi.string().min(3).max(20).required(),
+  status: Joi.string().required(),
+  state: Joi.string().required(),
   'type': Joi.string().required(),
   author_email: Joi.string().required(),
   screenshot: Joi.any(),
@@ -43,6 +43,7 @@ const schemaUpdate = Joi.object({
     'any.required': `Project token missing!`
   }),
   project: Joi.any(),
+  comments: Joi.any()
 });
 
 module.exports = { schemaCreate, schemaUpdate };

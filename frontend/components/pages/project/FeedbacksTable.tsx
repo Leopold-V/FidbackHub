@@ -22,6 +22,8 @@ import { formatDateToDisplay } from '../../../utils/formatDate';
 import { TableSection } from './TableSection';
 import { PaginationSection } from './PaginationSection';
 import Link from 'next/link';
+import { ButtonOutline } from 'components/common/Button';
+import { ModalAddFeedback } from './ModalAddFeedback';
 
 declare module '@tanstack/table-core' {
   interface FilterFns {
@@ -44,15 +46,18 @@ export const FeedbacksTable = ({
   feedbacks,
   setdateRange,
   projectId,
+  projectToken
 }: {
   feedbacks: feedbackType[];
   setdateRange;
   projectId: number;
+  projectToken: string;
 }) => {
   const rerender = React.useReducer(() => ({}), {})[1];
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [rowSelection, setRowSelection] = React.useState({});
   const [globalFilter, setGlobalFilter] = React.useState('');
+  const [open, setopen] = useState(false);
 
   const columns = React.useMemo<ColumnDef<feedbackType, any>[]>(
     () => [
@@ -200,7 +205,10 @@ export const FeedbacksTable = ({
   return (
     <div className="w-full">
       <HeaderWrapper>
-        <h2 className="text-secondary">Feedbacks</h2>
+        <div className="flex items-center space-x-5">
+          <h2 className="text-secondary">Feedbacks</h2>
+          <ButtonOutline onClick={() => setopen((open) => !open)}>New +</ButtonOutline>
+        </div>
         <div className="mt-4 flex items-center justify-between space-x-4">
           <div className="flex space-x-4">
             <FilterStatus column={table.getHeaderGroups()[0].headers[3].headerGroup.headers[3].column} />
@@ -227,6 +235,7 @@ export const FeedbacksTable = ({
           <PaginationSection table={table} setData={setData} />
         </div>
       </div>
+      <ModalAddFeedback open={open} setopen={setopen} projectToken={projectToken} setData={setData} />
     </div>
   );
 };
