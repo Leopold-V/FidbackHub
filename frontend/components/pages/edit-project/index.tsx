@@ -16,7 +16,7 @@ const EditProjectPageComponent = ({ project }: { project: projectType }) => {
       <HeaderWrapper>
         <h2>Settings</h2>
       </HeaderWrapper>
-      <div className="flex lg:flex-row flex-col py-8 px-5">
+      <div className="flex lg:flex-row flex-col py-6 px-5">
         <div className="flex flex-col xl:w-3/4 w-full mx-auto space-y-2 lg:pr-2.5 pr-0">
           <h2 className="font-medium">Details</h2>
           <EditProjectForm project={project} setProject={setProject} isAdmin={isAdmin} />

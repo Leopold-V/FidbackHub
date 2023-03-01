@@ -21,6 +21,7 @@ export const EditProjectForm = ({
   const { data: session } = useSession();
   const [input, setInput] = useState({
     name: project.name,
+    description: project.description,
     website_url: project.website_url,
     github_url: project.github_url,
   });
@@ -67,6 +68,27 @@ export const EditProjectForm = ({
           <span className="sm:w-1/4 w-3/4 mx-auto">Project name</span>
           <div className="sm:w-1/2 w-3/4 flex">
             <p className="text-secondaryText font-light">{project.name}</p>
+          </div>
+        </div>
+      )}
+      {isAdmin ? (
+        <InputDecorators label="Description">
+          <Input
+            type="text"
+            name="description"
+            id="description"
+            autoComplete="description"
+            value={input.description}
+            onChange={handleChange}
+            disabled={loading}
+            placeholder="Project description"
+          />
+        </InputDecorators>
+      ) : (
+        <div className="text-sm flex justify-center items-center p-4">
+          <span className="sm:w-1/4 w-3/4 mx-auto">Project description</span>
+          <div className="sm:w-1/2 w-3/4 flex">
+            <p className="text-secondaryText font-light">{project.description}</p>
           </div>
         </div>
       )}

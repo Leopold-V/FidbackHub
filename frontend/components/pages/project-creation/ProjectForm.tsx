@@ -6,10 +6,12 @@ import { addProject } from '../../../services/project.service';
 import { SpinnerButton } from 'components/common/Spinner';
 import { InputDecorators } from 'components/common/InputDecorators';
 import { Input } from 'components/common/Input';
+
 export const ProjectForm = () => {
   const { data: session } = useSession();
   const [project, setProject] = useState<Partial<projectType>>({
     name: '',
+    description: '',
     website_url: '',
     github_url: '',
   });
@@ -44,6 +46,18 @@ export const ProjectForm = () => {
           onChange={handleChange}
           disabled={loading}
           placeholder="e.g. my-ecommerce-website"
+        />
+      </InputDecorators>
+      <InputDecorators label="Description">
+        <Input
+          type="text"
+          name="description"
+          id="description"
+          autoComplete="description"
+          value={project.description}
+          onChange={handleChange}
+          disabled={loading}
+          placeholder="Your project description"
         />
       </InputDecorators>
       <InputDecorators label="Website link">

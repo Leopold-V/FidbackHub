@@ -2,10 +2,14 @@ const Joi = require('joi');
 
 const schemaCreate = Joi.object({
   name: Joi.string()
-      .alphanum()
-      .min(3)
-      .max(50)
-      .required(),
+    .alphanum()
+    .min(3)
+    .max(50)
+    .required(),
+  description: Joi.string()
+    .min(5)
+    .max(2000)
+    .required(),
   website_url: Joi.string().uri().required(),
   github_url: Joi.string().uri().required(),
   api_key: Joi.string().min(64).max(256).required(),
@@ -16,10 +20,14 @@ const schemaCreate = Joi.object({
 const schemaUpdate = Joi.object({
   id: Joi.number().required(),
   name: Joi.string()
-      .alphanum()
-      .min(3)
-      .max(50)
-      .required(),
+    .alphanum()
+    .min(3)
+    .max(50)
+    .required(),
+  description: Joi.string()
+    .min(5)
+    .max(2000)
+    .required(),
   website_url: Joi.string().uri().required(),
   github_url: Joi.string().uri().required(),
   api_key: Joi.string().min(64).max(256).required(),

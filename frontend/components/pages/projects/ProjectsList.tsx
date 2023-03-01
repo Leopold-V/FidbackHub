@@ -2,6 +2,7 @@ import React from 'react';
 import { useSession } from 'next-auth/react';
 import { projectType } from 'types/index';
 import { ProjectItem } from './ProjectItem';
+import { ProjectCardItem } from './ProjectCardItem';
 
 export const ProjectsList = ({
   projects,
@@ -15,12 +16,8 @@ export const ProjectsList = ({
   const { data: session } = useSession();
   if (grid) {
     return (
-      <ul role="list" className="flex sm:flex-row mx-2 flex-wrap flex-col justify-center items-center">
-        {projects.map((project) => (
-          <div className="m-2 border border-3Background rounded">
-            <ProjectItem key={project.id} project={project} userId={session.id} />
-          </div>
-        ))}
+      <ul role="list" className="flex sm:flex-row mx-2 flex-wrap flex-col justify-start items-center">
+        {projects.map((project) => (<ProjectCardItem key={project.id} project={project} userId={session.id} />))}
       </ul>
     );
   }

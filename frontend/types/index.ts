@@ -22,6 +22,7 @@ export type userType = {
 export type projectType = {
   id: number;
   name: string;
+  description: string;
   createdAt: string;
   updatedAt: string;
   publishedAt: string;

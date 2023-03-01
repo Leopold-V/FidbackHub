@@ -55,6 +55,10 @@
       "relation": "manyToMany",
       "target": "plugin::users-permissions.user",
       "inversedBy": "member_of"
+    },
+    "description": {
+      "type": "text",
+      "required": true
     }
   }
 }

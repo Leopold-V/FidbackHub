@@ -12,7 +12,7 @@ export const ProjectsColumn = ({
   setprojects: (projects: projectType[]) => void;
 }) => {
   const [projectsFiltered, setprojectsFiltered] = useState(projects);
-  const [grid, setgrid] = useState(false);
+  const [grid, setgrid] = useState(true);
 
   useEffect(() => {
     setprojectsFiltered(projects);
