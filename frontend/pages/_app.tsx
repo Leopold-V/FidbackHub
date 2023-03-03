@@ -10,8 +10,6 @@ import 'react-toastify/dist/ReactToastify.css';
 var localizedFormat = require('dayjs/plugin/localizedFormat');
 import '../styles/globals.css';
 import { LoaderScreen } from 'components/common/LoaderScreen';
-//import '../../widget/dist/widget';
-import Script from 'next/script';
 
 dayjs.extend(localizedFormat);
 
@@ -46,15 +44,6 @@ const App = ({ Component, pageProps }: AppProps) => {
           theme="dark"
         />
       </SessionProvider>
-      <Script>
-      {`(function (w,d,s,o,f,js,fjs) {
-            w['JS-Widget']=o;w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) };
-            js = d.createElement(s), fjs = d.getElementsByTagName(s)[0];
-            js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs);
-        }(window, document, 'script', 'mw', '../../widget/dist/widget.js'));
-        mw('init', { someConfiguration: 42 });
-        mw('message', 'Hello world!');`}
-      </Script>
     </>
   );
 };
