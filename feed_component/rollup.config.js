@@ -1,8 +1,8 @@
 import commonjs from '@rollup/plugin-commonjs';
+import babel from '@rollup/plugin-babel';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import postcss from 'rollup-plugin-postcss';
-import tsConfig from './tsconfig.json';
 
 const packageJson = require('./package.json');
 
@@ -35,6 +35,9 @@ export default {
       },
     }),
     resolve(),
+    babel({
+      presets: ['@babel/preset-react'],
+    }),
     commonjs(),
     typescript(),
   ],
