@@ -44,6 +44,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           theme="dark"
         />
       </SessionProvider>
+      <script type="module" src="https://cdn.jsdelivr.net/gh/Leopold-V/FidbackHub@master/widget/main.js"></script>
     </>
   );
 };
