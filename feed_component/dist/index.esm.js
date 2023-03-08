@@ -2776,12 +2776,7 @@ function requireReact_development () {
 }
 
 (function (module) {
-
-	if (process.env.NODE_ENV === 'production') {
 	  module.exports = requireReact_production_min();
-	} else {
-	  module.exports = requireReact_development();
-	}
 } (react));
 
 var React = /*@__PURE__*/getDefaultExportFromCjs(react.exports);
