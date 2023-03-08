@@ -1,6 +1,5 @@
 import React, { ChangeEvent, MouseEvent, useState } from 'react';
-import { sendFeedback } from 'service/feedback';
-import { Button } from './Button';
+import { sendFeedback } from '../services/feedback.service';
 
 export const Form = ({ apiKey }: { apiKey: string }) => {
   const [values, setvalues] = useState({
@@ -75,9 +74,9 @@ export const Form = ({ apiKey }: { apiKey: string }) => {
           </div>
         )}
       </div>
-      <Button type="submit" disabled={loading}>
+      <button type="submit" disabled={loading}>
         Send!
-      </Button>
+      </button>
     </form>
   );
 };

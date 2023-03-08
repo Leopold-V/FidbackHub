@@ -1,9 +1,21 @@
+import { useState } from 'react';
 import styled from 'styled-components';
+import { Button } from './components/Button';
+import { Form } from './components/Form';
+
+// apiKey="OX3bW6wtUaz/9zmf0KWvLu/KrUgVswf2kZy0kNR+7lBRHzyp0l6VCNanJkbBmjd5N/rcdP99sc6mbXhxquZmFg=="
 
 function App() {
+  const [open, setopen] = useState(false);
+
+  const handleOpen = () =>{
+    setopen(true);
+  }
+
   return (
     <Container>
-      Feedback
+      <Button onClick={handleOpen}>Feedback</Button>
+      {open && <Form apiKey="OX3bW6wtUaz/9zmf0KWvLu/KrUgVswf2kZy0kNR+7lBRHzyp0l6VCNanJkbBmjd5N/rcdP99sc6mbXhxquZmFg==" />}
     </Container>
   )
 }

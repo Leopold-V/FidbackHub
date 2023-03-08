@@ -20,7 +20,6 @@ const createFeedback = async (req: NextApiRequest, res: NextApiResponse) => {
     method: 'POST',
     body: JSON.stringify({ data: { ...feedback, status: 'Open', state: 'New', user_ipv4: ipv4 } }),
     headers: {
-      Authorization: 'Bearer ' + process.env.FEEDBACKS_API_TOKEN,
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
