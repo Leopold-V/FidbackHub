@@ -22,7 +22,6 @@ export default {
       sourcemap: true,
     },
   ],
-  external: ['react', 'dayjs'],
   plugins: [
     postcss({
       config: {
