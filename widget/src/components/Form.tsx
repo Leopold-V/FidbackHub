@@ -1,4 +1,5 @@
 import React, { ChangeEvent, MouseEvent, useState } from 'react';
+import styled from 'styled-components';
 import { sendFeedback } from '../services/feedback.service';
 
 export const Form = ({ apiKey }: { apiKey: string }) => {
@@ -27,7 +28,7 @@ export const Form = ({ apiKey }: { apiKey: string }) => {
     }
   };
   return (
-    <form
+    <FormStyled
       onSubmit={handleSubmit}
       className="flex flex-col items-center justify-center space-y-4 mt-4 h-full w-full text-sm"
     >
@@ -77,6 +78,18 @@ export const Form = ({ apiKey }: { apiKey: string }) => {
       <button type="submit" disabled={loading}>
         Send!
       </button>
-    </form>
+    </FormStyled>
   );
 };
+
+const FormStyled = styled.form`
+background-color: rgb(79 70 229);
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+margin-top: 16px;
+height: 100%;
+width: 100%;
+font-size: 0.8rem
+`
