@@ -1,6 +1,6 @@
-import React, { ChangeEvent, MouseEvent, useState } from 'react';
-import styled from 'styled-components';
+import { ChangeEvent, MouseEvent, useState } from 'react';
 import { sendFeedback } from '../services/feedback.service';
+import { Button } from './Button';
 
 export const Form = ({ apiKey }: { apiKey: string }) => {
   const [values, setvalues] = useState({
@@ -28,7 +28,7 @@ export const Form = ({ apiKey }: { apiKey: string }) => {
     }
   };
   return (
-    <FormStyled
+    <form
       onSubmit={handleSubmit}
       className="flex flex-col items-center justify-center space-y-4 mt-4 h-full w-full text-sm"
     >
@@ -75,21 +75,9 @@ export const Form = ({ apiKey }: { apiKey: string }) => {
           </div>
         )}
       </div>
-      <button type="submit" disabled={loading}>
+      <Button type="submit" disabled={loading}>
         Send!
-      </button>
-    </FormStyled>
+      </Button>
+    </form>
   );
 };
-
-const FormStyled = styled.form`
-background-color: rgb(79 70 229);
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-margin-top: 16px;
-height: 100%;
-width: 100%;
-font-size: 0.8rem
-`

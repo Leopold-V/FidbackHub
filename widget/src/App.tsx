@@ -20,47 +20,22 @@ function App() {
   const [open, setopen] = useState(false);
 
   return (
-    <Container as={motion.div}>
-      <FormContainer as={motion.div}
-        animate={open ? 'open' : 'closed'}
-        variants={card()}
-        initial={false}
-      >
-        <Form apiKey="OX3bW6wtUaz/9zmf0KWvLu/KrUgVswf2kZy0kNR+7lBRHzyp0l6VCNanJkbBmjd5N/rcdP99sc6mbXhxquZmFg==" />
-      </FormContainer>
-      <ButtonContainer as={motion.div} animate={open ? 'open' : 'closed'} variants={button} initial={false}>
-        <ButtonOpen open={open} setopen={setopen} />
-      </ButtonContainer>
-    </Container>
+    <div className="fixed bottom-0 right-0 text-gray-800 bg-gray-50 rounded-t">
+      <div className="relative">
+        <motion.div
+          animate={open ? 'open' : 'closed'}
+          variants={card()}
+          initial={false}
+          className={`shadow-lg flex flex-col items-center px-3 w-96`}
+        >
+          <Form apiKey="OX3bW6wtUaz/9zmf0KWvLu/KrUgVswf2kZy0kNR+7lBRHzyp0l6VCNanJkbBmjd5N/rcdP99sc6mbXhxquZmFg==" />
+        </motion.div>
+        <motion.div animate={open ? 'open' : 'closed'} variants={button} initial={false} className="absolute">
+          <ButtonOpen setopen={setopen} open={open} />
+        </motion.div>
+      </div>
+    </div>
   )
 }
-
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 384px;
-`
-
-const ButtonContainer = styled.div`
-position: absolute;
-`
-
-const Container = styled.div`
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  position: fixed;
-  bottom: 0px;
-  right: 0px;
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	vertical-align: baseline;
-  button {
-    border: none;
-  }
-`
 
 export default App
