@@ -30,7 +30,7 @@ export const Form = ({ apiKey }: { apiKey: string }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col items-center justify-center space-y-4 mt-4 h-full w-full text-sm"
+      className="flex flex-col items-center justify-center space-y-4 mt-6 w-full h-full text-gray-800 bg-gray-50 text-sm"
     >
       <div className="space-y-3 w-3/4">
         <div className="w-full flex flex-col items-center space-y-1">
@@ -40,7 +40,7 @@ export const Form = ({ apiKey }: { apiKey: string }) => {
             name="title"
             id="title"
             value={values.title}
-            className="w-full text-xs rounded-md border duration-200 bg-opacity-25 py-2 leading-5 placeholder-gray-500 focus:placeholder-gray-600 outline-none focus:ring-1"
+            className="w-full text-xs rounded-md border duration-200 bg-opacity-25 pl-2 py-2 leading-5 placeholder-gray-500 focus:placeholder-gray-600 outline-none focus:ring-1"
             onChange={handleChange}
             placeholder="Title"
           />
@@ -52,7 +52,7 @@ export const Form = ({ apiKey }: { apiKey: string }) => {
             name="description"
             id="description"
             value={values.description}
-            className="w-full text-xs rounded-md border duration-200 bg-opacity-25 py-2 leading-5 placeholder-gray-500 focus:placeholder-gray-600 outline-none focus:ring-1"
+            className="w-full text-xs rounded-md border duration-200 bg-opacity-25 pl-2 py-2 leading-5 placeholder-gray-500 focus:placeholder-gray-600 outline-none focus:ring-1"
             onChange={handleChange}
             placeholder="Description"
           />
@@ -64,7 +64,7 @@ export const Form = ({ apiKey }: { apiKey: string }) => {
             name="author_email"
             id="author_email"
             value={values.author_email}
-            className="w-full text-xs rounded-md border duration-200 bg-opacity-25 py-2 leading-5 text-secondaryPrimary placeholder-gray-500 focus:placeholder-gray-600 outline-none focus:ring-1"
+            className="w-full text-xs rounded-md border duration-200 bg-opacity-25 pl-2 py-2 leading-5 text-secondaryPrimary placeholder-gray-500 focus:placeholder-gray-600 outline-none focus:ring-1"
             onChange={handleChange}
             placeholder="Author email"
           />
