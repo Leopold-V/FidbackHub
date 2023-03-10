@@ -1,6 +1,14 @@
+import { motion } from 'framer-motion'
+import style from './buttonopen.module.css';
+
 type ButtonOpenProps = {
   open: boolean;
   setopen: (open: boolean) => void;
+};
+
+const button = {
+  open: { top: 0, bottom: 'auto' },
+  closed: { bottom: 0 },
 };
 
 export const ButtonOpen = ({ open, setopen }: ButtonOpenProps) => {
@@ -10,9 +18,10 @@ export const ButtonOpen = ({ open, setopen }: ButtonOpenProps) => {
   };
 
   return (
-    <button
-      className={`bg-indigo-600 text-white rounded-t w-96
-    h-12 flex items-center justify-center relative`}
+    <motion.button
+    animate={open ? 'open' : 'closed'} variants={button} initial={false}
+      className={style.button}
+      style={{"backgroundColor": "rgb(79 70 229)"}}
       onClick={handleClick}
     >
       <h1 className="text-center py-3">Feedback</h1>
@@ -30,6 +39,6 @@ export const ButtonOpen = ({ open, setopen }: ButtonOpenProps) => {
           </svg>
         </span>
       )}
-    </button>
+    </motion.button>
   );
 };

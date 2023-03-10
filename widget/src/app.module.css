@@ -1,0 +1,7 @@
+
+@import url(https://cdnjs.cloudflare.com/ajax/libs/cleanslate/0.10.1/cleanslate.min.css);
+.container {
+    position: fixed !important;
+    bottom: 0 !important;
+    right: 0 !important;
+}

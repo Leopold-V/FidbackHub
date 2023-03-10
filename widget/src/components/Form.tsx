@@ -1,8 +1,15 @@
 import { ChangeEvent, MouseEvent, useState } from 'react';
+import { motion } from 'framer-motion'
 import { sendFeedback } from '../services/feedback.service';
 import { Button } from './Button';
+import style from './form.module.css';
 
-export const Form = ({ apiKey }: { apiKey: string }) => {
+const card = () => ({
+  open: { opacity: 1, height: 400, clipPath: 'circle(100%)' },
+  closed: { opacity: 0, height: 0, clipPath: 'circle(40%)' },
+});
+
+export const Form = ({ apiKey, open }: { apiKey: string, open: boolean }) => {
   const [values, setvalues] = useState({
     title: '',
     description: '',
@@ -28,6 +35,12 @@ export const Form = ({ apiKey }: { apiKey: string }) => {
     }
   };
   return (
+    <motion.div
+    animate={open ? 'open' : 'closed'}
+    variants={card()}
+    initial={false}
+    className={`shadow-lg flex flex-col items-center w-96`}
+  >
     <form
       onSubmit={handleSubmit}
       className="flex flex-col items-center justify-center space-y-4 mt-6 w-full h-full text-gray-800 bg-gray-50 text-sm"
@@ -79,5 +92,6 @@ export const Form = ({ apiKey }: { apiKey: string }) => {
         Send!
       </Button>
     </form>
+    </motion.div>
   );
 };

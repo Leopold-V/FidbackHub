@@ -43,7 +43,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           theme="dark"
         />
       </SessionProvider>
-      <script type="module" src="https://cdn.jsdelivr.net/gh/Leopold-V/FidbackHub@master/widget/dist/fidbackhub-widget.js"></script>
+      <iframe src="https://app.marker.io/editor?embed=1" name="MagicIframe" width="300" height="600" scrolling="no" frameBorder="0"></iframe>
     </>
   );
 };

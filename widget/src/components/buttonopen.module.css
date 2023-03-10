@@ -1,0 +1,11 @@
+.button {
+    background-color: rgb(79 70 229) !important;
+    color: white !important;
+    border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+    height: 48px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: absolute !important;
+}
