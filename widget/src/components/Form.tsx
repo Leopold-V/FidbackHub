@@ -39,7 +39,7 @@ export const Form = ({ apiKey, open }: { apiKey: string, open: boolean }) => {
     animate={open ? 'open' : 'closed'}
     variants={card()}
     initial={false}
-    className={`shadow-lg flex flex-col items-center w-96`}
+    className={`shadow-lg flex flex-col items-center px-3 w-96`}
   >
     <form
       onSubmit={handleSubmit}

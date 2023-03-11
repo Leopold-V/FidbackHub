@@ -43,6 +43,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           theme="dark"
         />
       </SessionProvider>
+      <script type="text/javascript" src=""></script>
       {/* <iframe src="http://127.0.0.1:5173/" name="MagicIframe" width="300" height="600" scrolling="no" frameBorder="0" className="absolute top-0"></iframe> */}
     </>
   );
