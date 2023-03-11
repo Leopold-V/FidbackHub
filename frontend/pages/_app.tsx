@@ -43,7 +43,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           theme="dark"
         />
       </SessionProvider>
-      <iframe src="https://app.marker.io/editor?embed=1" name="MagicIframe" width="300" height="600" scrolling="no" frameBorder="0"></iframe>
+      {/* <iframe src="http://127.0.0.1:5173/" name="MagicIframe" width="300" height="600" scrolling="no" frameBorder="0" className="absolute top-0"></iframe> */}
     </>
   );
 };
