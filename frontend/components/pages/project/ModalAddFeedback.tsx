@@ -1,4 +1,4 @@
-import { ChangeEvent, Fragment, useRef, useState } from 'react';
+import { ChangeEvent, FormEvent, Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { createFeedback } from '../../../services/feedback.service';
@@ -23,20 +23,20 @@ export const ModalAddFeedback = ({ open, setopen, projectToken, setData }) => {
   });
   const cancelButtonRef = useRef(null);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setfeedback({ ...feedback, [e.target.name]: e.target.value });
+  const handleChange = (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setfeedback({ ...feedback, [e.currentTarget.name]: e.currentTarget.value });
   };
 
   const handleCreateFeedback = async () => {
     try {
-        const result = await createFeedback({...feedback, type: selectedType}, projectToken);
-        setData((data) => ([...data, result.data.attributes]));
-        toast.success("New Feedback added!")
-        setopen(false);
+      const result = await createFeedback({ ...feedback, type: selectedType }, projectToken);
+      setData((data) => [...data, result.data.attributes]);
+      toast.success('New Feedback added!');
+      setopen(false);
     } catch (error) {
-        toast.error(error.message);
+      toast.error(error.message);
     }
-  }
+  };
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -72,45 +72,42 @@ export const ModalAddFeedback = ({ open, setopen, projectToken, setData }) => {
                         New Feedback
                       </Dialog.Title>
                       <div className="mt-2 text-secondaryText">
-                      <InputDecorators label="Title">
-          <Input
-            type="text"
-            name="title"
-            id="title"
-            autoComplete="title"
-            value={feedback.title}
-            onChange={handleChange}
-            placeholder="title"
-          />
-        </InputDecorators>
-        <div className="text-sm flex justify-center items-center p-4">
-        <label htmlFor="name" className="sm:w-1/4 w-3/4 mx-auto">
-            Type
-        </label>
-        <div className="sm:w-1/2 w-3/4 flex">
-              <SelectState selected={selectedType} setselected={setSelectedType} listItems={listType} />
-            </div>
-          </div>
-        <InputDecorators label="description">
-          <Input
-            type="text"
-            name="description"
-            id="description"
-            autoComplete="description"
-            value={feedback.description}
-            onChange={handleChange}
-            placeholder="description"
-          />
-        </InputDecorators>
+                        <InputDecorators label="Title">
+                          <Input
+                            type="text"
+                            name="title"
+                            id="title"
+                            autoComplete="title"
+                            value={feedback.title}
+                            onChange={handleChange}
+                            placeholder="title"
+                          />
+                        </InputDecorators>
+                        <div className="text-sm flex justify-center items-center p-4">
+                          <label htmlFor="name" className="sm:w-1/4 w-3/4 mx-auto">
+                            Type
+                          </label>
+                          <div className="sm:w-1/2 w-3/4 flex">
+                            <SelectState selected={selectedType} setselected={setSelectedType} listItems={listType} />
+                          </div>
+                        </div>
+                        <InputDecorators label="description">
+                          <textarea
+                            name="description"
+                            id="description"
+                            autoComplete="description"
+                            className="flex-grow text-secondaryText focus:text-mainText rounded-md border duration-200 focus:ring-2 focus:ring-indigo-500 border-3Background bg-3Background bg-opacity-25 py-2 leading-5 text-secondaryPrimary placeholder-gray-500 focus:placeholder-gray-600 outline-none text-sm"
+                            value={feedback.description}
+                            onChange={handleChange}
+                            placeholder="description"
+                          />
+                        </InputDecorators>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="bg-mainBackground px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                  <Button
-                    type="button"
-                    onClick={handleCreateFeedback}
-                  >
+                  <Button type="button" onClick={handleCreateFeedback}>
                     Create
                   </Button>
                   <button

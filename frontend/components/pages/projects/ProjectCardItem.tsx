@@ -33,44 +33,44 @@ export const ProjectCardItem = ({ project, userId }: { project: projectType; use
               </Link>
             </h2>
           </div>
-          </div>
-          {!isGuest && (
-            <span className="rounded-full bg-secondaryBackground px-3 py-0.5 text-sm font-medium text-muted">
-              Admin
-            </span>
-          )}
+        </div>
+        {!isGuest && (
+          <span className="rounded-full bg-secondaryBackground px-3 py-0.5 text-sm font-medium text-muted">Admin</span>
+        )}
       </div>
       <div className="line-clamp-3">
         <p className="text-sm text-secondaryText">{project.description}</p>
       </div>
-      <div className="text-sm text-muted">Tasks done : <span className="text-secondaryText">{project.feedbacks.filter((ele) => ele.status === 'Open').length}</span> / {project.feedbacks.length}</div>
+      <div className="text-sm text-muted">
+        Tasks done :{' '}
+        <span className="text-secondaryText">{project.feedbacks.filter((ele) => ele.status === 'Open').length}</span> /{' '}
+        {project.feedbacks.length}
+      </div>
       <div className="flex justify-between absolute bottom-0  w-60 items-center border-t border-3Background">
         <ul className="flex items-center text-sm space-x-1 py-3">
-        {project.members.map((ele) => <img src={ele.avatar_url} alt={ele.username} className="rounded-full h-5 w-5" />
-        )}
+          {project.members.map((ele) => (
+            <img src={ele.avatar_url} alt={ele.username} className="rounded-full h-5 w-5" />
+          ))}
         </ul>
         <div className="flex flex-row items-center space-x-3 py-3">
-            {!isGuest && (
-                <Link href={`/project/${project.id}/settings`}>
-                <a className="flex space-x-1 text-sm items-center justify-center rounded-full  duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
-                    <PencilIcon className="h-4 w-4 hover:-rotate-90 text-secondaryText hover:text-main duration-200" />
-                </a>
-                </Link>
-            )}
-            {/* Repo meta info */}
-            <div className="flex-shrink-0 flex-col items-end space-y-3 sm:flex">
-                <p className="flex items-center space-x-4">
-                <a
-                    href={project.website_url}
-                    className="relative text-sm font-medium cursor-pointer"
-                >
+          {!isGuest && (
+            <Link href={`/project/${project.id}/settings`}>
+              <a className="flex space-x-1 text-sm items-center justify-center rounded-full  duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+                <PencilIcon className="h-4 w-4 hover:-rotate-90 text-secondaryText hover:text-main duration-200" />
+              </a>
+            </Link>
+          )}
+          {/* Repo meta info */}
+          <div className="flex-shrink-0 flex-col items-end space-y-3 sm:flex">
+            <p className="flex items-center space-x-4">
+              <a href={project.website_url} className="relative text-sm font-medium cursor-pointer">
                 <ArrowTopRightOnSquareIcon
-                    className="h-4 w-4 text-secondaryText hover:text-main hover:-rotate-90 duration-200"
-                    aria-hidden="true"
+                  className="h-4 w-4 text-secondaryText hover:text-main hover:-rotate-90 duration-200"
+                  aria-hidden="true"
                 />
-                </a>
-                </p>
-            </div>
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </li>

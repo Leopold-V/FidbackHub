@@ -70,7 +70,7 @@ export const FeedbackPageComponent = ({ _feedback, projectId }: { _feedback: fee
 
   const handleOpenImage = () => {
     setopenimage(true);
-  }
+  };
 
   return (
     <div>
@@ -112,16 +112,20 @@ export const FeedbackPageComponent = ({ _feedback, projectId }: { _feedback: fee
         <div className="lg:w-1/2 flex flex-col">
           <div className="py-5">
             <Card>
-                <div className="mx-auto w-full h-32 overflow-hidden relative group">
-                  <Image src={img} alt="Screenshot for the feedback" layout="responsive" className="group-hover:blur-sm duration-500" />
-                  <ButtonOutline 
-                    className="focus:ring-3Background text-3Background border-3Background hover:bg-3Background hover:text-mainText opacity-0 group-hover:opacity-100 absolute z-10 -translate-y-1/2 duration-500 right-0 group-hover:right-1/3 top-1/2"
-                    onClick={handleOpenImage}
-                  >
-                  
-                    Open
-                  </ButtonOutline>
-                </div>
+              <div className="mx-auto w-full h-32 overflow-hidden relative group">
+                <Image
+                  src={img}
+                  alt="Screenshot for the feedback"
+                  layout="responsive"
+                  className="group-hover:blur-sm duration-500"
+                />
+                <ButtonOutline
+                  className="focus:ring-3Background text-3Background border-3Background hover:bg-3Background hover:text-mainText opacity-0 group-hover:opacity-100 absolute z-10 -translate-y-1/2 duration-500 right-0 group-hover:right-1/3 top-1/2"
+                  onClick={handleOpenImage}
+                >
+                  Open
+                </ButtonOutline>
+              </div>
               <div className="py-4 text-sm border-b border-3Background space-y-2">
                 <h3 className="text-mainText">Description</h3>
                 <p className="text-secondaryText">{feedback.description}</p>
@@ -191,11 +195,7 @@ export const FeedbackPageComponent = ({ _feedback, projectId }: { _feedback: fee
           </div>
         </div>
       </div>
-      <ModalImage
-        image={img}
-        open={openimage}
-        setopen={setopenimage}
-      />
+      <ModalImage image={img} open={openimage} setopen={setopenimage} />
       <Modal
         open={open}
         setopen={setopen}

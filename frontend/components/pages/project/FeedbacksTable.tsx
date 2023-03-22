@@ -46,7 +46,7 @@ export const FeedbacksTable = ({
   feedbacks,
   setdateRange,
   projectId,
-  projectToken
+  projectToken,
 }: {
   feedbacks: feedbackType[];
   setdateRange;

@@ -56,7 +56,7 @@ export type commentType = {
       errors: strapiErrorDetailType[];
     };
   };
-}
+};
 
 export type feedbackType = {
   id: number;

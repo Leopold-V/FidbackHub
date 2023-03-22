@@ -82,10 +82,10 @@ export const updateProject = async (project: Partial<projectType>, jwt: string):
   return json;
 };
 
-export const leaveProject = async (projectId:number, members: userType[], jwt: string): Promise<any> => {
+export const leaveProject = async (projectId: number, members: userType[], jwt: string): Promise<any> => {
   const data = await fetch(`http://localhost:1337/api/projects/${projectId}/leave`, {
     method: 'PUT',
-    body: JSON.stringify({data: { id: projectId, members: members }}),
+    body: JSON.stringify({ data: { id: projectId, members: members } }),
     headers: {
       Authorization: 'Bearer ' + jwt,
       Accept: 'application/json',

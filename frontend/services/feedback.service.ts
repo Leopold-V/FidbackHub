@@ -7,7 +7,7 @@ export const createFeedback = async (feedback: Partial<feedbackType>, projectTok
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ feedback: {...feedback, projectToken} }),
+    body: JSON.stringify({ feedback: { ...feedback, projectToken } }),
   });
   const json = await data.json();
   if (json.error) {

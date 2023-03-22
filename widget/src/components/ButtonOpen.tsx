@@ -6,8 +6,8 @@ type ButtonOpenProps = {
 };
 
 const button = {
-  open: { top: 0, bottom: 'auto' },
-  closed: { bottom: 0 },
+  open: { top: 0,  width: 384, bottom: 'auto' },
+  closed: { bottom: 0,  width: 100},
 };
 
 export const ButtonOpen = ({ open, setopen }: ButtonOpenProps) => {
@@ -19,10 +19,11 @@ export const ButtonOpen = ({ open, setopen }: ButtonOpenProps) => {
   return (
     <motion.div
     animate={open ? 'open' : 'closed'} variants={button} initial={false}
-    className="absolute"
+    className="absolute w-full"
     >
-    <button
-    className={`bg-indigo-600 text-white rounded-t w-96
+    <motion.button
+    //animate={open ? 'open' : 'closed'} variants={button} initial={false}
+    className={`bg-indigo-600 text-white rounded-t w-full
     h-12 flex items-center justify-center relative`}
       onClick={handleClick}
     >
@@ -41,7 +42,7 @@ export const ButtonOpen = ({ open, setopen }: ButtonOpenProps) => {
           </svg>
         </span>
       )}
-    </button>
+    </motion.button>
     </motion.div>
   );
 };

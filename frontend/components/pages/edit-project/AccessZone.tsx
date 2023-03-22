@@ -30,7 +30,7 @@ const MembersList = ({ project, membersList, setmembers, isAdmin }) => {
           <span className="hover:text-indigo-500 duration-200 w-52 overflow-hidden overflow-ellipsis">
             {member.email}
           </span>
-          {isAdmin && (member.id !== session.id) && (
+          {isAdmin && member.id !== session.id && (
             <button
               onClick={handleRemoveMember}
               data-email={member.email}

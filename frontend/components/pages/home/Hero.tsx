@@ -7,9 +7,7 @@ export const Hero = () => {
       <h1 className="px-8 mt-16 mb-6 text-5xl font-extrabold leading-tight text-center text-white xl:text-6xl">
         <span className="text-indigo-700">FidbackHub</span>
       </h1>
-      <p className="max-w-xl mx-auto mb-10 text-xl text-center xl:max-w-2xl">
-        Blabla bla
-      </p>
+      <p className="max-w-xl mx-auto mb-10 text-xl text-center xl:max-w-2xl">Blabla bla</p>
       <div className="flex flex-col justify-center max-w-xs mx-auto mb-12 sm:max-w-full sm:flex-row">
         <Link href="/documentation">
           <a

@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
-import { CheckIcon, ChevronDownIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
+import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid';
 import { Listbox, Transition } from '@headlessui/react';
-import { feedbackStateType } from 'types/index';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
