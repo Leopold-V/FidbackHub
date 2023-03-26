@@ -1,6 +1,6 @@
 import { flexRender, Table } from '@tanstack/react-table';
 
-export const TableSection = ({ table, projectId }: { table: Table<any>; projectId: number }) => {
+export const TableSection = ({ table }: { table: Table<any> }) => {
   return (
     <table className="w-full">
       <thead className="border-b-2 border-3Background text-muted text-sm">

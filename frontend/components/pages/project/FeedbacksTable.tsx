@@ -1,4 +1,5 @@
 import React, { HTMLProps, useEffect, useState } from 'react';
+import Link from 'next/link';
 import {
   Column,
   useReactTable,
@@ -16,14 +17,14 @@ import {
 import { RankingInfo, rankItem } from '@tanstack/match-sorter-utils';
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import { feedbackType } from '../../../types';
+import { formatDateToDisplay } from '../../../utils/formatDate';
 import { HeaderWrapper } from 'components/common/HeaderWrapper';
 import { DateButtonGroups } from '../dashboard/DateButtonsGroup';
-import { formatDateToDisplay } from '../../../utils/formatDate';
 import { TableSection } from './TableSection';
 import { PaginationSection } from './PaginationSection';
-import Link from 'next/link';
 import { ButtonOutline } from 'components/common/Button';
 import { ModalAddFeedback } from './ModalAddFeedback';
+import { useDateFilterForFeedbacks } from '../../../hooks/useDateFilterForFeedbacks';
 
 declare module '@tanstack/table-core' {
   interface FilterFns {
@@ -43,17 +44,17 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
 };
 
 export const FeedbacksTable = ({
-  feedbacks,
-  setdateRange,
   projectId,
   projectToken,
+  feedbacks,
+  setfeedbacks,
 }: {
-  feedbacks: feedbackType[];
-  setdateRange;
   projectId: number;
   projectToken: string;
+  feedbacks: feedbackType[];
+  setfeedbacks;
+  // ugly but pass this to sync the date filter with all the table filters so that deleted feedbacks doesn't show with date filter
 }) => {
-  const rerender = React.useReducer(() => ({}), {})[1];
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [rowSelection, setRowSelection] = React.useState({});
   const [globalFilter, setGlobalFilter] = React.useState('');
@@ -161,10 +162,15 @@ export const FeedbacksTable = ({
   );
 
   const [data, setData] = useState<feedbackType[]>(() => feedbacks);
+  const [feedbacksFiltered, dateRange, setdateRange, setfeedbacksFiltered] = useDateFilterForFeedbacks(
+    feedbacks,
+    projectId,
+    data,
+  );
 
   useEffect(() => {
-    setData(feedbacks);
-  }, [feedbacks]);
+    setData(feedbacksFiltered);
+  }, [feedbacksFiltered]);
 
   const table = useReactTable({
     data,
@@ -231,8 +237,8 @@ export const FeedbacksTable = ({
       </HeaderWrapper>
       <div className="w-full">
         <div className="text-secondaryText px-10">
-          <TableSection projectId={projectId} table={table} />
-          <PaginationSection table={table} setData={setData} />
+          <TableSection table={table} />
+          <PaginationSection table={table} setData={setData} setfeedbacks={setfeedbacks} />
         </div>
       </div>
       <ModalAddFeedback open={open} setopen={setopen} projectToken={projectToken} setData={setData} />

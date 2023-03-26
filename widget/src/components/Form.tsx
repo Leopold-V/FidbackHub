@@ -17,6 +17,7 @@ export const Form = ({ apiKey, open }: { apiKey: string, open: boolean }) => {
   });
   const [error, seterror] = useState('');
   const [loading, setloading] = useState(false);
+  const [success, setsuccess] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setvalues({ ...values, [e.target.name]: e.target.value });
@@ -25,10 +26,18 @@ export const Form = ({ apiKey, open }: { apiKey: string, open: boolean }) => {
   const handleSubmit = async (e: MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     setloading(true);
+    setsuccess(false);
+    seterror('');
     try {
       await sendFeedback(values, apiKey);
+      setvalues({
+        title: '',
+        type: 'Bug Report',
+        description: '',
+        author_email: '',
+      })
+      setsuccess(true);
     } catch (error: any) {
-      console.log(error);
       seterror(error.message);
     } finally {
       setloading(false);
@@ -41,7 +50,8 @@ export const Form = ({ apiKey, open }: { apiKey: string, open: boolean }) => {
     initial={false}
     className={`shadow-lg flex flex-col items-center px-3 w-96`}
   >
-    <form
+
+    {!loading ? (<form
       onSubmit={handleSubmit}
       className="flex flex-col items-center justify-center space-y-4 mt-6 w-full h-full text-gray-800 bg-gray-50"
     >
@@ -87,11 +97,20 @@ export const Form = ({ apiKey, open }: { apiKey: string, open: boolean }) => {
             <p className="text-red-500 text-sm font-semibold text-center">{error}</p>
           </div>
         )}
+        {success && (
+          <div>
+            <p className="text-green-500 text-sm font-semibold text-center">Feedback successfully sent !</p>
+          </div>
+        )}
       </div>
       <Button type="submit" disabled={loading}>
         Send!
       </Button>
-    </form>
+    </form>) : (
+      <div className='h-full w-full flex items-center justify-center'>
+        <h2 className="text-xl font-semibold">Loading...</h2>
+      </div>
+    )}
     </motion.div>
   );
 };

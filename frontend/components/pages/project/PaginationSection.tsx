@@ -5,7 +5,7 @@ import { deleteManyFeedbacks } from '../../../services/feedback.service';
 import { DeleteSelected } from './DeleteSelectedFeedbacks';
 import { feedbackType } from 'types/index';
 
-export const PaginationSection = ({ table, setData }) => {
+export const PaginationSection = ({ table, setData, setfeedbacks }) => {
   const { data: session } = useSession();
   const [loading, setloading] = useState(false);
   const [open, setopen] = useState(false);
@@ -16,6 +16,9 @@ export const PaginationSection = ({ table, setData }) => {
     try {
       await deleteManyFeedbacks(listFeedbacksToDelete, session.jwt);
       setData((feedbacks: feedbackType[]) =>
+        feedbacks.filter((ele) => !listFeedbacksToDelete.find((id) => +id === ele.id)),
+      );
+      setfeedbacks((feedbacks: feedbackType[]) =>
         feedbacks.filter((ele) => !listFeedbacksToDelete.find((id) => +id === ele.id)),
       );
       toast.success('Feedbacks deleted!');

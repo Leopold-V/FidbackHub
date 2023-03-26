@@ -5,7 +5,7 @@ dayjs.extend(isBetween);
 import { feedbackType } from 'types/index';
 
 // passing the projectId to force rerender with useeffect when changing page id params
-export const useDateFilterForFeedbacks = (feedbacks: feedbackType[], projectId: number) => {
+export const useDateFilterForFeedbacks = (feedbacks: feedbackType[], projectId: number, data: feedbackType[]) => {
   const [dateRange, setdateRange] = useState({
     startDate: dayjs().subtract(1000000, 'day').format('YYYY-MM-DD'),
     endDate: dayjs(new Date()).format('YYYY-MM-DD'),
@@ -21,9 +21,10 @@ export const useDateFilterForFeedbacks = (feedbacks: feedbackType[], projectId: 
   };
 
   useEffect(() => {
+    console.log(feedbacksFiltered);
     const newFeedbacks = filterFeedbacks(feedbacks);
     setfeedbacksFiltered([...newFeedbacks]);
-  }, [dateRange, projectId]);
+  }, [dateRange, projectId, feedbacks]);
 
-  return [feedbacksFiltered, dateRange, setdateRange];
+  return [feedbacksFiltered, dateRange, setdateRange, setfeedbacksFiltered];
 };
