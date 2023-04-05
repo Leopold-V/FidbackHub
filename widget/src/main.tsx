@@ -19,7 +19,7 @@ rel="stylesheet"
 />
 
 ReactDOM.createRoot(document.getElementById('widget_fidbackhub') as HTMLElement).render(
-  <Frame head={Head} height={500} width={384} style={{border: "none"}}>
+  <Frame head={Head} height={500} width={384} style={{border: "none", backgroundColor: 'red'}}>
     <App apiKey={apiKey} />
   </Frame>,
 )

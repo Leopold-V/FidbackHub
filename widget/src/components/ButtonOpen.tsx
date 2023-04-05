@@ -21,8 +21,7 @@ export const ButtonOpen = ({ open, setopen }: ButtonOpenProps) => {
     animate={open ? 'open' : 'closed'} variants={button} initial={false}
     className="absolute w-full"
     >
-    <motion.button
-    //animate={open ? 'open' : 'closed'} variants={button} initial={false}
+    <button
     className={`bg-indigo-600 text-white rounded-t w-full
     h-12 flex items-center justify-center relative`}
       onClick={handleClick}
@@ -42,7 +41,7 @@ export const ButtonOpen = ({ open, setopen }: ButtonOpenProps) => {
           </svg>
         </span>
       )}
-    </motion.button>
+    </button>
     </motion.div>
   );
 };

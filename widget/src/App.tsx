@@ -13,12 +13,11 @@ function App({apiKey}: {apiKey: string}) {
 
   return (
     <div className="fixed bottom-0 right-0 text-gray-800 bg-gray-50 rounded-t">
-      <motion.div
-      animate={open ? 'open' : 'closed'} variants={widget_layout} initial={false}
-      className="relative">
+      <div
+      className={`relative ${open ? 'w-[384px]': 'w-[120px]'}`}>
       <Form open={open} apiKey={apiKey} />
       <ButtonOpen setopen={setopen} open={open} />
-      </motion.div>
+      </div>
     </div>
   )
 }
