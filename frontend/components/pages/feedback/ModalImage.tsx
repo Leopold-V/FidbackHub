@@ -1,8 +1,16 @@
 import { Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 
-export const ModalImage = ({ open, setopen, image }) => {
+export const ModalImage = ({
+  open,
+  setopen,
+  image,
+}: {
+  open: boolean;
+  setopen: (open: boolean) => void;
+  image: StaticImageData;
+}) => {
   const cancelButtonRef = useRef(null);
 
   return (

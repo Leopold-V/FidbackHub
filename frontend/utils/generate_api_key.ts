@@ -1,7 +1,7 @@
-import { randomBytes } from 'crypto';
+import { randomBytes, BinaryToTextEncoding } from 'crypto';
 
-export const generateKey = (size = 64, format = 'base64') => {
+/**Generate a secret key with the node.js crypto module, default base64 */
+export const generateKey = (size: number = 64, format: BinaryToTextEncoding = 'base64'): string => {
   const buffer = randomBytes(size);
-  //@ts-ignore
   return buffer.toString(format);
 };
