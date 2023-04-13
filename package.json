@@ -7,8 +7,8 @@
     "build:frontend": "cd frontend && yarn build",
     "start": "npm run dev:backend & npm run dev:frontend",
     "release": "release-it",
-    "format:check": "prettier -c \"frontend/**/*.{js,ts,jsx,tsx}\"",
-    "format:fix": "prettier -w \"frontend/**/*.{js,ts,jsx,tsx}\""
+    "format:check": "prettier -c \"frontend/**/*.{js,ts,jsx,tsx}\" \"widget/**/*.{js,ts,jsx,tsx}\"",
+    "format:fix": "prettier -w \"frontend/**/*.{js,ts,jsx,tsx}\" \"widget/**/*.{js,ts,jsx,tsx}\""
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^5.1.0",
