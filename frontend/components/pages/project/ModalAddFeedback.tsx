@@ -1,6 +1,5 @@
-import { ChangeEvent, FormEvent, Fragment, useRef, useState } from 'react';
+import { FormEvent, Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { createFeedback } from '../../../services/feedback.service';
 import { useSession } from 'next-auth/react';
 import { feedbackType, feedbackTypeType } from 'types/index';

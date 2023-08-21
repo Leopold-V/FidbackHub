@@ -1,6 +1,6 @@
 import { feedbackStateType } from 'types/index';
 
-export const feedbackColor = (state: feedbackStateType) => {
+export const feedbackColor = (state: feedbackStateType): string => {
   switch (state) {
     case 'New':
       return 'blue';

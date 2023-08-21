@@ -4,10 +4,12 @@ import { motion } from 'framer-motion'
 import { ButtonOpen } from './components/ButtonOpen';
 import { Form } from './components/Form';
 
+/*
 const widget_layout = {
   open: { width: 384 },
   closed: { width: 100},
 };
+*/
 
 const Head: ReactNode = <link
 href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"
@@ -42,4 +44,4 @@ function App({apiKey}: {apiKey: string}) {
   )
 }
 
-export default App
+export default App;

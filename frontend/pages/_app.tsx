@@ -55,11 +55,12 @@ const App = ({ Component, pageProps }: AppProps) => {
 };
 
 const ProtectedRoute = ({ children }) => {
-  const { status } = useSession({ required: true });
-
+  //const { status } = useSession({ required: true });
+  /*
   if (status === 'loading') {
     return <LoaderScreen />;
   }
+  */
   return children;
 };
 
