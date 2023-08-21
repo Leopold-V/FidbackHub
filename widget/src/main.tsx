@@ -15,5 +15,5 @@ widget_container.style.right = '0';
 ReactDOM.createRoot(document.getElementById('widget_fidbackhub') as HTMLElement).render(
   <div>
     <App apiKey={apiKey} />
-  </div>
-)
+  </div>,
+);
