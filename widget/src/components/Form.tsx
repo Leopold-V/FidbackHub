@@ -3,13 +3,9 @@ import { motion } from 'framer-motion';
 import { Button } from './Button';
 import { sendFeedback } from '../services/feedback.service';
 import { feedbackType, feedbackTypeType } from '../types';
+import { ButtonOpen } from './ButtonOpen';
 
-const card = () => ({
-  open: { opacity: 1, height: 500, width: 384, clipPath: 'circle(100%)' },
-  closed: { opacity: 0, height: 0, width: 200, clipPath: 'circle(40%)' },
-});
-
-export const Form = ({ apiKey, open }: { apiKey: string; open: boolean }) => {
+export const Form = ({ apiKey, open, setopen }: { apiKey: string; open: boolean, setopen: (open: boolean) => void }) => {
   const [values, setvalues] = useState<feedbackType>({
     title: '',
     type: 'Bug report',
@@ -45,12 +41,10 @@ export const Form = ({ apiKey, open }: { apiKey: string; open: boolean }) => {
     }
   };
   return (
-    <motion.div
-      animate={open ? 'open' : 'closed'}
-      variants={card()}
-      initial={false}
-      className={`shadow-lg flex flex-col items-center px-3 w-96`}
+    <div
+      className={`shadow-lg flex flex-col items-center w-96 pt-8 pb-6`}
     >
+      <ButtonOpen setopen={setopen} open={open} />
       {!loading ? (
         <form
           onSubmit={handleSubmit}
@@ -113,7 +107,7 @@ export const Form = ({ apiKey, open }: { apiKey: string; open: boolean }) => {
           <h2 className="text-xl font-semibold">Loading...</h2>
         </div>
       )}
-    </motion.div>
+    </div>
   );
 };
 

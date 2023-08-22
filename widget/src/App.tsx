@@ -19,20 +19,17 @@ function App({ apiKey }: { apiKey: string }) {
   return (
     <>
       {open && (
-        <Frame head={Head} height={500} width={384} style={{ border: 'none', backgroundColor: 'red' }}>
+        <Frame head={Head} style={{ border: 'none', width: '100%', height: '100%' }} allowFullScreen>
           <div className="fixed bottom-0 right-0 text-gray-800 bg-gray-50 rounded-t">
-            <div className={`relative ${open ? 'w-[384px]' : 'w-[120px]'}`}>
-              <Form open={open} apiKey={apiKey} />
-            </div>
+            <Form open={open} setopen={setopen} apiKey={apiKey} />
           </div>
         </Frame>
       )}
-      <Frame head={Head} height={200} width={200} style={{ border: 'none', backgroundColor: 'green' }}>
-        <ButtonOpen setopen={setopen} open={open} />
-        <div className="fixed bottom-0 right-0 text-gray-800 bg-gray-50 rounded-t">
-          <div className={`relative ${open ? 'w-[384px]' : 'w-[120px]'}`}></div>
-        </div>
-      </Frame>
+      {!open && (
+        <Frame head={Head} height={200} width={200} style={{ border: 'none'}}>
+          <ButtonOpen setopen={setopen} open={open} />
+        </Frame>
+      )}
     </>
   );
 }
