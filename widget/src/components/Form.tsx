@@ -5,7 +5,15 @@ import { sendFeedback } from '../services/feedback.service';
 import { feedbackType, feedbackTypeType } from '../types';
 import { ButtonOpen } from './ButtonOpen';
 
-export const Form = ({ apiKey, open, setopen }: { apiKey: string; open: boolean, setopen: (open: boolean) => void }) => {
+export const Form = ({
+  apiKey,
+  open,
+  setopen,
+}: {
+  apiKey: string;
+  open: boolean;
+  setopen: (open: boolean) => void;
+}) => {
   const [values, setvalues] = useState<feedbackType>({
     title: '',
     type: 'Bug report',

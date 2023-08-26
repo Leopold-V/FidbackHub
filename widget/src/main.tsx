@@ -12,6 +12,4 @@ widget_container.style.height = '100%';
 
 //document.body.appendChild(widget_container);
 
-ReactDOM.createRoot(document.getElementsByTagName('body')[0] as HTMLElement).render(
-  <App apiKey={apiKey} />
-);
+ReactDOM.createRoot(document.getElementsByTagName('body')[0] as HTMLElement).render(<App apiKey={apiKey} />);

@@ -9,12 +9,8 @@ function App({ apiKey }: { apiKey: string }) {
 
   return (
     <>
-      {open && (
-        <IframeForm Head={Head} open={open} setopen={setopen} apiKey={apiKey} />
-      )}
-      {!open && (
-        <IframeButton Head={Head} open={open} setopen={setopen} />
-      )}
+      {open && <IframeForm Head={Head} open={open} setopen={setopen} apiKey={apiKey} />}
+      {!open && <IframeButton Head={Head} open={open} setopen={setopen} />}
     </>
   );
 }
