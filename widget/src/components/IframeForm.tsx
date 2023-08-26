@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import Frame from 'react-frame-component';
 import { Form } from './Form';
+import { ScreenPlay } from './ScreenPlay';
 
 export const IframeForm = ({
   Head,
@@ -14,10 +15,9 @@ export const IframeForm = ({
   apiKey: string;
 }) => {
   return (
-    <Frame head={Head} style={{ border: 'none', position: 'absolute', width: '100%', height: '100%' }}>
-      <div className="absolute h-full w-full">
-        <Form open={open} setopen={setopen} apiKey={apiKey} />
-      </div>
+    <Frame head={Head} style={{ border: 'none', position: 'absolute', width: '100%', height: '100%', bottom: '0' }}>
+      <Form open={open} setopen={setopen} apiKey={apiKey} />
+      <ScreenPlay />
     </Frame>
   );
 };

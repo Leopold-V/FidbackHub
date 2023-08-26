@@ -1,17 +1,16 @@
 import React from 'react';
-import { AppProps } from 'next/app';
+import Script from 'next/script';
 import Head from 'next/head';
+import { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import dayjs from 'dayjs';
 import { ToastContainer } from 'react-toastify';
+import dayjs from 'dayjs';
 var localizedFormat = require('dayjs/plugin/localizedFormat');
 import { LoaderScreen } from 'components/common/LoaderScreen';
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/globals.css';
-import Script from 'next/script';
-
 
 dayjs.extend(localizedFormat);
 
@@ -44,10 +43,10 @@ const App = ({ Component, pageProps }: AppProps) => {
           pauseOnHover
           theme="dark"
         />
-                <Script
+        <Script
           id="script_widget"
           type="text/javascript"
-          src="https://cdn.jsdelivr.net/gh/Leopold-V/FidbackHub@latest/widget/dist/fidbackhub-widget.min.js"
+          src="https://cdn.jsdelivr.net/gh/Leopold-V/FidbackHub@0.0.1-alpha/widget/dist/fidbackhub-widget.js"
           data-key="OX3bW6wtUaz/9zmf0KWvLu/KrUgVswf2kZy0kNR+7lBRHzyp0l6VCNanJkbBmjd5N/rcdP99sc6mbXhxquZmFg=="
         />
       </SessionProvider>
