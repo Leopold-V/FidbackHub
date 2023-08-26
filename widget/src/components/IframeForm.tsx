@@ -14,7 +14,7 @@ export const IframeForm = ({
   apiKey: string;
 }) => {
   return (
-    <Frame head={Head} style={{ border: 'none', width: '100%', height: '100%' }}>
+    <Frame head={Head} style={{ border: 'none', position: 'absolute', width: '100%', height: '100%' }}>
       <div className="absolute h-full w-full">
         <Form open={open} setopen={setopen} apiKey={apiKey} />
       </div>

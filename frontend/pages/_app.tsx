@@ -10,6 +10,8 @@ var localizedFormat = require('dayjs/plugin/localizedFormat');
 import { LoaderScreen } from 'components/common/LoaderScreen';
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/globals.css';
+import Script from 'next/script';
+
 
 dayjs.extend(localizedFormat);
 
@@ -42,16 +44,13 @@ const App = ({ Component, pageProps }: AppProps) => {
           pauseOnHover
           theme="dark"
         />
-      </SessionProvider>
-      {
-        <script
+                <Script
           id="script_widget"
           type="text/javascript"
-          src="https://cdn.jsdelivr.net/gh/Leopold-V/FidbackHub@latest/widget/dist/fidbackhub-widget.js"
+          src="https://cdn.jsdelivr.net/gh/Leopold-V/FidbackHub@latest/widget/dist/fidbackhub-widget.min.js"
           data-key="OX3bW6wtUaz/9zmf0KWvLu/KrUgVswf2kZy0kNR+7lBRHzyp0l6VCNanJkbBmjd5N/rcdP99sc6mbXhxquZmFg=="
-        ></script>
-      }
-      {/* <iframe src="http://127.0.0.1:5173/" name="MagicIframe" width="300" height="600" scrolling="no" frameBorder="0" className="fixed bottom-0 right-0"></iframe> */}
+        />
+      </SessionProvider>
     </>
   );
 };
