@@ -1,13 +1,6 @@
-import { motion } from 'framer-motion';
-
 type ButtonOpenProps = {
   open: boolean;
   setopen: (open: boolean) => void;
-};
-
-const button = {
-  open: { top: 0, width: 384, bottom: 'auto' },
-  closed: { bottom: 0, width: 100 },
 };
 
 export const ButtonOpen = ({ open, setopen }: ButtonOpenProps) => {
@@ -16,10 +9,9 @@ export const ButtonOpen = ({ open, setopen }: ButtonOpenProps) => {
   };
 
   return (
-    <motion.div animate={open ? 'open' : 'closed'} variants={button} initial={false} className="absolute w-full">
       <button
-        className={`bg-indigo-600 text-white rounded-t w-full
-    h-12 flex items-center justify-center relative`}
+        className={`bg-indigo-600 text-white rounded
+        w-full h-full flex items-center justify-center relative`}
         onClick={handleClick}
       >
         <h1 className="text-center py-3">Feedback</h1>
@@ -38,6 +30,5 @@ export const ButtonOpen = ({ open, setopen }: ButtonOpenProps) => {
           </span>
         )}
       </button>
-    </motion.div>
   );
 };

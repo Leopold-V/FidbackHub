@@ -42,7 +42,7 @@ export const Form = ({ apiKey, open, setopen }: { apiKey: string; open: boolean,
   };
   return (
     <div
-      className={`shadow-lg flex flex-col items-center w-96 pt-8 pb-6`}
+      className={`absolute right-0 bottom-0 shadow-lg flex flex-col items-center w-96 pb-6 text-gray-800 bg-gray-50 rounded-t`}
     >
       <ButtonOpen setopen={setopen} open={open} />
       {!loading ? (
