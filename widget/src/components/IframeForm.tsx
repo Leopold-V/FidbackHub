@@ -8,16 +8,18 @@ export const IframeForm = ({
   open,
   setopen,
   apiKey,
+  htmlToCanvas,
 }: {
   Head: ReactNode;
   open: boolean;
   setopen: (open: boolean) => void;
   apiKey: string;
+  htmlToCanvas: Promise<HTMLCanvasElement>;
 }) => {
   return (
     <Frame head={Head} style={{ border: 'none', position: 'absolute', width: '100%', height: '100%', bottom: '0' }}>
       <Form open={open} setopen={setopen} apiKey={apiKey} />
-      <ScreenPlay />
+      <ScreenPlay htmlToCanvas={htmlToCanvas} />
     </Frame>
   );
 };

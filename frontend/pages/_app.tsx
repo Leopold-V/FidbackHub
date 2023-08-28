@@ -46,7 +46,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <Script
           id="script_widget"
           type="text/javascript"
-          src="https://cdn.jsdelivr.net/gh/Leopold-V/FidbackHub@0.0.1-alpha/widget/dist/fidbackhub-widget.js"
+          src="https://cdn.jsdelivr.net/gh/Leopold-V/FidbackHub@0.0.2-alpha/widget/dist/fidbackhub-widget.js"
           data-key="OX3bW6wtUaz/9zmf0KWvLu/KrUgVswf2kZy0kNR+7lBRHzyp0l6VCNanJkbBmjd5N/rcdP99sc6mbXhxquZmFg=="
         />
       </SessionProvider>
