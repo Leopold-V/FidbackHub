@@ -137,7 +137,7 @@ const SelectInput = ({
         onChange={handleChange}
       >
         {listType.map((type) => (
-          <option>{type}</option>
+          <option key={type}>{type}</option>
         ))}
       </select>
     </div>
