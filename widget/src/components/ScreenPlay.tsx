@@ -26,7 +26,6 @@ export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
     let lastLine = lines[lines.length - 1];
     // add point
     lastLine.points = lastLine.points.concat([point.x, point.y]);
-
     // replace last
     lines.splice(lines.length - 1, 1, lastLine);
     setLines(lines.concat());
@@ -39,9 +38,6 @@ export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
   const createCanvas = () => {
     htmlToCanvas.then(function (dataUrl: any) {
       setimagedata(dataUrl);
-      //canvas.style.width = '100%';
-      //canvas.style.height = '100%';
-      //ref.current?.appendChild(canvas);
     });
   };
 
@@ -49,27 +45,8 @@ export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
     createCanvas();
   }, []);
 
-  const drawCursor = () => {
-    const canvas = ref.current?.firstElementChild as HTMLCanvasElement | null;
-    console.log('execute');
-
-    if (canvas) {
-      const context = canvas.getContext('2d');
-      if (context) {
-        context.strokeStyle = 'red';
-        context.lineJoin = 'round';
-        context.lineWidth = 5;
-        context.beginPath();
-        //context.moveTo(mouseCoords.x, mouseCoords.y);
-        //context.lineTo(mouseCoords.x -1, mouseCoords.y -1);
-        context.closePath();
-        context.stroke();
-      }
-    }
-  };
-
   return (
-    <div className="bg-gray-500 absolute top-0 m-4 w-3/4 h-3/4 p-3">
+    <div className="bg-gray-50 absolute top-0 m-4 w-3/4 h-3/4 p-3">
       <h2 className="py-2">Screen capture</h2>
       <select
         value={tool}
@@ -83,12 +60,12 @@ export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
       <div className="object-contain w-full h-full" ref={ref}>
         <Stage
           width={ref.current?.offsetWidth}
-          height={ref.current?.offsetHeight}
+          height={ref.current?.offsetHeight - 70}
           //@ts-ignore
           onMouseDown={handleMouseDown}
           onMousemove={handleMouseMove}
           onMouseup={handleMouseUp}
-          className="object-contain"
+          className=""
         >
           <Layer>
             <Text text="Just start drawing" x={5} y={30} />
@@ -98,7 +75,7 @@ export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
                 key={i}
                 points={line.points}
                 stroke="#df4b26"
-                strokeWidth={5}
+                strokeWidth={3}
                 tension={0.5}
                 lineCap="round"
                 lineJoin="round"
