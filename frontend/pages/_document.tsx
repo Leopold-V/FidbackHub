@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" crossOrigin="anonymous" />
       </Head>
       <body className="h-full">
         <Main />

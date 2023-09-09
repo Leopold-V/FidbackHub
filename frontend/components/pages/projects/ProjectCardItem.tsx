@@ -49,7 +49,8 @@ export const ProjectCardItem = ({ project, userId }: { project: projectType; use
       <div className="flex justify-between absolute bottom-0  w-60 items-center border-t border-3Background">
         <ul className="flex items-center text-sm space-x-1 py-3">
           {project.members.map((ele) => (
-            <img src={ele.avatar_url} alt={ele.username} className="rounded-full h-5 w-5" />
+            <div>{ele.username}</div>
+            // <img src={ele.avatar_url} alt={ele.username} className="rounded-full h-5 w-5" crossOrigin="anonymous" />
           ))}
         </ul>
         <div className="flex flex-row items-center space-x-3 py-3">

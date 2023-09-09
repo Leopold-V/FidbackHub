@@ -27,11 +27,7 @@ export const Topbar = () => {
               {/* Logo section */}
               <div className="flex items-center px-2 lg:px-0 xl:w-64">
                 <div className="flex-shrink-0">
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    alt="Avisitor logo"
-                  />
+                  <img className="h-8 w-auto" alt="logo" crossOrigin="anonymous" />
                 </div>
               </div>
               <div className="flex lg:hidden">

@@ -21,7 +21,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
-        <link rel="shortcut icon" href="/images/favicon.ico" />
+        <link rel="shortcut icon" href="/images/favicon.ico" crossOrigin="anonymous" />
       </Head>
       <SessionProvider session={session}>
         {router.pathname !== ('/' && '/project-creation') ? (
@@ -44,9 +44,10 @@ const App = ({ Component, pageProps }: AppProps) => {
           theme="dark"
         />
         <Script
+          crossOrigin="anonymous"
           id="script_widget"
           type="text/javascript"
-          src="https://cdn.jsdelivr.net/gh/Leopold-V/FidbackHub@0.0.2-alpha/widget/dist/fidbackhub-widget.js"
+          src="https://cdn.jsdelivr.net/gh/Leopold-V/FidbackHub@master/widget/dist/fidbackhub-widget.js"
           data-key="OX3bW6wtUaz/9zmf0KWvLu/KrUgVswf2kZy0kNR+7lBRHzyp0l6VCNanJkbBmjd5N/rcdP99sc6mbXhxquZmFg=="
         />
       </SessionProvider>
