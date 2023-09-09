@@ -3,30 +3,25 @@ import { Stage, Layer, Line, Text, Image } from 'react-konva';
 
 export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
   let ref = useRef<HTMLDivElement>(null);
+  const isDrawing = useRef(false);
   const [tool, setTool] = useState('pen');
   const [lines, setLines] = useState<any>([]);
-  const isDrawing = useRef(false);
-  const [imagedata, setimagedata] = useState('');
+  const [imagedata, setimagedata] = useState<CanvasImageSource | undefined>();
 
-  const handleMouseDown = (e: MouseEvent) => {
+  const handleMouseDown = (e: any) => {
     isDrawing.current = true;
-    //@ts-ignore
     const pos = e.target?.getStage().getPointerPosition();
     setLines([...lines, { tool, points: [pos.x, pos.y] }]);
   };
 
-  const handleMouseMove = (e: MouseEvent) => {
-    // no drawing - skipping
+  const handleMouseMove = (e: any) => {
     if (!isDrawing.current) {
       return;
     }
-    //@ts-ignore
     const stage = e.target?.getStage();
     const point = stage.getPointerPosition();
     let lastLine = lines[lines.length - 1];
-    // add point
     lastLine.points = lastLine.points.concat([point.x, point.y]);
-    // replace last
     lines.splice(lines.length - 1, 1, lastLine);
     setLines(lines.concat());
   };
@@ -46,7 +41,7 @@ export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
   }, []);
 
   return (
-    <div className="bg-gray-50 absolute top-0 m-4 w-3/4 h-3/4 p-3">
+    <div className="bg-gray-50 m-2 w-3/4 p-3 rounded">
       <h2 className="py-2">Screen capture</h2>
       <select
         value={tool}
@@ -60,8 +55,8 @@ export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
       <div className="object-contain w-full h-full" ref={ref}>
         <Stage
           width={ref.current?.offsetWidth}
-          height={ref.current?.offsetHeight - 70}
           //@ts-ignore
+          height={ref.current?.offsetHeight - 70}
           onMouseDown={handleMouseDown}
           onMousemove={handleMouseMove}
           onMouseup={handleMouseUp}

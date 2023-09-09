@@ -17,9 +17,23 @@ export const IframeForm = ({
   htmlToCanvas: any;
 }) => {
   return (
-    <Frame head={Head} style={{ border: 'none', position: 'absolute', width: '100%', height: '100%', bottom: '0' }}>
-      <Form open={open} setopen={setopen} apiKey={apiKey} />
-      <ScreenPlay htmlToCanvas={htmlToCanvas} />
+    <Frame
+      head={Head}
+      scrolling="no"
+      style={{
+        border: 'none',
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        top: '0',
+        bottom: '0',
+        verticalAlign: 'bottom',
+      }}
+    >
+      <div className="flex w-full h-screen">
+        <ScreenPlay htmlToCanvas={htmlToCanvas} />
+        <Form open={open} setopen={setopen} apiKey={apiKey} />
+      </div>
     </Frame>
   );
 };

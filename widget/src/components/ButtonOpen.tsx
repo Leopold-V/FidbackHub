@@ -11,7 +11,7 @@ export const ButtonOpen = ({ open, setopen }: ButtonOpenProps) => {
   return (
     <button
       className={`bg-indigo-600 text-white rounded
-        w-full h-full flex items-center justify-center relative`}
+        w-full flex items-center justify-center relative`}
       onClick={handleClick}
     >
       <h1 className="text-center py-3">Feedback</h1>
