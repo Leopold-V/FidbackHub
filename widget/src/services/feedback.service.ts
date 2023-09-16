@@ -1,6 +1,6 @@
 import { feedbackType } from '../types';
 
-export const sendFeedback = async (feedback: feedbackType, apiKey: string) => {
+export const sendFeedback = async (feedback: feedbackType, imageBase64: string, apiKey: string) => {
   if (typeof apiKey === undefined) {
     return { message: 'Error: no api key' };
   }
@@ -11,7 +11,14 @@ export const sendFeedback = async (feedback: feedbackType, apiKey: string) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      data: { ...feedback, projectToken: apiKey, status: 'Open', state: 'New', user_ipv4: '0.0.0.0' },
+      data: {
+        ...feedback,
+        projectToken: apiKey,
+        screenshot: imageBase64,
+        status: 'Open',
+        state: 'New',
+        user_ipv4: '0.0.0.0',
+      },
     }),
   });
   const json = await data.json();

@@ -14,6 +14,7 @@ export const IframeButton = ({
   return (
     <Frame
       head={Head}
+      id="fidbackhub_button_iframe"
       height={50}
       width={200}
       style={{ border: 'none', position: 'absolute', right: '0', bottom: '0' }}

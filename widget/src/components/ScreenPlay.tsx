@@ -52,7 +52,7 @@ export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
         <option value="pen">Pen</option>
         <option value="eraser">Eraser</option>
       </select>
-      <div className="object-contain w-full h-full" ref={ref}>
+      <div className="object-contain w-full h-full" ref={ref} id="fidbackhub_editor_content">
         <Stage
           width={ref.current?.offsetWidth}
           //@ts-ignore
@@ -64,7 +64,12 @@ export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
         >
           <Layer>
             <Text text="Just start drawing" x={5} y={30} />
-            <Image image={imagedata} />
+            <Image
+              width={ref.current?.offsetWidth}
+              //@ts-ignore
+              height={ref.current?.offsetHeight - 70}
+              image={imagedata}
+            />
             {lines.map((line: any, i: number) => (
               <Line
                 key={i}

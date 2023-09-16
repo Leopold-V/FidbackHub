@@ -1,6 +1,6 @@
 import { Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import Image, { StaticImageData } from 'next/image';
+import { StaticImageData } from 'next/image';
 
 export const ModalImage = ({
   open,
@@ -9,7 +9,7 @@ export const ModalImage = ({
 }: {
   open: boolean;
   setopen: (open: boolean) => void;
-  image: StaticImageData;
+  image: StaticImageData | string;
 }) => {
   const cancelButtonRef = useRef(null);
 
@@ -40,7 +40,10 @@ export const ModalImage = ({
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg shadow-xl transition-all sm:my-8 w-1/2">
-                <Image src={image} alt="Screenshot for the feedback" layout="responsive" />
+                {
+                  //@ts-ignore
+                  <img src={image} alt="Screenshot for the feedback" layout="responsive" />
+                }
               </Dialog.Panel>
             </Transition.Child>
           </div>

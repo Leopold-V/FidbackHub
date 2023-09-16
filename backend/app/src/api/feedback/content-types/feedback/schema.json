@@ -29,14 +29,6 @@
       "required": true,
       "minLength": 8
     },
-    "screenshot": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "state": {
       "type": "enumeration",
       "enum": [
@@ -79,6 +71,9 @@
       "relation": "oneToMany",
       "target": "api::comment.comment",
       "mappedBy": "feedback"
+    },
+    "screenshot": {
+      "type": "text"
     }
   }
 }
