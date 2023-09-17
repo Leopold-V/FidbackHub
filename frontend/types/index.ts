@@ -68,6 +68,7 @@ export type feedbackType = {
   state: feedbackStateType;
   type: feedbackTypeType;
   screenshot?: string;
+  metadata?: metadataType;
   user_ipv4?: string;
   createdAt?: Date;
   error?: {
@@ -111,3 +112,10 @@ export type feedbackStateType = 'New' | 'In progress' | 'Resolved' | 'Rejected';
  * The possible **type** of a feedback
  */
 export type feedbackTypeType = 'General feedback' | 'Bug report' | 'Feature request';
+
+export type metadataType = {
+  userAgent: string; 
+  resolutionWidth: number;
+  resolutionHeight: number; 
+  os: string;
+}

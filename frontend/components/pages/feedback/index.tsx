@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import Image from 'next/image';
 import { ArrowPathIcon, ChatBubbleBottomCenterTextIcon, LockClosedIcon, LockOpenIcon } from '@heroicons/react/20/solid';
 import { feedbackStateType, feedbackStatusType, feedbackType, feedbackTypeType } from 'types/index';
 import img from 'public/images/screenshot_example.png';
@@ -13,7 +13,6 @@ import { Modal } from 'components/common/Modal';
 import { HeaderWrapper } from 'components/common/HeaderWrapper';
 import { Card } from 'components/common/Card';
 import { CommentZone } from './CommentZone';
-import { useRouter } from 'next/router';
 import { ModalImage } from './ModalImage';
 
 const listState: feedbackStateType[] = ['New', 'In progress', 'Resolved', 'Rejected'];
@@ -24,7 +23,6 @@ const message = `Are you sure you want to delete this feedback? The feedback wil
 removed. This action cannot be undone.`;
 
 export const FeedbackPageComponent = ({ _feedback, projectId }: { _feedback: feedbackType; projectId: number }) => {
-  //const imageDecoded = _feedback.screenshot
   const [feedback, setfeedback] = useState(_feedback);
   const { data: session } = useSession();
   const router = useRouter();
@@ -136,7 +134,7 @@ export const FeedbackPageComponent = ({ _feedback, projectId }: { _feedback: fee
                 <p className="text-secondaryText">{feedback.description}</p>
               </div>
 
-              <div className="flex">
+              <div className="flex space-x-4">
                 <div className="flex flex-col space-y-4 py-4 text-sm">
                   <h3 className=" text-mainText">Status</h3>
                   <div className="flex items-center space-x-3 w-full">
@@ -159,21 +157,18 @@ export const FeedbackPageComponent = ({ _feedback, projectId }: { _feedback: fee
                   </div>
                 </div>
 
-                <div className="text-muted text-sm py-4 space-y-4 mx-auto">
+                {_feedback.metadata && <div className="text-muted text-sm py-4 space-y-4 mx-auto">
                   <h3 className="text-mainText pb-2">Device/System details</h3>
                   <p>
-                    OS: <span className="text-secondaryText pl-2">Windows 10</span>
+                    OS: <span className="text-secondaryText pl-2">{_feedback.metadata.os}</span>
                   </p>
                   <p>
-                    Browser: <span className="text-secondaryText pl-2">Firefox Firefox 108.0</span>
+                    Browser: <span className="text-secondaryText pl-2">{_feedback.metadata.userAgent}</span>
                   </p>
                   <p>
-                    Resolution: <span className="text-secondaryText pl-2">1536 x 864</span>
+                    Resolution: <span className="text-secondaryText pl-2">{_feedback.metadata.resolutionWidth} x {_feedback.metadata.resolutionHeight}</span>
                   </p>
-                  <p>
-                    Viewport: <span className="text-secondaryText pl-2">1536 x 711</span>
-                  </p>
-                </div>
+                </div>}
               </div>
               <div className="flex justify-center space-x-3 pt-3">
                 <ButtonOutline disabled={loadingUpdate} className="space-x-1" onClick={handleUpdateStateFeedback}>

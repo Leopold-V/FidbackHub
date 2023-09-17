@@ -41,13 +41,19 @@ export const Form = ({
     setsuccess(false);
     seterror('');
     try {
+      const metadata = { 
+        userAgent: window.navigator.userAgent, 
+        resolutionWidth: window.screen.width, 
+        resolutionHeight: window.screen.height, 
+              //@ts-ignore
+        os: window.navigator.oscpu
+      }
       //@ts-ignore
       const canvasElement = document
         .getElementById('fidbackhub_form_iframe') //@ts-ignore
         .contentWindow.document.getElementById('fidbackhub_editor_content');
-      //@ts-ignore
       const imageBase64 = await html2Image(canvasElement);
-      await sendFeedback(values, imageBase64, apiKey);
+      await sendFeedback(values, imageBase64, metadata, apiKey);
       setvalues({
         title: '',
         type: 'Bug report',

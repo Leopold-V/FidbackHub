@@ -74,6 +74,10 @@
     },
     "screenshot": {
       "type": "text"
+    },
+    "metadata": {
+      "type": "json",
+      "required": true
     }
   }
 }

@@ -15,6 +15,7 @@ const schemaCreate = Joi.object({
   author_email: Joi.string().required(),
   'type': Joi.string().required(),
   screenshot: Joi.string(),
+  metadata: Joi.required(),
   user_ipv4: Joi.string().min(7).max(64).required(true),
   projectToken: Joi.string().min(64).max(256).required(true).messages({
     'any.required': `Project token missing!`
@@ -36,6 +37,7 @@ const schemaUpdate = Joi.object({
   'type': Joi.string().required(),
   author_email: Joi.string().required(),
   screenshot: Joi.string(),
+  metadata: Joi.object(),
   user_ipv4: Joi.string().min(7).max(64).required(true),
   createdAt: Joi.string(),
   updatedAt: Joi.string(),
