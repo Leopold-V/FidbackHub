@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import { getSession } from 'next-auth/react';
+import { unstable_getServerSession } from 'next-auth';
+import { authOptions } from './api/auth/[...nextauth]';
 import { GetServerSideProps } from 'next/types';
 import { getUser } from '../services/user.service';
 import { getProjectsFromUser } from '../services/project.service';
@@ -20,8 +21,18 @@ const ProjectsPage = ({ listProjects, userData }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const session = await getSession({ req });
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await unstable_getServerSession(context.req, context.res, authOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/api/auth/signin',
+        permanent: false,
+      },
+    };
+  }
+
   const userData = await getUser(session.jwt);
   const listProjects = await getProjectsFromUser(session.jwt);
   return { props: { userData: userData, listProjects: Object.values(listProjects.data.attributes) } };

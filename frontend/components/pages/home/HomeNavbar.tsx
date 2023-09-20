@@ -13,18 +13,16 @@ export const HomeNavbar = () => {
     if (status === 'authenticated') {
       router.push('/projects');
     } else {
-      signIn('github', {
-        callbackUrl: `/projects`,
-      });
+      signIn({ callbackUrl: 'http://localhost:3000/projects' });
     }
   };
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex md:flex-row md:space-y-0 space-y-2 items-center justify-between flex-col">
       <Link href="/">
         <img className="block w-8 h-8" src="img/logo.svg" alt="" />
       </Link>
-      <div className="flex items-center mb-4 md:block">
+      <div className="flex items-center space-x-2 mb-4 md:block">
         <Link href="/api/auth/signin">
           <button className="bg-indigo-500 btn hover:bg-indigo-400" onClick={handleSignup}>
             Sign up

@@ -6,10 +6,10 @@ export type feedbackType = {
 };
 
 export type metadataType = {
-  userAgent: string; 
+  userAgent: string;
   resolutionWidth: number;
-  resolutionHeight: number; 
+  resolutionHeight: number;
   os: string;
-}
+};
 
 export type feedbackTypeType = 'General feedback' | 'Bug report' | 'Feature request';

@@ -18,6 +18,7 @@ function classNames(...classes) {
 
 export const Topbar = () => {
   const { data: session } = useSession();
+
   return (
     <Disclosure as="nav" className="flex-shrink-0 bg-mainBackground border-b border-secondaryBackground">
       {({ open }) => (

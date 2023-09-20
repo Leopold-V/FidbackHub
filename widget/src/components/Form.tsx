@@ -41,13 +41,13 @@ export const Form = ({
     setsuccess(false);
     seterror('');
     try {
-      const metadata = { 
-        userAgent: window.navigator.userAgent, 
-        resolutionWidth: window.screen.width, 
-        resolutionHeight: window.screen.height, 
-              //@ts-ignore
-        os: window.navigator.oscpu
-      }
+      const metadata = {
+        userAgent: window.navigator.userAgent,
+        resolutionWidth: window.screen.width,
+        resolutionHeight: window.screen.height,
+        //@ts-ignore
+        os: window.navigator.oscpu,
+      };
       //@ts-ignore
       const canvasElement = document
         .getElementById('fidbackhub_form_iframe') //@ts-ignore

@@ -157,18 +157,23 @@ export const FeedbackPageComponent = ({ _feedback, projectId }: { _feedback: fee
                   </div>
                 </div>
 
-                {_feedback.metadata && <div className="text-muted text-sm py-4 space-y-4 mx-auto">
-                  <h3 className="text-mainText pb-2">Device/System details</h3>
-                  <p>
-                    OS: <span className="text-secondaryText pl-2">{_feedback.metadata.os}</span>
-                  </p>
-                  <p>
-                    Browser: <span className="text-secondaryText pl-2">{_feedback.metadata.userAgent}</span>
-                  </p>
-                  <p>
-                    Resolution: <span className="text-secondaryText pl-2">{_feedback.metadata.resolutionWidth} x {_feedback.metadata.resolutionHeight}</span>
-                  </p>
-                </div>}
+                {_feedback.metadata && (
+                  <div className="text-muted text-sm py-4 space-y-4 mx-auto">
+                    <h3 className="text-mainText pb-2">Device/System details</h3>
+                    <p>
+                      OS: <span className="text-secondaryText pl-2">{_feedback.metadata.os}</span>
+                    </p>
+                    <p>
+                      Browser: <span className="text-secondaryText pl-2">{_feedback.metadata.userAgent}</span>
+                    </p>
+                    <p>
+                      Resolution:{' '}
+                      <span className="text-secondaryText pl-2">
+                        {_feedback.metadata.resolutionWidth} x {_feedback.metadata.resolutionHeight}
+                      </span>
+                    </p>
+                  </div>
+                )}
               </div>
               <div className="flex justify-center space-x-3 pt-3">
                 <ButtonOutline disabled={loadingUpdate} className="space-x-1" onClick={handleUpdateStateFeedback}>

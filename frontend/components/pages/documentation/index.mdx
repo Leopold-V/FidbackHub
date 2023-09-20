@@ -10,73 +10,23 @@ you'll need to set up the fidbackhub component.
 
 ## 1. Installation
 
-You can install the Fidbackhub React component library as an NPM package
+You can install the Fidbackhub component by using the script tag:
 
-With Yarn:
+<SyntaxHighlighter language="html" style={a11yDark}>
+{`<script
+      id="script_widget"
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/gh/Leopold-V/FidbackHub@0.1.0-alpha/widget/dist/fidbackhub-widget.js"
+      data-key="YOUR_SECRET_KEY">
+  </script>`}
 
-```bash
-yarn add fidbackhub
-```
-
-With npm:
-
-```bash
-npm install fidbackhub
-```
-
-## 2. Usage
-
-Fidbackhub works as any other React component so It is extremely easy to start with.\
-This is a small button which can be push to open a card with a form.\
-The component has **an absolute position so be sure to put it in a relative container**.\
-It will always be placed at the bottom-left of the container with a small margin.
-The button has a default animation to be more "catchy" but can be disabled with a props (see next section).
-
-**Example:**
-
-<SyntaxHighlighter language="javascript" style={a11yDark}>
-  {`import Fidbackhub from "Avisitor";
-
-export const Fidbackhub = () => {
-  return (
-    <Fidbackhub 
-      color="blue"
-      token={YOUR_SECRET_KEY}
-      width={300} 
-      height={300}
-      animate={true}
-      disabled={false}
-    />
-  )
-}`}
 </SyntaxHighlighter>
 
-## 3. Project Token
+## 2. Project Token
 
-You will need your project token for sending data. 
+You need your project token for sending data. 
 
-Copy your project token from your [project settings](http://localhost:3000/projects).
-
-## 4. Customizations
-
-<SyntaxHighlighter language="typescript" style={a11yDark}>
-{`type FidbackHubProps = {
-  // Default "blue"
-  color?: 'indigo' | 'blue' | 'red' 
-        | 'green' | 'orange' | 'orange';
-        | 'gray' | 'white' 
-        | 'black' | 'yellow'
-  // Your project token
-  apiKey: string;
-  // Default 300
-  width?: number;
-  // Default 300
-  height?: number;
-  // Default true
-  animate?: boolean;
-  // Default false
-  disabled?: boolean;
-};`}
-</SyntaxHighlighter>
+Copy your project token in the project settings page.
+This is the value you have to give above to the "data-key" attribute;
 
 And voilà !

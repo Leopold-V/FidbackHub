@@ -24,7 +24,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <link rel="shortcut icon" href="/images/favicon.ico" crossOrigin="anonymous" />
       </Head>
       <SessionProvider session={session}>
-        {router.pathname !== ('/' && '/project-creation') ? (
+        {router.pathname !== '/' && router.pathname !== '/project-creation' ? (
           <ProtectedRoute>
             <Component {...pageProps} />
           </ProtectedRoute>
@@ -56,11 +56,9 @@ const App = ({ Component, pageProps }: AppProps) => {
 
 const ProtectedRoute = ({ children }) => {
   const { status } = useSession({ required: true });
-
   if (status === 'loading') {
     return <LoaderScreen />;
   }
-
   return children;
 };
 

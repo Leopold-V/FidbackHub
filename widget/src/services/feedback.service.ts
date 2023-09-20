@@ -1,6 +1,11 @@
 import { feedbackType, metadataType } from '../types';
 
-export const sendFeedback = async (feedback: feedbackType, imageBase64: string, metadata: metadataType, apiKey: string) => {
+export const sendFeedback = async (
+  feedback: feedbackType,
+  imageBase64: string,
+  metadata: metadataType,
+  apiKey: string,
+) => {
   if (typeof apiKey === undefined) {
     return { message: 'Error: no api key' };
   }

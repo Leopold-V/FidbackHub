@@ -25,7 +25,7 @@ export const IframeForm = ({
       scrolling="no"
       style={{
         border: 'none',
-        position: 'absolute',
+        position: 'fixed',
         width: '100%',
         height: '100%',
         top: '0',

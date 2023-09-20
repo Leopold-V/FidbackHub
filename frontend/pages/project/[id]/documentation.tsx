@@ -5,6 +5,7 @@ import { GetServerSideProps } from 'next/types';
 import Page from 'components/pages/documentation/index.mdx';
 import Layout from 'components/layout';
 import { getProjectsFromUser } from '../../../services/project.service';
+import { HeaderWrapper } from 'components/common/HeaderWrapper';
 
 const DocumentationPage = ({ params, project, listProjects }) => {
   return (
@@ -14,6 +15,9 @@ const DocumentationPage = ({ params, project, listProjects }) => {
       </Head>
       <Layout listProjects={listProjects} id={params.id} name={project.name}>
         <div className="flex flex-col items-center space-y-8 pb-8">
+          <HeaderWrapper>
+            <h2>Documentation</h2>
+          </HeaderWrapper>
           <article className="prose prose-mainText prose-a:text-blue-600 hover:prose-a:text-blue-500">
             <Page project={project} />
           </article>

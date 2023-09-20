@@ -1,19 +1,41 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextAuth from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
+import GoogleProvider from 'next-auth/providers/google';
+import Auth0Provider from 'next-auth/providers/auth0';
 import IAccount from 'types/next_auth/account';
 import iToken from 'types/next_auth/token';
 import IUser from 'types/next_auth/user';
 import ISession from 'types/next_auth/session';
 
-const options = {
+export const authOptions = {
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
+    Auth0Provider({
+      clientId: process.env.AUTH0_CLIENT_ID,
+      clientSecret: process.env.AUTH0_CLIENT_SECRET,
+      issuer: process.env.AUTH0_ISSUER,
+      allowDangerousEmailAccountLinking: true,
+      profile(profile) {
+        console.log('----------------------------');
+        console.log(profile);
+        return {
+          id: profile.sub,
+          name: profile.nickname,
+          email: profile.email,
+          image: profile.picture,
+        };
+      },
+    }),
   ],
-  secret: process.env.JWT_SECRET, //PUT YOUR OWN SECRET (command: openssl rand -base64 32)
+  secret: process.env.JWT_SECRET,
   database: process.env.NEXT_PUBLIC_DATABASE_URL,
   session: {
     strategy: 'jwt',
@@ -35,6 +57,7 @@ const options = {
         if (data.jwt) {
           await updateUser(data.user.id, data.user.username, user.image);
         }
+        console.log('Auth0 data:', data);
         token.jwt = data.jwt;
         token.id = data.user.id;
       }
@@ -43,8 +66,10 @@ const options = {
   },
 };
 
+// api/auth/auth0/callback
+
 const Auth = (req: NextApiRequest, res: NextApiResponse) => {
-  return NextAuth(req, res, options);
+  return NextAuth(req, res, authOptions);
 };
 
 export default Auth;

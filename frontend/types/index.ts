@@ -114,8 +114,8 @@ export type feedbackStateType = 'New' | 'In progress' | 'Resolved' | 'Rejected';
 export type feedbackTypeType = 'General feedback' | 'Bug report' | 'Feature request';
 
 export type metadataType = {
-  userAgent: string; 
+  userAgent: string;
   resolutionWidth: number;
-  resolutionHeight: number; 
+  resolutionHeight: number;
   os: string;
-}
+};
