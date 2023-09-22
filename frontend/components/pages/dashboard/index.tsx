@@ -15,7 +15,7 @@ const DashboardPageComponent = ({ project }: { project: projectType }) => {
           <InfoSection feedbacks={project.feedbacks} />
         </div>
         <div className="md:w-2/3 space-y-2">
-          <ProgressLineChartSection feedbacks={project.feedbacks} />
+          <ProgressLineChartSection feedbacks={project.feedbacks} projectId={project.id} />
         </div>
       </div>
     </div>

@@ -102,7 +102,7 @@ export const ProgressLineChart = ({
 };
 
 const CustomTooltip = ({ active, payload, label }: any) => {
-  if (active) {
+  if (active && payload && payload.length) {
     return (
       <div className="bg-secondaryBackground text-secondaryText font-medium p-3 rounded space-y-1">
         <p>{label}</p>
@@ -111,6 +111,5 @@ const CustomTooltip = ({ active, payload, label }: any) => {
       </div>
     );
   }
-
   return null;
 };

@@ -25,6 +25,7 @@ import { PaginationSection } from './PaginationSection';
 import { ButtonOutline } from 'components/common/Button';
 import { ModalAddFeedback } from './ModalAddFeedback';
 import { useDateFilterForFeedbacks } from '../../../hooks/useDateFilterForFeedbacks';
+import dayjs from 'dayjs';
 
 declare module '@tanstack/table-core' {
   interface FilterFns {
@@ -165,7 +166,7 @@ export const FeedbacksTable = ({
   const [feedbacksFiltered, dateRange, setdateRange, setfeedbacksFiltered] = useDateFilterForFeedbacks(
     feedbacks,
     projectId,
-    data,
+    dayjs('2000-01-01').format('YYYY-MM-DD'),
   );
 
   useEffect(() => {
@@ -232,7 +233,7 @@ export const FeedbacksTable = ({
               placeholder="Search all columns..."
             />
           </div>
-          <DateButtonGroups setdateRange={setdateRange} />
+          <DateButtonGroups setdateRange={setdateRange} firstDate={feedbacks[0].createdAt} />
         </div>
       </HeaderWrapper>
       <div className="w-full">
