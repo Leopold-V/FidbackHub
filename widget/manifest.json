@@ -1,0 +1,15 @@
+{
+    "manifest_version": 3,
+    "name": "fidbackhub",
+    "description": "fidbackhub Extension",
+    "version": "0.0.1",
+    "content_scripts": [
+        {
+          "js": ["dist/fidbackhub-widget.js"],
+          "matches": [
+            "https://*/*",
+            "http://*/*"
+          ]
+        }
+      ]
+  }

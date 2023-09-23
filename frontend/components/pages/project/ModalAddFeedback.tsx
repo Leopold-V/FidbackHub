@@ -11,6 +11,10 @@ import { SelectState } from 'components/common/SelectState';
 
 const listType: feedbackTypeType[] = ['Bug report', 'Feature request', 'General feedback'];
 
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(' ');
+}
+
 export const ModalAddFeedback = ({ open, setopen, projectToken, setData }) => {
   const { data: session } = useSession();
   const [selectedType, setSelectedType] = useState<feedbackTypeType>('Bug report');
@@ -68,29 +72,38 @@ export const ModalAddFeedback = ({ open, setopen, projectToken, setData }) => {
                   <div className="">
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4">
                       <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-mainText">
-                        New Feedback
+                        New feedback
                       </Dialog.Title>
                       <div className="mt-2 text-secondaryText">
-                        <InputDecorators label="Title">
-                          <Input
+                        <div className="text-sm flex justify-center items-center p-4">
+                          <label htmlFor="title" className="sm:w-1/4 w-1/4 mx-auto">
+                            Title
+                          </label>
+                          <input
                             type="text"
                             name="title"
                             id="title"
+                            className={classNames(
+                              'flex-grow text-secondaryText focus:text-mainText rounded-md border duration-200 focus:ring-2 focus:ring-indigo-500 border-3Background bg-3Background bg-opacity-25 py-2 leading-5 text-secondaryPrimary placeholder-gray-500 focus:placeholder-gray-600 outline-none text-sm',
+                            )}
                             autoComplete="title"
                             value={feedback.title}
                             onChange={handleChange}
-                            placeholder="title"
+                            placeholder="Your feedback title"
                           />
-                        </InputDecorators>
-                        <div className="text-sm flex justify-center items-center p-4">
-                          <label htmlFor="name" className="sm:w-1/4 w-3/4 mx-auto">
+                        </div>
+                        <div className="text-sm flex justify-start items-center p-4">
+                          <label htmlFor="type" className="sm:w-1/4 w-1/4">
                             Type
                           </label>
-                          <div className="sm:w-1/2 w-3/4 flex">
+                          <div className="">
                             <SelectState selected={selectedType} setselected={setSelectedType} listItems={listType} />
                           </div>
                         </div>
-                        <InputDecorators label="description">
+                        <div className="text-sm flex justify-center items-center p-4">
+                          <label htmlFor="description" className="sm:w-1/4 w-1/4 mx-auto">
+                            Description
+                          </label>
                           <textarea
                             name="description"
                             id="description"
@@ -98,9 +111,9 @@ export const ModalAddFeedback = ({ open, setopen, projectToken, setData }) => {
                             className="flex-grow text-secondaryText focus:text-mainText rounded-md border duration-200 focus:ring-2 focus:ring-indigo-500 border-3Background bg-3Background bg-opacity-25 py-2 leading-5 text-secondaryPrimary placeholder-gray-500 focus:placeholder-gray-600 outline-none text-sm"
                             value={feedback.description}
                             onChange={handleChange}
-                            placeholder="description"
+                            placeholder="Your feedback description"
                           />
-                        </InputDecorators>
+                        </div>
                       </div>
                     </div>
                   </div>

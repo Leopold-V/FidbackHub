@@ -10,7 +10,7 @@ export const ButtonOpen = ({ open, setopen }: ButtonOpenProps) => {
 
   return (
     <button
-      className={`bg-indigo-600 text-white rounded
+      className={`bg-indigo-600 text-white rounded-t
         w-full flex items-center justify-center relative`}
       onClick={handleClick}
     >

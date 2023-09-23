@@ -31,11 +31,13 @@ export const IframeForm = ({
         top: '0',
         bottom: '0',
         verticalAlign: 'bottom',
+        zIndex: '2147483647',
       }}
     >
       <div className="flex w-full h-screen relative">
+        <div className="absolute h-full w-full opacity-70 bg-gray-500 -z-10"></div>
         {loading && (
-          <div className="h-full w-full opacity-90 bg-gray-500 flex justify-center items-center absolute z-10">
+          <div className="h-full w-full opacity-80 bg-gray-500 flex justify-center items-center absolute z-10">
             <div className="font-bold text-3xl">Loading...</div>
           </div>
         )}

@@ -69,7 +69,7 @@ export const Form = ({
   };
   return (
     <div
-      className={`shadow-lg flex flex-col flex-grow items-center self-end pb-6 m-2 text-gray-800 bg-gray-50 rounded`}
+      className={`z-10 shadow-lg flex flex-col flex-grow items-center self-end pb-6 m-2 text-gray-800 bg-gray-50 rounded`}
     >
       <ButtonOpen setopen={setopen} open={open} />
 

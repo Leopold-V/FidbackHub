@@ -17,7 +17,7 @@ export const IframeButton = ({
       id="fidbackhub_button_iframe"
       height={50}
       width={200}
-      style={{ border: 'none', position: 'fixed', right: '0', bottom: '0' }}
+      style={{ border: 'none', position: 'fixed', right: '0', bottom: '0', zIndex: '2147483647' }}
     >
       <ButtonOpen setopen={setopen} open={open} />
     </Frame>

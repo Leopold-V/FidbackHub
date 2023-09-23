@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
     "framer-motion": "^10.2.3",
     "html-to-image": "^1.11.11",
     "html2canvas": "^1.4.1",
