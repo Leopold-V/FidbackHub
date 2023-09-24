@@ -10,7 +10,7 @@ function App({ apiKey }: { apiKey: string }) {
 
   const htmlToCanvas = () => {
     const node = document.getElementsByTagName('html')[0];
-    return html2canvas(node, { allowTaint: true, useCORS: true, scale: 1 });
+    return html2canvas(node, { allowTaint: true, useCORS: true });
   };
 
   return (

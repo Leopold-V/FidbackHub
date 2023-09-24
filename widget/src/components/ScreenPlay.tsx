@@ -131,6 +131,7 @@ export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
   const [imagedata, setimagedata] = useState<CanvasImageSource | undefined>();
   const [loading, setloading] = useState(true);
   const [colorselected, setcolorselected] = useState('#df4b26');
+  const [ratio, setratio] = useState(0);
 
   const handleMouseDown = (e: any) => {
     isDrawing.current = true;
@@ -162,6 +163,11 @@ export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
   };
 
   useEffect(() => {
+    if (ref.current) {
+      const ratio = ref.current?.offsetWidth / window.outerWidth;
+      setratio(ratio);
+      console.log(document.documentElement.scrollTop);
+    }
     createCanvas();
   }, []);
 
@@ -176,20 +182,27 @@ export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
           setcolorselected={setcolorselected}
         />
       </div>
-      <div className="flex-grow h-5/6 bg-gray-200 p-3 flex flex-col justify-center">
-        <div className="object-contain h-full overflow-hidden" ref={ref} id="fidbackhub_editor_content">
+      <div className="flex-grow bg-gray-200 p-3 flex flex-col justify-center">
+        <div className="object-contain overflow-hidden h-full" ref={ref} id="fidbackhub_editor_content">
           {!loading ? (
             <Stage
               width={ref.current?.offsetWidth}
-              height={window.outerHeight}
+              height={ref.current?.offsetHeight}
               onMouseDown={handleMouseDown}
               onMousemove={handleMouseMove}
               onMouseup={handleMouseUp}
-              className="rounded overflow-hidden shadow-lg"
+              className="rounded shadow-lg"
             >
               <Layer>
                 <Text text="Just start drawing" x={5} y={30} />
-                <Image width={ref.current?.offsetWidth} image={imagedata} />
+                {/*@ts-ignore*/}
+                <Image
+                  width={innerWidth}
+                  scale={{ x: ratio, y: ratio }}
+                  x={0}
+                  y={-document.documentElement.scrollTop}
+                  image={imagedata}
+                />
                 {lines.map((line: any, i: number) => (
                   <Line
                     key={i}
