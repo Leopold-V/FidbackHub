@@ -131,7 +131,7 @@ export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
   const [imagedata, setimagedata] = useState<CanvasImageSource | undefined>();
   const [loading, setloading] = useState(true);
   const [colorselected, setcolorselected] = useState('#df4b26');
-  const [ratio, setratio] = useState(0);
+  const [ratio, setratio] = useState({xy: 1, x: 1, y: 1});
 
   const handleMouseDown = (e: any) => {
     isDrawing.current = true;
@@ -162,11 +162,22 @@ export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
     });
   };
 
+  // 1115 * 627.83
+
+  // 1519 * 711.92
+
   useEffect(() => {
     if (ref.current) {
-      const ratio = ref.current?.offsetWidth / window.outerWidth;
-      setratio(ratio);
-      console.log(document.documentElement.scrollTop);
+      //const ratioXY = window.outerHeight / window.outerWidth;
+      const ratioXY = 0.46867676102;
+      console.log(ratioXY);
+      console.log('screen height: ', screen.height, screen.availHeight);
+      console.log('window: ',window.innerHeight, window.innerWidth);
+      
+      console.log('screen width: ', screen.width, screen.availWidth);
+      const ratioX = ref.current?.offsetWidth / window.outerWidth;
+      const ratioY = ref.current?.offsetHeight / window.outerHeight;
+      setratio({xy: ratioXY, x: ratioX, y: ratioY});
     }
     createCanvas();
   }, []);
@@ -182,25 +193,26 @@ export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
           setcolorselected={setcolorselected}
         />
       </div>
-      <div className="flex-grow bg-gray-200 p-3 flex flex-col justify-center">
-        <div className="object-contain overflow-hidden h-full" ref={ref} id="fidbackhub_editor_content">
+      <div className="flex-grow bg-gray-200 p-3 flex flex-col justify-center items-center">
+        <div className="object-contain overflow-hidden w-full h-full flex justify-center items-center" ref={ref} id="fidbackhub_editor_content">
           {!loading ? (
             <Stage
-              width={ref.current?.offsetWidth}
-              height={ref.current?.offsetHeight}
+            //@ts-ignore
+              width={ref.current?.clientWidth} 
+              //@ts-ignore
+              height={ref.current?.clientWidth * ratio.xy}
               onMouseDown={handleMouseDown}
               onMousemove={handleMouseMove}
               onMouseup={handleMouseUp}
-              className="rounded shadow-lg"
+              className="rounded shadow-lg flex justify-center items-center overflow-hidden"
             >
               <Layer>
-                <Text text="Just start drawing" x={5} y={30} />
-                {/*@ts-ignore*/}
                 <Image
-                  width={innerWidth}
-                  scale={{ x: ratio, y: ratio }}
+                  width={parent.outerWidth}
+                  height={self.outerWidth * ratio.xy}
+                  scale={{ x: ratio.x, y: ratio.y }}
                   x={0}
-                  y={-document.documentElement.scrollTop}
+                  y={ - window.scrollY * ratio.y}
                   image={imagedata}
                 />
                 {lines.map((line: any, i: number) => (
