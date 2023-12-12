@@ -179,11 +179,11 @@ export const FeedbacksTable = ({
     },
     initialState: {
       sorting: [
-         {
-            id: 'createdAt',
-            desc: true,
-          }
-      ]
+        {
+          id: 'createdAt',
+          desc: true,
+        },
+      ],
     },
     onColumnFiltersChange: setColumnFilters,
     onGlobalFilterChange: setGlobalFilter,

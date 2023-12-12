@@ -2,11 +2,7 @@ import { useState } from 'react';
 import { Form } from './Form';
 import { ScreenPlay } from './ScreenPlay';
 
-export const FidbackhubMain = ({
-  screenshot,
-}: {
-  screenshot: string;
-}) => {
+export const FidbackhubMain = ({ screenshot }: { screenshot: string }) => {
   const [loading, setloading] = useState(false);
 
   return (
@@ -36,4 +32,3 @@ export const FidbackhubMain = ({
     </div>
   );
 };
- 

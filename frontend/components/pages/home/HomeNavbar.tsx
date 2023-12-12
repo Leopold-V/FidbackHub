@@ -3,8 +3,7 @@ import { useSession } from 'next-auth/react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import img from '../../../public/images/Logo.svg'
-
+import img from '../../../public/images/Logo.svg';
 
 export const HomeNavbar = () => {
   const { status } = useSession();

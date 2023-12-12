@@ -37,12 +37,19 @@ export const EditProjectForm = ({
     setloading(true);
     try {
       console.log(project);
-      
-      await updateProject({ id: project.id, createdAt: project.createdAt,
-        updatedAt: project.updatedAt,
-        api_key: project.api_key,
-        members: project.members,
-        user: project.user, ...input }, session.jwt);
+
+      await updateProject(
+        {
+          id: project.id,
+          createdAt: project.createdAt,
+          updatedAt: project.updatedAt,
+          api_key: project.api_key,
+          members: project.members,
+          user: project.user,
+          ...input,
+        },
+        session.jwt,
+      );
       setProject({ ...project, ...input });
       toast.success(`Project ${project.name} updated!`);
     } catch (error) {

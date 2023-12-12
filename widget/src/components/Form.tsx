@@ -7,18 +7,18 @@ import { Button } from './Button';
 // TO TEST API KEY : OX3bW6wtUaz/9zmf0KWvLu/KrUgVswf2kZy0kNR+7lBRHzyp0l6VCNanJkbBmjd5N/rcdP99sc6mbXhxquZmFg==
 
 const FormHeader = () => {
-  return (<div className={` text-white rounded-t
-      w-full flex items-center justify-center relative space-x-2 py-4`}>
-    <img className="h-12 w-auto" src="../../public/Logo.svg" alt="logo" />
-    <h1 className="text-center font-semibold text-base text-indigo-500">Fidbackhub</h1>
-  </div>);
-}
+  return (
+    <div
+      className={` text-white rounded-t
+      w-full flex items-center justify-center relative space-x-2 py-4`}
+    >
+      <img className="h-12 w-auto" src="../../public/Logo.svg" alt="logo" />
+      <h1 className="text-center font-semibold text-base text-indigo-500">Fidbackhub</h1>
+    </div>
+  );
+};
 
-export const Form = ({
-  setloading
-}: {
-  setloading: (loading: boolean) => void;
-}) => {
+export const Form = ({ setloading }: { setloading: (loading: boolean) => void }) => {
   const [values, setvalues] = useState<feedbackType>({
     title: '',
     type: 'Bug report',
@@ -34,8 +34,8 @@ export const Form = ({
   };
 
   const handleChangeApikey = (e: ChangeEvent<HTMLInputElement>) => {
-    setapikey(e.target.value)
-  }
+    setapikey(e.target.value);
+  };
 
   const html2Image = async (canvasElement: HTMLHtmlElement) => {
     const rep = await htmlToImage.toPng(canvasElement);
@@ -59,7 +59,7 @@ export const Form = ({
       //@ts-ignore
       const canvasElement: any = document.getElementById('fidbackhub_editor_content');
       console.log(canvasElement);
-      
+
       const imageBase64 = await html2Image(canvasElement);
       await sendFeedback(values, imageBase64, metadata, apikey);
       setvalues({

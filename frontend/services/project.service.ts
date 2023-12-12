@@ -27,7 +27,7 @@ export const getProjectsFromUser = async (jwt: number) => {
   });
   const json = await data.json();
   console.log(json);
-  
+
   if (json.error) {
     throw new Error(json.error.message);
   }

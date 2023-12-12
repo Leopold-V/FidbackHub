@@ -1,5 +1,5 @@
 {
-  "scripts": {
+    "scripts": {
     "dev:frontend": "cd frontend && npm run dev",
     "dev:backend": "cd backend/app && npm run develop",
     "dev:widget": "cd widget && npm run dev",

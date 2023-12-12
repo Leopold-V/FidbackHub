@@ -133,7 +133,7 @@ export const ScreenPlay = ({ screenshot }: { screenshot: any }) => {
 
   const [loading, setloading] = useState(true);
   const [colorselected, setcolorselected] = useState('#df4b26');
-  const [ratio, setratio] = useState({xy: 1, x: 1, y: 1});
+  const [ratio, setratio] = useState({ xy: 1, x: 1, y: 1 });
 
   const handleMouseDown = (e: any) => {
     isDrawing.current = true;
@@ -158,10 +158,10 @@ export const ScreenPlay = ({ screenshot }: { screenshot: any }) => {
   };
 
   const loadImage = () => {
-      const img = new window.Image();
-      img.src = screenshot;
-      setimagedata(img);
-      setloading(false);
+    const img = new window.Image();
+    img.src = screenshot;
+    setimagedata(img);
+    setloading(false);
   };
 
   useEffect(() => {
@@ -169,17 +169,17 @@ export const ScreenPlay = ({ screenshot }: { screenshot: any }) => {
       const ratioXY = 0.46867676102;
       console.log(ratioXY);
       console.log('screen height: ', screen.height, screen.availHeight);
-      console.log('window: ',window.outerHeight, window.outerWidth);
-      console.log('ref: ',ref.current?.offsetWidth , ref.current?.offsetHeight);
+      console.log('window: ', window.outerHeight, window.outerWidth);
+      console.log('ref: ', ref.current?.offsetWidth, ref.current?.offsetHeight);
       console.log('screen width: ', screen.width, screen.availWidth);
       const ratioX = ref.current?.offsetWidth / window.outerWidth;
       const ratioY = ref.current?.offsetHeight / window.outerHeight;
       console.log(ratioX, ratioY);
-      
-      setratio({xy: ratioXY, x: ratioX, y: ratioY});
+
+      setratio({ xy: ratioXY, x: ratioX, y: ratioY });
     }
     loadImage();
-  }, [])
+  }, []);
 
   return (
     <div className="bg-gray-50 m-2 w-3/4 rounded h-full overflow-hidden flex flex-col justify-end z-10">
@@ -193,11 +193,15 @@ export const ScreenPlay = ({ screenshot }: { screenshot: any }) => {
         />
       </div>
       <div className="flex-grow bg-gray-200 p-3 flex flex-col h-full justify-center items-center">
-        <div className="object-contain overflow-hidden w-full h-full flex justify-center items-center" ref={ref} id="fidbackhub_editor_content">
+        <div
+          className="object-contain overflow-hidden w-full h-full flex justify-center items-center"
+          ref={ref}
+          id="fidbackhub_editor_content"
+        >
           {!loading ? (
             <Stage
-            //@ts-ignore
-              width={ref.current?.clientWidth} 
+              //@ts-ignore
+              width={ref.current?.clientWidth}
               //@ts-ignore
               height={ref.current?.clientWidth * ratio.xy}
               onMouseDown={handleMouseDown}
@@ -222,7 +226,7 @@ export const ScreenPlay = ({ screenshot }: { screenshot: any }) => {
                     lineCap="round"
                     lineJoin="round"
                     globalCompositeOperation={line.tool === 'eraser' ? 'destination-out' : 'source-over'}
-                  /> 
+                  />
                 ))}
               </Layer>
             </Stage>

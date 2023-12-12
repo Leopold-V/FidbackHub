@@ -7,4 +7,6 @@ const widget_container = document.createElement('div');
 widget_container.id = 'widget_fidbackhub';
 document.body.appendChild(widget_container);
 
-ReactDOM.createRoot(document.getElementById('widget_fidbackhub') as HTMLElement).render(<App screenshot={screenshot} />);
+ReactDOM.createRoot(document.getElementById('widget_fidbackhub') as HTMLElement).render(
+  <App screenshot={screenshot} />,
+);
