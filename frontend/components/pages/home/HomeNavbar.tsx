@@ -3,6 +3,8 @@ import { useSession } from 'next-auth/react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import img from '../../../public/images/Logo.svg'
+
 
 export const HomeNavbar = () => {
   const { status } = useSession();
@@ -20,7 +22,7 @@ export const HomeNavbar = () => {
   return (
     <div className="flex md:flex-row md:space-y-0 space-y-2 items-center justify-between flex-col">
       <Link href="/">
-        <img className="block w-8 h-8" src="img/logo.svg" alt="" />
+        <img className="block w-8 h-8" src="'../../../public/images/Logo.svg'" alt="logo" />
       </Link>
       <div className="flex items-center space-x-2 mb-4 md:block">
         <Link href="/api/auth/signin">

@@ -1,3 +1,4 @@
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/20/solid';
 import { flexRender, Table } from '@tanstack/react-table';
 
 export const TableSection = ({ table }: { table: Table<any> }) => {
@@ -16,11 +17,12 @@ export const TableSection = ({ table }: { table: Table<any> }) => {
                           className: header.column.getCanSort() ? 'cursor-pointer select-none' : '',
                           onClick: header.column.getToggleSortingHandler(),
                         }}
+                        className='flex space-x-2 items-center'
                       >
                         {flexRender(header.column.columnDef.header, header.getContext())}
-                        {{
-                          asc: ' 🔼',
-                          desc: ' 🔽',
+                        {{  
+                          asc: <ChevronUpIcon className=" h-4 w-5" aria-hidden="true"/>,
+                          desc: <ChevronDownIcon className=" h-4 w-5" aria-hidden="true" />,
                         }[header.column.getIsSorted() as string] ?? null}
                       </div>
                     </>

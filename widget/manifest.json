@@ -7,7 +7,12 @@
     "activeTab"
   ],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "public/Logo.png",
+      "48": "public/Logo.png",
+      "128": "public/Logo.png"
+    }
   },
   "background": {
     "service_worker": "background.js"

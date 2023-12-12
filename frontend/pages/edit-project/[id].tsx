@@ -12,8 +12,8 @@ const EditProjectPage = ({ params, project, listProjects }) => {
       <Head>
         <title>Edit project</title>
       </Head>
-      <Layout listProjects={listProjects}>
-        <Page params={params} project={project} />
+      <Layout listProjects={listProjects} id={params.id}>
+        <Page project={project} />
       </Layout>
     </>
   );

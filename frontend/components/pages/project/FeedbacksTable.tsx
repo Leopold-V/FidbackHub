@@ -27,15 +27,6 @@ import { ModalAddFeedback } from './ModalAddFeedback';
 import { useDateFilterForFeedbacks } from '../../../hooks/useDateFilterForFeedbacks';
 import dayjs from 'dayjs';
 
-declare module '@tanstack/table-core' {
-  interface FilterFns {
-    fuzzy: FilterFn<unknown>;
-  }
-  interface FilterMeta {
-    itemRank: RankingInfo;
-  }
-}
-
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   const itemRank = rankItem(row.getValue(columnId), value);
   addMeta({
@@ -186,6 +177,14 @@ export const FeedbacksTable = ({
       globalFilter,
       rowSelection,
     },
+    initialState: {
+      sorting: [
+         {
+            id: 'createdAt',
+            desc: true,
+          }
+      ]
+    },
     onColumnFiltersChange: setColumnFilters,
     onGlobalFilterChange: setGlobalFilter,
     globalFilterFn: fuzzyFilter,
@@ -202,9 +201,9 @@ export const FeedbacksTable = ({
   });
 
   useEffect(() => {
-    if (table.getState().columnFilters[0]?.id === 'fullName') {
-      if (table.getState().sorting[0]?.id !== 'fullName') {
-        table.setSorting([{ id: 'fullName', desc: false }]);
+    if (table.getState().columnFilters[0]?.id === 'createdAt') {
+      if (table.getState().sorting[0]?.id !== 'createdAt') {
+        table.setSorting([{ id: 'createdAt', desc: true }]);
       }
     }
   }, [table.getState().columnFilters[0]?.id]);
@@ -216,7 +215,7 @@ export const FeedbacksTable = ({
           <h2 className="text-secondary">Feedbacks</h2>
           <ButtonOutline onClick={() => setopen((open) => !open)}>New +</ButtonOutline>
         </div>
-        <div className="mt-4 flex items-center justify-between space-x-4">
+        <div className="mt-4 flex items-center justify-between lg:space-x-4 lg:space-y-0 space-y-3 lg:flex-row flex-col">
           <div className="flex space-x-4">
             <FilterStatus column={table.getHeaderGroups()[0].headers[3].headerGroup.headers[3].column} />
             <FilterType column={table.getHeaderGroups()[0].headers[2].headerGroup.headers[2].column} />

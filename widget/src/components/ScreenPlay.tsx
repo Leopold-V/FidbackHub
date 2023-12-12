@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Stage, Layer, Line, Text, Image } from 'react-konva';
 import {
   ArrowDownRightIcon,
@@ -33,8 +33,8 @@ function ButtonEditorGroup({
       <div className="flex flex-row items-center justify-center">
         <button
           className={classNames(
-            'duration-200 flex items-center justify-center rounded-l-sm border-b border-t border-l border-gray-500 hover:text-white px-4 py-2 text-sm font-medium shadow-md disabled:bg-indigo-400 hover:bg-indigo-500',
-            active === 'pen' ? 'bg-indigo-500 text-white' : 'bg-white  text-gray-600',
+            'duration-200 flex items-center justify-center rounded-l-sm border-b border-t border-l border-gray-500 hover:text-white px-4 py-2 text-sm font-medium shadow-md disabled:bg-indigo-400 hover:bg-indigo-600',
+            active === 'pen' ? 'bg-indigo-600 text-white' : 'bg-white  text-gray-600',
           )}
           value="pen"
           onClick={(e) => {
@@ -46,8 +46,8 @@ function ButtonEditorGroup({
         </button>
         <button
           className={classNames(
-            'duration-200 flex items-center justify-center border-b border-t border-gray-500  hover:text-white px-4 py-2 text-sm font-medium shadow-sm disabled:bg-indigo-400 hover:bg-indigo-500',
-            active === 'text' ? 'bg-indigo-500 text-white' : 'bg-white text-gray-600',
+            'duration-200 flex items-center justify-center border-b border-t border-gray-500  hover:text-white px-4 py-2 text-sm font-medium shadow-sm disabled:bg-indigo-400 hover:bg-indigo-600',
+            active === 'text' ? 'bg-indigo-600 text-white' : 'bg-white text-gray-600',
           )}
           value="text"
           onClick={(e) => {
@@ -59,8 +59,8 @@ function ButtonEditorGroup({
         </button>
         <button
           className={classNames(
-            'duration-200 flex items-center justify-center border-b border-t border-gray-500  hover:text-white px-4 py-2 text-sm font-medium shadow-sm disabled:bg-indigo-400 hover:bg-indigo-500',
-            active === 'arrow' ? 'bg-indigo-500 text-white' : 'bg-white text-gray-600',
+            'duration-200 flex items-center justify-center border-b border-t border-gray-500  hover:text-white px-4 py-2 text-sm font-medium shadow-sm disabled:bg-indigo-400 hover:bg-indigo-600',
+            active === 'arrow' ? 'bg-indigo-600 text-white' : 'bg-white text-gray-600',
           )}
           value="arrow"
           onClick={(e) => {
@@ -74,7 +74,7 @@ function ButtonEditorGroup({
       <div className="flex flex-row items-center justify-center">
         <button
           className={classNames(
-            'duration-200 relative flex items-center justify-center border-b border-t bg-white border-gray-500 px-4 py-2 text-sm font-medium shadow-sm disabled:bg-indigo-400 hover:bg-indigo-500',
+            'duration-200 relative flex items-center justify-center border-b border-t bg-white border-gray-500 px-4 py-2 text-sm font-medium shadow-sm disabled:bg-indigo-400 hover:bg-indigo-600',
           )}
           value="colorpicker"
         >
@@ -90,7 +90,7 @@ function ButtonEditorGroup({
         </button>
         <button
           className={classNames(
-            'duration-200 flex items-center justify-center bg-white border-b border-t border-gray-500 text-gray-600 hover:text-white px-4 py-2 text-sm font-medium shadow-sm disabled:bg-indigo-400 hover:bg-indigo-500',
+            'duration-200 flex items-center justify-center bg-white border-b border-t border-gray-500 text-gray-600 hover:text-white px-4 py-2 text-sm font-medium shadow-sm disabled:bg-indigo-400 hover:bg-indigo-600',
           )}
           value="pen"
           onClick={(e) => {
@@ -105,7 +105,7 @@ function ButtonEditorGroup({
         </button>
         <button
           className={classNames(
-            'duration-200 flex items-center justify-center bg-white rounded-r-sm border-b border-t border-r border-gray-500 text-gray-600 hover:text-white px-4 py-2 text-sm font-medium shadow-sm disabled:bg-indigo-400 hover:bg-indigo-500',
+            'duration-200 flex items-center justify-center bg-white rounded-r-sm border-b border-t border-r border-gray-500 text-gray-600 hover:text-white px-4 py-2 text-sm font-medium shadow-sm disabled:bg-indigo-400 hover:bg-indigo-600',
           )}
           value="pen"
           onClick={(e) => {
@@ -123,7 +123,7 @@ function ButtonEditorGroup({
   );
 }
 
-export const ScreenPlay = ({ htmlToCanvas, screenshot }: { htmlToCanvas: any, screenshot: any }) => {
+export const ScreenPlay = ({ screenshot }: { screenshot: any }) => {
   let ref = useRef<HTMLDivElement>(null);
   const isDrawing = useRef(false);
   const [tool, setTool] = useState('pen');
@@ -157,34 +157,33 @@ export const ScreenPlay = ({ htmlToCanvas, screenshot }: { htmlToCanvas: any, sc
     isDrawing.current = false;
   };
 
-  const createCanvas = () => {
-    htmlToCanvas.then(function (dataUrl: any) {
+  const loadImage = () => {
       const img = new window.Image();
       img.src = screenshot;
       setimagedata(img);
       setloading(false);
-    });
   };
 
   useEffect(() => {
     if (ref.current) {
-      //const ratioXY = window.outerHeight / window.outerWidth;
       const ratioXY = 0.46867676102;
       console.log(ratioXY);
       console.log('screen height: ', screen.height, screen.availHeight);
-      console.log('window: ',window.innerHeight, window.innerWidth);
-      
+      console.log('window: ',window.outerHeight, window.outerWidth);
+      console.log('ref: ',ref.current?.offsetWidth , ref.current?.offsetHeight);
       console.log('screen width: ', screen.width, screen.availWidth);
       const ratioX = ref.current?.offsetWidth / window.outerWidth;
       const ratioY = ref.current?.offsetHeight / window.outerHeight;
+      console.log(ratioX, ratioY);
+      
       setratio({xy: ratioXY, x: ratioX, y: ratioY});
     }
-    createCanvas();
-  }, []);
+    loadImage();
+  }, [])
 
   return (
-    <div className="bg-gray-50 m-2 w-3/4 rounded overflow-hidden flex flex-col justify-end z-10">
-      <div className="flex flex-col justify-center items-center py-2">
+    <div className="bg-gray-50 m-2 w-3/4 rounded h-full overflow-hidden flex flex-col justify-end z-10">
+      <div className="flex flex-col flex-grow justify-center items-center py-2">
         <ButtonEditorGroup
           setTool={setTool}
           lines={lines}
@@ -193,7 +192,7 @@ export const ScreenPlay = ({ htmlToCanvas, screenshot }: { htmlToCanvas: any, sc
           setcolorselected={setcolorselected}
         />
       </div>
-      <div className="flex-grow bg-gray-200 p-3 flex flex-col justify-center items-center">
+      <div className="flex-grow bg-gray-200 p-3 flex flex-col h-full justify-center items-center">
         <div className="object-contain overflow-hidden w-full h-full flex justify-center items-center" ref={ref} id="fidbackhub_editor_content">
           {!loading ? (
             <Stage
@@ -211,10 +210,7 @@ export const ScreenPlay = ({ htmlToCanvas, screenshot }: { htmlToCanvas: any, sc
                   width={parent.outerWidth}
                   height={self.outerWidth * ratio.xy}
                   scale={{ x: ratio.x, y: ratio.y }}
-                  x={0}
-                  y={ - window.scrollY * ratio.y}
                   image={imagedata}
-                  
                 />
                 {lines.map((line: any, i: number) => (
                   <Line
@@ -226,7 +222,7 @@ export const ScreenPlay = ({ htmlToCanvas, screenshot }: { htmlToCanvas: any, sc
                     lineCap="round"
                     lineJoin="round"
                     globalCompositeOperation={line.tool === 'eraser' ? 'destination-out' : 'source-over'}
-                  />
+                  /> 
                 ))}
               </Layer>
             </Stage>

@@ -25,7 +25,6 @@ const ProjectPageComponent = ({
         feedbacks={_feedbacks}
         setfeedbacks={setfeedbacks}
       />
-      {/* <FeedbacksSection feedbacks={feedbacks} setfeedbacks={setfeedbacks} projectId={project.id} /> */}
     </div>
   );
 };

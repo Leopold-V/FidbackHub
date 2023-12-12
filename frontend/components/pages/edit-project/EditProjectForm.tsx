@@ -8,6 +8,7 @@ import { SpinnerButton } from 'components/common/Spinner';
 import { InputDecorators } from 'components/common/InputDecorators';
 import { Input } from 'components/common/Input';
 import { ButtonOutline } from 'components/common/Button';
+import { idea } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 export const EditProjectForm = ({
   project,
@@ -35,7 +36,13 @@ export const EditProjectForm = ({
     e.preventDefault();
     setloading(true);
     try {
-      await updateProject({ ...project, ...input }, session.jwt);
+      console.log(project);
+      
+      await updateProject({ id: project.id, createdAt: project.createdAt,
+        updatedAt: project.updatedAt,
+        api_key: project.api_key,
+        members: project.members,
+        user: project.user, ...input }, session.jwt);
       setProject({ ...project, ...input });
       toast.success(`Project ${project.name} updated!`);
     } catch (error) {

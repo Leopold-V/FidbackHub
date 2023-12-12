@@ -1,25 +1,8 @@
-import { ReactNode, useState } from 'react';
-import html2canvas from 'html2canvas';
-import { IframeForm } from './components/IframeForm';
-import { IframeButton } from './components/IframeButton';
+import { FidbackhubMain } from './components/FidbackhubMain';
 
-const Head: ReactNode = <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet" />;
-
-function App({ apiKey, screenshot }: { apiKey: string, screenshot: string }) {
-  const [open, setopen] = useState(false);
-
-  console.log(screenshot);
-
-  const htmlToCanvas = () => {
-    const node = document.getElementsByTagName('html')[0];
-    return html2canvas(node, { allowTaint: true, useCORS: true });
-  };
-
+function App({screenshot }: { screenshot: string }) {
   return (
-    <>
-      {open && <IframeForm Head={Head} open={open} setopen={setopen} apiKey={apiKey} screenshot={screenshot} htmlToCanvas={htmlToCanvas()} />}
-      {!open && <IframeButton Head={Head} open={open} setopen={setopen} />}
-    </>
+    <FidbackhubMain screenshot={screenshot} />
   );
 }
 

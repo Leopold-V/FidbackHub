@@ -34,7 +34,7 @@ const schemaUpdate = Joi.object({
   createdAt: Joi.string(),
   updatedAt: Joi.string(),
   user: Joi.any(),
-  feedbacks: Joi.any(),
+  //feedbacks: Joi.any(),
   members: Joi.array()
 });
 

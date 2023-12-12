@@ -1,30 +1,17 @@
-import { ReactNode, useState } from 'react';
-import Frame from 'react-frame-component';
+import { useState } from 'react';
 import { Form } from './Form';
 import { ScreenPlay } from './ScreenPlay';
 
-export const IframeForm = ({
-  Head,
-  open,
-  setopen,
-  apiKey,
+export const FidbackhubMain = ({
   screenshot,
-  htmlToCanvas,
 }: {
-  Head: ReactNode;
-  open: boolean;
-  setopen: (open: boolean) => void;
-  apiKey: string;
   screenshot: string;
-  htmlToCanvas: any;
 }) => {
   const [loading, setloading] = useState(false);
 
   return (
-    <Frame
-      head={Head}
-      id="fidbackhub_form_iframe"
-      scrolling="no"
+    <div
+      id="fidbackhub_form_main"
       style={{
         border: 'none',
         position: 'fixed',
@@ -43,9 +30,10 @@ export const IframeForm = ({
             <div className="font-bold text-3xl">Loading...</div>
           </div>
         )}
-        <ScreenPlay htmlToCanvas={htmlToCanvas} screenshot={screenshot} />
-        <Form open={open} setopen={setopen} apiKey={apiKey} setloading={setloading} />
+        <ScreenPlay screenshot={screenshot} />
+        <Form setloading={setloading} />
       </div>
-    </Frame>
+    </div>
   );
 };
+ 
