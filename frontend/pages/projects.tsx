@@ -32,6 +32,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
+  console.log(session);
 
   const userData = await getUser(session.jwt);
   const listProjects = await getProjectsFromUser(session.jwt);

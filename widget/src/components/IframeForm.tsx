@@ -8,12 +8,14 @@ export const IframeForm = ({
   open,
   setopen,
   apiKey,
+  screenshot,
   htmlToCanvas,
 }: {
   Head: ReactNode;
   open: boolean;
   setopen: (open: boolean) => void;
   apiKey: string;
+  screenshot: string;
   htmlToCanvas: any;
 }) => {
   const [loading, setloading] = useState(false);
@@ -41,7 +43,7 @@ export const IframeForm = ({
             <div className="font-bold text-3xl">Loading...</div>
           </div>
         )}
-        <ScreenPlay htmlToCanvas={htmlToCanvas} />
+        <ScreenPlay htmlToCanvas={htmlToCanvas} screenshot={screenshot} />
         <Form open={open} setopen={setopen} apiKey={apiKey} setloading={setloading} />
       </div>
     </Frame>

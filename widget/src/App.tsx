@@ -5,8 +5,10 @@ import { IframeButton } from './components/IframeButton';
 
 const Head: ReactNode = <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet" />;
 
-function App({ apiKey }: { apiKey: string }) {
+function App({ apiKey, screenshot }: { apiKey: string, screenshot: string }) {
   const [open, setopen] = useState(false);
+
+  console.log(screenshot);
 
   const htmlToCanvas = () => {
     const node = document.getElementsByTagName('html')[0];
@@ -15,7 +17,7 @@ function App({ apiKey }: { apiKey: string }) {
 
   return (
     <>
-      {open && <IframeForm Head={Head} open={open} setopen={setopen} apiKey={apiKey} htmlToCanvas={htmlToCanvas()} />}
+      {open && <IframeForm Head={Head} open={open} setopen={setopen} apiKey={apiKey} screenshot={screenshot} htmlToCanvas={htmlToCanvas()} />}
       {!open && <IframeButton Head={Head} open={open} setopen={setopen} />}
     </>
   );

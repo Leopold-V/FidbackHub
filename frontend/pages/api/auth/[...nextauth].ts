@@ -24,8 +24,6 @@ export const authOptions = {
       issuer: process.env.AUTH0_ISSUER,
       allowDangerousEmailAccountLinking: true,
       profile(profile) {
-        console.log('----------------------------');
-        console.log(profile);
         return {
           id: profile.sub,
           name: profile.nickname,

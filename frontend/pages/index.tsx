@@ -4,6 +4,8 @@ import { GetServerSideProps } from 'next/types';
 import { NextPage } from 'next';
 import Page from 'components/pages/home/index';
 import { getSession } from 'next-auth/react';
+import { unstable_getServerSession } from 'next-auth';
+import { authOptions } from './api/auth/[...nextauth]';
 
 const IndexPage: NextPage = () => {
   return (
@@ -17,7 +19,7 @@ const IndexPage: NextPage = () => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession(context);
+  const session = await unstable_getServerSession(context.req, context.res, authOptions);
 
   if (session) {
     return {

@@ -123,12 +123,14 @@ function ButtonEditorGroup({
   );
 }
 
-export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
+export const ScreenPlay = ({ htmlToCanvas, screenshot }: { htmlToCanvas: any, screenshot: any }) => {
   let ref = useRef<HTMLDivElement>(null);
   const isDrawing = useRef(false);
   const [tool, setTool] = useState('pen');
   const [lines, setLines] = useState<any>([]);
   const [imagedata, setimagedata] = useState<CanvasImageSource | undefined>();
+  //const [imagedata, setimagedata] = useState();
+
   const [loading, setloading] = useState(true);
   const [colorselected, setcolorselected] = useState('#df4b26');
   const [ratio, setratio] = useState({xy: 1, x: 1, y: 1});
@@ -157,14 +159,12 @@ export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
 
   const createCanvas = () => {
     htmlToCanvas.then(function (dataUrl: any) {
-      setimagedata(dataUrl);
+      const img = new window.Image();
+      img.src = screenshot;
+      setimagedata(img);
       setloading(false);
     });
   };
-
-  // 1115 * 627.83
-
-  // 1519 * 711.92
 
   useEffect(() => {
     if (ref.current) {
@@ -214,6 +214,7 @@ export const ScreenPlay = ({ htmlToCanvas }: { htmlToCanvas: any }) => {
                   x={0}
                   y={ - window.scrollY * ratio.y}
                   image={imagedata}
+                  
                 />
                 {lines.map((line: any, i: number) => (
                   <Line
