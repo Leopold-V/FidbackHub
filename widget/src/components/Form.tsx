@@ -39,7 +39,6 @@ export const Form = ({ setloading }: { setloading: (loading: boolean) => void })
 
   const html2Image = async (canvasElement: HTMLHtmlElement) => {
     const rep = await htmlToImage.toPng(canvasElement);
-    console.log(rep);
     return rep;
   };
 
@@ -54,12 +53,9 @@ export const Form = ({ setloading }: { setloading: (loading: boolean) => void })
         resolutionWidth: window.screen.width,
         resolutionHeight: window.screen.height,
         //@ts-ignore
-        os: window.navigator.oscpu,
+        os: window.navigator.oscpu || window.navigator.platform,
       };
-      //@ts-ignore
       const canvasElement: any = document.getElementById('fidbackhub_editor_content');
-      console.log(canvasElement);
-
       const imageBase64 = await html2Image(canvasElement);
       await sendFeedback(values, imageBase64, metadata, apikey);
       setvalues({

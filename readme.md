@@ -18,4 +18,4 @@ The core difference between them and Fidbackhub is that it is opensource, and as
 ### Feedbacks page:
 ![main](https://i.gyazo.com/767fd2d6c4a30cc65891cc1fedb0fa9f.png)
 ### Feedback page:
-![main](https://i.gyazo.com/f67791794018896bb1cb38a35bb88b5f.png)
+![main](https://i.gyazo.com/0db708588d03445a2fcec37713ebec81.png)

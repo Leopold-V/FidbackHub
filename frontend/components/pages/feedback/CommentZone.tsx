@@ -1,9 +1,9 @@
 import React, { useState, memo } from 'react';
-import { createComment } from '../../../services/comment.service';
-import { commentType } from 'types/index';
-import { formatDateToDisplay } from '../../../utils/formatDate';
-import { toast } from 'react-toastify';
 import { useSession } from 'next-auth/react';
+import { toast } from 'react-toastify';
+import { commentType } from 'types/index';
+import { createComment } from '../../../services/comment.service';
+import { formatDateToDisplay } from '../../../utils/formatDate';
 
 export const CommentZone = ({
   _comments,

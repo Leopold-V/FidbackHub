@@ -14,7 +14,7 @@ import {
   FilterFn,
   ColumnDef,
 } from '@tanstack/react-table';
-import { RankingInfo, rankItem } from '@tanstack/match-sorter-utils';
+import { rankItem } from '@tanstack/match-sorter-utils';
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import { feedbackType } from '../../../types';
 import { formatDateToDisplay } from '../../../utils/formatDate';
@@ -232,7 +232,7 @@ export const FeedbacksTable = ({
               placeholder="Search all columns..."
             />
           </div>
-          <DateButtonGroups setdateRange={setdateRange} firstDate={feedbacks[0].createdAt} />
+          <DateButtonGroups setdateRange={setdateRange} firstDate={feedbacks[0]?.createdAt} />
         </div>
       </HeaderWrapper>
       <div className="w-full">
@@ -262,13 +262,13 @@ function FilterStatus({ column }: { column: Column<any, unknown> }) {
         onChange={onChange}
         className={`duration-200 text-secondaryText w-32 text-xs bg-secondaryBackground relative cursor-default rounded-md border border-3Background py-1 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
       >
-        <option value="" key="" className="text-secondaryBackground">
+        <option value="" key="" className="text-gray-200">
           All
         </option>
-        <option className="text-secondaryBackground" value="Open" key="Open">
+        <option className="text-gray-200" value="Open" key="Open">
           Open
         </option>
-        <option className="text-secondaryBackground" value="Close" key="Close">
+        <option className="text-gray-200" value="Close" key="Close">
           Close
         </option>
       </select>
@@ -292,16 +292,16 @@ function FilterType({ column }: { column: Column<any, unknown> }) {
         onChange={onChange}
         className={`duration-200 text-secondaryText w-32 text-xs bg-secondaryBackground relative cursor-default rounded-md border border-3Background py-1 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
       >
-        <option value="" key="" className="text-secondaryBackground">
+        <option value="" key="" className="text-secondaryText">
           All
         </option>
-        <option className="text-secondaryBackground" value="General feedback" key="General feedback">
+        <option className="text-secondaryText" value="General feedback" key="General feedback">
           General feedback
         </option>
-        <option className="text-secondaryBackground" value="Bug report" key="Bug report">
+        <option className="text-secondaryText" value="Bug report" key="Bug report">
           Bug report
         </option>
-        <option className="text-secondaryBackground" value="Feature request" key="Feature request">
+        <option className="text-secondaryText" value="Feature request" key="Feature request">
           Feature request
         </option>
       </select>
@@ -325,19 +325,19 @@ function FilterState({ column }: { column: Column<any, unknown> }) {
         onChange={onChange}
         className={`duration-200 text-secondaryText w-32 text-xs bg-secondaryBackground relative cursor-default rounded-md border border-3Background py-1 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
       >
-        <option value="" key="" className="text-secondaryBackground">
+        <option value="" key="" className="text-secondaryText">
           All
         </option>
-        <option className="text-secondaryBackground" value="New" key="New">
+        <option className="text-secondaryText" value="New" key="New">
           New
         </option>
-        <option className="text-secondaryBackground" value="In progress" key="In progress">
+        <option className="text-secondaryText" value="In progress" key="In progress">
           In progress
         </option>
-        <option className="text-secondaryBackground" value="Resolved" key="Resolved">
+        <option className="text-secondaryText" value="Resolved" key="Resolved">
           Resolved
         </option>
-        <option className="text-secondaryBackground" value="Rejected" key="Rejected">
+        <option className="text-secondaryText" value="Rejected" key="Rejected">
           Rejected
         </option>
       </select>

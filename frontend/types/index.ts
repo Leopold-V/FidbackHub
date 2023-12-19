@@ -43,6 +43,7 @@ export type projectType = {
 };
 
 export type commentType = {
+  type?: 'commment' | 'history';
   id: number;
   content: string;
   author: string;

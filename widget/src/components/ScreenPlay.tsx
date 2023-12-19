@@ -167,15 +167,8 @@ export const ScreenPlay = ({ screenshot }: { screenshot: any }) => {
   useEffect(() => {
     if (ref.current) {
       const ratioXY = 0.46867676102;
-      console.log(ratioXY);
-      console.log('screen height: ', screen.height, screen.availHeight);
-      console.log('window: ', window.outerHeight, window.outerWidth);
-      console.log('ref: ', ref.current?.offsetWidth, ref.current?.offsetHeight);
-      console.log('screen width: ', screen.width, screen.availWidth);
       const ratioX = ref.current?.offsetWidth / window.outerWidth;
       const ratioY = ref.current?.offsetHeight / window.outerHeight;
-      console.log(ratioX, ratioY);
-
       setratio({ xy: ratioXY, x: ratioX, y: ratioY });
     }
     loadImage();
