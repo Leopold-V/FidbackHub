@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import { commentType } from 'types/index';
@@ -15,6 +15,8 @@ export const CommentZone = ({
   projectId: number;
 }) => {
   const [comments, setcomments] = useState(_comments);
+
+  useEffect(() => {}, []);
 
   return (
     <div className="text-sm pt-4">

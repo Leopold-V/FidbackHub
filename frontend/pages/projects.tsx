@@ -32,11 +32,18 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
-  console.log(session);
-
-  const userData = await getUser(session.jwt);
-  const listProjects = await getProjectsFromUser(session.jwt);
-  return { props: { userData: userData, listProjects: Object.values(listProjects.data.attributes) } };
+  try {
+    const userData = await getUser(session.jwt);
+    const listProjects = await getProjectsFromUser(session.jwt);
+    return { props: { userData: userData, listProjects: Object.values(listProjects.data.attributes) } };
+  } catch (error) {
+    return {
+      redirect: {
+        destination: '/404',
+        permanent: false,
+      },
+    };
+  }
 };
 
 export default ProjectsPage;

@@ -19,6 +19,16 @@ export type userType = {
   };
 };
 
+export type historyType = {
+  id: number;
+  content_type: 'feedback' | 'project' | 'user';
+  action: string;
+  author: userType;
+  project: projectType;
+  content: string;
+  content_id: number;
+};
+
 export type projectType = {
   id: number;
   name: string;

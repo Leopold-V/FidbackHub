@@ -6,9 +6,7 @@ import { ArrowPathIcon, ChatBubbleBottomCenterTextIcon, LockClosedIcon, LockOpen
 import { feedbackStateType, feedbackStatusType, feedbackType, feedbackTypeType } from 'types/index';
 import img from 'public/images/screenshot_example.png';
 import { updateFeedback, deleteFeedback } from '../../../services/feedback.service';
-import { createComment } from '../../../services/comment.service';
 import { formatDateToDisplay } from '../../../utils/formatDate';
-import { findDiffForHistory } from '../../../utils/feedback';
 import { SelectState } from 'components/common/SelectState';
 import { ButtonBack, ButtonDelete, ButtonOutline } from 'components/common/Button';
 import { Modal } from 'components/common/Modal';
@@ -46,20 +44,6 @@ export const FeedbackPageComponent = ({ _feedback, projectId }: { _feedback: fee
       );
       setfeedback((feedback) => ({ ...feedback, state: selectedState, status: selectedStatus, type: selectedType }));
       toast.success(`Feedback updated!`);
-      const change = findDiffForHistory(feedback, { state: selectedState, status: selectedStatus, type: selectedType });
-      // adding a comment for history change
-      if (change.length > 0) {
-        change.forEach(async (ele) => {
-          const commentData = {
-            content: ele,
-            author: session.user.name,
-            user_avatar: session.user.image,
-            feedback: feedback.id,
-          };
-          console.log(commentData);
-          await createComment({ ...commentData }, projectId, session.jwt);
-        });
-      }
     } catch (error) {
       toast.error(error.message);
     } finally {

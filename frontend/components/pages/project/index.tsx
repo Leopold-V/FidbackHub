@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { FeedbacksTable } from './FeedbacksTable';
-import { feedbackType } from 'types/index';
+import { feedbackType, historyType } from 'types/index';
 
 const ProjectPageComponent = ({
   feedbacks,
   projectToken,
   projectId,
+  histories,
 }: {
   feedbacks: feedbackType[];
   projectToken: string;
   projectId: number;
+  histories: historyType[];
 }) => {
   const [_feedbacks, setfeedbacks] = useState(feedbacks);
+
+  console.log(histories);
 
   useEffect(() => {
     setfeedbacks(feedbacks);
