@@ -9,7 +9,6 @@ const { createCoreController } = require('@strapi/strapi').factories;
 module.exports = createCoreController('api::history.history', ({strapi}) => ({
   async find(ctx) {
     try {
-      console.log(ctx.query);
       const projects = await strapi.db.query("api::project.project").findMany({
         where: {
           id: ctx.query.id,
@@ -33,7 +32,7 @@ module.exports = createCoreController('api::history.history', ({strapi}) => ({
 
           },
         },
-        populate: { project: true },
+        populate: { project: true, author: true },
       });
       return {
         data: { id: response.id, attributes: { ...response } },

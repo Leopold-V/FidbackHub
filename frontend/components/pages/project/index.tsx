@@ -15,8 +15,6 @@ const ProjectPageComponent = ({
 }) => {
   const [_feedbacks, setfeedbacks] = useState(feedbacks);
 
-  console.log(histories);
-
   useEffect(() => {
     setfeedbacks(feedbacks);
   }, [projectId]);

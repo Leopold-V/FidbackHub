@@ -25,8 +25,13 @@ export type historyType = {
   action: string;
   author: userType;
   project: projectType;
-  content: string;
+  content: {
+    attribut: string;
+    value: string;
+  };
   content_id: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type projectType = {

@@ -1,29 +1,42 @@
 import React, { useState, memo, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
-import { commentType } from 'types/index';
+import { commentType, historyType } from 'types/index';
 import { createComment } from '../../../services/comment.service';
 import { formatDateToDisplay } from '../../../utils/formatDate';
 
 export const CommentZone = ({
   _comments,
+  histories,
   feedbackId,
   projectId,
 }: {
   _comments: commentType[];
+  histories: historyType[];
   feedbackId: number;
   projectId: number;
 }) => {
   const [comments, setcomments] = useState(_comments);
+  const [commentsAndHistories, setcommentsAndHistories] = useState([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    //@ts-ignore
+    const commentsAndHistoriesMerged: any = []
+      .concat(comments, histories)
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    setcommentsAndHistories(commentsAndHistoriesMerged);
+  }, [comments]);
 
   return (
     <div className="text-sm pt-4">
-      <ul className="p-1 rounded space-y-4 flex flex-col h-[16rem] overflow-y-auto">
-        {comments.map((comment) => (
-          <CommentItem key={comment.id} comment={comment} />
-        ))}
+      <ul className="p-1 rounded space-y-4 flex flex-col min-h-[16rem] max-h-screen overflow-y-auto">
+        {commentsAndHistories.map((comment) =>
+          comment.action ? (
+            <HistoryItem key={comment.id} comment={comment} />
+          ) : (
+            <CommentItem key={comment.id} comment={comment} />
+          ),
+        )}
       </ul>
       <CommentInput feedbackId={feedbackId} projectId={projectId} setcomments={setcomments} />
     </div>
@@ -41,6 +54,20 @@ const CommentItem = ({ comment }: { comment: commentType }) => {
         <img className="h-10 w-10 rounded-full" src={comment.user_avatar} alt="user avatar" />
         <pre className=" whitespace-pre-wrap bg-secondaryBackground border border-secondaryBackground hover:border-4Background duration-200 text-gray-200 rounded-lg p-3">
           {comment.content}
+        </pre>
+      </div>
+    </li>
+  );
+};
+
+const HistoryItem = ({ comment }: { comment: historyType }) => {
+  return (
+    <li className="text-center">
+      <div className="">
+        <pre className="whitespace-pre-wrap text-gray-200 rounded-lg p-3">
+          <div className="text-sm">{formatDateToDisplay(comment.createdAt)}: </div>
+          The {comment.content.attribut} has been modified to{' '}
+          <span className="text-main font-bold">{comment.content.value}</span> by {comment.author.username}
         </pre>
       </div>
     </li>
@@ -66,8 +93,10 @@ const CommentInput = memo<{ feedbackId: number; projectId: number; setcomments }
         feedback: feedbackId,
       };
       try {
-        await createComment(commentData, projectId, session.jwt);
-        setcomments((comments) => [...comments, commentData]);
+        const commentresult = await createComment(commentData, projectId, session.jwt);
+        console.log(commentresult);
+        //@ts-ignore
+        setcomments((comments) => [...comments, commentresult.data.attributes]);
         setinput('');
         toast.success('New comment added!');
       } catch (error) {

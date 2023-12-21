@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { ArrowPathIcon, ChatBubbleBottomCenterTextIcon, LockClosedIcon, LockOpenIcon } from '@heroicons/react/20/solid';
-import { feedbackStateType, feedbackStatusType, feedbackType, feedbackTypeType } from 'types/index';
+import { feedbackStateType, feedbackStatusType, feedbackType, feedbackTypeType, historyType } from 'types/index';
 import img from 'public/images/screenshot_example.png';
 import { updateFeedback, deleteFeedback } from '../../../services/feedback.service';
 import { formatDateToDisplay } from '../../../utils/formatDate';
@@ -22,7 +22,15 @@ const listType: feedbackTypeType[] = ['Bug report', 'Feature request', 'General 
 const message = `Are you sure you want to delete this feedback? The feedback will be permanently
 removed. This action cannot be undone.`;
 
-export const FeedbackPageComponent = ({ _feedback, projectId }: { _feedback: feedbackType; projectId: number }) => {
+export const FeedbackPageComponent = ({
+  _feedback,
+  histories,
+  projectId,
+}: {
+  _feedback: feedbackType;
+  histories: historyType[];
+  projectId: number;
+}) => {
   const [feedback, setfeedback] = useState(_feedback);
   const { data: session } = useSession();
   const router = useRouter();
@@ -190,13 +198,18 @@ export const FeedbackPageComponent = ({ _feedback, projectId }: { _feedback: fee
         </div>
 
         <div className="lg:w-1/2 flex flex-col">
-          <div className="py-5">
+          <div className="py-5 min-h-[screen]">
             <Card>
               <div className="flex items-center space-x-2">
                 <ChatBubbleBottomCenterTextIcon className="h-5 w-5" aria-hidden="true" />
                 <h3 className="text-base text-mainText">Comments</h3>
               </div>
-              <CommentZone _comments={feedback.comments} feedbackId={feedback.id} projectId={projectId} />
+              <CommentZone
+                _comments={feedback.comments}
+                histories={histories}
+                feedbackId={feedback.id}
+                projectId={projectId}
+              />
             </Card>
           </div>
         </div>
