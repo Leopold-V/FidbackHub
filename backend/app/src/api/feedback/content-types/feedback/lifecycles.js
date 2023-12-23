@@ -1,6 +1,18 @@
 "use strict";
 
 module.exports = {
+  async afterCreate(event) {
+    const ctx = strapi.requestContext.get();
+    const { result } = event;
+    try {
+      await strapi.entityService.create('api::history.history', {
+          data: { content_type: 'feedback', content_id: result.id, action: 'create', author: ctx?.state?.user,
+          content: { attribut: 'title', value: result.title }, project: result.project.id },
+      })
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
   async beforeUpdate(event) {
     let existing = await strapi.entityService.findOne("api::feedback.feedback", event.params.data.id);
     if (existing) {

@@ -5,17 +5,18 @@ import { authOptions } from './api/auth/[...nextauth]';
 import { GetServerSideProps } from 'next/types';
 import { getUser } from '../services/user.service';
 import { getProjectsFromUser } from '../services/project.service';
+import { getHistories } from '../services/history.service';
 import Page from 'components/pages/projects';
 import Layout from 'components/layout';
 
-const ProjectsPage = ({ listProjects, userData }) => {
+const ProjectsPage = ({ listProjects, userData, histories }) => {
   return (
     <>
       <Head>
         <title>Projects</title>
       </Head>
       <Layout listProjects={listProjects}>
-        <Page userData={userData} userProjects={listProjects} />
+        <Page userData={userData} userProjects={listProjects} histories={histories} />
       </Layout>
     </>
   );
@@ -35,7 +36,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const userData = await getUser(session.jwt);
     const listProjects = await getProjectsFromUser(session.jwt);
-    return { props: { userData: userData, listProjects: Object.values(listProjects.data.attributes) } };
+    const dataHistory = await getHistories(session.jwt);
+    return {
+      props: {
+        userData: userData,
+        listProjects: Object.values(listProjects.data.attributes),
+        histories: Object.values(dataHistory.data.attributes),
+      },
+    };
   } catch (error) {
     return {
       redirect: {

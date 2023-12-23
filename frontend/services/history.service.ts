@@ -1,5 +1,5 @@
-export const getHistories = async (token: string, projectId: any) => {
-  const data = await fetch(`http://localhost:3000/api/histories/${projectId}`, {
+export const getHistories = async (token: string) => {
+  const data = await fetch(`http://localhost:3000/api/histories`, {
     method: 'GET',
     headers: {
       Authorization: 'Bearer ' + token,

@@ -37,13 +37,16 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
       },
     });
     const feedback = await dataFeedback.json();
-    const dataHistory = await getHistories(jwt, params.id);
+    const dataHistory = await getHistories(jwt);
     const dataHistoryFiltered = [
       ...Object.values(dataHistory.data.attributes).filter(
-        (ele: historyType) => ele.content_type === 'feedback' && +ele.content_id === +params.feedback,
+        (ele: historyType) =>
+          +ele.project.id === +params.id &&
+          ele.content_type === 'feedback' &&
+          +ele.content_id === +params.feedback &&
+          ele.action === 'update',
       ),
     ];
-
     return {
       props: {
         params,

@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { userType } from 'types/index';
+import { historyType, userType } from 'types/index';
 import { ProjectsColumn } from './ProjectsColumn';
 import { Feed } from './Feed';
 
-const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType; userProjects: any[] }) => {
+const ProjectsPageComponent = ({
+  userData,
+  userProjects,
+  histories,
+}: {
+  userData: userType;
+  userProjects: any[];
+  histories: historyType[];
+}) => {
   const profile = {
     id: userData.id,
     username: userData.username,
@@ -14,6 +22,8 @@ const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType;
   const [projects, setprojects] = useState(userProjects);
   const [allfeedbacks, setallfeedbacks] = useState([]);
   const [maxFeedbackProject, setmaxFeedbackProject] = useState({ name: '', number: 0 });
+
+  console.log(histories);
 
   useEffect(() => {
     let _allfeedbacks = [];
@@ -35,7 +45,7 @@ const ProjectsPageComponent = ({ userData, userProjects }: { userData: userType;
         <div className="min-w-0 flex-1 xl:flex">
           <ProjectsColumn projects={projects} setprojects={setprojects} />
         </div>
-        <Feed />
+        <Feed histories={histories} />
       </div>
     </div>
   );

@@ -20,9 +20,8 @@ export const CommentZone = ({
   const [commentsAndHistories, setcommentsAndHistories] = useState([]);
 
   useEffect(() => {
-    //@ts-ignore
     const commentsAndHistoriesMerged: any = []
-      .concat(comments, histories)
+      .concat(comments, histories) //@ts-ignore
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     setcommentsAndHistories(commentsAndHistoriesMerged);
   }, [comments]);
@@ -67,7 +66,8 @@ const HistoryItem = ({ comment }: { comment: historyType }) => {
         <pre className="whitespace-pre-wrap text-gray-200 rounded-lg p-3">
           <div className="text-sm">{formatDateToDisplay(comment.createdAt)}: </div>
           The {comment.content.attribut} has been modified to{' '}
-          <span className="text-main font-bold">{comment.content.value}</span> by {comment.author.username}
+          <span className="text-main font-bold">{comment.content.value}</span>{' '}
+          {comment.author && `by ${comment.author.username}`}
         </pre>
       </div>
     </li>

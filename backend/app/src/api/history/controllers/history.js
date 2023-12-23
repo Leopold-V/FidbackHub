@@ -11,7 +11,6 @@ module.exports = createCoreController('api::history.history', ({strapi}) => ({
     try {
       const projects = await strapi.db.query("api::project.project").findMany({
         where: {
-          id: ctx.query.id,
           $or: [
             {
               user: ctx.state.user.id

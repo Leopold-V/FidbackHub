@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 }
 
 const findHistories = async (req: NextApiRequest, res: NextApiResponse) => {
-  const data = await fetch(`http://localhost:1337/api/histories?id=${req.query.id[0]}`, {
+  const data = await fetch(`http://localhost:1337/api/histories`, {
     method: 'get',
     headers: {
       Authorization: req.headers.authorization,

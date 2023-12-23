@@ -16,7 +16,7 @@ const schemaCreate = Joi.object({
   'type': Joi.string().required(),
   screenshot: Joi.string(),
   metadata: Joi.object(),
-  user_ipv4: Joi.string().min(7).max(64).required(true),
+  user_ipv4: Joi.string().min(1).max(64).required(true),
   projectToken: Joi.string().min(64).max(256).required(true).messages({
     'any.required': `Project token missing!`
   }),
@@ -38,7 +38,7 @@ const schemaUpdate = Joi.object({
   author_email: Joi.string().required(),
   screenshot: Joi.string(),
   metadata: Joi.object(),
-  user_ipv4: Joi.string().min(7).max(64).required(true),
+  user_ipv4: Joi.string().min(1).max(64).required(true), // Had a bug with ip when testing locally so change to min = 1 instead of 7
   createdAt: Joi.string(),
   updatedAt: Joi.string(),
   api_key: Joi.string().min(64).max(256).required(true).messages({
