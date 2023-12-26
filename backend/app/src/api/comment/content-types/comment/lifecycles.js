@@ -11,7 +11,7 @@ module.exports = {
       console.log(feedback);
       await strapi.entityService.create('api::history.history', {
           data: { content_type: 'comment', content_id: result.id, action: 'create', author: ctx?.state?.user,
-          content: { attribut: 'text', value: result.content }, project: feedback.project.id },
+          content: { attribut: 'text', value: result.content, feedback: feedback.id }, project: feedback.project.id },
     })
     } catch (error) {
       console.log(error.message);

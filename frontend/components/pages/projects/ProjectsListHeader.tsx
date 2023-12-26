@@ -35,7 +35,7 @@ export const ProjectsListHeader = ({ projects, setprojects, setprojectsFiltered,
   return (
     <div className="py-4">
       <div className="flex items-center space-x-3">
-        <h1 className="text-lg font-medium pl-6">Projects</h1>
+        <h1 className="text-lg font-medium ">Projects</h1>
         <SearchProject projects={projects} setprojectsFiltered={setprojectsFiltered} />
         <div className="flex items-center divide-x divide-3Background">
           <button

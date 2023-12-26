@@ -41,7 +41,7 @@ const ProjectsPageComponent = ({
 
   return (
     <div className="flex flex-col items-center space-y-4 pb-8">
-      <div className="mx-auto w-full max-w-7xl lg:flex xl:px-8">
+      <div className="mx-auto max-w-8xl lg:flex xl:px-8 space-x-4">
         <div className="min-w-0 flex-1 xl:flex">
           <ProjectsColumn projects={projects} setprojects={setprojects} />
         </div>
