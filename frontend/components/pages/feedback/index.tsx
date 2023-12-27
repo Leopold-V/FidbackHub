@@ -27,10 +27,12 @@ export const FeedbackPageComponent = ({
   _feedback,
   histories,
   projectId,
+  projectTitle,
 }: {
   _feedback: feedbackType;
   histories: historyType[];
   projectId: number;
+  projectTitle: string;
 }) => {
   const [feedback, setfeedback] = useState(_feedback);
   const { data: session } = useSession();
@@ -51,7 +53,7 @@ export const FeedbackPageComponent = ({
         { ...newFeedback, state: selectedState, status: selectedStatus, type: selectedType },
         session.jwt,
       );
-      await sendUpdateFeedbackNotif(projectId, session.id, newFeedback.title);
+      await sendUpdateFeedbackNotif(projectId, session.id, newFeedback.title, projectTitle);
       setfeedback((feedback) => ({ ...feedback, state: selectedState, status: selectedStatus, type: selectedType }));
       toast.success(`Feedback updated!`);
     } catch (error) {
@@ -211,6 +213,7 @@ export const FeedbackPageComponent = ({
                 histories={histories}
                 feedbackId={feedback.id}
                 projectId={projectId}
+                projectTitle={projectTitle}
               />
             </Card>
           </div>

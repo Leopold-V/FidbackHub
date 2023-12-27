@@ -40,11 +40,13 @@ export const FeedbacksTable = ({
   projectToken,
   feedbacks,
   setfeedbacks,
+  projectTitle,
 }: {
   projectId: number;
   projectToken: string;
   feedbacks: feedbackType[];
   setfeedbacks;
+  projectTitle: string;
   // ugly but pass this to sync the date filter with all the table filters so that deleted feedbacks doesn't show with date filter
 }) => {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
@@ -247,6 +249,7 @@ export const FeedbacksTable = ({
         projectToken={projectToken}
         setData={setData}
         projectId={projectId}
+        projectTitle={projectTitle}
       />
     </div>
   );

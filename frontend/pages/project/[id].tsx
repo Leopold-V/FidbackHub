@@ -15,7 +15,13 @@ const ProjectPage = ({ params, feedbacks, histories, projectName, projectToken, 
         <title>Project</title>
       </Head>
       <Layout listProjects={listProjects} id={params.id} name={projectName}>
-        <Page feedbacks={feedbacks} histories={histories} projectToken={projectToken} projectId={params.id} />
+        <Page
+          feedbacks={feedbacks}
+          histories={histories}
+          projectToken={projectToken}
+          projectId={params.id}
+          projectTitle={projectName}
+        />
       </Layout>
     </>
   );

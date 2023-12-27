@@ -11,11 +11,13 @@ export const CommentZone = ({
   histories,
   feedbackId,
   projectId,
+  projectTitle,
 }: {
   _comments: commentType[];
   histories: historyType[];
   feedbackId: number;
   projectId: number;
+  projectTitle: string;
 }) => {
   const [comments, setcomments] = useState(_comments);
   const [commentsAndHistories, setcommentsAndHistories] = useState([]);
@@ -38,7 +40,12 @@ export const CommentZone = ({
           ),
         )}
       </ul>
-      <CommentInput feedbackId={feedbackId} projectId={projectId} setcomments={setcomments} />
+      <CommentInput
+        feedbackId={feedbackId}
+        projectId={projectId}
+        projectTitle={projectTitle}
+        setcomments={setcomments}
+      />
     </div>
   );
 };
@@ -75,8 +82,8 @@ const HistoryItem = ({ comment }: { comment: historyType }) => {
   );
 };
 
-const CommentInput = memo<{ feedbackId: number; projectId: number; setcomments }>(
-  ({ feedbackId, projectId, setcomments }) => {
+const CommentInput = memo<{ feedbackId: number; projectId: number; setcomments; projectTitle: string }>(
+  ({ feedbackId, projectId, setcomments, projectTitle }) => {
     const { data: session } = useSession();
 
     const [input, setinput] = useState('');
@@ -95,7 +102,7 @@ const CommentInput = memo<{ feedbackId: number; projectId: number; setcomments }
       };
       try {
         const commentresult = await createComment(commentData, projectId, session.jwt);
-        await newCommentNotif(projectId, session.jwt, feedbackId, session.user.name);
+        await newCommentNotif(projectId, session.id, feedbackId, session.user.name, projectTitle);
         //@ts-ignore
         setcomments((comments) => [...comments, commentresult.data.attributes]);
         setinput('');

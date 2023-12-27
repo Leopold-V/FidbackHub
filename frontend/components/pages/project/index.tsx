@@ -7,11 +7,13 @@ const ProjectPageComponent = ({
   projectToken,
   projectId,
   histories,
+  projectTitle,
 }: {
   feedbacks: feedbackType[];
   projectToken: string;
   projectId: number;
   histories: historyType[];
+  projectTitle: string;
 }) => {
   const [_feedbacks, setfeedbacks] = useState(feedbacks);
 
@@ -26,6 +28,7 @@ const ProjectPageComponent = ({
         projectId={projectId}
         feedbacks={_feedbacks}
         setfeedbacks={setfeedbacks}
+        projectTitle={projectTitle}
       />
     </div>
   );

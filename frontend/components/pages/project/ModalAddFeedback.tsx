@@ -14,7 +14,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-export const ModalAddFeedback = ({ open, setopen, projectToken, setData, projectId }) => {
+export const ModalAddFeedback = ({ open, setopen, projectToken, setData, projectId, projectTitle }) => {
   const { data: session } = useSession();
   const [selectedType, setSelectedType] = useState<feedbackTypeType>('Bug report');
   const [feedback, setfeedback] = useState<Partial<feedbackType>>({
@@ -32,7 +32,7 @@ export const ModalAddFeedback = ({ open, setopen, projectToken, setData, project
   const handleCreateFeedback = async () => {
     try {
       const result = await createFeedback({ ...feedback, type: selectedType }, projectToken);
-      await createFeedbackNotif(projectId, session.id, feedback.title);
+      await createFeedbackNotif(projectId, session.id, feedback.title, projectTitle);
       setData((data) => [...data, result.data.attributes]);
       toast.success('New Feedback added!');
       setopen(false);

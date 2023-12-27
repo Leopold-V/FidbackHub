@@ -65,40 +65,60 @@ export const sendUpdateProjectNotif = async (projectId: number, userId: number, 
   return result;
 };
 
-export const sendUpdateFeedbackNotif = async (projectId: number, userId: number, feedbackTitle: string) => {
+export const sendUpdateFeedbackNotif = async (
+  projectId: number,
+  userId: number,
+  feedbackTitle: string,
+  projectTitle: string,
+) => {
   const result = await fetch('http://localhost:3000/api/notifs/feedbacks/update', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ projectId: projectId, userId: userId, title: feedbackTitle }),
+    body: JSON.stringify({ projectId: projectId, userId: userId, title: feedbackTitle, projectTitle: projectTitle }),
   });
   return result;
 };
 
-export const createFeedbackNotif = async (projectId: number, userId: number, feedbackTitle: string) => {
+export const createFeedbackNotif = async (
+  projectId: number,
+  userId: number,
+  feedbackTitle: string,
+  projectTitle: string,
+) => {
   const result = await fetch('http://localhost:3000/api/notifs/feedbacks', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ projectId: projectId, userId: userId, title: feedbackTitle }),
+    body: JSON.stringify({ projectId: projectId, userId: userId, title: feedbackTitle, projectTitle: projectTitle }),
   });
   return result;
 };
 
-export const newCommentNotif = async (projectId: number, userId: number, feedbackId: number, authorName: string) => {
-  console.log(projectId, feedbackId);
-
+export const newCommentNotif = async (
+  projectId: number,
+  userId: number,
+  feedbackId: number,
+  authorName: string,
+  projectTitle: string,
+) => {
   const result = await fetch('http://localhost:3000/api/notifs/comments', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ projectId: projectId, userId: userId, feedbackId: feedbackId, authorName: authorName }),
+    body: JSON.stringify({
+      projectId: projectId,
+      userId: userId,
+      feedbackId: feedbackId,
+      authorName: authorName,
+      projectTitle: projectTitle,
+    }),
   });
   return result;
 };
