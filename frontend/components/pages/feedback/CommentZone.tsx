@@ -2,6 +2,7 @@ import React, { useState, memo, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import { commentType, historyType } from 'types/index';
+import { newCommentNotif } from '../../../services/notif.service';
 import { createComment } from '../../../services/comment.service';
 import { formatDateToDisplay } from '../../../utils/formatDate';
 
@@ -94,7 +95,7 @@ const CommentInput = memo<{ feedbackId: number; projectId: number; setcomments }
       };
       try {
         const commentresult = await createComment(commentData, projectId, session.jwt);
-        console.log(commentresult);
+        await newCommentNotif(projectId, session.jwt, feedbackId, session.user.name);
         //@ts-ignore
         setcomments((comments) => [...comments, commentresult.data.attributes]);
         setinput('');

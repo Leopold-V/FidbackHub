@@ -2,20 +2,38 @@ import React, { useState, MouseEvent } from 'react';
 import { Input } from 'components/common/Input';
 import SecretKey from './SecretKey';
 import { UsersIcon } from '@heroicons/react/20/solid';
-import { updateProject } from '../../../services/project.service';
-import { findUserWithEmail } from '../../../services/user.service';
 import { projectType } from 'types/index';
 import { toast } from 'react-toastify';
 import { useSession } from 'next-auth/react';
+import { updateProject } from '../../../services/project.service';
+import { findUserWithEmail } from '../../../services/user.service';
+import { invitToProjectNotif, removeFromProjectNotif } from '../../../services/notif.service';
 
-const MembersList = ({ project, membersList, setmembers, isAdmin }) => {
+const MembersList = ({
+  project,
+  membersList,
+  setmembers,
+  isAdmin,
+}: {
+  project: projectType;
+  membersList;
+  setmembers;
+  isAdmin: boolean;
+}) => {
   const { data: session } = useSession();
 
   const handleRemoveMember = async (e: MouseEvent<HTMLButtonElement>) => {
     const member_email = e.currentTarget.dataset.email;
+    const { feedbacks, ...newProject } = project;
     try {
       const newMemberList = membersList.filter((member) => member.email !== member_email);
-      await updateProject({ ...project, members: [...newMemberList.map((member) => member.id)] }, session.jwt);
+      await updateProject({ ...newProject, members: [...newMemberList.map((member) => member.id)] }, session.jwt);
+      await removeFromProjectNotif(
+        project.id,
+        session.id,
+        membersList.find((member) => member.email === member_email).id,
+        project.name,
+      );
       setmembers(newMemberList);
       toast.success(`Member ${member_email} removed!`);
     } catch (error) {
@@ -68,7 +86,9 @@ export const AccessZone = ({ project, isAdmin }: { project: projectType; isAdmin
       try {
         const newMember = await findUserWithEmail(member, session.jwt);
         if (newMember.data) {
-          await updateProject({ ...project, members: [...project.members, newMember.data.id] }, session.jwt);
+          const { feedbacks, ...newProject } = project;
+          await updateProject({ ...newProject, members: [...project.members, newMember.data.id] }, session.jwt);
+          await invitToProjectNotif(project.id, session.id, newMember.data.id, project.name);
           setmembers((members) => [...members, { email: member, id: newMember.data.id }]);
           toast.success(`Member ${newMember.data.attributes.username} added!`);
         }

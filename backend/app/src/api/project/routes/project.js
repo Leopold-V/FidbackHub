@@ -30,6 +30,11 @@ const myExtraRoutes = [
     method: "PUT",
     path: "/projects/:id/leave",
     handler: "api::project.project.updateMember",
+  },
+  {
+    method: "POST",
+    path: "/projects/findwithtoken",
+    handler: "api::project.project.findOneWithApiKey",
   }
 ];
 

@@ -32,8 +32,8 @@ const App = ({ Component, pageProps }: AppProps) => {
           <Component {...pageProps} />
         )}
         <ToastContainer
-          position="bottom-center"
-          autoClose={5000}
+          position="bottom-right"
+          autoClose={4000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
@@ -43,12 +43,6 @@ const App = ({ Component, pageProps }: AppProps) => {
           pauseOnHover
           theme="dark"
         />
-        {/* <Script
-          id="script_widget"
-          type="text/javascript"
-          src="https://cdn.jsdelivr.net/gh/Leopold-V/FidbackHub@0.1.0-alpha/widget/dist/fidbackhub-widget.js"
-          data-key="OX3bW6wtUaz/9zmf0KWvLu/KrUgVswf2kZy0kNR+7lBRHzyp0l6VCNanJkbBmjd5N/rcdP99sc6mbXhxquZmFg=="
-        /> */}
       </SessionProvider>
     </>
   );

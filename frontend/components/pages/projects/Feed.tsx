@@ -1,22 +1,39 @@
 //@ts-nocheck
 
-import { Card } from 'components/common/Card';
+import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
-import React from 'react';
 var relativeTime = require('dayjs/plugin/relativeTime');
-import { CheckIcon, HandThumbUpIcon, UserIcon } from '@heroicons/react/20/solid';
-import { historyType } from 'types/index';
 import { ChatBubbleLeftEllipsisIcon, FlagIcon, HomeModernIcon } from '@heroicons/react/24/solid';
+import { historyType } from 'types/index';
+import { Card } from 'components/common/Card';
+import { SelectState } from 'components/common/SelectState';
 
 dayjs.extend(relativeTime);
 
 export const Feed = ({ histories }: { histories: historyType[] }) => {
+  const [historiesFiltered, sethistoriesFiltered] = useState(histories);
+  const [selected, setselected] = useState('all');
+
+  useEffect(() => {
+    sethistoriesFiltered([...histories].filter((ele) => ele.content_type === selected || selected === 'all'));
+  }, [selected]);
+
   return (
-    <div className="pt-6 w-96">
-      <h2 className="pb-8">Feed</h2>
+    <div className="py-4 w-96">
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-lg font-medium">Feed</h2>
+        <div className="flex space-x-2 items-center">
+          <span className="text-sm text-secondaryText">Filter content :</span>
+          <SelectState
+            listItems={['all', 'project', 'feedback', 'comment']}
+            selected={selected}
+            setselected={setselected}
+          />
+        </div>
+      </div>
       <Card>
         <FeedList
-          histories={[...histories].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 9)}
+          histories={[...historiesFiltered].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 9)}
         />
       </Card>
     </div>
@@ -78,10 +95,20 @@ const generateIconHistory = (history: historyType) => {
 const generateMessage = (history: historyType) => {
   switch (history.content_type) {
     case 'feedback':
-      return `${history.project.name}, ${history.content_type} ${history.action} ${history.content.attribut} ${history.content.value}`;
+      if (history.action === 'create') {
+        return `${history.action.charAt(0).toUpperCase() + history.action.slice(1)} ${history.content_type} ${
+          history.content.attribut
+        } "${history.content.value}" in project ${history.project.name}`;
+      } else {
+        return `${history.action.charAt(0).toUpperCase() + history.action.slice(1)} ${history.content_type} #${
+          history.id
+        } to ${history.content.attribut} "${history.content.value}" in project ${history.project.name}`;
+      }
     case 'comment':
-      return `${history.project.name}, new ${history.content_type} added in feedback #${history.content.feedback}`;
+      return `New ${history.content_type} added in feedback #${history.content.feedback} in project ${history.project.name}`;
     default:
-      return `${history.project.name}, ${history.content_type} ${history.action} ${history.content.attribut} ${history.content.value}`;
+      return `${history.action.charAt(0).toUpperCase() + history.action.slice(1)} ${history.content_type} ${
+        history.project.name
+      } "${history.content.value}"`;
   }
 };

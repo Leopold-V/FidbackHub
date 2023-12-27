@@ -18,6 +18,8 @@
     "@mdx-js/loader": "^2.2.1",
     "@mdx-js/react": "^2.2.1",
     "@next/mdx": "^13.0.7",
+    "@novu/node": "^0.22.0",
+    "@novu/notification-center": "^0.22.0",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@tanstack/match-sorter-utils": "^8.7.6",
     "@tanstack/react-table": "^8.7.8",

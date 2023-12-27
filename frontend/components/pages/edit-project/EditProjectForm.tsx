@@ -2,13 +2,13 @@ import React, { FormEvent, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import dayjs from 'dayjs';
 import { toast } from 'react-toastify';
-import { updateProject } from '../../../services/project.service';
 import { projectType } from 'types/index';
+import { updateProject } from '../../../services/project.service';
+import { sendUpdateProjectNotif } from '../../../services/notif.service';
 import { SpinnerButton } from 'components/common/Spinner';
 import { InputDecorators } from 'components/common/InputDecorators';
 import { Input } from 'components/common/Input';
 import { ButtonOutline } from 'components/common/Button';
-import { idea } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 export const EditProjectForm = ({
   project,
@@ -36,8 +36,6 @@ export const EditProjectForm = ({
     e.preventDefault();
     setloading(true);
     try {
-      console.log(project);
-
       await updateProject(
         {
           id: project.id,
@@ -50,6 +48,7 @@ export const EditProjectForm = ({
         },
         session.jwt,
       );
+      await sendUpdateProjectNotif(project.id, session.id, project.name);
       setProject({ ...project, ...input });
       toast.success(`Project ${project.name} updated!`);
     } catch (error) {

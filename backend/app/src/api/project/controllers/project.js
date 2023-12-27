@@ -62,6 +62,20 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
       throw new ApplicationError();
     }
   },
+  async findOneWithApiKey(ctx) {
+    try {
+      const response = await strapi.db.query('api::project.project').findOne({
+        where: { api_key: ctx.request.body.data.projectToken },
+      });
+      if (!response) {
+        // If project is from another user, we answer with the same message as an unexisting url path to not guess another users project id.
+        return ctx.badRequest(`Error 404, ressource not found`);
+      }
+      return {data: {id: response.id, attributes: {...response}}, meta: {}};
+    } catch (error) {
+      throw new ApplicationError();
+    }
+  },
   async update(ctx) {
     const { error } = schemaUpdate.validate(ctx.request.body.data);
     if (error) {
@@ -98,7 +112,7 @@ module.exports = createCoreController('api::project.project', ({ strapi }) => ({
           id: ctx.params.id,
           user: ctx.state.user.id
         },
-        populate: { user: true },
+        populate: { user: true, members: true },
       });
       return {data: {id: project.id, attributes: {...project}}, meta: {}};
     } catch (error) {

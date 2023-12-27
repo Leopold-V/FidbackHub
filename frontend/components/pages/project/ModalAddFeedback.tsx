@@ -1,12 +1,11 @@
 import { FormEvent, Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { createFeedback } from '../../../services/feedback.service';
 import { useSession } from 'next-auth/react';
-import { feedbackType, feedbackTypeType } from 'types/index';
 import { toast } from 'react-toastify';
+import { feedbackType, feedbackTypeType } from 'types/index';
+import { createFeedback } from '../../../services/feedback.service';
+import { createFeedbackNotif } from '../../../services/notif.service';
 import { Button } from 'components/common/Button';
-import { InputDecorators } from 'components/common/InputDecorators';
-import { Input } from 'components/common/Input';
 import { SelectState } from 'components/common/SelectState';
 
 const listType: feedbackTypeType[] = ['Bug report', 'Feature request', 'General feedback'];
@@ -15,7 +14,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-export const ModalAddFeedback = ({ open, setopen, projectToken, setData }) => {
+export const ModalAddFeedback = ({ open, setopen, projectToken, setData, projectId }) => {
   const { data: session } = useSession();
   const [selectedType, setSelectedType] = useState<feedbackTypeType>('Bug report');
   const [feedback, setfeedback] = useState<Partial<feedbackType>>({
@@ -33,6 +32,7 @@ export const ModalAddFeedback = ({ open, setopen, projectToken, setData }) => {
   const handleCreateFeedback = async () => {
     try {
       const result = await createFeedback({ ...feedback, type: selectedType }, projectToken);
+      await createFeedbackNotif(projectId, session.id, feedback.title);
       setData((data) => [...data, result.data.attributes]);
       toast.success('New Feedback added!');
       setopen(false);

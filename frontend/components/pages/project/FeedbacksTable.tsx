@@ -241,7 +241,13 @@ export const FeedbacksTable = ({
           <PaginationSection table={table} setData={setData} setfeedbacks={setfeedbacks} />
         </div>
       </div>
-      <ModalAddFeedback open={open} setopen={setopen} projectToken={projectToken} setData={setData} />
+      <ModalAddFeedback
+        open={open}
+        setopen={setopen}
+        projectToken={projectToken}
+        setData={setData}
+        projectId={projectId}
+      />
     </div>
   );
 };

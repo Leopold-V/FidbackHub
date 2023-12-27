@@ -3,6 +3,7 @@ import * as htmlToImage from 'html-to-image';
 import { sendFeedback } from '../services/feedback.service';
 import { feedbackType, feedbackTypeType } from '../types';
 import { Button } from './Button';
+import { createFeedbackNotif } from '../services/notif.service';
 
 // TO TEST API KEY : OX3bW6wtUaz/9zmf0KWvLu/KrUgVswf2kZy0kNR+7lBRHzyp0l6VCNanJkbBmjd5N/rcdP99sc6mbXhxquZmFg==
 
@@ -58,6 +59,7 @@ export const Form = ({ setloading }: { setloading: (loading: boolean) => void })
       const canvasElement: any = document.getElementById('fidbackhub_editor_content');
       const imageBase64 = await html2Image(canvasElement);
       await sendFeedback(values, imageBase64, metadata, apikey);
+      await createFeedbackNotif(apikey, values.title);
       setvalues({
         title: '',
         type: 'Bug report',

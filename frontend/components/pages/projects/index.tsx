@@ -4,7 +4,6 @@ import { ProjectsColumn } from './ProjectsColumn';
 import { Feed } from './Feed';
 
 const ProjectsPageComponent = ({
-  userData,
   userProjects,
   histories,
 }: {
@@ -12,18 +11,9 @@ const ProjectsPageComponent = ({
   userProjects: any[];
   histories: historyType[];
 }) => {
-  const profile = {
-    id: userData.id,
-    username: userData.username,
-    email: userData.email,
-    avatar_url: userData.avatar_url,
-  };
-
   const [projects, setprojects] = useState(userProjects);
   const [allfeedbacks, setallfeedbacks] = useState([]);
   const [maxFeedbackProject, setmaxFeedbackProject] = useState({ name: '', number: 0 });
-
-  console.log(histories);
 
   useEffect(() => {
     let _allfeedbacks = [];

@@ -1,13 +1,13 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import { projectType, userType } from 'types/index';
-import { getUser } from '../services/user.service';
-import Page from 'components/pages/my-account';
-import Layout from 'components/layout';
-import { getProjectsFromUser } from '../services/project.service';
 import { unstable_getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
+import { projectType, userType } from 'types/index';
+import { getUser } from '../services/user.service';
+import { getProjectsFromUser } from '../services/project.service';
+import Page from 'components/pages/my-account';
+import Layout from 'components/layout';
 
 const MyAccountPage = ({ profile, listProjects }: { profile: userType; listProjects: projectType[] }) => {
   return (

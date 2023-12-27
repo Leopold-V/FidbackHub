@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import { deleteProject, leaveProject } from '../../../services/project.service';
-import { Modal } from 'components/common/Modal';
 import { projectType } from 'types/index';
+import { deleteProject, leaveProject } from '../../../services/project.service';
+import { deleteProjectNotif } from '../../../services/notif.service';
+import { Modal } from 'components/common/Modal';
 
 const message = `Are you sure you want to delete? The project will be permanently
 removed. This action cannot be undone.`;
@@ -21,7 +22,14 @@ export const DangerZone = ({ projectId }: { projectId: number }) => {
 
   const handleDeleteProject = async () => {
     try {
-      await deleteProject(projectId, session.jwt);
+      const result = await deleteProject(projectId, session.jwt);
+      console.log(result);
+      await deleteProjectNotif(
+        projectId,
+        result.data.attributes.user.id,
+        result.data.attributes.members,
+        result.data.attributes.name,
+      );
       router.push(`/projects`);
       toast.success(`Project deleted!`);
     } catch (error) {

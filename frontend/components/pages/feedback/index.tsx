@@ -6,6 +6,7 @@ import { ArrowPathIcon, ChatBubbleBottomCenterTextIcon, LockClosedIcon, LockOpen
 import { feedbackStateType, feedbackStatusType, feedbackType, feedbackTypeType, historyType } from 'types/index';
 import img from 'public/images/screenshot_example.png';
 import { updateFeedback, deleteFeedback } from '../../../services/feedback.service';
+import { sendUpdateFeedbackNotif } from '../../../services/notif.service';
 import { formatDateToDisplay } from '../../../utils/formatDate';
 import { SelectState } from 'components/common/SelectState';
 import { ButtonBack, ButtonDelete, ButtonOutline } from 'components/common/Button';
@@ -50,6 +51,7 @@ export const FeedbackPageComponent = ({
         { ...newFeedback, state: selectedState, status: selectedStatus, type: selectedType },
         session.jwt,
       );
+      await sendUpdateFeedbackNotif(projectId, session.id, newFeedback.title);
       setfeedback((feedback) => ({ ...feedback, state: selectedState, status: selectedStatus, type: selectedType }));
       toast.success(`Feedback updated!`);
     } catch (error) {

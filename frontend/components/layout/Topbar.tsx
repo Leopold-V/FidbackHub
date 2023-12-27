@@ -5,6 +5,7 @@ import { signOut } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3CenterLeftIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { NovuComponent } from './NovuComponent';
 
 const navigation = [{ name: 'Projects', href: '/projects', current: true, key: 1 }];
 const userNavigation = [
@@ -62,23 +63,7 @@ export const Topbar = () => {
                         <span className="sr-only">Create new project</span>
                       </div>
                     </Link>
-                    <button className="flex rounded-full p-1 text-secondaryText hover:text-mainText focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:ring-offset-1 focus:ring-offset-indigo-500">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-6 h-6"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
-                        />
-                      </svg>
-                      <span className="sr-only">Open user notification</span>
-                    </button>
+                    <NovuComponent />
                   </div>
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-4 flex-shrink-0">
@@ -155,21 +140,8 @@ export const Topbar = () => {
             </div>
             <div className="border-t border-indigo-600 pt-4 pb-3">
               <div className="space-y-1 px-2">
-                <div className="block rounded-md px-3 py-2 text-secondaryText hover:bg-indigo-600 hover:text-mainText">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
-                    />
-                  </svg>
+                <div className="px-3 py-2">
+                  <NovuComponent />
                 </div>
                 {userNavigation.map((item) => (
                   <div key={item.href}>

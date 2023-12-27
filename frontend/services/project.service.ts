@@ -34,7 +34,7 @@ export const getProjectsFromUser = async (jwt: number) => {
   return json;
 };
 
-export const addProject = async (id: number, project: Partial<projectType>, jwt: string): Promise<projectType> => {
+export const addProject = async (id: number, project: Partial<projectType>, jwt: string): Promise<any> => {
   const data = await fetch(`http://localhost:3000/api/projects/create-project`, {
     method: 'POST',
     body: JSON.stringify({ project: { ...project }, user: id }),
@@ -51,7 +51,7 @@ export const addProject = async (id: number, project: Partial<projectType>, jwt:
   return json;
 };
 
-export const deleteProject = async (id: number, jwt: string): Promise<projectType> => {
+export const deleteProject = async (id: number, jwt: string): Promise<any> => {
   const data = await fetch(`http://localhost:3000/api/projects/${id}`, {
     method: 'DELETE',
     headers: {

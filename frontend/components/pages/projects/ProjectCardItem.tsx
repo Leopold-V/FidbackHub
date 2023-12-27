@@ -7,7 +7,7 @@ export const ProjectCardItem = ({ project, userId }: { project: projectType; use
   const isGuest = project.user.id !== userId;
 
   return (
-    <li className="hover:-translate-y-2 m-3 border border-3Background rounded relative py-5 pl-4 pr-6 w-72 h-52 space-y-3 bg-mainBackground duration-200 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
+    <li className="hover:-translate-y-2 m-3 border border-3Background rounded relative py-5 pl-4 pr-6 w-80 h-52 space-y-3 bg-mainBackground duration-200 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
       <div className="flex justify-between w-full">
         <div className="flex space-x-2 items-center">
           <a href={project.github_url} className="group relative flex items-center space-x-2.5 cursor-pointer">

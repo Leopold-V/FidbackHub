@@ -5,8 +5,6 @@ import { AccountDetails } from './AccountCard';
 import { AvatarCard } from './AvatarCard';
 
 const MyAccountPageComponent = ({ profile }: { profile: userType }) => {
-  console.log(profile);
-
   return (
     <div className="flex flex-col justify-center items-center space-y-4 pb-8">
       <PageHeader label="My Account" />

@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { GetServerSideProps } from 'next/types';
 import { NextPage } from 'next';
 import Page from 'components/pages/home/index';
-import { getSession } from 'next-auth/react';
 import { unstable_getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
 

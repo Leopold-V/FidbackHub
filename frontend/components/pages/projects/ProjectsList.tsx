@@ -16,7 +16,7 @@ export const ProjectsList = ({
   const { data: session } = useSession();
   if (grid) {
     return (
-      <ul role="list" className="flex sm:flex-row mx-2 flex-wrap flex-col justify-center items-center">
+      <ul role="list" className="flex flex-row mx-2 flex-wrap lg:justify-between justify-center items-center">
         {projects.map((project) => (
           <ProjectCardItem key={project.id} project={project} userId={session.id} />
         ))}

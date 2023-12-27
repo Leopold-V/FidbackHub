@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import { projectType } from 'types/index';
 import { addProject } from '../../../services/project.service';
+import { sendCreateProjectNotif } from '../../../services/notif.service';
 import { SpinnerButton } from 'components/common/Spinner';
 import { InputDecorators } from 'components/common/InputDecorators';
 import { Input } from 'components/common/Input';
@@ -25,7 +26,9 @@ export const ProjectForm = () => {
     e.preventDefault();
     setloading(true);
     try {
-      await addProject(session.id, project, session.jwt);
+      const newProject = await addProject(session.id, project, session.jwt);
+      console.log(newProject);
+      await sendCreateProjectNotif(newProject.data.id, session.id, project.name);
       toast.success(`Project ${project.name} created!`);
     } catch (error) {
       toast.error(error.message);
