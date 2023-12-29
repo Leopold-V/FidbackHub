@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Form } from './Form';
 import { ScreenPlay } from './ScreenPlay';
+import { VideoContainer } from './VideoContainer';
 
-export const FidbackhubMain = ({ screenshot }: { screenshot: string }) => {
+export const FidbackhubMain = ({ screenshot, video }: { screenshot: string; video: string }) => {
   const [loading, setloading] = useState(false);
 
   return (
@@ -26,7 +27,7 @@ export const FidbackhubMain = ({ screenshot }: { screenshot: string }) => {
             <div className="font-bold text-3xl">Loading...</div>
           </div>
         )}
-        <ScreenPlay screenshot={screenshot} />
+        {screenshot ? <ScreenPlay screenshot={screenshot} /> : <VideoContainer video={video} />}
         <Form setloading={setloading} />
       </div>
     </div>

@@ -2,6 +2,8 @@ import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/20/solid';
 import { flexRender, Table } from '@tanstack/react-table';
 
 export const TableSection = ({ table }: { table: Table<any> }) => {
+  console.log(table.getRowModel().rows);
+
   return (
     <table className="w-full">
       <thead className="border-b-2 border-3Background text-muted text-sm">

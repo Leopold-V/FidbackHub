@@ -27,6 +27,10 @@
     {
       "resources": ["dist/*"],
       "matches": ["<all_urls>"]
+    },
+    {
+      "resources": ["record-control.html"],
+      "matches": ["<all_urls>"]
     }
   ]
 }

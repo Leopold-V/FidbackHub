@@ -53,7 +53,7 @@ export const FeedbackPageComponent = ({
         { ...newFeedback, state: selectedState, status: selectedStatus, type: selectedType },
         session.jwt,
       );
-      await sendUpdateFeedbackNotif(projectId, session.id, newFeedback.title, projectTitle);
+      await sendUpdateFeedbackNotif(projectId, session.id, newFeedback.title, projectTitle, feedback.id);
       setfeedback((feedback) => ({ ...feedback, state: selectedState, status: selectedStatus, type: selectedType }));
       toast.success(`Feedback updated!`);
     } catch (error) {

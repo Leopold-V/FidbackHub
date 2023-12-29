@@ -15,7 +15,7 @@ import {
   ColumnDef,
 } from '@tanstack/react-table';
 import { rankItem } from '@tanstack/match-sorter-utils';
-import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
+import { BellSnoozeIcon, CheckIcon, ClockIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/20/solid';
 import { feedbackType } from '../../../types';
 import { formatDateToDisplay } from '../../../utils/formatDate';
 import { HeaderWrapper } from 'components/common/HeaderWrapper';
@@ -81,7 +81,19 @@ export const FeedbacksTable = ({
         ),
       },
       {
-        accessorKey: 'title',
+        accessorFn: (row) => row.id,
+        id: 'id',
+        cell: (info) => (
+          <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}>
+            <a className="cursor-pointer">{info.getValue()}</a>
+          </Link>
+        ),
+        header: () => 'Id',
+        footer: (props) => props.column.id,
+      },
+      {
+        accessorFn: (row) => row.title,
+        id: 'title',
         cell: (info) => (
           <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}>
             <a className="cursor-pointer">{info.getValue()}</a>
@@ -123,7 +135,10 @@ export const FeedbacksTable = ({
         id: 'state',
         cell: (info) => (
           <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}>
-            <a className="cursor-pointer">{info.getValue()}</a>
+            <a className="cursor-pointer flex items-center space-x-1">
+              {generateStateIcon(info.getValue())}
+              <span>{info.getValue()}</span>
+            </a>
           </Link>
         ),
         header: () => 'State',
@@ -219,9 +234,9 @@ export const FeedbacksTable = ({
         </div>
         <div className="mt-4 flex items-center justify-between lg:space-x-4 lg:space-y-0 space-y-3 lg:flex-row flex-col">
           <div className="flex space-x-4">
-            <FilterStatus column={table.getHeaderGroups()[0].headers[3].headerGroup.headers[3].column} />
-            <FilterType column={table.getHeaderGroups()[0].headers[2].headerGroup.headers[2].column} />
-            <FilterState column={table.getHeaderGroups()[0].headers[4].headerGroup.headers[4].column} />
+            <FilterStatus column={table.getHeaderGroups()[0].headers[4].headerGroup.headers[4].column} />
+            <FilterType column={table.getHeaderGroups()[0].headers[3].headerGroup.headers[3].column} />
+            <FilterState column={table.getHeaderGroups()[0].headers[5].headerGroup.headers[5].column} />
           </div>
           <div className="relative">
             <div className="pointer-events-none text-secondaryText absolute inset-y-0 left-0 flex items-center pl-3">
@@ -260,6 +275,11 @@ function FilterStatus({ column }: { column: Column<any, unknown> }) {
     column.setFilterValue(e.target.value);
   };
 
+  useEffect(() => {
+    // Default value
+    column.setFilterValue('Open');
+  }, []);
+
   return (
     <div className="space-x-2 flex items-center">
       <label className="text-sm text-secondaryText" htmlFor={`${column.id}-select`}>
@@ -269,6 +289,7 @@ function FilterStatus({ column }: { column: Column<any, unknown> }) {
         name={column.id}
         id={`${column.id}-select`}
         onChange={onChange}
+        value={column.getFilterValue() as string}
         className={`duration-200 text-secondaryText w-32 text-xs bg-secondaryBackground relative cursor-default rounded-md border border-3Background py-1 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
       >
         <option value="" key="" className="text-gray-200">
@@ -397,3 +418,18 @@ function IndeterminateCheckbox({
 
   return <input type="checkbox" ref={ref} className={className + ' cursor-pointer'} {...rest} />;
 }
+
+const generateStateIcon = (state: string) => {
+  switch (state) {
+    case 'New':
+      return <BellSnoozeIcon className="h-5 w-5 text-zinc-400" />;
+    case 'In progress':
+      return <ClockIcon className="h-5 w-5 text-yellow-500" />;
+    case 'Resolved':
+      return <CheckIcon className="h-5 w-5 text-green-500" />;
+    case 'Rejected':
+      return <XMarkIcon className="h-5 w-5 text-red-500" />;
+    default:
+      break;
+  }
+};

@@ -70,6 +70,7 @@ export const sendUpdateFeedbackNotif = async (
   userId: number,
   feedbackTitle: string,
   projectTitle: string,
+  feedbackId: number,
 ) => {
   const result = await fetch('http://localhost:3000/api/notifs/feedbacks/update', {
     method: 'POST',
@@ -77,7 +78,13 @@ export const sendUpdateFeedbackNotif = async (
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ projectId: projectId, userId: userId, title: feedbackTitle, projectTitle: projectTitle }),
+    body: JSON.stringify({
+      projectId: projectId,
+      userId: userId,
+      title: feedbackTitle,
+      projectTitle: projectTitle,
+      feedbackId: feedbackId,
+    }),
   });
   return result;
 };
