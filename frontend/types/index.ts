@@ -83,6 +83,7 @@ export type feedbackType = {
   status: feedbackStatusType;
   state: feedbackStateType;
   type: feedbackTypeType;
+  priority: feedbackPriorityType;
   screenshot?: string;
   metadata?: metadataType;
   user_ipv4?: string;
@@ -128,6 +129,11 @@ export type feedbackStateType = 'New' | 'In progress' | 'Resolved' | 'Rejected';
  * The possible **type** of a feedback
  */
 export type feedbackTypeType = 'General feedback' | 'Bug report' | 'Feature request';
+
+/**
+ * The priority **level** of a feedback
+ */
+export type feedbackPriorityType = 'Low' | 'Very low' | 'Medium' | 'High' | 'Very high';
 
 export type metadataType = {
   userAgent: string;

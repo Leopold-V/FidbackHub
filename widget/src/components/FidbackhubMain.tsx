@@ -2,10 +2,15 @@ import { useState } from 'react';
 import { Form } from './Form';
 import { ScreenPlay } from './ScreenPlay';
 import { VideoContainer } from './VideoContainer';
+import { SuccessPage } from './SuccessPage';
 
 export const FidbackhubMain = ({ screenshot, video }: { screenshot: string; video: string }) => {
   const [loading, setloading] = useState(false);
+  const [success, setsuccess] = useState(false);
 
+  if (success) {
+    return <SuccessPage />;
+  }
   return (
     <div
       id="fidbackhub_form_main"
@@ -28,7 +33,7 @@ export const FidbackhubMain = ({ screenshot, video }: { screenshot: string; vide
           </div>
         )}
         {screenshot ? <ScreenPlay screenshot={screenshot} /> : <VideoContainer video={video} />}
-        <Form setloading={setloading} />
+        <Form setsuccess={setsuccess} loading={loading} setloading={setloading} />
       </div>
     </div>
   );

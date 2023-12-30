@@ -25,6 +25,7 @@ export const sendFeedback = async (
         metadata: metadata,
         status: 'Open',
         state: 'New',
+        priority: 'Low',
         user_ipv4: '0.0.0.0',
       },
     }),

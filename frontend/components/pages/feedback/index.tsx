@@ -3,7 +3,14 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { ArrowPathIcon, ChatBubbleBottomCenterTextIcon, LockClosedIcon, LockOpenIcon } from '@heroicons/react/20/solid';
-import { feedbackStateType, feedbackStatusType, feedbackType, feedbackTypeType, historyType } from 'types/index';
+import {
+  feedbackPriorityType,
+  feedbackStateType,
+  feedbackStatusType,
+  feedbackType,
+  feedbackTypeType,
+  historyType,
+} from 'types/index';
 import img from 'public/images/screenshot_example.png';
 import { updateFeedback, deleteFeedback } from '../../../services/feedback.service';
 import { sendUpdateFeedbackNotif } from '../../../services/notif.service';
@@ -19,6 +26,7 @@ import { ModalImage } from './ModalImage';
 const listState: feedbackStateType[] = ['New', 'In progress', 'Resolved', 'Rejected'];
 const listStatus: feedbackStatusType[] = ['Open', 'Closed'];
 const listType: feedbackTypeType[] = ['Bug report', 'Feature request', 'General feedback'];
+const listPriority: feedbackPriorityType[] = ['Low', 'Very low', 'Medium', 'High', 'Very high'];
 
 const message = `Are you sure you want to delete this feedback? The feedback will be permanently
 removed. This action cannot be undone.`;
@@ -44,17 +52,30 @@ export const FeedbackPageComponent = ({
   const [selectedState, setSelectedState] = useState(feedback.state);
   const [selectedType, setSelectedType] = useState(feedback.type);
   const [selectedStatus, setSelectedStatus] = useState(feedback.status);
+  const [selectedPriority, setSelectedPriority] = useState(feedback.priority);
 
   const handleUpdateStateFeedback = async () => {
     setloadingUpdate(true);
     try {
       const { screenshot, metadata, ...newFeedback } = feedback; // destructuring because body limit for screenshot and some fields aren't updated anyway.
       await updateFeedback(
-        { ...newFeedback, state: selectedState, status: selectedStatus, type: selectedType },
+        {
+          ...newFeedback,
+          state: selectedState,
+          status: selectedStatus,
+          type: selectedType,
+          priority: selectedPriority,
+        },
         session.jwt,
       );
       await sendUpdateFeedbackNotif(projectId, session.id, newFeedback.title, projectTitle, feedback.id);
-      setfeedback((feedback) => ({ ...feedback, state: selectedState, status: selectedStatus, type: selectedType }));
+      setfeedback((feedback) => ({
+        ...feedback,
+        state: selectedState,
+        status: selectedStatus,
+        type: selectedType,
+        priority: selectedPriority,
+      }));
       toast.success(`Feedback updated!`);
     } catch (error) {
       toast.error(error.message);
@@ -166,6 +187,16 @@ export const FeedbackPageComponent = ({
                     <span className=" text-secondaryText text-right w-12">Status: </span>
                     <div className="">
                       <SelectState selected={selectedStatus} setselected={setSelectedStatus} listItems={listStatus} />
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-3 w-full">
+                    <span className=" text-secondaryText text-right w-12">Priority: </span>
+                    <div className="">
+                      <SelectState
+                        selected={selectedPriority}
+                        setselected={setSelectedPriority}
+                        listItems={listPriority}
+                      />
                     </div>
                   </div>
                 </div>

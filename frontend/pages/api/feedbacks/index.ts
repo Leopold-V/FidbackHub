@@ -18,7 +18,7 @@ const createFeedback = async (req: NextApiRequest, res: NextApiResponse) => {
   const feedback = req.body.feedback;
   const data = await fetch(`http://localhost:1337/api/feedbacks`, {
     method: 'POST',
-    body: JSON.stringify({ data: { ...feedback, status: 'Open', state: 'New', user_ipv4: ipv4 } }),
+    body: JSON.stringify({ data: { ...feedback, status: 'Open', state: 'New', priority: 'Low', user_ipv4: ipv4 } }),
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',

@@ -78,6 +78,18 @@
     "metadata": {
       "type": "json",
       "required": true
+    },
+    "priority": {
+      "type": "enumeration",
+      "enum": [
+        "Very low",
+        "Low",
+        "Medium",
+        "High",
+        "Very high"
+      ],
+      "default": "Low",
+      "required": true
     }
   }
 }
