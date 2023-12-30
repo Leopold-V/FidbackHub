@@ -1,11 +1,19 @@
 import { ChangeEvent, MouseEvent, useState } from 'react';
 import * as htmlToImage from 'html-to-image';
 import { sendFeedback } from '../services/feedback.service';
-import { feedbackType, feedbackTypeType } from '../types';
+import { feedbackType } from '../types';
 import { Button } from './Button';
 import { createFeedbackNotif } from '../services/notif.service';
+import { BugAntIcon, InformationCircleIcon, LightBulbIcon } from '@heroicons/react/24/outline';
+import { SelectType } from './SelectType';
 
 // TO TEST API KEY : OX3bW6wtUaz/9zmf0KWvLu/KrUgVswf2kZy0kNR+7lBRHzyp0l6VCNanJkbBmjd5N/rcdP99sc6mbXhxquZmFg==
+
+const listType: any[] = [
+  {text: 'Bug report', icon: <BugAntIcon className="h-4 w-4 text-red-500" />},
+  {text: 'Feature request', icon: <LightBulbIcon className="h-4 w-4 text-yellow-500" />},
+  {text: 'General feedback', icon: <InformationCircleIcon className="h-4 w-4 text-indigo-500" />}
+];
 
 const FormHeader = () => {
   return (
@@ -20,15 +28,15 @@ const FormHeader = () => {
 };
 
 export const Form = ({ setloading }: { setloading: (loading: boolean) => void }) => {
-  const [values, setvalues] = useState<feedbackType>({
+  const [values, setvalues] = useState<Partial<feedbackType>>({
     title: '',
-    type: 'Bug report',
     description: '',
     author_email: '',
   });
   const [apikey, setapikey] = useState<string>('');
   const [error, seterror] = useState('');
   const [success, setsuccess] = useState(false);
+  const [selectedType, setselectedType] = useState(listType[0])
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setvalues({ ...values, [e.target.name]: e.target.value });
@@ -58,7 +66,7 @@ export const Form = ({ setloading }: { setloading: (loading: boolean) => void })
       };
       const canvasElement: any = document.getElementById('fidbackhub_editor_content');
       const imageBase64 = await html2Image(canvasElement);
-      await sendFeedback(values, imageBase64, metadata, apikey);
+      await sendFeedback(values, selectedType.text, imageBase64, metadata, apikey);
       await createFeedbackNotif(apikey, values.title);
       setvalues({
         title: '',
@@ -95,7 +103,7 @@ export const Form = ({ setloading }: { setloading: (loading: boolean) => void })
               placeholder="Title"
             />
           </div>
-          <SelectInput handleChange={handleChange} />
+          <SelectType selectedType={selectedType} setselectedType={setselectedType} listType={listType} />
           <div className="flex flex-col items-center space-y-1">
             <label htmlFor="description">Description</label>
             <textarea
@@ -148,27 +156,3 @@ export const Form = ({ setloading }: { setloading: (loading: boolean) => void })
   );
 };
 
-const listType: feedbackTypeType[] = ['Bug report', 'Feature request', 'General feedback'];
-
-const SelectInput = ({
-  handleChange,
-}: {
-  handleChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
-}) => {
-  return (
-    <div className="flex flex-col items-center space-y-1">
-      <label htmlFor="type">Type</label>
-      <select
-        id="type"
-        name="type"
-        className="mt-2 block w-full bg-white rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 text-sm"
-        defaultValue="Bug report"
-        onChange={handleChange}
-      >
-        {listType.map((type) => (
-          <option key={type}>{type}</option>
-        ))}
-      </select>
-    </div>
-  );
-};

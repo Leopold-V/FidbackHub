@@ -1,7 +1,8 @@
-import { feedbackType, metadataType } from '../types';
+import { feedbackType, feedbackTypeType, metadataType } from '../types';
 
 export const sendFeedback = async (
-  feedback: feedbackType,
+  feedback: Partial<feedbackType>,
+  selectedType: feedbackTypeType,
   imageBase64: string,
   metadata: metadataType,
   apiKey: string,
@@ -18,6 +19,7 @@ export const sendFeedback = async (
     body: JSON.stringify({
       data: {
         ...feedback,
+        type: selectedType,
         projectToken: apiKey,
         screenshot: imageBase64,
         metadata: metadata,

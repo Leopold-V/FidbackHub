@@ -1,4 +1,4 @@
-export const createFeedbackNotif = async (apikey: string, feedbackTitle: string) => {
+export const createFeedbackNotif = async (apikey: string, feedbackTitle: string | undefined) => {
   const result = await fetch('http://localhost:3000/api/notifs/feedbacks/widget', {
     method: 'POST',
     headers: {
