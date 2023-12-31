@@ -43,8 +43,10 @@ export const ProjectCardItem = ({ project, userId }: { project: projectType; use
       </div>
       <div className="text-sm text-muted">
         Tasks done :{' '}
-        <span className="text-secondaryText">{project.feedbacks.filter((ele) => ele.status === 'Open').length}</span> /{' '}
-        {project.feedbacks.length}
+        <span className="text-secondaryText">
+          {project.feedbacks.filter((ele) => ele.status === 'Closed' && ele.state === 'Resolved').length}
+        </span>{' '}
+        / {project.feedbacks.filter((ele) => ele.state !== 'Rejected').length}
       </div>
       <div className="flex justify-between absolute bottom-0  w-60 items-center border-t border-3Background">
         <ul className="flex items-center text-sm space-x-1 py-3">

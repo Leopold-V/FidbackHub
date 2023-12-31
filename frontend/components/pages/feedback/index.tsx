@@ -16,7 +16,7 @@ import { updateFeedback, deleteFeedback } from '../../../services/feedback.servi
 import { sendUpdateFeedbackNotif } from '../../../services/notif.service';
 import { formatDateToDisplay } from '../../../utils/formatDate';
 import { SelectState } from 'components/common/SelectState';
-import { ButtonBack, ButtonDelete, ButtonOutline } from 'components/common/Button';
+import { Button, ButtonBack, ButtonDelete, ButtonOutline } from 'components/common/Button';
 import { Modal } from 'components/common/Modal';
 import { HeaderWrapper } from 'components/common/HeaderWrapper';
 import { Card } from 'components/common/Card';
@@ -164,62 +164,71 @@ export const FeedbackPageComponent = ({
                 </div>
               )}
               <div className="py-4 text-sm border-b border-3Background space-y-2">
-                <h3 className="text-mainText">Description</h3>
+                <h3 className="text-mainText font-semibold">Description</h3>
                 <p className="text-secondaryText">{feedback.description}</p>
               </div>
 
-              <div className="flex space-x-4">
-                <div className="flex flex-col space-y-4 py-4 text-sm">
-                  <h3 className=" text-mainText">Status</h3>
-                  <div className="flex items-center space-x-3 w-full">
-                    <span className=" text-secondaryText text-right w-12">Type: </span>
-                    <div className="">
-                      <SelectState selected={selectedType} setselected={setSelectedType} listItems={listType} />
+              <div className="flex flex-col space-y-4">
+                <div className="flex space-x-4">
+                  <div className="flex flex-col space-y-4 py-4 text-sm">
+                    <h3 className=" text-mainText font-semibold">Settings</h3>
+                    <div className="flex items-center space-x-3 w-full">
+                      <span className=" text-secondaryText text-right w-12">Type: </span>
+                      <div className="">
+                        <SelectState selected={selectedType} setselected={setSelectedType} listItems={listType} />
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-3 w-full">
+                      <span className=" text-secondaryText text-right w-12">State: </span>
+                      <div className="">
+                        <SelectState selected={selectedState} setselected={setSelectedState} listItems={listState} />
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-3 w-full">
+                      <span className=" text-secondaryText text-right w-12">Status: </span>
+                      <div className="">
+                        <SelectState selected={selectedStatus} setselected={setSelectedStatus} listItems={listStatus} />
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-3 w-full">
+                      <span className=" text-secondaryText text-right w-12">Priority: </span>
+                      <div className="">
+                        <SelectState
+                          selected={selectedPriority}
+                          setselected={setSelectedPriority}
+                          listItems={listPriority}
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-3 w-full">
-                    <span className=" text-secondaryText text-right w-12">State: </span>
-                    <div className="">
-                      <SelectState selected={selectedState} setselected={setSelectedState} listItems={listState} />
+
+                  {_feedback.metadata && (
+                    <div className="text-muted text-sm py-4 space-y-4 mx-auto">
+                      <h3 className="text-mainText font-semibold pb-2">Device/System details</h3>
+                      <p>
+                        OS: <span className="text-secondaryText pl-2">{_feedback.metadata.os}</span>
+                      </p>
+                      <p>
+                        Browser: <span className="text-secondaryText pl-2">{_feedback.metadata.userAgent}</span>
+                      </p>
+                      <p>
+                        Resolution:{' '}
+                        <span className="text-secondaryText pl-2">
+                          {_feedback.metadata.resolutionWidth} x {_feedback.metadata.resolutionHeight}
+                        </span>
+                      </p>
                     </div>
-                  </div>
-                  <div className="flex items-center space-x-3 w-full">
-                    <span className=" text-secondaryText text-right w-12">Status: </span>
-                    <div className="">
-                      <SelectState selected={selectedStatus} setselected={setSelectedStatus} listItems={listStatus} />
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-3 w-full">
-                    <span className=" text-secondaryText text-right w-12">Priority: </span>
-                    <div className="">
-                      <SelectState
-                        selected={selectedPriority}
-                        setselected={setSelectedPriority}
-                        listItems={listPriority}
-                      />
-                    </div>
+                  )}
+                </div>
+                <div className="text-sm space-y-4">
+                  <h3 className="text-mainText font-semibold">Browser Logs</h3>
+                  <div className="flex items-center">
+                    <span className="text-secondaryText">Open the console:</span>
+                    <Button className="py-1 ml-6 bg-zinc-700">Open</Button>
                   </div>
                 </div>
-
-                {_feedback.metadata && (
-                  <div className="text-muted text-sm py-4 space-y-4 mx-auto">
-                    <h3 className="text-mainText pb-2">Device/System details</h3>
-                    <p>
-                      OS: <span className="text-secondaryText pl-2">{_feedback.metadata.os}</span>
-                    </p>
-                    <p>
-                      Browser: <span className="text-secondaryText pl-2">{_feedback.metadata.userAgent}</span>
-                    </p>
-                    <p>
-                      Resolution:{' '}
-                      <span className="text-secondaryText pl-2">
-                        {_feedback.metadata.resolutionWidth} x {_feedback.metadata.resolutionHeight}
-                      </span>
-                    </p>
-                  </div>
-                )}
               </div>
-              <div className="flex justify-center space-x-3 pt-3">
+              <div className="flex justify-center space-x-3 pt-4">
                 <ButtonOutline disabled={loadingUpdate} className="space-x-1" onClick={handleUpdateStateFeedback}>
                   <ArrowPathIcon className="h-5 w-5" aria-hidden="true" />
                   <span>Update</span>

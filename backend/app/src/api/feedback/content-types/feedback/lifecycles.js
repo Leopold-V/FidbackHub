@@ -45,5 +45,8 @@ const findDiffForHistory = (oldFeedback, newFeedback) => {
   if (oldFeedback.type !== newFeedback.type) {
     listChange.push({attribut: 'type', value: newFeedback.type});
   }
+  if (oldFeedback.priority !== newFeedback.priority) {
+    listChange.push({attribut: 'priority', value: newFeedback.priority});
+  }
   return listChange;
 };
