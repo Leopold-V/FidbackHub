@@ -15,8 +15,19 @@ import {
   ColumnDef,
 } from '@tanstack/react-table';
 import { rankItem } from '@tanstack/match-sorter-utils';
-import { BellSnoozeIcon, CheckIcon, ClockIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/20/solid';
-import { feedbackType } from '../../../types';
+import {
+  BellSnoozeIcon,
+  CheckIcon,
+  ChevronDoubleDownIcon,
+  ChevronDoubleUpIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  ClockIcon,
+  MagnifyingGlassIcon,
+  MinusIcon,
+  XMarkIcon,
+} from '@heroicons/react/20/solid';
+import { feedbackPriorityType, feedbackStateType, feedbackType } from '../../../types';
 import { formatDateToDisplay } from '../../../utils/formatDate';
 import { HeaderWrapper } from 'components/common/HeaderWrapper';
 import { DateButtonGroups } from '../dashboard/DateButtonsGroup';
@@ -142,6 +153,20 @@ export const FeedbacksTable = ({
           </Link>
         ),
         header: () => 'State',
+        footer: (props) => props.column.id,
+      },
+      {
+        accessorFn: (row) => row.priority,
+        id: 'priority',
+        cell: (info) => (
+          <Link href={`http://localhost:3000/project/${projectId}/feedback/${info.row.original.id}`}>
+            <a className="cursor-pointer flex items-center space-x-1">
+              {generatePriorityIcon(info.getValue())}
+              <span>{info.getValue()}</span>
+            </a>
+          </Link>
+        ),
+        header: () => 'Priority',
         footer: (props) => props.column.id,
       },
       {
@@ -419,7 +444,7 @@ function IndeterminateCheckbox({
   return <input type="checkbox" ref={ref} className={className + ' cursor-pointer'} {...rest} />;
 }
 
-const generateStateIcon = (state: string) => {
+const generateStateIcon = (state: feedbackStateType) => {
   switch (state) {
     case 'New':
       return <BellSnoozeIcon className="h-5 w-5 text-zinc-400" />;
@@ -429,6 +454,23 @@ const generateStateIcon = (state: string) => {
       return <CheckIcon className="h-5 w-5 text-green-500" />;
     case 'Rejected':
       return <XMarkIcon className="h-5 w-5 text-red-500" />;
+    default:
+      break;
+  }
+};
+
+const generatePriorityIcon = (priority: feedbackPriorityType) => {
+  switch (priority) {
+    case 'Very low':
+      return <ChevronDoubleDownIcon className="h-4 w-4 text-blue-500" />;
+    case 'Low':
+      return <ChevronDownIcon className="h-4 w-4 text-blue-500" />;
+    case 'Medium':
+      return <MinusIcon className="h-4 w-4 text-yellow-500" />;
+    case 'High':
+      return <ChevronUpIcon className="h-4 w-4 text-red-500" />;
+    case 'Very high':
+      return <ChevronDoubleUpIcon className="h-4 w-4 text-red-500" />;
     default:
       break;
   }
